@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minilibx.h"
+#include "../inc/libft.h"
 
 static char		*ft_mini_sub_hexajoin(char *hexcolor, int begin_numb)
 {

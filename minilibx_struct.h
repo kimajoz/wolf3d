@@ -1,19 +1,26 @@
 # ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct		s_rgbcolor
-{
-	int				r;
-	int				g;
-	int				b;
-}					t_rgbcolor;
-
 typedef struct		s_rgbcolorf
 {
 	float			r;
 	float			g;
 	float			b;
 }					t_rgbcolorf;
+
+typedef struct		s_point
+{
+	int				x;
+	int				y;
+	int				z;
+}					t_point;
+
+typedef struct		s_rgbcolor
+{
+	int				r;
+	int				g;
+	int				b;
+}					t_rgbcolor;
 
 typedef struct		s_colorpalette
 {
@@ -71,13 +78,6 @@ typedef struct		s_dpoint
 	double			z;
 }					t_dpoint;
 
-typedef struct		s_point
-{
-	int				x;
-	int				y;
-	int				z;
-}					t_point;
-
 typedef struct		s_vec
 {
 	//t_point		o; // Origin of the ray (start dot) // (Optionnal)
@@ -91,110 +91,20 @@ typedef struct		s_camera
 	t_vec			dir;
 	t_vec			right;
 	t_vec			left;
+	double			fov;
+	double			anglebetrays;
 }					t_camera;
 
 typedef struct				s_viewplane
 {
-	float					width;
-	float					height;
-	float					aspect_ratio;
+	float					w;
+	float					h;
+	float					aspect_r;
 	float					dist;
 	t_vec					dot_upleft;
 	t_vec					rightvec;
 	t_vec					upvec;
 }							t_viewplane;
-
-typedef struct				s_rt_material
-{
-	char					*name;
-	t_rgbcolorf				cdiff;
-	t_rgbcolorf				cspec;
-	t_rgbcolorf				camb;
-	t_rgbcolorf				cselfillu;
-	float					mshine;
-	float					mshinestren;
-	float					mreflect;
-	float					mrefract;
-	int						mboltemp;
-}							t_rt_material;
-
-typedef struct				s_rt_el
-{
-	char					*name;
-	t_dpoint				pos;
-	t_dpoint				rot;
-	t_rgbcolorf				color;
-}							t_rt_el;
-
-typedef struct				s_rt_obj
-{
-	int						type;
-	char					*name;
-	t_dpoint				pos;
-	t_dpoint				rot;
-	float					rayon;
-	t_rt_material			*mat;
-}							t_rt_obj;
-
-typedef struct				s_rt_lstl
-{
-	t_rt_el				*data;
-	struct s_rt_lstl		*next;
-}							t_rt_lstl;
-
-typedef struct				s_rt_lsto
-{
-	t_rt_obj				*data;
-	struct s_rt_lsto		*next;
-}							t_rt_lsto;
-
-typedef struct				s_rt
-{
-	t_point					s; //Pixel screen position
-	t_rt_el					e; //eyes position
-	t_viewplane				viewplane;
-	t_rt_lsto				*lst_obj;
-	t_rt_lstl				*lst_light;
-	t_rt_material			mat;
-	t_vec					vecdir;
-	t_vec					vecdirn; // Vecteur normaliwe (Longueur == 1)
-	double					t; // dist to intersection point
-	float					tl; // dist to intersection point from light
-	double					dist; // max dist to intersection point
-	float					distl; // max dist to intersection point from light
-	t_rt_el					tmpe; //tmp eyes position at zero pos
-	t_vec					tmpdirn; //tmp vecdirn at zero pos
-	t_rt_el					tmplight;
-	t_vec					tmplightrayn;
-	float					tlc; // dist to intersection point from light
-	float					tls; // dist to intersection point from light
-	t_rt_lsto				*tmpobj;
-	t_vec					tmpvecinter;
-	//Needed to calculate obj hits on 0,0,0 position
-	t_rt_el					meme; //mem eyes position at zero pos
-	t_vec					memdirn; //mem vecdirn at zero pos
-	t_vec					vecinter; //vec intersection from e to obj
-	t_vec					vecintern; //vec normalize intersection from e to obj
-	t_vec					vecinternotmoved; //vec intersection from e to obj
-	t_vec					vecinternotmovedn; //vec intersection from e to obj
-	t_vec					lightraymoved;
-	t_rt_obj				*hitobj; // first contact Obj found with ray
-	int						hitobjl;
-	t_vec					lightray;
-	t_vec					lightrayn;
-	t_vec					normaleobj;
-	t_vec					normaleobjn;
-	t_rgbcolorf				color;
-	t_rgbcolorf				coloradd;
-	char					*colorhexa;
-	int						inverse;
-	int						ui_sel;
-	int						speed_rt;
-	t_rt_lsto				*lst_objsel;
-	t_rt_lstl				*lst_lightsel;
-	t_dpoint				plan;
-	float					focale;
-}							t_rt;
 
 typedef struct				s_listp_path
 {
@@ -340,7 +250,6 @@ typedef struct		s_wind
 	char			*title;
 	int				width;
 	int				height;
-	t_rt			rt;
 	t_point			point;
 	t_img			img;
 	t_browsefile	b;

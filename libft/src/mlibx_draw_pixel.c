@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minilibx.h"
+#include "../inc/libft.h"
 
 void			mlibx_draw_pixel(t_wind *w, int x, int y, char *hexacolor)
 {

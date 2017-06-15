@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minilibx.h"
+#include "../inc/libft.h"
 
 void			draw_circle(t_wind *w, t_point centp, int rayon, char *hexcol)
 {
@@ -23,11 +23,11 @@ void			draw_circle(t_wind *w, t_point centp, int rayon, char *hexcol)
 		hexcol = w->p.color.hexa_default;
 	while (i < 360)
 	{
-		i_rad = degree_to_radian(i);
+		i_rad = ft_degree_to_radian(i);
 		pos.x = ((double)rayon * cos(i_rad)) + centp.x;
 		pos.y = ((double)rayon * sin(i_rad)) + centp.y;
 		pos.z = centp.z;
-		draw_point(w, pos.x, pos.y, hexcol);
+		mlibx_draw_pixel(w, pos.x, pos.y, hexcol);
 		i++;
 	}
 }

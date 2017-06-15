@@ -1,11 +1,15 @@
 
-#include "rtv1.h"
+#include "wolf3d.h"
+
+#define MAPSIZE		20
 
 int			ft_print_error_parsing(int x, int y)
 {
 	ft_putstr("wrong file type, wrong parsing, please check number of elem(now ");
 	ft_putnbr(x);
-	ft_putstr(" -> needs 12) on line ");
+	ft_putstr(" -> needs ");
+	ft_putnbr(MAPSIZE);
+	ft_putstr(") on line ");
 	ft_putnbr(y + 1);
 	ft_putstr(".");
 	ft_putstr("\n");
@@ -56,7 +60,7 @@ int			ft_check_parsing(char *filename)
 			while(tab[i])
 				ft_strdel(&tab[i++]);
 			free(tab);
-			if (i != 12)
+			if (i != MAPSIZE)
 				return (ft_print_error_parsing(i, y));
 		}
 	y++;

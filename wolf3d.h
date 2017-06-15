@@ -1,12 +1,12 @@
 #ifndef WOLF3D_H
 
 # define WOLF3D_H
-#include "libft/inc/libft.h"
 # if MACROKEY == 1
 #  include "minilibx_macos/mlx.h"
 # else
 #  include "minilibx/mlx.h"
 # endif
+#include "libft/inc/libft.h"
 #include "minilibx_struct.h"
 #include "libft/inc/get_next_line.h"
 #include "keymacro.h"
@@ -18,7 +18,8 @@ int				**rt_file(char *filename, int y, t_wind *w);
 int				ft_check_parsing(char *filename);
 
 void			put_info(t_wind *w);
-int				wolf3d(char *filename);
+int				prog(char *filename);
+void			wolf3d(t_wind *w);
 
 t_wind			create_new_window(char *title, int width, int height);
 int				create_new_img(t_wind *w);
