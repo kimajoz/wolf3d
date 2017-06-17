@@ -1,6 +1,5 @@
 UNAME := $(shell uname)
 
-		#put_info.c \#
 NAME=wolf3d
 SRC=	main.c \
 		wolf3d.c \
@@ -9,6 +8,7 @@ SRC=	main.c \
 		create_new_window.c \
 		create_new_img.c \
 		key_function.c \
+		put_info.c \
 		expose_hook.c
 OBJ=${SRC:.c=.o}
 

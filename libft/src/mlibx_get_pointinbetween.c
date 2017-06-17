@@ -12,13 +12,6 @@
 
 #include "../inc/libft.h"
 
-int			dot_in_window(t_wind *w, int x, int y)
-{
-	if ((x > 0 && x < w->width) && (y > 0 && y < w->height))
-		return (1);
-	return (0);
-}
-
 t_point		move_to(t_wind *w, t_point p, int param)
 {
 	int		pyx;

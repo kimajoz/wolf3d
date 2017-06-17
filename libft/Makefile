@@ -78,9 +78,11 @@ SRC= src/ft_lstiter.c \
 	src/ft_hexatorgb.c \
 	src/ft_rgbtohexa.c \
 	src/ft_rgbftohexa.c \
-	src/ft_degree_to_radian.c \
+	src/ft_degreetorad.c \
 	src/ft_fabs.c \
 	src/mlibx_draw_pixel.c \
+	src/mlibx_draw_pixel_line.c \
+	src/mlibx_dot_in_window.c \
 	src/ft_hextoint.c \
 	src/get_next_line.c \
 	src/ft_check_fd.c

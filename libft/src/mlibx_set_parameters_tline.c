@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrice_rotation.c                                 :+:      :+:    :+:   */
+/*   set_parameters_tline.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/10 15:49:59 by pbillett          #+#    #+#             */
-/*   Updated: 2017/01/19 17:06:54 by pbillett         ###   ########.fr       */
+/*   Created: 2016/12/27 15:10:43 by pbillett          #+#    #+#             */
+/*   Updated: 2017/01/10 15:15:08 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-double		ft_degree_to_radian(int degrees)
-{
-	double	radians;
-	double	pi;
+#include "../inc/libft.h"
 
-	pi = 3.1415;
-	radians = degrees * (pi / 180);
-	return (radians);
+t_line		ft_conv_tpoint_to_tline_coord(t_point p)
+{
+	t_line	t;
+
+	t.x = p.x;
+	t.y = p.y;
+	t.z = p.z;
+	return (t);
 }

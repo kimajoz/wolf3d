@@ -1,8 +1,6 @@
 
 #include "wolf3d.h"
 
-#define MAPSIZE		20
-
 int			ft_print_error_parsing(int x, int y)
 {
 	ft_putstr("wrong file type, wrong parsing, please check number of elem(now ");
@@ -60,8 +58,8 @@ int			ft_check_parsing(char *filename)
 			while(tab[i])
 				ft_strdel(&tab[i++]);
 			free(tab);
-			if (i != MAPSIZE)
-				return (ft_print_error_parsing(i, y));
+			/*if (i != MAPSIZE)
+				return (ft_print_error_parsing(i, y));*/
 		}
 	y++;
 	}

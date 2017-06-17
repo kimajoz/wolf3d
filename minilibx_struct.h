@@ -87,7 +87,8 @@ typedef struct		s_vec
 
 typedef struct		s_camera
 {
-	t_point			pos;
+	t_dpoint		pos;
+	t_point			rot;
 	t_vec			dir;
 	t_vec			right;
 	t_vec			left;
@@ -215,6 +216,7 @@ typedef struct		s_params
 	int				turntable;
 	t_mouse			m;
 	int				paint;
+	int				cubesize;
 }					t_params;
 
 typedef struct		s_movegizmo
@@ -250,6 +252,7 @@ typedef struct		s_wind
 	char			*title;
 	int				width;
 	int				height;
+	t_camera		cam;
 	t_point			point;
 	t_img			img;
 	t_browsefile	b;

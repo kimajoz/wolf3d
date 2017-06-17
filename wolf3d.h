@@ -1,6 +1,12 @@
 #ifndef WOLF3D_H
 
 # define WOLF3D_H
+
+# define FOV		60
+# define CUBESIZE	15
+# define MAPSIZE	20
+# define MOVINGSP	10
+
 # if MACROKEY == 1
 #  include "minilibx_macos/mlx.h"
 # else
