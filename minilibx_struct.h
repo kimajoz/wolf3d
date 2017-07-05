@@ -85,8 +85,21 @@ typedef struct		s_vec
 	float			len; // Len
 }					t_vec;
 
+typedef struct				s_viewplane
+{
+	float					w;
+	float					h;
+	float					aspect_r;
+	float					dist;
+	float					distpix;
+	t_vec					dot_upleft;
+	t_vec					rightvec;
+	t_vec					upvec;
+}							t_viewplane;
+
 typedef struct		s_camera
 {
+	t_viewplane		vp;
 	t_dpoint		pos;
 	t_point			rot;
 	t_vec			dir;
@@ -94,18 +107,8 @@ typedef struct		s_camera
 	t_vec			left;
 	double			fov;
 	double			anglebetrays;
+	double			rayangle;
 }					t_camera;
-
-typedef struct				s_viewplane
-{
-	float					w;
-	float					h;
-	float					aspect_r;
-	float					dist;
-	t_vec					dot_upleft;
-	t_vec					rightvec;
-	t_vec					upvec;
-}							t_viewplane;
 
 typedef struct				s_listp_path
 {
@@ -212,6 +215,7 @@ typedef struct		s_params
 	int				space_mousemove;
 	int				help;
 	int				comments;
+	int				comments2;
 	t_colorpalette	color;
 	int				turntable;
 	t_mouse			m;
@@ -259,6 +263,7 @@ typedef struct		s_wind
 	t_params		p;
 	t_obj			obj;
 	t_matrice_rot	mr;
+	double			dist;
 }					t_wind;
 
 #endif

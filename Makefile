@@ -3,6 +3,8 @@ UNAME := $(shell uname)
 NAME=wolf3d
 SRC=	main.c \
 		wolf3d.c \
+		w_cast_rays.c \
+		w_print_radar_fov.c \
 		rt_file.c \
 		rt_parsing.c \
 		create_new_window.c \

@@ -6,7 +6,7 @@ int			ft_print_error_parsing(int x, int y)
 	ft_putstr("wrong file type, wrong parsing, please check number of elem(now ");
 	ft_putnbr(x);
 	ft_putstr(" -> needs ");
-	ft_putnbr(MAPSIZE);
+	ft_putnbr(MAPLEN);
 	ft_putstr(") on line ");
 	ft_putnbr(y + 1);
 	ft_putstr(".");

@@ -43,7 +43,7 @@ t_line		mlibx_set_parameters_tline(t_line v)
 	return (v);
 }
 
-void		mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w)
+void		mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, char *color)
 {
 	t_line	v;
 
@@ -59,6 +59,6 @@ void		mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w)
 		if (v.y != v.ydest)
 			v.y += (v.sign_y * (v.diff_y / v.bigdiff));
 		if (mlibx_dot_in_window(w, rint(v.x), rint(v.y)))
-			mlibx_draw_pixel(w, rint(v.x), rint(v.y), "0xFFFFFF");
+			mlibx_draw_pixel(w, rint(v.x), rint(v.y), color);
 	}
 }

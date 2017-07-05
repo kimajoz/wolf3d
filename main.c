@@ -23,9 +23,6 @@
 
 static int		set_parameters(t_wind *w)
 {
-	t_viewplane	vp;
-	t_viewplane	vpc;
-
 	w->img.width = 800;
 	w->img.height = 600;
 	w->img.margin = 100;
@@ -37,16 +34,14 @@ static int		set_parameters(t_wind *w)
 	w->img.y = 0;
 
 	// SPEC
-	vp.w = 320;
-	vp.h = 200;
-	w->cam.pos.y = CUBESIZE / 2;
-	w->cam.pos.x = 0;
-	w->cam.pos.z = 0;
-	w->cam.anglebetrays = FOV / vp.w;
-	vpc.w = vp.w / 2;
-	vpc.h = vp.h / 2;
-	vp.dist = vpc.w / tan(FOV/2);
-	w->cam.rot.y = 60;
+	w->cam.vp.w = 640;
+	w->cam.vp.h = 400;
+	w->cam.pos.y = CUBESIZE / 2; //character height mid
+	w->cam.pos.x = 1.5; //start pos
+	w->cam.pos.z = 0.5;
+	w->cam.rot.y = 0;
+	w->p.comments = 0;
+	w->p.comments2 = 0;
 	return (0);
 }
 
