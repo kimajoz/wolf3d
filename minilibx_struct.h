@@ -249,6 +249,16 @@ typedef struct		s_obj
 	t_fillsquare	f;
 }					t_obj;
 
+typedef struct		s_wolf
+{
+	double			dist;
+	double			dist_correct;
+	double			slicew;
+	double			slope;
+	double			block_dist;
+	char			*color;
+}					t_wolf;
+
 typedef struct		s_wind
 {
 	void			*mlx;
@@ -263,7 +273,7 @@ typedef struct		s_wind
 	t_params		p;
 	t_obj			obj;
 	t_matrice_rot	mr;
-	double			dist;
+	t_wolf			w;
 }					t_wind;
 
 #endif

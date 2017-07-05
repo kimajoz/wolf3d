@@ -6,9 +6,9 @@
 # define CUBESIZE	64
 # define MAPLEN		20
 # define MOVESPEED	0.18
-# define MINIMAPSCALE 15
+# define MINIMAPSCALE 10
 # define RADARL 100
-# define RAYNUMB 10
+# define RAYNUMB 60
 # define TWOPI (M_PI * 2)
 
 # if MACROKEY == 1
