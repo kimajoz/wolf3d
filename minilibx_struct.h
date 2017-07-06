@@ -255,8 +255,10 @@ typedef struct		s_wolf
 	double			dist_correct;
 	double			slicew;
 	double			slope;
+	t_dpoint		hit;
 	double			block_dist;
 	char			*color;
+	double			correct_fisheyes;
 }					t_wolf;
 
 typedef struct		s_wind
