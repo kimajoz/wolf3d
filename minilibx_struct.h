@@ -1,5 +1,17 @@
-# ifndef STRUCT_H
-# define STRUCT_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minilibx_struct.h                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
+/*   Updated: 2017/07/06 23:31:37 by pbillett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINILIBX_STRUCT_H
+# define MINILIBX_STRUCT_H
 
 typedef struct		s_rgbcolorf
 {
@@ -24,7 +36,7 @@ typedef struct		s_rgbcolor
 
 typedef struct		s_colorpalette
 {
-	char			*hexa_bot; 
+	char			*hexa_bot;
 	char			*hexa_mid;
 	char			*hexa_top;
 	char			*hexa_default;
@@ -40,13 +52,13 @@ typedef struct		s_mouse
 	int				button1;
 	int				button2;
 	int				button3;
-	int				memm_x; 
+	int				memm_x;
 	int				memm_y;
 	int				mem_rotx;
 	int				mem_rotz;
 	int				mem_spacing_x;
 	int				mem_zaccentuation;
-	int				mem_posx; 
+	int				mem_posx;
 	int				mem_posy;
 	int				mem_gizx;
 	int				mem_gizy;
@@ -80,22 +92,21 @@ typedef struct		s_dpoint
 
 typedef struct		s_vec
 {
-	//t_point		o; // Origin of the ray (start dot) // (Optionnal)
-	t_dpoint		dir; // Direction
-	float			len; // Len
+	t_dpoint		dir;
+	float			len;
 }					t_vec;
 
-typedef struct				s_viewplane
+typedef struct		s_viewplane
 {
-	float					w;
-	float					h;
-	float					aspect_r;
-	float					dist;
-	float					distpix;
-	t_vec					dot_upleft;
-	t_vec					rightvec;
-	t_vec					upvec;
-}							t_viewplane;
+	float			w;
+	float			h;
+	float			aspect_r;
+	float			dist;
+	float			distpix;
+	t_vec			dot_upleft;
+	t_vec			rightvec;
+	t_vec			upvec;
+}					t_viewplane;
 
 typedef struct		s_camera
 {
@@ -126,11 +137,11 @@ typedef struct		s_fillsquare
 {
 	int				bol;
 	int				bolfill;
-	t_listp_path	*path; 
+	t_listp_path	*path;
 	t_listp_path	*beginpath;
 	t_listofnodes	*lstnodes;
 	t_listofnodes	*lstnodesbeg;
-	int				i; 
+	int				i;
 	t_point			p;
 	t_point			pr;
 	t_point			pd;
@@ -145,20 +156,19 @@ typedef struct		s_sortlistp
 	int				mem_z;
 }					t_sortlistp;
 
-
-typedef struct				s_matrice_rot
+typedef struct		s_matrice_rot
 {
-	double					a;
-	double					b;
-	double					c;
-	double					d;
-	double					e;
-	double					f;
-	double					ad;
-	double					bd;
-	float					mat[16];
-	t_dpoint				p_r;
-}							t_matrice_rot;
+	double			a;
+	double			b;
+	double			c;
+	double			d;
+	double			e;
+	double			f;
+	double			ad;
+	double			bd;
+	float			mat[16];
+	t_dpoint		p_r;
+}					t_matrice_rot;
 
 typedef struct		s_browsefile
 {
@@ -175,9 +185,9 @@ typedef struct		s_browsefile
 typedef struct		s_img
 {
 	void			*ptr_img;
-	int				x; 
+	int				x;
 	int				y;
-	int				start_x; 
+	int				start_x;
 	int				start_y;
 	int				width;
 	int				height;
@@ -191,26 +201,26 @@ typedef struct		s_img
 	int				endian_type;
 	t_point			point;
 	t_point			pointd;
-	t_point			r_point; 
-	t_point			r_pointd; 
+	t_point			r_point;
+	t_point			r_pointd;
 	int				margin;
 }					t_img;
 
 typedef struct		s_params
 {
-	int				zaccentuation; 
-	int				zhighest; 
-	int				zlowest; 
-	int				zmid; 
+	int				zaccentuation;
+	int				zhighest;
+	int				zlowest;
+	int				zmid;
 	int				x_spacing;
 	int				y_spacing;
 	int				z_spacing;
-	t_point			t; 
-	t_point			rot; 
-	t_dpoint		r_rot; 
-	int				graphic_mode; 
-	int				view_mode; 
-	int				dot; 
+	t_point			t;
+	t_point			rot;
+	t_dpoint		r_rot;
+	int				graphic_mode;
+	int				view_mode;
+	int				dot;
 	int				insert;
 	int				space_mousemove;
 	int				help;
@@ -226,7 +236,7 @@ typedef struct		s_params
 typedef struct		s_movegizmo
 {
 	t_point			t;
-	t_point			p_x; 
+	t_point			p_x;
 	t_point			pd_x;
 	t_point			p_y;
 	t_point			pd_y;
@@ -249,6 +259,16 @@ typedef struct		s_obj
 	t_fillsquare	f;
 }					t_obj;
 
+typedef struct		s_info
+{
+	int				bg;
+	int				ray_minimap;
+	int				raynumb;
+	int				texture;
+	int				sound;
+
+}					t_info;
+
 typedef struct		s_wolf
 {
 	double			dist;
@@ -258,7 +278,10 @@ typedef struct		s_wolf
 	t_dpoint		hit;
 	double			block_dist;
 	char			*color;
+	char			*color_mfov;
+	char			*color_mray;
 	double			correct_fisheyes;
+	t_info			info;
 }					t_wolf;
 
 typedef struct		s_wind
@@ -279,4 +302,3 @@ typedef struct		s_wind
 }					t_wind;
 
 #endif
-

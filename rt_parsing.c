@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_parsing.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/06 21:06:15 by pbillett          #+#    #+#             */
+/*   Updated: 2017/07/06 22:13:56 by pbillett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "wolf3d.h"
 
 int			ft_print_error_parsing(int x, int y)
 {
-	ft_putstr("wrong file type, wrong parsing, please check number of elem(now ");
+	ft_putstr("wrong file type, wrong parsing, ");
+	ft_putstr("please check number of elem(now ");
 	ft_putnbr(x);
 	ft_putstr(" -> needs ");
 	ft_putnbr(MAPLEN);
@@ -16,7 +28,8 @@ int			ft_print_error_parsing(int x, int y)
 
 int			ft_print_error_type_parsing(int x, int y)
 {
-	ft_putstr("wrong file type, wrong parsing, please check type of character ");
+	ft_putstr("wrong file type, wrong parsing, ");
+	ft_putstr("please check type of character ");
 	ft_putnbr(x);
 	ft_putstr(" on line ");
 	ft_putnbr(y + 1);
@@ -55,13 +68,13 @@ int			ft_check_parsing(char *filename)
 		i = 0;
 		if (line[0] != '#')
 		{
-			while(tab[i])
+			while (tab[i])
 				ft_strdel(&tab[i++]);
 			free(tab);
-			/*if (i != MAPSIZE)
-				return (ft_print_error_parsing(i, y));*/
+			if (i != MAPLEN)
+				return (ft_print_error_parsing(i, y));
 		}
-	y++;
+		y++;
 	}
 	return (0);
 }

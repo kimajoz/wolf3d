@@ -6,13 +6,13 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 18:35:01 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/06 23:08:00 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		rot_abs(int n)
+int				rot_abs(int n)
 {
 	if (n >= 360)
 		n %= 360;
@@ -21,7 +21,7 @@ int		rot_abs(int n)
 	return (n);
 }
 
-int		is_blocking(t_dpoint pos, t_wind *w)
+int				is_blocking(t_dpoint pos, t_wind *w)
 {
 	if (w->b.tab_int[(int)pos.z][(int)pos.x] == 1)
 		return (1);
@@ -30,69 +30,67 @@ int		is_blocking(t_dpoint pos, t_wind *w)
 
 static void		keypress_function01(int keycode, t_wind *w, int percrotcam)
 {
-	t_dpoint		tmp;
+	t_dpoint	tmp;
 
 	tmp = (t_dpoint){0, 0, 0};
-		if (keycode == L_ARROW)
-			w->cam.rot.y = rot_abs(w->cam.rot.y - percrotcam);
-		else if (keycode == R_ARROW)
-			w->cam.rot.y = rot_abs(w->cam.rot.y + percrotcam);
-		else if (keycode == U_ARROW || keycode == D_ARROW)
+	if (keycode == L_ARROW)
+		w->cam.rot.y = rot_abs(w->cam.rot.y - percrotcam);
+	else if (keycode == R_ARROW)
+		w->cam.rot.y = rot_abs(w->cam.rot.y + percrotcam);
+	else if (keycode == U_ARROW || keycode == D_ARROW)
+	{
+		if (keycode == U_ARROW)
 		{
-			if (keycode == U_ARROW)
-			{
-				tmp.x = w->cam.pos.x + cos(ft_degreetorad(w->cam.rot.y)) * MOVESPEED;
-				tmp.z = w->cam.pos.z + sin(ft_degreetorad(w->cam.rot.y)) * MOVESPEED;
-			}
-			else if (keycode == D_ARROW)
-			{
-				tmp.x = w->cam.pos.x - cos(ft_degreetorad(w->cam.rot.y)) * MOVESPEED;
-				tmp.z = w->cam.pos.z - sin(ft_degreetorad(w->cam.rot.y)) * MOVESPEED;
-			}
-			if (is_blocking(tmp, w) != 1)
-			{
-				w->cam.pos.x = tmp.x;
-				w->cam.pos.z = tmp.z;
-			}
+			tmp.x = w->cam.pos.x + cos(ft_degreetorad(w->cam.rot.y)) * MOVESP;
+			tmp.z = w->cam.pos.z + sin(ft_degreetorad(w->cam.rot.y)) * MOVESP;
 		}
-			/*else if (keycode == PAGE_U)
-			w->rt.e.pos.z += 1;
-		else if (keycode == PAGE_D)
-			w->rt.e.pos.z -= 1;*/
-		/*else if (keycode == NUM_U)
-			w->rt.e.rot.x += percrotcam;
-		else if (keycode == NUM_D)
-			w->rt.e.rot.x -= percrotcam;*//*
-		else if (keycode == NUM_R)
-			w->cam.rot.y = rot_abs(w->cam.rot.y + percrotcam);
-		else if (keycode == NUM_L)
-			w->cam.rot.y = rot_abs(w->cam.rot.y - percrotcam);*/
-		/*
-		else if (keycode == NUM_1)
-			w->rt.e.rot.z += percrotcam;
-		else if (keycode == NUM_3)
-			w->rt.e.rot.z -= percrotcam;*/
+		else if (keycode == D_ARROW)
+		{
+			tmp.x = w->cam.pos.x - cos(ft_degreetorad(w->cam.rot.y)) * MOVESP;
+			tmp.z = w->cam.pos.z - sin(ft_degreetorad(w->cam.rot.y)) * MOVESP;
+		}
+		if (is_blocking(tmp, w) != 1)
+		{
+			w->cam.pos.x = tmp.x;
+			w->cam.pos.z = tmp.z;
+		}
+	}
+}
+
+static void		keypress_function02(int keycode, t_wind *w)
+{
+	if (keycode == KEY_1)
+	{
+		w->w.info.raynumb = (w->w.info.raynumb < w->width) ?
+			(w->w.info.raynumb - 10) : w->w.info.raynumb;
+	}
+	else if (keycode == KEY_2)
+	{
+		w->w.info.raynumb = (w->w.info.raynumb < w->width) ?
+			(w->w.info.raynumb + 10) : w->w.info.raynumb;
+	}
+	else if (keycode == KEY_3)
+		w->w.info.ray_minimap = (w->w.info.ray_minimap) ? 0 : 1;
+	else if (keycode == KEY_4)
+		w->w.info.bg = (w->w.info.bg) ? 0 : 1;
+	else if (keycode == KEY_5)
+		w->w.info.texture = (w->w.info.texture) ? 0 : 1;
+	else if (keycode == KEY_6)
+		w->w.info.sound = (w->w.info.sound) ? 0 : 1;
 }
 
 int				keypress_function(int keycode, t_wind *w)
 {
-	//int			percrotobj;
 	int			percrotcam;
 
-	//percrotobj = 15;
 	percrotcam = 5;
 	if (keycode == EXIT)
 		exit(0);
-	//ft_putnbr(keycode);
 	rot_abs(w->cam.rot.y);
 	keypress_function01(keycode, w, percrotcam);
-	/*if (keycode == KEY_S)
-		rt_savefile(w);*/
-	if (keycode != BACKSLASH && keycode != EXCLAMMARK && keycode != ZOOM_P && keycode != ZOOM_M)
-	{
-		mlx_destroy_image(w->mlx, w->img.ptr_img);
-		create_new_img(w);
-	}
+	keypress_function02(keycode, w);
+	mlx_destroy_image(w->mlx, w->img.ptr_img);
+	create_new_img(w);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 	put_info(w);
 	return (0);

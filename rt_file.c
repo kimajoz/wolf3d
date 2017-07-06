@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   browsefile.c                                       :+:      :+:    :+:   */
+/*   rt_file.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/27 13:37:09 by pbillett          #+#    #+#             */
-/*   Updated: 2017/05/15 12:12:45 by pbillett         ###   ########.fr       */
+/*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
+/*   Updated: 2017/07/06 23:09:57 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-#include "stdio.h" //
 
 int			**insert_file_to_prog(int fd, int y, t_wind *w)
 {
@@ -25,22 +24,17 @@ int			**insert_file_to_prog(int fd, int y, t_wind *w)
 	y = 0;
 	while (get_next_line(fd, &line))
 	{
-		if (line[0] != '#')
+		tab_int[y] = malloc(ft_strlen(line) * sizeof(int));
+		tab = ft_strsplit(line, ' ');
+		ft_strdel(&line);
+		x = 0;
+		while (tab[x])
 		{
-			tab_int[y] = malloc(ft_strlen(line) * sizeof(int));
-			tab = ft_strsplit(line, ' ');
-			ft_strdel(&line);
-			x = 0;
-			while (tab[x])
-			{
-				tab_int[y][x] = ft_atoi(tab[x]);
-				ft_strdel(&tab[x]);
-				x++;
-			}
-			w->b.nbr_elem_line[y] = x;
-			free(tab);
-			y++;
+			tab_int[y][x] = ft_atoi(tab[x]);
+			ft_strdel(&tab[x++]);
 		}
+		w->b.nbr_elem_line[y++] = x;
+		free(tab);
 	}
 	w->b.nbr_of_line = y;
 	return (tab_int);

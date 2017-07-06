@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 18:37:27 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/06 23:14:59 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,19 @@ static int		set_parameters(t_wind *w)
 	w->p.m.button3 = 0;
 	w->img.x = 0;
 	w->img.y = 0;
-
-	// SPEC
 	w->cam.vp.w = 600;
 	w->cam.vp.h = 400;
-	w->cam.pos.y = CUBESIZE / 2; //character height mid
-	w->cam.pos.x = 1.5; //start pos
+	w->cam.pos.y = CUBESIZE / 2;
+	w->cam.pos.x = 1.5;
 	w->cam.pos.z = 0.5;
 	w->cam.rot.y = 0;
-	w->p.comments = 0;
-	w->p.comments2 = 0;
+	w->w.color_mray = "0xFF0000";
+	w->w.color_mfov = "0xFFFFFF";
+	w->w.info.raynumb = RAYNUMB;
+	w->w.info.ray_minimap = 0;
+	w->w.info.bg = 0;
+	w->w.info.texture = 0;
+	w->w.info.sound = 0;
 	return (0);
 }
 
@@ -56,24 +59,17 @@ int				prog(char *filename)
 		return (0);
 	else
 		w.b.tab_int = rt_file(filename, w.b.y, &w);
-	//w.b.filename = (char *)malloc((ft_strlen(filename) + 1) * sizeof(char));
-	//w.b.filename = ft_strcpy(w.b.filename, filename);
 	set_parameters(&w);
 	create_new_img(&w);
 	mlx_put_image_to_window(w.mlx, w.win, w.img.ptr_img, w.img.x, w.img.y);
-	//mlx_mouse_hook(w.win, mousepress_function, &w);
-	//mlx_hook(w.win, BUTTONRELEASE, BUTTONRELEASEMASK, mouse_release_function,
-	//&w);
-	//mlx_hook(w.win, MOTIONNOTIFY, BUTTONMOTIONMASK, mouse_motion_function, &w);
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
-	//mlx_loop_hook(w.mlx, turntable, &w);
 	mlx_expose_hook(w.win, expose_hook, &w);
 	mlx_loop(w.mlx);
 	return (0);
 }
 
-int					main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	if (argc != 2)
 		ft_putstr("usage");

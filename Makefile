@@ -42,7 +42,6 @@ $(NAME):	$(SRC)
 clean:
 	rm -rf $(OBJ)
 	make clean -C libft
-	make clean -C minilibx_macos
 
 fclean: clean
 	rm -rf $(NAME)
