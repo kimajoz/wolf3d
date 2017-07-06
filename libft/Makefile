@@ -6,7 +6,7 @@
 #    By: pbillett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 14:11:23 by pbillett          #+#    #+#              #
-#    Updated: 2017/04/04 14:15:15 by pbillett         ###   ########.fr        #
+#    Updated: 2017/07/06 18:46:47 by pbillett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ SRC= src/ft_lstiter.c \
 	src/ft_rgbtohexa.c \
 	src/ft_rgbftohexa.c \
 	src/ft_degreetorad.c \
+	src/ft_radtodegree.c \
 	src/ft_fabs.c \
 	src/mlibx_draw_pixel.c \
 	src/mlibx_draw_pixel_line.c \

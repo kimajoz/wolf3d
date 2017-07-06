@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 12:11:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/04/12 13:44:57 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/06 18:46:20 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_list				*ft_sort_list(t_list *lst, int (*cmp)(int, int));
 float				ft_squared(float n);
 float				ft_pythagore(float a, float b);
 double				ft_degreetorad(int degrees);
-float				ft_radian_to_degree(float radians);
+double				ft_radtodegree(double rad);
 char				*ft_rgbtohexa(t_rgbcolor rgbcolor);
 char				*ft_rgbftohexa(t_rgbcolorf rgbcolorf);
 t_rgbcolor			ft_hexatorgb(char *hexcolor);

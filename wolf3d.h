@@ -34,6 +34,7 @@ void			w_cast_rays(t_wind *w);
 void			w_print_radar_ray(t_wind *w, int cx, int cy, int angle, char *color);
 void			w_print_radar_fov(t_wind *w, int cx, int cy, int angle, char *color);
 void			w_print_radar_ray_hitwall(t_wind *w, double cx, double cy, char *color);
+void			w_draw_background_color(t_wind *w);
 
 t_wind			create_new_window(char *title, int width, int height);
 int				create_new_img(t_wind *w);

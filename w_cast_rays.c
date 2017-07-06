@@ -8,30 +8,19 @@ void			w_draw_the_wall(t_wind *w, int i, double ray_angle)
 	double		projsliceh;
 	t_point		p;
 	t_point		pd;
-	//double		beta;
-
-	//w->w.dist = sqrt(w->w.dist);
-	//beta = w->cam.vp.dist / w->w.dist;
 
 	// https://dev.opera.com/articles/3d-games-with-canvas-and-raycasting-part-1/
-	//printf("distance reel au view plane: %.3f\n", w->cam.vp.dist);
-	//printf("distorsion: %.3f\n", w->w.dist);
 	printf("ray_angle: %.3f\n", ray_angle);
-	//printf("dist before: %.3f\n", w->w.dist);
-	// Use perpendicular distance to adjust for fish eye
-	// distorted_dist = correct_dist / cos(relative_angle_of_ray)
-	//beta = ft_degreetorad(w->w.correct_fisheyes);
-	//printf("beta: %.3f\n", beta);
-	//w->w.dist = w->w.dist * cos(beta);
-	//w->w.dist = w->w.dist * cos(ft_degreetorad(w->cam.rot.y) - ray_angle);
-	/*
-	if (ray_angle < w->cam.pos.y)
-		w->w.dist = w->w.dist * cos(ray_angle - ft_degreetorad(w->cam.pos.y + 30));
-	else
-		w->w.dist = w->w.dist * cos(ray_angle - ft_degreetorad(w->cam.pos.y - 30));*/
-	//printf("dist after: %.3f\n", w->w.dist);
+	printf("ray_angle in degree: %.3f\n", ft_radtodegree(ray_angle));
+	printf("dist before: %.3f\n", w->w.dist);
+	// FISHEYES CORRECT DISTORTION distorted_dist = correct_dist / cos(relative_angle_of_ray)
+	w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
+	printf("dist after: %.3f\n", w->w.dist);
+	printf("w->cam.vp.h: %.3f\n", w->cam.vp.h);
+	printf("w->cam.vp.dist: %.3f\n", w->cam.vp.dist);
 	projsliceh = (CUBESIZE / w->w.dist) * w->cam.vp.dist;
-	p = (t_point){(int)((double)i * w->w.slicew), (w->cam.vp.h/2) - (projsliceh/2), 0};
+	printf("projsliceh: %.3f\n", projsliceh);
+	p = (t_point){(int)((double)i * w->w.slicew), (w->height/2) - (projsliceh/2), 0};
 	pd = (t_point){(int)p.x, p.y + projsliceh, 0};
 	p.x += MARGINW;
 	pd.x += MARGINW;
@@ -56,8 +45,8 @@ void				w_verticales_lines_check(t_wind *w, double ray_angle, double right)
 		wall.y = floor(p.y);
 		if (wall.x < 0 || wall.y < 0) break;
 		if (w->b.tab_int[(int)wall.y][(int)wall.x] > 0) {
-			dist = (t_dpoint){p.x - w->cam.pos.x, p.y - w->cam.pos.z, 0};
-			w->w.dist = pow(dist.x, 2) + pow(dist.y, 2);
+			dist = (t_dpoint){(p.x * MINIMAPSCALE) - (w->cam.pos.x * MINIMAPSCALE), (p.y * MINIMAPSCALE) - (w->cam.pos.z * MINIMAPSCALE), 0};
+			w->w.dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
 			w->w.hit = p;
 			w->w.color = (p.x < w->cam.pos.x) ? "0x00FF00" : "0x0000FF";
 			break;
@@ -83,8 +72,8 @@ void				w_horizontales_lines_check(t_wind *w, double ray_angle, double up)
 		wall = (t_dpoint){floor(p.x), floor(p.y + (up ? -1 : 0)), 0};
 		if (wall.x < 0 || wall.y < 0) break;
 		if (w->b.tab_int[(int)wall.y][(int)wall.x] > 0) {
-			dist = (t_dpoint){p.x - w->cam.pos.x, p.y - w->cam.pos.z, 0};
-			w->w.block_dist = dist.x*dist.x + dist.y*dist.y;
+			dist = (t_dpoint){(p.x * MINIMAPSCALE) - (w->cam.pos.x * MINIMAPSCALE), (p.y * MINIMAPSCALE) - (w->cam.pos.z * MINIMAPSCALE), 0};
+			w->w.block_dist = sqrt(dist.x*dist.x + dist.y*dist.y);
 			if (!w->w.dist || w->w.block_dist < w->w.dist)
 			{
 				w->w.dist = w->w.block_dist;
@@ -125,23 +114,20 @@ void			w_cast_rays(t_wind *w)
 {
 	int			i;
 	double		angle;
-	//double		rayScreenPos;
 
 	w->cam.vp.dist = (RAYNUMB/2) / tan(ft_degreetorad(FOV/2));
 	w->cam.anglebetrays = (double)FOV / (double)RAYNUMB;
-	//printf("anglebetrays: %.3f\n", w->cam.anglebetrays);
 	w->w.slicew = w->cam.vp.w / RAYNUMB;
 	angle = w->cam.rot.y - (FOV/2);
-	//w->w.correct_fisheyes = - FOV/2;
+	w->w.correct_fisheyes = FOV/2;
 	i = 0;
 	while (i < RAYNUMB)
 	{
-		//w->w.correct_fisheyes += w->cam.anglebetrays;
-		//printf("correct_fisheyes: %.3f\n", w->w.correct_fisheyes);
-		//rayScreenPos = (-RAYNUMB/2 + i) * w->w.slicew;
-		//w->cam.vp.distpix = sqrt(pow(rayScreenPos, 2) + pow(w->cam.vp.dist, 2));
-		//angle = asin(w->cam.vp.dist / w->cam.vp.distpix);
-		w_cast_single_ray(w, w->cam.rot.y + angle, i);
+		w->w.correct_fisheyes -= w->cam.anglebetrays;
+		printf("anglebetrays: %.3f\n", w->cam.anglebetrays);
+		printf("correct_fisheyes: %.3f\n", w->w.correct_fisheyes);
+		printf("w->cam.pos.x: %.3f\n", w->cam.pos.x);
+		w_cast_single_ray(w, angle, i);
 		angle += w->cam.anglebetrays;
 		i++;
 	}

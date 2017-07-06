@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/03/02 10:48:35 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/06 18:37:27 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int		set_parameters(t_wind *w)
 	w->img.y = 0;
 
 	// SPEC
-	w->cam.vp.w = 640;
+	w->cam.vp.w = 600;
 	w->cam.vp.h = 400;
 	w->cam.pos.y = CUBESIZE / 2; //character height mid
 	w->cam.pos.x = 1.5; //start pos

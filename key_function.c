@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/05/24 12:22:26 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/06 18:35:01 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void		keypress_function01(int keycode, t_wind *w, int percrotcam)
 {
 	t_dpoint		tmp;
 
+	tmp = (t_dpoint){0, 0, 0};
 		if (keycode == L_ARROW)
 			w->cam.rot.y = rot_abs(w->cam.rot.y - percrotcam);
 		else if (keycode == R_ARROW)

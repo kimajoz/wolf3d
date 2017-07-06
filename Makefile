@@ -5,6 +5,7 @@ SRC=	main.c \
 		wolf3d.c \
 		w_cast_rays.c \
 		w_print_radar_fov.c \
+		w_draw_background_color.c \
 		rt_file.c \
 		rt_parsing.c \
 		create_new_window.c \
@@ -40,10 +41,12 @@ $(NAME):	$(SRC)
 
 clean:
 	rm -rf $(OBJ)
-	make fclean -C libft
+	make clean -C libft
+	make clean -C minilibx_macos
 
 fclean: clean
 	rm -rf $(NAME)
+	make fclean -C libft
 
 re: fclean all
 
