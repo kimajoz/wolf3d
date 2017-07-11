@@ -83,6 +83,7 @@ SRC= src/ft_lstiter.c \
 	src/ft_fabs.c \
 	src/mlibx_draw_pixel.c \
 	src/mlibx_draw_pixel_line.c \
+	src/mlibx_draw_pixel_line_float.c \
 	src/mlibx_dot_in_window.c \
 	src/ft_hextoint.c \
 	src/get_next_line.c \

@@ -20,7 +20,7 @@
 # define MOVESP 0.18
 # define MMS 10
 # define RADARL 100
-# define RAYNUMB 400
+# define RAYNUMB 60
 # define TWOPI (M_PI * 2)
 
 # if MACROKEY == 1
@@ -48,6 +48,7 @@ void			w_print_radar_fov(t_wind *w, double cx, double cy, int angle);
 void			w_print_radar_ray_hitwall(t_wind *w, double cx, double cy,
 		char *color);
 void			w_draw_background_color(t_wind *w);
+void			w_texture_walls(t_wind *w);
 
 t_wind			create_new_window(char *title, int width, int height);
 int				create_new_img(t_wind *w);

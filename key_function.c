@@ -58,25 +58,28 @@ static void		keypress_function01(int keycode, t_wind *w, int percrotcam)
 }
 
 static void		keypress_function02(int keycode, t_wind *w)
-{
-	if (keycode == KEY_1)
+{	if (keycode == KEY_1)
+		w->w.info.raynumb = 60;
+	else if (keycode == KEY_2)
 	{
 		w->w.info.raynumb = (w->w.info.raynumb < w->width) ?
 			(w->w.info.raynumb - 10) : w->w.info.raynumb;
 	}
-	else if (keycode == KEY_2)
+	else if (keycode == KEY_3)
 	{
 		w->w.info.raynumb = (w->w.info.raynumb < w->width) ?
 			(w->w.info.raynumb + 10) : w->w.info.raynumb;
 	}
-	else if (keycode == KEY_3)
-		w->w.info.ray_minimap = (w->w.info.ray_minimap) ? 0 : 1;
 	else if (keycode == KEY_4)
-		w->w.info.bg = (w->w.info.bg) ? 0 : 1;
+		w->w.info.raynumb = 600;
 	else if (keycode == KEY_5)
-		w->w.info.texture = (w->w.info.texture) ? 0 : 1;
+		w->w.info.ray_minimap = (w->w.info.ray_minimap) ? 0 : 1;
 	else if (keycode == KEY_6)
-		w->w.info.sound = (w->w.info.sound) ? 0 : 1;
+		w->w.info.bg = (w->w.info.bg) ? 0 : 1;
+	/*else if (keycode == KEY_7)
+		w->w.info.texture = (w->w.info.texture) ? 0 : 1;
+	else if (keycode == KEY_8)
+		w->w.info.sound = (w->w.info.sound) ? 0 : 1;*/
 }
 
 int				keypress_function(int keycode, t_wind *w)
@@ -92,6 +95,7 @@ int				keypress_function(int keycode, t_wind *w)
 	mlx_destroy_image(w->mlx, w->img.ptr_img);
 	create_new_img(w);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
+	//w_texture_walls(w);
 	put_info(w);
 	return (0);
 }

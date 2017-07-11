@@ -17,11 +17,11 @@
 void			w_draw_the_wall(t_wind *w, int i)
 {
 	double		projsliceh;
-	t_point		p;
-	t_point		pd;
+	t_point	p;
+	t_point	pd;
 
 	w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
-	projsliceh = (CUBESIZE / w->w.dist) * w->cam.vp.dist;
+	projsliceh = (CUBESIZE * FOV) / w->w.dist;
 	p = (t_point){(i * w->w.slicew), (w->height / 2) - (projsliceh / 2), 0};
 	pd = (t_point){p.x, p.y + projsliceh, 0};
 	p.x += MARGINW;
@@ -49,14 +49,14 @@ double right)
 			break ;
 		if (w->b.tab_int[(int)wall.y][(int)wall.x] > 0)
 		{
-			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x *
-	MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
+			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
 			w->w.dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
 			w->w.hit = p;
 			w->w.color = (p.x < w->cam.pos.x) ? "0x00FF00" : "0x0000FF";
+			break ;
 		}
-		break ;
-		p = (t_dpoint){p.x + d.x, p.y + d.y, 0};
+		p.x += d.x;
+		p.y += d.y;
 	}
 }
 
@@ -80,16 +80,15 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 			break ;
 		if (w->b.tab_int[(int)wall.y][(int)wall.x] > 0)
 		{
-			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x *
-	MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
+			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
 			w->w.block_dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
 			if (!w->w.dist || w->w.block_dist < w->w.dist)
 			{
 				w->w.dist = w->w.block_dist;
 				w->w.hit = p;
 				w->w.color = p.y < w->cam.pos.z ? "0xFFFF00" : "0xFF00FF";
+				break ;
 			}
-			break ;
 		}
 		p.x += d.x;
 		p.y += d.y;
@@ -122,9 +121,11 @@ void			w_cast_rays(t_wind *w)
 	int			i;
 	double		angle;
 
-	w->cam.vp.dist = (w->w.info.raynumb / 2) / tan(ft_degreetorad(FOV / 2));
+	w->cam.vp.dist = (w->cam.vp.w / 2) / tan(ft_degreetorad(FOV / 2));
 	w->cam.anglebetrays = (double)FOV / (double)w->w.info.raynumb;
 	w->w.slicew = w->cam.vp.w / w->w.info.raynumb;
+	//printf("slicew:  %.3f\n", w->w.slicew);
+	//printf("vp.dist:  %.3f\n", w->cam.vp.dist);
 	angle = w->cam.rot.y - (FOV / 2);
 	w->w.correct_fisheyes = FOV / 2;
 	i = 0;

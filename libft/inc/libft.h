@@ -111,6 +111,7 @@ int					mlibx_dot_in_window(t_wind *w, int x, int y);
 void				mlibx_draw_circle(t_wind *w, t_point centp, int rayon, char *hexcol);
 void				mlibx_draw_circlef(t_wind *w, t_point centp, int rayon, char *hexcol);
 void				mlibx_draw_pixel(t_wind *w, int x, int y, char *hexacolor);
+void				mlibx_draw_pixel_line_float(t_dpoint point, t_dpoint pointd, t_wind *w, char *color);
 void				mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, char *color);
 t_line				ft_set_parameters_tline(t_line v);
 int					ft_get_sign(int first, int second);

@@ -44,23 +44,29 @@ void				put_info(t_wind *w)
 {
 	int				row;
 	int				column;
+	int				margin;
 
 	column = 17;
 	row = 14;
+	margin = 2;
 	put_info_cam(w, LEFTM, row, BL);
-	row = 20;
-	put_string("Number of rays: ", row, 1, w);
-	put_string(ft_itoa((int)w->w.info.raynumb), row, column, w);
 	row = 22;
-	put_string("Minimap rays: ", row, 1, w);
-	put_string(ft_itoa((int)w->w.info.ray_minimap), row, column, w);
+	put_string("1/4: Rays min/max", row, 1, w);
 	row = 23;
-	put_string("Background: ", row, 1, w);
-	put_string(ft_itoa((int)w->w.info.bg), row, column, w);
-	row = 24;
-	put_string("Textures: ", row, 1, w);
-	put_string(ft_itoa((int)w->w.info.texture), row, column, w);
+	put_string("2/3: Rays -/+", row, 1, w);
+	put_string(ft_itoa((int)w->w.info.raynumb), row, column, w);
 	row = 25;
-	put_string("Sound: ", row, 1, w);
+	put_string("Toogles:", row, margin, w);
+	row = 26;
+	put_string("5: Minimap rays", row, margin, w);
+	put_string(ft_itoa((int)w->w.info.ray_minimap), row, column, w);
+	row = 27;
+	put_string("6: Background", row, margin, w);
+	put_string(ft_itoa((int)w->w.info.bg), row, column, w);
+	row = 28;
+	put_string("7: Textures", row, margin, w);
+	put_string(ft_itoa((int)w->w.info.texture), row, column, w);
+	row = 29;
+	put_string("8: Sound", row, margin, w);
 	put_string(ft_itoa((int)w->w.info.sound), row, column, w);
 }

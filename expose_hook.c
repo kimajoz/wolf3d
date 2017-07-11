@@ -18,6 +18,7 @@ int			expose_hook(t_wind *w)
 {
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img,
 	w->img.x, w->img.y);
+	//w_texture_walls(w);
 	put_info(w);
 	return (0);
 }

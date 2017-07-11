@@ -15,13 +15,13 @@
 void			w_draw_background_color(t_wind *w)
 {
 	int			i;
-	t_point		p;
-	t_point		pd;
+	t_point	p;
+	t_point	pd;
 
 	i = 0;
 	while (i < w->height)
 	{
-		p = (t_point){0, i, 0};
+		p = (t_point){MMS * MAPLEN, i, 0};
 		pd = (t_point){w->width, i, 0};
 		if (i < w->height / 2)
 			mlibx_draw_pixel_line(p, pd, w, "0xbdbdbd");

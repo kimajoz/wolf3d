@@ -185,6 +185,7 @@ typedef struct		s_browsefile
 typedef struct		s_img
 {
 	void			*ptr_img;
+	void			*ptr_imgbg;
 	int				x;
 	int				y;
 	int				start_x;
