@@ -6,13 +6,47 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 23:17:33 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/21 16:01:01 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
 #define MARGINW 200
+
+int				getcolor(t_img *img, int x, int y, int fade)
+{
+	int			color;
+	int			c;
+
+	fade /= 8;
+	c = (y * img->size_line + x) * 4;
+	color = img->pxl_ptr[c];
+	if (color == -120 && img->pxl_ptr[c + 1] == 0 && img->pxl_ptr[c + 2] == -104)
+		return (256 * 256 * 256 + 256 * 256 + 256);
+	color += img->pxl_ptr[c + 1] * 256;
+	color += img->pxl_ptr[c + 2] * 256 * 256;
+	return (color);
+}
+
+
+void			draw_dot(t_wind *w, int x, int y, int color)
+{
+	char		b;
+	char		g;
+	char		r;
+	int			i;
+
+	if (color == 256 * 256 * 256 + 256 * 256 + 256)
+		return ;
+	i = (w->img.size_line * y) + (x * (w->img.bpp / 8));
+	b = color % 256;
+	g = (color / 256) % 256;
+	r = (color / 256 / 256) % 256;
+	w->img.pxl_ptr[i] = b;
+	w->img.pxl_ptr[i + 1] = g;
+	w->img.pxl_ptr[i + 2] = r;
+}
 
 void			w_draw_the_wall(t_wind *w, int i)
 {
@@ -22,9 +56,9 @@ void			w_draw_the_wall(t_wind *w, int i)
 	int			y;
 	int			d;
 	//t_rgbcolor	color;
-	int			*col;
-	char		hex[9];
-	char		*colhexa;
+	int			col;
+	//char		hex[9];
+	//char		*colhexa;
 
 	// http://lodev.org/cgtutor/raycasting.html
 
@@ -34,50 +68,54 @@ void			w_draw_the_wall(t_wind *w, int i)
 	pd = (t_point){p.x, p.y + projsliceh, 0};
 	p.x += MARGINW;
 	pd.x += MARGINW;
+	//w->w.lineheight = projsliceh / w->w.dist;
 	w->w.lineheight = w->height / w->w.dist;
 	//printf("rayon: %d\n", i);
 	//printf("p.x: %d, p.y: %d, pd.y: %d\n", p.x, p.y, pd.y);
-	
+
 	if (w->w.info.texture)
 	{
 		y = p.y;
-		while(y < pd.y)
+		while(y < (pd.y - p.y))
 		{
 			d = y * 256 - w->height * 128 + w->w.lineheight * 128;  //256 and 128 factors to avoid floats
+			printf("w->w.lineheight: %.3f\n", w->w.lineheight);
 			w->w.texY = ((d * texHeight) / w->w.lineheight) / 256;
 			//w->w.color = w->w.text[w->w.textnumb][w->w.texY][w->w.texX];
 
-			printf("y: %d\n", y);
+			//printf("y: %d\n", y);
 			printf("texX: %d\n", w->w.texX);
 			printf("texY: %d\n", w->w.texY);
-			printf("w->w.textw: %d\n", w->w.textw);
-			printf("w->w.texth: %d\n", w->w.texth);
-			printf("bpp/8: %d\n",  w->w.bpp[w->w.textnumb]/8);
-			printf("w->w.sline %d\n", w->w.sline[w->w.textnumb]);
+			printf("w->w.textw: %d\n", w->w.text[w->w.textnumb].width);
+			printf("w->w.texth: %d\n", w->w.text[w->w.textnumb].height);
+			printf("bpp/8: %d\n",  w->w.text[w->w.textnumb].bpp/8);
+			printf("w->w.sline %d\n", w->w.text[w->w.textnumb].size_line);
 			printf("w->w.textnumb %d\n", w->w.textnumb);
 			//printf("texY * texth: %d\n", (w->w.texY * w->w.texth));
-			printf("texX * bpp/8: %d\n",  (w->w.texX * (w->w.bpp[w->w.textnumb]/8)));
-			col = (w->w.text[w->w.textnumb] + (w->w.texY * w->w.sline[w->w.textnumb]) + (w->w.texX * (w->w.bpp[w->w.textnumb])));
-			printf("color%d\n", (int)col);
-			printf("color hex:\n");
-			sprintf(hex, "%x", *col);
-			//w->w.color = ft_inttohex_comp(col);
+			printf("texX * bpp/8: %d\n",  (w->w.texX * (w->w.text[w->w.textnumb].bpp/8)));
+			//col = (w->w.text[w->w.textnumb] + (w->w.texY * w->w.text[w->w.textnumb]) + (w->w.texX * (w->w.bpp[w->w.textnumb])));
+			//printf("color%d\n", (int)col);
+			//sprintf(hex, "%x", *col);
 			//puts(w->w.color);
 			//printf("colorhexa%s\n", hex);
-			colhexa = ft_strnew(10);
-			colhexa[0] = '0';
-			colhexa[1] = 'x';
-			ft_strcpy(&colhexa[2], hex);
+			col = getcolor(&w->w.text[w->w.textnumb], w->w.texX, w->w.texY, w->w.dist);
+			//w->w.color = ft_inttohex_comp(col);
+			//printf("color hex:\n", w->w.color);
+			//colhexa = ft_strnew(10);
+			//colhexa[0] = '0';
+			//colhexa[1] = 'x';
+			//ft_strcpy(&colhexa[2], hex);
 			//printf("colorhexa mod%s\n", colhexa);
 			//color.g = (int)(w->w.text[w->w.textnumb] + (w->w.texY * w->w.texth) + (w->w.texX * (w->w.bpp[w->w.textnumb]/8)) + 1);
 			//color.b = (int)(w->w.text[w->w.textnumb] + (w->w.texY * w->w.texth) + (w->w.texX * (w->w.bpp[w->w.textnumb]/8)) + 2);
 			//printf("color.r:%d, g:%d, b:%d\n", color.r, color.g, color.b);
 			/*color.g = *(w->w.text[w->w.textnumb] + (w->w.texY * w->w.texth) + (w->w.texX * (w->w.bpp/8)) + 1);
-			color.b = *(w->w.text[w->w.textnumb] + (w->w.texY * w->w.texth) + (w->w.texX * (w->w.bpp/8)) + 2);*/
-			mlibx_draw_pixel(w, (int)p.x, y, colhexa);
+			  color.b = *(w->w.text[w->w.textnumb] + (w->w.texY * w->w.texth) + (w->w.texX * (w->w.bpp/8)) + 2);*/
+			//mlibx_draw_pixel(w, (int)p.x, y, colhexa);
+			draw_dot(w, (int)p.x, y, col);
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 			//if(side == 1) color = (color >> 1) & 8355711;
-				//buffer[y][x] = color;
+			//buffer[y][x] = color;
 			y++;
 		}
 	}
@@ -86,7 +124,7 @@ void			w_draw_the_wall(t_wind *w, int i)
 }
 
 void			w_verticales_lines_check(t_wind *w, double ray_angle,
-double right)
+		double right)
 {
 	t_dpoint	d;
 	t_dpoint	p;
@@ -171,13 +209,18 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 	up = (ray_angle < 0 || ray_angle > M_PI);
 	w_verticales_lines_check(w, ray_angle, right);
 	w_horizontales_lines_check(w, ray_angle, up);
+	printf("raynumb: %d\n", raynumb);
 	if (w->w.dist)
 	{
 		if (w->w.info.ray_minimap)
 			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x00FF00");
-		
+
 		//ft_putstr("test\n");
 		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
+		/*printf("w->w.dir.y: %.3f\n", w->w.dir.y);
+		  printf("w->w.hit.x: %.3f\n", w->w.hit.x);
+		  printf("w->w.hit.y: %.3f\n", w->w.hit.y);
+		  printf("w->w.dist: %.3f\n", w->w.dist);*/
 		//where exactly the wall was hit
 		if (w->w.side == 0)
 			wallX = w->w.hit.y + w->w.dist * w->w.dir.y;
@@ -185,14 +228,14 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 			wallX = w->w.hit.x + w->w.dist * w->w.dir.x;
 		wallX -= floor((wallX));
 
-		printf("wallX: %.3f\n", wallX);
-		printf("w->w.textw: %d\n", w->w.textw);
+		//printf("wallX: %.3f\n", wallX);
+		//printf("w->w.textw: %d\n", w->w.textw);
 		//x coordinate on the texture
-		w->w.texX = (int)(wallX * (double)w->w.textw);
-		printf("w->w.texX: %d\n", w->w.texX);
-		//if((w->w.side == 0 && w->w.dir.x > 0) || (w->w.side == 1 && w->w.dir.y < 0))
-			//w->w.texX = w->w.textw - w->w.texX - 1;
-		printf("w->w.texX after: %d\n", w->w.texX);
+		w->w.texX = (int)(wallX * (double)w->w.text[w->w.textnumb].width);
+		//printf("w->w.texX: %d\n", w->w.texX);
+		if((w->w.side == 0 && w->w.dir.x > 0) || (w->w.side == 1 && w->w.dir.y < 0))
+			w->w.texX = w->w.text[w->w.textnumb].width - w->w.texX - 1;
+		//printf("w->w.texX after: %d\n", w->w.texX);
 
 
 		w_draw_the_wall(w, raynumb);

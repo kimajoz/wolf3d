@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 14:06:46 by pbillett          #+#    #+#             */
-/*   Updated: 2016/12/27 15:21:03 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/21 12:09:56 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int			expose_hook(t_wind *w)
 	w->img.x, w->img.y);
 	//w_texture_walls(w);
 	put_info(w);
+	//mlx_put_image_to_window(w->mlx, w->win, w->w.text[0], w->img.width, w->img.height);
 	return (0);
 }
 

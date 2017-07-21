@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 23:31:37 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/21 14:03:58 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,10 +195,10 @@ typedef struct		s_img
 	int				y_centerpoint;
 	int				z_centerpoint;
 	char			*pxl_ptr;
-	int				bits_per_pixel;
+	int				bpp;
 	int				size_line;
 	int				octet_per_pixel;
-	int				endian_type;
+	int				endian;
 	t_point			point;
 	t_point			pointd;
 	t_point			r_point;
@@ -288,14 +288,8 @@ typedef struct		s_wolf
 	int				texX;
 	int				texY;
 	char			**lst_text; //lst text
-	void			**text; //texture
-	int				textw;
-	int				texth;
+	t_img			*text;
 	double			lineheight;
-	char			**textpxlptr;
-	int				*bpp;
-	int				*sline;
-	int				*endian;
 }					t_wolf;
 
 typedef struct		s_wind

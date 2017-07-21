@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 14:44:56 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 23:21:34 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/21 09:34:46 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 #  define KEY_4 21
 #  define KEY_5 23
 #  define KEY_6 22
-#  define KEY_7 232
-#  define KEY_8 95
+#  define KEY_7 26
+#  define KEY_8 28
 #  define KEY_I 34
 #  define F1 23
 #  define F2 22

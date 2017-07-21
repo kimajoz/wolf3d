@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 23:08:00 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/21 09:32:54 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int				keypress_function(int keycode, t_wind *w)
 {
 	int			percrotcam;
 
+	ft_putnbr(keycode);
 	percrotcam = 5;
 	if (keycode == EXIT)
 		exit(0);

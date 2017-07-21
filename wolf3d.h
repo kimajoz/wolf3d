@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 23:23:24 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/21 15:50:38 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void			w_print_radar_ray_hitwall(t_wind *w, double cx, double cy,
 void			w_draw_background_color(t_wind *w);
 
 void			init_texture(t_wind *w);
+void			draw_texture(t_wind *w, int n);
 //void			init_screen_texture(t_wind *w);
 //void			w_texture_walls(t_wind *w);
 

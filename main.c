@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 23:14:59 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/07/21 12:08:56 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,15 @@ int				prog(char *filename)
 		w.b.tab_int = rt_file(filename, w.b.y, &w);
 	set_parameters(&w);
 	init_texture(&w);
+	//draw_texture(&w, 0);
 	//init_screen_texture(&w);
 	create_new_img(&w);
+	
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
 	mlx_expose_hook(w.win, expose_hook, &w);
 	mlx_loop(w.mlx);
+	//mlx_put_image_to_window(w.mlx, w.win, w.w.text[0], w.w.text[0]->width, w.w.text[0]->height);
 	return (0);
 }
 
