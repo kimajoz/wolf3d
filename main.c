@@ -60,6 +60,8 @@ int				prog(char *filename)
 	else
 		w.b.tab_int = rt_file(filename, w.b.y, &w);
 	set_parameters(&w);
+	init_texture(&w);
+	//init_screen_texture(&w);
 	create_new_img(&w);
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);

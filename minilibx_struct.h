@@ -185,7 +185,6 @@ typedef struct		s_browsefile
 typedef struct		s_img
 {
 	void			*ptr_img;
-	void			*ptr_imgbg;
 	int				x;
 	int				y;
 	int				start_x;
@@ -277,12 +276,26 @@ typedef struct		s_wolf
 	double			slicew;
 	double			slope;
 	t_dpoint		hit;
+	t_dpoint		dir;
 	double			block_dist;
 	char			*color;
 	char			*color_mfov;
 	char			*color_mray;
 	double			correct_fisheyes;
+	int				side;
 	t_info			info;
+	int				textnumb;
+	int				texX;
+	int				texY;
+	char			**lst_text; //lst text
+	void			**text; //texture
+	int				textw;
+	int				texth;
+	double			lineheight;
+	char			**textpxlptr;
+	int				*bpp;
+	int				*sline;
+	int				*endian;
 }					t_wolf;
 
 typedef struct		s_wind
@@ -295,6 +308,7 @@ typedef struct		s_wind
 	t_camera		cam;
 	t_point			point;
 	t_img			img;
+	t_img			imgbg;
 	t_browsefile	b;
 	t_params		p;
 	t_obj			obj;

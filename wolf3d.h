@@ -22,6 +22,8 @@
 # define RADARL 100
 # define RAYNUMB 60
 # define TWOPI (M_PI * 2)
+# define texWidth 64
+# define texHeight 64
 
 # if MACROKEY == 1
 #  include "minilibx_macos/mlx.h"
@@ -48,7 +50,10 @@ void			w_print_radar_fov(t_wind *w, double cx, double cy, int angle);
 void			w_print_radar_ray_hitwall(t_wind *w, double cx, double cy,
 		char *color);
 void			w_draw_background_color(t_wind *w);
-void			w_texture_walls(t_wind *w);
+
+void			init_texture(t_wind *w);
+//void			init_screen_texture(t_wind *w);
+//void			w_texture_walls(t_wind *w);
 
 t_wind			create_new_window(char *title, int width, int height);
 int				create_new_img(t_wind *w);

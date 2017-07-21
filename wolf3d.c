@@ -31,8 +31,6 @@ void			print_map(t_wind *w)
 	}
 	if (mlibx_dot_in_window(w, w->cam.pos.x * MMS, w->cam.pos.z * MMS) == 1)
 		mlibx_draw_pixel(w, w->cam.pos.x * MMS, w->cam.pos.z * MMS, "0xFF0000");
-	w->w.color_mray = "0xFF0000";
-	w->w.color_mfov = "0xFFFFFF";
 	w_print_radar_ray(w, w->cam.pos.x, w->cam.pos.z, w->cam.rot.y);
 	w_print_radar_fov(w, w->cam.pos.x, w->cam.pos.z, w->cam.rot.y);
 }

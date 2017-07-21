@@ -14,7 +14,7 @@
 
 int			ft_print_error_parsing(int x, int y)
 {
-	ft_putstr("wrong file type, wrong parsing, ");
+	ft_putstr("wrong parsing file, ");
 	ft_putstr("please check number of elem(now ");
 	ft_putnbr(x);
 	ft_putstr(" -> needs ");
@@ -28,7 +28,7 @@ int			ft_print_error_parsing(int x, int y)
 
 int			ft_print_error_type_parsing(int x, int y)
 {
-	ft_putstr("wrong file type, wrong parsing, ");
+	ft_putstr("wrong type in parsing file, ");
 	ft_putstr("please check type of character ");
 	ft_putnbr(x);
 	ft_putstr(" on line ");
@@ -71,8 +71,8 @@ int			ft_check_parsing(char *filename)
 			while (tab[i])
 				ft_strdel(&tab[i++]);
 			free(tab);
-			if (i != MAPLEN)
-				return (ft_print_error_parsing(i, y));
+			/*if (i != MAPLEN)
+				return (ft_print_error_parsing(i, y));*/
 		}
 		y++;
 	}

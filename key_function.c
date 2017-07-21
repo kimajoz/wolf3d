@@ -76,10 +76,10 @@ static void		keypress_function02(int keycode, t_wind *w)
 		w->w.info.ray_minimap = (w->w.info.ray_minimap) ? 0 : 1;
 	else if (keycode == KEY_6)
 		w->w.info.bg = (w->w.info.bg) ? 0 : 1;
-	/*else if (keycode == KEY_7)
+	else if (keycode == KEY_7)
 		w->w.info.texture = (w->w.info.texture) ? 0 : 1;
 	else if (keycode == KEY_8)
-		w->w.info.sound = (w->w.info.sound) ? 0 : 1;*/
+		w->w.info.sound = (w->w.info.sound) ? 0 : 1;
 }
 
 int				keypress_function(int keycode, t_wind *w)
