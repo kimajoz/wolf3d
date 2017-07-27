@@ -278,7 +278,7 @@ typedef struct		s_wolf
 	t_dpoint		hit;
 	t_dpoint		dir;
 	double			block_dist;
-	char			*color;
+	int				color;
 	char			*color_mfov;
 	char			*color_mray;
 	double			correct_fisheyes;

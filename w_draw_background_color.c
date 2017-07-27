@@ -24,9 +24,9 @@ void			w_draw_background_color(t_wind *w)
 		p = (t_point){MMS * MAPLEN, i, 0};
 		pd = (t_point){w->width, i, 0};
 		if (i < w->height / 2)
-			mlibx_draw_pixel_line(p, pd, w, "0xbdbdbd");
+			mlibx_draw_pixel_line_int(p, pd, w, 3355443); // Light gray (51, 51, 51 in rgb)
 		else
-			mlibx_draw_pixel_line(p, pd, w, "0x939393");
+			mlibx_draw_pixel_line_int(p, pd, w, 7829367); // Drak grey (119, 119, 119 in rgb)
 		i++;
 	}
 }
