@@ -92,7 +92,7 @@ t_list				*ft_sort_list(t_list *lst, int (*cmp)(int, int));
 
 float				ft_squared(float n);
 float				ft_pythagore(float a, float b);
-double				ft_degreetorad(int degrees);
+double				ft_degreetorad(double degrees);
 double				ft_radtodegree(double rad);
 char				*ft_rgbtohexa(t_rgbcolor rgbcolor);
 char				*ft_rgbftohexa(t_rgbcolorf rgbcolorf);

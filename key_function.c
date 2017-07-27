@@ -23,7 +23,7 @@ int				rot_abs(int n)
 
 int				is_blocking(t_dpoint pos, t_wind *w)
 {
-	if (w->b.tab_int[(int)pos.z][(int)pos.x] == 1)
+	if ((int)(w->b.tab_int[(int)pos.z][(int)pos.x]) > 0)
 		return (1);
 	return (0);
 }
@@ -86,7 +86,6 @@ int				keypress_function(int keycode, t_wind *w)
 {
 	int			percrotcam;
 
-	ft_putnbr(keycode);
 	percrotcam = 5;
 	if (keycode == EXIT)
 		exit(0);

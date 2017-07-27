@@ -22,8 +22,8 @@
 # define RADARL 100
 # define RAYNUMB 60
 # define TWOPI (M_PI * 2)
-# define texWidth 64
-# define texHeight 64
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
 
 # if MACROKEY == 1
 #  include "minilibx_macos/mlx.h"

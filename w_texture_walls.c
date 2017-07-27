@@ -51,8 +51,6 @@ void			draw_texture(t_wind *w, int n)
 void			init_texture(t_wind *w)
 {
 	int			i;
-	//int			wi;
-	//int			he;
 
 	i = 0;
 	w->w.lst_text = malloc(sizeof(char *) * 11);
@@ -67,27 +65,15 @@ void			init_texture(t_wind *w)
 						"img/barrel.xpm",
 						"img/greenlight.xpm",
 						"img/pillar.xpm");
-	printf("malloc img\n");
-	w->w.text = malloc(sizeof(t_img *) * 11);
-	printf("malloc img after\n");
-	/*w->w.textpxlptr = malloc(sizeof(char *) * 11);
-	w->w.bpp = malloc(sizeof(int *) * 11);
-	w->w.sline = malloc(sizeof(int *) * 11);
-	w->w.endian = malloc(sizeof(int *) * 11);*/
+	w->w.text = malloc(sizeof(t_img) * 11);
 	while (i < 11)
 	{
-		//w->w.text[i].ptr_img = malloc(sizeof(void *));
-		printf("malloc img after all 1\n");
-		//w->w.text[i].ptr_img = mlx_new_image(w->mlx, w->w.text[i].width, w->w.text[i].height);
-		printf("malloc img after all 1q\n");
+		//printf("i: %d\n", i);
 		w->w.text[i].ptr_img = mlx_xpm_file_to_image(w->mlx, w->w.lst_text[i], &(w->w.text[i].width), &(w->w.text[i].height));
-		printf("malloc img after all 2\n");
 		w->w.text[i].pxl_ptr = mlx_get_data_addr(w->w.text[i].ptr_img, &w->w.text[i].bpp, &w->w.text[i].size_line, &w->w.text[i].endian);
-		printf("malloc img after all 2\n");
 		i++;
 	}
-	printf("malloc img after all end\n");
-	//printf("endian:%i\n", w->w.endian[0]);
+	//printf("malloc img after all end\n");
 }
 /*
 void			init_screen_texture(t_wind *w)

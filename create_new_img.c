@@ -18,7 +18,7 @@ int				create_new_img(t_wind *w)
 
 	w->img.pxl_ptr = mlx_get_data_addr(w->img.ptr_img, &w->img.bpp,
 	&w->img.size_line, &w->img.endian);
-	printf("endian screen: %d\n", w->img.endian);
+	//printf("endian screen: %d\n", w->img.endian);
 	w->img.octet_per_pixel = w->img.bpp / 8;
 	if (w->w.info.bg)
 		w_draw_background_color(w);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-double		ft_degreetorad(int degrees)
+double		ft_degreetorad(double degrees)
 {
 	double	radians;
 	double	pi;

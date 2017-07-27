@@ -36,7 +36,7 @@ static int		set_parameters(t_wind *w)
 	w->cam.vp.h = 400;
 	w->cam.pos.y = CUBESIZE / 2;
 	w->cam.pos.x = 1.5;
-	w->cam.pos.z = 0.5;
+	w->cam.pos.z = 1.5;
 	w->cam.rot.y = 0;
 	w->w.color_mray = "0xFF0000";
 	w->w.color_mfov = "0xFFFFFF";
