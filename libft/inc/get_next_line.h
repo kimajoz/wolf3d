@@ -29,6 +29,6 @@ typedef struct		s_fd {
 	struct s_fd		*next;
 }					t_fd;
 
-int			check_fd(int fd);
+int			ft_check_fd(int fd, char *filename, int optional);
 
 #endif

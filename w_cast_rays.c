@@ -12,8 +12,6 @@
 
 #include "wolf3d.h"
 
-#define MARGINW 200
-
 int				getcolor(t_img *img, int x, int y)
 {
 	int			color;
@@ -56,8 +54,8 @@ void			w_draw_the_wall(t_wind *w, int i)
 	projsliceh = (CUBESIZE * FOV) / w->w.dist;
 	p = (t_point){(i * w->w.slicew), (w->height / 2) - (projsliceh / 2), 0};
 	pd = (t_point){p.x, p.y + projsliceh, 0};
-	p.x += MARGINW;
-	pd.x += MARGINW;
+	p.x += w->w.marginw;
+	pd.x += w->w.marginw;
 	if (w->w.info.texture)
 	{
 		h = 0;
@@ -89,7 +87,7 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 	d.y = (w->w.slope < 360) ? d.x * w->w.slope : 0;
 	p.x = right ? ceil(w->cam.pos.x) : floor(w->cam.pos.x);
 	p.y = (w->cam.pos.z) + (p.x - w->cam.pos.x) * w->w.slope;
-	while (p.x >= 0 && p.x < MAPLEN && p.y >= 0 && p.y < MAPLEN)
+	while (p.x >= 0 && p.x < w->b.nbr_elem_line[0] && p.y >= 0 && p.y < w->b.nbrtot_of_line)
 	{
 		wall = (t_dpoint){floor(p.x + (right ? 0 : -1)), floor(p.y), 0};
 		if (wall.x < 0 || wall.y < 0)
@@ -124,7 +122,7 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 	d.x = (w->w.slope < 360) ? (d.y * w->w.slope) : 0;
 	p.y = up ? floor(w->cam.pos.z) : ceil(w->cam.pos.z);
 	p.x = w->cam.pos.x + (p.y - w->cam.pos.z) * w->w.slope;
-	while (p.x >= 0 && p.x < MAPLEN && p.y >= 0 && p.y < MAPLEN)
+	while (p.x >= 0 && p.x < w->b.nbr_elem_line[0] && p.y >= 0 && p.y < w->b.nbrtot_of_line)
 	{
 		wall = (t_dpoint){floor(p.x), floor(p.y + (up ? -1 : 0)), 0};
 		if (wall.x < 0 || wall.y < 0)

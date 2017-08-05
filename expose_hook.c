@@ -42,5 +42,9 @@ int			key_release_function(int keycode, t_wind *w)
 {
 	if (keycode == SPACE)
 		w->p.space_mousemove = 0;
+	else if (keycode == R_ARROW || keycode == L_ARROW)
+		w->w.player.dir = 0;
+	else if (keycode == U_ARROW || keycode == D_ARROW)
+		w->w.player.speed = 0;
 	return (0);
 }

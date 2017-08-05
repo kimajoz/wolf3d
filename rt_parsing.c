@@ -18,7 +18,8 @@ int			ft_print_error_parsing(int x, int y)
 	ft_putstr("please check number of elem(now ");
 	ft_putnbr(x);
 	ft_putstr(" -> needs ");
-	ft_putnbr(MAPLEN);
+	ft_putstr(" lenght of the line ");
+	//ft_putnbr(w->b.nbr_elem_line[0]);
 	ft_putstr(") on line ");
 	ft_putnbr(y + 1);
 	ft_putstr(".");
@@ -52,6 +53,33 @@ int			ft_numdigit(char *n)
 	return (0);
 }
 
+int			ft_check_parsing_param(char *filename)
+{
+	int		fd;
+	char	**tab;
+	char	*line;
+	int		i;
+	int		y;
+
+	y = 0;
+	fd = open(filename, O_RDONLY);
+	while (get_next_line(fd, &line))
+	{
+		tab = ft_strsplit(line, ' ');
+		i = 0;
+		if (line[0] != '#')
+		{
+			while (tab[i])
+				ft_strdel(&tab[i++]);
+			free(tab);
+			if (i != 3)
+				return (ft_print_error_parsing(i, y));
+		}
+		y++;
+	}
+	return (0);
+}
+
 int			ft_check_parsing(char *filename)
 {
 	int		fd;
@@ -71,8 +99,8 @@ int			ft_check_parsing(char *filename)
 			while (tab[i])
 				ft_strdel(&tab[i++]);
 			free(tab);
-			/*if (i != MAPLEN)
-				return (ft_print_error_parsing(i, y));*/
+			//if (i != w->b.nbr_elem_line[0])
+				//return (ft_print_error_parsing(i, y));
 		}
 		y++;
 	}

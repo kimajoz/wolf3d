@@ -2,7 +2,7 @@
 #include "wolf3d.h"
 #include <stdarg.h> //for ellipsis
 
-int				aff_text_name(t_wind *w, int numargs, ...)
+int				aff_text_name(char **lst_text, int numargs, ...)
 {
 	int			i;
 	va_list		list; //access ellipsis through va_list
@@ -13,13 +13,88 @@ int				aff_text_name(t_wind *w, int numargs, ...)
 	while (i < numargs)
 	{
 		char *arg = va_arg(list, char *);
-		w->w.lst_text[i] = malloc(sizeof(char) * ft_strlen(arg) + 1);
-		ft_strcpy(w->w.lst_text[i], arg);
+		lst_text[i] = malloc(sizeof(char) * ft_strlen(arg) + 1);
+		ft_strcpy(lst_text[i], arg);
 		i++;
 	}
 	va_end(list);
 	return (0);
 }
+
+int				aff_block(int *block, int numargs, ...)
+{
+	int			i;
+	va_list		list; //access ellipsis through va_list
+
+	// https://bobobobo.wordpress.com/2008/01/28/how-to-use-variable-argument-lists-va_list/
+	i = 0;
+	va_start(list, numargs);
+	while (i < numargs)
+	{
+		int arg = va_arg(list, int);
+		//block[i] = malloc(sizeof(char) * ft_strlen(arg) + 1);
+		//ft_strcpy(lst_text[i], arg);
+		block[i] = arg;
+		i++;
+	}
+	va_end(list);
+	return (0);
+}
+
+void			init_sprites(t_wind *w)
+{
+	int			i;
+	int			numb;
+
+	i = 0;
+	numb = 5;
+	w->w.lst_sprite = malloc(sizeof(char *) * numb);
+	aff_text_name(w->w.lst_sprite, numb,
+						"img/sprites/table-chairs.png",
+						"img/sprites/armor.png",
+						"img/sprites/plant-green.png",
+						"img/sprites/lamp.png",
+						"img/sprites/guard.png");
+	aff_block(w->w.sprite_block, 1, 1, 1, 0, 1);
+	w->w.sprite = malloc(sizeof(t_img) * numb);
+	while (i < numb)
+	{
+		//printf("i: %d\n", i);
+		w->w.sprite[i].ptr_img = mlx_xpm_file_to_image(w->mlx, w->w.lst_sprite[i], &(w->w.sprite[i].width), &(w->w.sprite[i].height));
+		w->w.sprite[i].pxl_ptr = mlx_get_data_addr(w->w.sprite[i].ptr_img, &w->w.sprite[i].bpp, &w->w.sprite[i].size_line, &w->w.sprite[i].endian);
+		i++;
+	}
+	//printf("malloc img after all end\n");
+}
+
+void			init_texture(t_wind *w)
+{
+	int			i;
+
+	i = 0;
+	w->w.lst_text = malloc(sizeof(char *) * 11);
+	aff_text_name(w->w.lst_text, 11, "img/greystone.xpm",
+						"img/mossy.xpm",
+						"img/redbrick.xpm",
+						"img/purplestone.xpm",
+						"img/wood.xpm",
+						"img/colorstone.xpm",
+						"img/bluestone.xpm",
+						"img/eagle.xpm",
+						"img/barrel.xpm",
+						"img/greenlight.xpm",
+						"img/pillar.xpm");
+	w->w.text = malloc(sizeof(t_img) * 11);
+	while (i < 11)
+	{
+		//printf("i: %d\n", i);
+		w->w.text[i].ptr_img = mlx_xpm_file_to_image(w->mlx, w->w.lst_text[i], &(w->w.text[i].width), &(w->w.text[i].height));
+		w->w.text[i].pxl_ptr = mlx_get_data_addr(w->w.text[i].ptr_img, &w->w.text[i].bpp, &w->w.text[i].size_line, &w->w.text[i].endian);
+		i++;
+	}
+	//printf("malloc img after all end\n");
+}
+
 /*
 void			draw_texture(t_wind *w, int n)
 {
@@ -48,33 +123,7 @@ void			draw_texture(t_wind *w, int n)
 
 }*/
 
-void			init_texture(t_wind *w)
-{
-	int			i;
 
-	i = 0;
-	w->w.lst_text = malloc(sizeof(char *) * 11);
-	aff_text_name(w, 11, "img/greystone.xpm",
-						"img/mossy.xpm",
-						"img/redbrick.xpm",
-						"img/purplestone.xpm",
-						"img/wood.xpm",
-						"img/colorstone.xpm",
-						"img/bluestone.xpm",
-						"img/eagle.xpm",
-						"img/barrel.xpm",
-						"img/greenlight.xpm",
-						"img/pillar.xpm");
-	w->w.text = malloc(sizeof(t_img) * 11);
-	while (i < 11)
-	{
-		//printf("i: %d\n", i);
-		w->w.text[i].ptr_img = mlx_xpm_file_to_image(w->mlx, w->w.lst_text[i], &(w->w.text[i].width), &(w->w.text[i].height));
-		w->w.text[i].pxl_ptr = mlx_get_data_addr(w->w.text[i].ptr_img, &w->w.text[i].bpp, &w->w.text[i].size_line, &w->w.text[i].endian);
-		i++;
-	}
-	//printf("malloc img after all end\n");
-}
 /*
 void			init_screen_texture(t_wind *w)
 {
@@ -84,7 +133,7 @@ void			init_screen_texture(t_wind *w)
 	int			xpm1_x;
 	int			xpm1_y;
 
-	i = MMS * MAPLEN;
+	i = w->w.marginw;
 	id = 0;
 	strip_w = 2;
 	w->w.sstrip = malloc(sizeof(void **) * w->width);

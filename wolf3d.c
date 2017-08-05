@@ -18,12 +18,14 @@ void			print_map(t_wind *w)
 	int			j;
 
 	i = 0;
-	while (i < ((w->b.nbrtot_of_line + 1) * MMS))
+	//printf("nbr of line: %d\n", w->b.nbrtot_of_line);
+	//printf("nbr elem on line: %d\n", w->b.nbr_elem_line[3]);
+	while (i < (w->b.nbrtot_of_line * MMS))
 	{
 		j = 0;
 		while (j < (w->b.nbr_elem_line[(i / MMS)] * MMS))
 		{
-			if (w->b.tab_int[i / MMS][j / MMS] == 1)
+			if (w->b.tab_int[i / MMS][j / MMS] > 0)
 				mlibx_draw_pixel(w, j, i, "0xFFFFFF");
 			j++;
 		}
@@ -35,20 +37,15 @@ void			print_map(t_wind *w)
 	w_print_radar_fov(w, w->cam.pos.x, w->cam.pos.z, w->cam.rot.y);
 }
 
-int				check_wall(t_wind *w, t_point inter)
+void			game_cycle(t_wind *w)
 {
-	if ((w->b.tab_int[inter.z][inter.x]) == 1)
-	{
-		ft_putendl("found!");
-		return (1);
-	}
-	else
-		ft_putendl("not found...");
-	return (0);
+	print_map(w);
 }
 
 void			wolf3d(t_wind *w)
 {
+	move(w);
 	w_cast_rays(w);
-	print_map(w);
+	print_map(w); //should init_map
+	//game_cycle(w);
 }

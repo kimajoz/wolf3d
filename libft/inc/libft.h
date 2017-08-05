@@ -120,5 +120,6 @@ int					ft_get_sign(int first, int second);
 int					ft_get_diff(int first, int second);
 double				ft_fabs(double x);
 int					ft_nbrlen(int n);
+double				ft_rot_fabs(double n);
 
 #endif

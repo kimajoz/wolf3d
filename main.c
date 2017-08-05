@@ -35,41 +35,74 @@ static int		set_parameters(t_wind *w)
 	w->cam.vp.w = 600;
 	w->cam.vp.h = 400;
 	w->cam.pos.y = CUBESIZE / 2;
-	w->cam.pos.x = 1.5;
-	w->cam.pos.z = 1.5;
-	w->cam.rot.y = 0;
+	if (w->w.player.init_pos != NULL)
+	{
+		w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
+		w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
+		w->cam.rot.y = w->w.player.init_pos[2];
+	}
+	else
+	{ // Default values (if not map.par files)
+		w->cam.pos.x = 1.5;
+		w->cam.pos.z = 1.5;
+		w->cam.rot.y = 0;
+	}
+	w->w.player.rotspeed = 5;
+	w->w.player.movespeed = MOVESP;
+	w->w.marginw = w->b.nbr_elem_line[0] * MMS;
 	w->w.color_mray = "0xFF0000";
 	w->w.color_mfov = "0xFFFFFF";
 	w->w.info.raynumb = RAYNUMB;
 	w->w.info.ray_minimap = 0;
 	w->w.info.bg = 0;
-	w->w.info.texture = 0;
+	w->w.info.texture = 1;
 	w->w.info.sound = 0;
 	return (0);
+}
+
+char			*new_file_name(char *oldfilename, char* ext)
+{
+	char		*str;
+	int			len;
+
+	len = ft_strlen(ext);
+	str = ft_strnew(ft_strlen(oldfilename));
+	ft_strcpy(str, ft_strsub(oldfilename, 0, ft_strlen(oldfilename) - len));
+	ft_strcat(str, ext);
+	return (str);
 }
 
 int				prog(char *filename)
 {
 	t_wind		w;
+	char		*fsprites;
+	char		*fparam;
 
 	w.width = 800;
 	w.height = 600;
+	if (!ft_strstr(filename, "scn"))
+	{
+		ft_putendl("File wrong type: Needed .scn input file extension.");
+		return (0);
+	}
 	w = create_new_window("Wolf3d", w.width, w.height);
-	if (rt_file(filename, w.b.y, &w) == NULL)
+	if (rt_file(filename, w.b.y, &w, 1) == NULL)
 		return (0);
 	else
-		w.b.tab_int = rt_file(filename, w.b.y, &w);
+		w.b.tab_int = rt_file(filename, w.b.y, &w, 1);
+	// Load sprites and params if any
+	fsprites = new_file_name(filename, ".spr");
+	fparam = new_file_name(filename, ".par");
+	rt_file(fsprites, w.b.y, &w, 0);
+	if (rt_file(fparam, w.b.y, &w, 1) == NULL)
+		return (0);
 	set_parameters(&w);
 	init_texture(&w);
-	//draw_texture(&w, 0);
-	//init_screen_texture(&w);
 	create_new_img(&w);
-	
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
 	mlx_expose_hook(w.win, expose_hook, &w);
 	mlx_loop(w.mlx);
-	//mlx_put_image_to_window(w.mlx, w.win, w.w.text[0], w.w.text[0]->width, w.w.text[0]->height);
 	return (0);
 }
 

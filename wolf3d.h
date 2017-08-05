@@ -16,14 +16,14 @@
 
 # define FOV 60
 # define CUBESIZE 64
-# define MAPLEN 20
 # define MOVESP 0.18
 # define MMS 10
 # define RADARL 100
-# define RAYNUMB 60
+# define RAYNUMB 600
 # define TWOPI (M_PI * 2)
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
+# define MARGINIT 3
 # define IC_DGREY 3355443//Rgb 51,51,51
 # define IC_MGREY 7829367//Rgb 119,119,119
 # define IC_FGREEN 65280//Rgb 0,255,0
@@ -44,8 +44,11 @@
 # include <stdlib.h>
 # include <stdio.h> // A SUPPRIMER !
 
-int				**rt_file(char *filename, int y, t_wind *w);
+int				**rt_file(char *filename, int y, t_wind *w, int needed);
 int				ft_check_parsing(char *filename);
+int				ft_check_parsing_param(char *filename);
+int				ft_print_error_type_parsing(int x, int y);
+int				ft_count_lines(t_wind *w, char *filename);
 
 void			put_info(t_wind *w);
 int				prog(char *filename);
@@ -59,6 +62,7 @@ void			w_draw_background_color(t_wind *w);
 
 void			init_texture(t_wind *w);
 void			draw_texture(t_wind *w, int n);
+void			move(t_wind *w);
 //void			init_screen_texture(t_wind *w);
 //void			w_texture_walls(t_wind *w);
 

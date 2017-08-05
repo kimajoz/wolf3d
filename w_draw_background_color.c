@@ -21,7 +21,7 @@ void			w_draw_background_color(t_wind *w)
 	i = 0;
 	while (i < w->height)
 	{
-		p = (t_point){MMS * MAPLEN, i, 0};
+		p = (t_point){w->w.marginw, i, 0};
 		pd = (t_point){w->width, i, 0};
 		if (i < w->height / 2)
 			mlibx_draw_pixel_line_int(p, pd, w, 3355443); // Light gray (51, 51, 51 in rgb)

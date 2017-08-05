@@ -23,15 +23,22 @@ static void			put_string(char *s, int l, int c, t_wind *w)
 
 void				put_info_cam(t_wind *w, int leftm, int row, int bl)
 {
+	row = w->b.nbrtot_of_line  / 1.5;
+	put_string("player.speed :", row, 1, w);
+	put_string(ft_itoa((int)w->w.player.speed), row, leftm + bl, w);
+	row++;
+	put_string("player.dir :", row, 1, w);
+	put_string(ft_itoa((int)w->w.player.dir), row, leftm + bl, w);
+	row++;
 	put_string("Camera :", row, 1, w);
-	row = 15;
+	row++;
 	put_string("pos.x:", row, leftm, w);
 	put_string(ft_itoa((int)w->cam.pos.x), row, leftm + bl, w);
 	put_string("y: ", row, leftm + bl + 4, w);
 	put_string(ft_itoa((int)w->cam.pos.y), row, leftm + bl + 6, w);
 	put_string("z: ", row, leftm + bl + 10, w);
 	put_string(ft_itoa((int)w->cam.pos.z), row, leftm + bl + 12, w);
-	row = 16;
+	row++;
 	put_string("rot.x:", row, leftm, w);
 	put_string(ft_itoa((int)w->cam.rot.x), row, leftm + bl, w);
 	put_string("y: ", row, leftm + bl + 4, w);

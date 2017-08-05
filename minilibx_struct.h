@@ -269,19 +269,29 @@ typedef struct		s_info
 
 }					t_info;
 
+typedef struct		s_player
+{
+	int				speed;
+	int				dir;
+	double			rotspeed;
+	double			movespeed;
+	int				*init_pos;
+}					t_player;
+
 typedef struct		s_wolf
 {
+	t_player		player;
 	double			dist;
 	double			dist_correct;
 	double			slicew;
 	double			slope;
 	t_dpoint		hit;
-	t_dpoint		dir;
 	double			block_dist;
 	int				color;
 	char			*color_mfov;
 	char			*color_mray;
 	double			correct_fisheyes;
+	int				marginw;
 	int				side;
 	t_info			info;
 	int				textnumb;
@@ -290,6 +300,10 @@ typedef struct		s_wolf
 	char			**lst_text; //lst text
 	t_img			*text;
 	double			lineheight;
+	t_img			*sprite; //lst text
+	char			**lst_sprite; //lst text
+	int				*sprite_block;
+	int				**tab_int_spr;
 }					t_wolf;
 
 typedef struct		s_wind

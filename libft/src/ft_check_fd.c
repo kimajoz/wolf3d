@@ -3,13 +3,17 @@
 #include "../inc/libft.h"
 #include "../inc/get_next_line.h"
 
-int			check_fd(int fd)
+int			ft_check_fd(int fd, char *filename, int needed)
 {
 	char	*line;
 
 	if (fd == -1 || !get_next_line(fd, &line))
 	{
-		ft_putstr("empy file, please check source_file\n");
+		ft_putstr("File found or empy file: ");
+		ft_putstr(filename);
+		if (!needed)
+			ft_putstr(" (Optional file)");
+		ft_putchar('\n');
 		return (1);
 	}
 	return (0);

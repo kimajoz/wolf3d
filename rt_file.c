@@ -12,6 +12,65 @@
 
 #include "wolf3d.h"
 
+void		set_spr_to_prog(int fd, int y, t_wind *w)
+{
+	char	*line;
+	char	**tab;
+	int		x;
+	int		j;
+
+	w->w.tab_int_spr = malloc((y + 1) * sizeof(int *));
+	j = 0;
+	while (get_next_line(fd, &line))
+	{
+		w->w.tab_int_spr[j] = malloc(ft_strlen(line) * sizeof(int));
+		tab = ft_strsplit(line, ';');
+		ft_strdel(&line);
+		x = 0;
+		if (tab[x][0] != '#')
+		{
+			while (tab[x])
+			{
+				w->w.tab_int_spr[j][x] = ft_atoi(tab[x]);
+				ft_strdel(&tab[x++]);
+			}
+			j++;
+		}
+		free(tab);
+	}
+}
+
+void		set_param_to_prog(int fd, t_wind *w)
+{
+	char	*line;
+	char	**tab;
+	int		x;
+	int		j;
+	int		y;
+
+	w->w.player.init_pos = malloc(3 * sizeof(double));
+	j = 0;
+	y = 0;
+	while (get_next_line(fd, &line))
+	{
+		tab = ft_strsplit(line, ' ');
+		ft_strdel(&line);
+		x = 0;
+		if (tab[x][0] != '#')
+		{
+			while (tab[x])
+			{
+				if (j == 0)
+					w->w.player.init_pos[x] = ft_atoi(tab[x]);
+				ft_strdel(&tab[x++]);
+			}
+			j++;
+		}
+		y++;
+		free(tab);
+	}
+}
+
 int			**insert_file_to_prog(int fd, int y, t_wind *w)
 {
 	char	*line;
@@ -40,7 +99,7 @@ int			**insert_file_to_prog(int fd, int y, t_wind *w)
 	return (tab_int);
 }
 
-int			**rt_file(char *filename, int y, t_wind *w)
+int			**rt_file(char *filename, int y, t_wind *w, int needed)
 {
 	int		fd;
 	int		fd1;
@@ -49,18 +108,29 @@ int			**rt_file(char *filename, int y, t_wind *w)
 
 	fd = open(filename, O_RDONLY);
 	fd1 = open(filename, O_RDONLY);
-	if (check_fd(fd1) == 1)
+	if (ft_check_fd(fd1, filename, needed) == 1)
 		return (NULL);
 	y = 0;
-	while (get_next_line(fd1, &line))
+	if (ft_strstr(filename, "scn"))
 	{
-		ft_strdel(&line);
-		y++;
+		while (get_next_line(fd1, &line))
+		{
+			ft_strdel(&line);
+			y++;
+		}
+		w->b.nbrtot_of_line = y + 1;
+		if (ft_check_parsing(filename) == 1)
+			return (NULL);
+		tab_int = insert_file_to_prog(fd, y, w);
 	}
-	w->b.nbrtot_of_line = y;
-	if (ft_check_parsing(filename) == 1)
-		return (0);
-	tab_int = insert_file_to_prog(fd, y, w);
+	else if (ft_strstr(filename, "spr"))
+		set_spr_to_prog(fd, y, w);
+	else if (ft_strstr(filename, "par"))
+	{
+		if (ft_check_parsing_param(filename) == 1)
+			return (NULL);
+		set_param_to_prog(fd, w);
+	}
 	close(fd1);
 	close(fd);
 	return (tab_int);

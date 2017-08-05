@@ -88,7 +88,8 @@ SRC= src/ft_lstiter.c \
 	src/mlibx_draw_dot.c \
 	src/ft_hextoint.c \
 	src/get_next_line.c \
-	src/ft_check_fd.c
+	src/ft_check_fd.c \
+	src/ft_rot_fabs.c
 CFLAGS= -Wall -Werror -Wextra
 SRCDIR= src
 OBJDIR= obj
