@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 # include <math.h>
+# include <time.h>
 # include "../../minilibx_struct.h"
 
 void				*ft_memset(void *b, int c, size_t len);
@@ -121,5 +122,11 @@ int					ft_get_diff(int first, int second);
 double				ft_fabs(double x);
 int					ft_nbrlen(int n);
 double				ft_rot_fabs(double n);
+double				ft_get_time(void);
+double				ft_get_millitime(void);
+char				*ft_get_time_clean(void);
+void				ft_set_time_out(t_wind *w, void (*f)(t_wind *w), double endtime);
+double				ft_fmax(double a, double b);
 
+int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data);
 #endif

@@ -1,14 +1,15 @@
 #Sprites //type;posX;posY
+1;10;3
 #Lamps in center area
-3;10;7
-3;15;7
+4;10;7
+4;15;7
 #Lamps in bottom corridor
-3;5;22
-3;12;22
-3;19;22
+4;5;22
+4;12;22
+4;19;22
 #Tables in long bottom room
-0;10;18
-0;15;18
+1;10;18
+1;15;18
 #Lamps in long bottom room
-3;8;18
-3;17;18
+4;8;18
+4;17;18

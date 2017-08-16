@@ -21,6 +21,22 @@
 #define KEYRELEASE			3
 #define KEYRELEASEMASK		(1L<<1)
 
+static void		init_player_pos(t_wind *w)
+{
+	if (w->w.player.init_pos != NULL)
+	{
+		w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
+		w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
+		w->cam.rot.y = w->w.player.init_pos[2];
+	}
+	else
+	{ // Default values (if not map.par files)
+		w->cam.pos.x = 1.5;
+		w->cam.pos.z = 1.5;
+		w->cam.rot.y = 0;
+	}
+}
+
 static int		set_parameters(t_wind *w)
 {
 	w->img.width = 800;
@@ -35,18 +51,7 @@ static int		set_parameters(t_wind *w)
 	w->cam.vp.w = 600;
 	w->cam.vp.h = 400;
 	w->cam.pos.y = CUBESIZE / 2;
-	if (w->w.player.init_pos != NULL)
-	{
-		w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
-		w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
-		w->cam.rot.y = w->w.player.init_pos[2];
-	}
-	else
-	{ // Default values (if not map.par files)
-		w->cam.pos.x = 1.5;
-		w->cam.pos.z = 1.5;
-		w->cam.rot.y = 0;
-	}
+	init_player_pos(w);
 	w->w.player.rotspeed = 5;
 	w->w.player.movespeed = MOVESP;
 	w->w.marginw = w->b.nbr_elem_line[0] * MMS;
@@ -57,6 +62,8 @@ static int		set_parameters(t_wind *w)
 	w->w.info.bg = 0;
 	w->w.info.texture = 1;
 	w->w.info.sound = 0;
+	w->w.o.lastgamecycle_time = 0;
+	w->w.o.gamecycle_delay = 1000 / 30; //30fps
 	return (0);
 }
 
@@ -99,6 +106,7 @@ int				prog(char *filename)
 	set_parameters(&w);
 	init_texture(&w);
 	create_new_img(&w);
+	init_minimap(&w); //init minimap
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
 	mlx_expose_hook(w.win, expose_hook, &w);

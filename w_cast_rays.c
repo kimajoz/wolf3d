@@ -17,6 +17,15 @@ int				getcolor(t_img *img, int x, int y)
 	int			color;
 	int			c;
 
+	/*if (w->w.sprnumb)
+	{
+		ft_putendl("start getcolor spr");
+		ft_putstr("sizeline");
+		ft_putnbr(img->size_line);
+		ft_putchar('\n');
+		printf("sizeline: %d\n", img->size_line);
+		//printf("sizeline: %d, bpp:%d\n", img->size_line, img->bpp);
+	}*/
 	c = y * img->size_line + (x * (img->bpp / 8));
 	color = img->pxl_ptr[c];
 	if (color == -120 && img->pxl_ptr[c + 1] == 0 && img->pxl_ptr[c + 2] == -104)
@@ -42,14 +51,14 @@ void		ft_int_to_rgb(t_wind *w, int x, int y, int color)
 	printf("r:%d, g:%d, b:%d, i:%d\n", r, g, b, i);
 }
 
-void			w_draw_the_wall(t_wind *w, int i)
+void				w_draw_the_wall(t_wind *w, int i)
 {
-	double		projsliceh;
-	t_point		p;
-	t_point		pd;
-	int			y;
-	int			h;
-	int			col;
+	double			projsliceh;
+	t_point			p;
+	t_point			pd;
+	int				y;
+	int				h;
+	int				col;
 
 	projsliceh = (CUBESIZE * FOV) / w->w.dist;
 	p = (t_point){(i * w->w.slicew), (w->height / 2) - (projsliceh / 2), 0};
@@ -64,7 +73,17 @@ void			w_draw_the_wall(t_wind *w, int i)
 		{
 			h++;
 			w->w.texY = (TEXHEIGHT / projsliceh) * h;
-			col = getcolor(&w->w.text[w->w.textnumb], w->w.texX, w->w.texY);
+			if (w->w.sprnumb)
+			{
+				//ft_putendl("sprnumb before");
+				//printf("sprnumb: %d\n", w->w.sprnumb);
+				//col = mlx_get_color_value(w->mlx, w->w.sprite[w->w.sprnumb - 1]);
+				col = getcolor(&w->w.sprite[w->w.sprnumb - 1], w->w.texX, w->w.texY);
+				//ft_putendl("sprnumb after");
+			}
+			else
+				col = getcolor(&w->w.text[w->w.textnumb], w->w.texX, w->w.texY);
+
 			if (mlibx_dot_in_window(w, rint(p.x), y))
 				mlibx_draw_dot(w, (int)p.x, y, col);
 			y++;
@@ -92,7 +111,7 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 		wall = (t_dpoint){floor(p.x + (right ? 0 : -1)), floor(p.y), 0};
 		if (wall.x < 0 || wall.y < 0)
 			break ;
-		if (w->b.tab_int[(int)wall.y][(int)wall.x] > 0)
+		if ((w->w.tab_int_spr[(int)wall.y][(int)wall.x] > 0) || (w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
 		{
 			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
 			w->w.dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
@@ -100,6 +119,7 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 			w->w.texX = fmod(p.y, 1) * TEXWIDTH; // keep the float number after coma.
 			if (!right) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
 			w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
+			w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x];
 			w->w.color = (p.x < w->cam.pos.x) ? IC_FGREEN : IC_FBLUE;
 			w->w.side = 1; // Verticales lines
 			break ;
@@ -127,7 +147,7 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 		wall = (t_dpoint){floor(p.x), floor(p.y + (up ? -1 : 0)), 0};
 		if (wall.x < 0 || wall.y < 0)
 			break ;
-		if (w->b.tab_int[(int)wall.y][(int)wall.x] > 0)
+		if ((w->w.tab_int_spr[(int)wall.y][(int)wall.x] > 0) || (w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
 		{
 			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
 			w->w.block_dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
@@ -138,6 +158,7 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 				w->w.texX = fmod(p.x, 1) * TEXWIDTH; // keep the float number after coma.
 				if (!up) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
 				w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
+				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x];
 				w->w.color = p.y < w->cam.pos.z ? IC_FYELLOW : IC_FPURPLE;
 				w->w.side = 0; // Horizontales lines
 				break ;
@@ -165,7 +186,6 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 	{
 		if (w->w.info.ray_minimap)
 			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x00FF00");
-
 		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
 		w_draw_the_wall(w, raynumb);
 	}

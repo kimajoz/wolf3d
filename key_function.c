@@ -23,10 +23,19 @@ void			move(t_wind *w)
 {
 	t_dpoint	tmp;
 	double		movestep;
+	double		mult;
 
 	tmp = (t_dpoint){0, 0, 0};
-	movestep = w->w.player.speed * w->w.player.movespeed;
-	w->cam.rot.y = ft_rot_fabs(w->cam.rot.y + w->w.player.dir * w->w.player.rotspeed);
+	// we calculate the mult of time_delay/gamecycle_delay
+	//printf("time_delay: %.3f\n", time_delay);
+	mult = 1;
+	//mult = time_delay / w->w.o.gamecycle_delay;
+	/*printf("time_delay2: %.3f\n", time_delay);
+	printf("w->w.o.gamecycle_delay: %d\n", w->w.o.gamecycle_delay);
+	printf("mult: %.3f\n", mult);*/
+
+	movestep = mult * w->w.player.speed * w->w.player.movespeed;
+	w->cam.rot.y = mult * ft_rot_fabs(w->cam.rot.y + w->w.player.dir * w->w.player.rotspeed);
 	tmp.x = w->cam.pos.x + cos(ft_degreetorad(w->cam.rot.y)) * movestep;
 	tmp.z = w->cam.pos.z + sin(ft_degreetorad(w->cam.rot.y)) * movestep;
 	if (is_blocking(tmp, w) != 1)

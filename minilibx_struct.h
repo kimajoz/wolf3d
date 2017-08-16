@@ -269,6 +269,12 @@ typedef struct		s_info
 
 }					t_info;
 
+typedef struct		s_opti
+{
+	int				gamecycle_delay;
+	int				lastgamecycle_time;
+}					t_opti;
+
 typedef struct		s_player
 {
 	int				speed;
@@ -304,6 +310,9 @@ typedef struct		s_wolf
 	char			**lst_sprite; //lst text
 	int				*sprite_block;
 	int				**tab_int_spr;
+	t_opti			o;
+	int				sprnumb;
+
 }					t_wolf;
 
 typedef struct		s_wind
@@ -323,5 +332,12 @@ typedef struct		s_wind
 	t_matrice_rot	mr;
 	t_wolf			w;
 }					t_wind;
+
+typedef struct		s_pthread
+{
+	int				t;
+	t_wind			*w;
+	void			(*func) (t_wind *w);
+}					t_pthread;
 
 #endif

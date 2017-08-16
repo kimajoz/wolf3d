@@ -54,6 +54,7 @@ void			put_info(t_wind *w);
 int				prog(char *filename);
 void			wolf3d(t_wind *w);
 void			w_cast_rays(t_wind *w);
+void			w_render_sprites(t_wind *w);
 void			w_print_radar_ray(t_wind *w, double cx, double cy, int angle);
 void			w_print_radar_fov(t_wind *w, double cx, double cy, int angle);
 void			w_print_radar_ray_hitwall(t_wind *w, double cx, double cy,
@@ -61,8 +62,11 @@ void			w_print_radar_ray_hitwall(t_wind *w, double cx, double cy,
 void			w_draw_background_color(t_wind *w);
 
 void			init_texture(t_wind *w);
+void			init_sprites(t_wind *w);
 void			draw_texture(t_wind *w, int n);
+//void			move(t_wind *w, double time_delay);
 void			move(t_wind *w);
+void			init_minimap(t_wind *w);
 //void			init_screen_texture(t_wind *w);
 //void			w_texture_walls(t_wind *w);
 

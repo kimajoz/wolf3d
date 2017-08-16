@@ -89,6 +89,12 @@ SRC= src/ft_lstiter.c \
 	src/ft_hextoint.c \
 	src/get_next_line.c \
 	src/ft_check_fd.c \
+	src/ft_get_time.c \
+	src/ft_get_millitime.c \
+	src/ft_get_time_clean.c \
+	src/ft_set_time_out.c \
+	src/ft_pthread_do_or_timeout.c \
+	src/ft_fmax.c \
 	src/ft_rot_fabs.c
 CFLAGS= -Wall -Werror -Wextra
 SRCDIR= src

@@ -12,28 +12,44 @@
 
 #include "wolf3d.h"
 
-void		set_spr_to_prog(int fd, int y, t_wind *w)
+void		create_spr_map(t_wind *w)
+{
+	int		y;
+	int		x;
+
+	w->w.tab_int_spr = malloc(w->b.nbrtot_of_line * sizeof(int *));
+	y = 0;
+	while (y < w->b.nbrtot_of_line)
+	{
+		w->w.tab_int_spr[y] = malloc(w->b.nbr_elem_line[3] * sizeof(int));
+		x = 0;
+		while (x < w->b.nbr_elem_line[3])
+			w->w.tab_int_spr[y][x++] = 0;
+		y++;
+	}
+}
+
+void		set_spr_to_prog(int fd, t_wind *w)
 {
 	char	*line;
 	char	**tab;
 	int		x;
 	int		j;
 
-	w->w.tab_int_spr = malloc((y + 1) * sizeof(int *));
+	init_sprites(w);
+	create_spr_map(w);
 	j = 0;
 	while (get_next_line(fd, &line))
 	{
-		w->w.tab_int_spr[j] = malloc(ft_strlen(line) * sizeof(int));
+		//w->w.tab_int_spr[j] = malloc(w->b.nbr_elem_line[3] * sizeof(int));
 		tab = ft_strsplit(line, ';');
 		ft_strdel(&line);
 		x = 0;
 		if (tab[x][0] != '#')
 		{
+			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])] = ft_atoi(tab[0]);
 			while (tab[x])
-			{
-				w->w.tab_int_spr[j][x] = ft_atoi(tab[x]);
 				ft_strdel(&tab[x++]);
-			}
 			j++;
 		}
 		free(tab);
@@ -124,7 +140,7 @@ int			**rt_file(char *filename, int y, t_wind *w, int needed)
 		tab_int = insert_file_to_prog(fd, y, w);
 	}
 	else if (ft_strstr(filename, "spr"))
-		set_spr_to_prog(fd, y, w);
+		set_spr_to_prog(fd, w);
 	else if (ft_strstr(filename, "par"))
 	{
 		if (ft_check_parsing_param(filename) == 1)
