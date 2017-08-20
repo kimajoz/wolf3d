@@ -62,8 +62,10 @@ static int		set_parameters(t_wind *w)
 	w->w.info.bg = 0;
 	w->w.info.texture = 1;
 	w->w.info.sound = 0;
-	w->w.o.lastgamecycle_time = 0;
-	w->w.o.gamecycle_delay = 1000 / 30; //30fps
+	w->w.o.lastgamecycle_time.tv_sec = 0;
+	w->w.o.lastgamecycle_time.tv_nsec = 0;
+	//w->w.o.gamecycle_delay = 1000 / 30; //30fps
+	w->w.o.gamecycle_delay.tv_nsec = 33000000; //30fps
 	return (0);
 }
 
@@ -106,6 +108,11 @@ int				prog(char *filename)
 	set_parameters(&w);
 	init_texture(&w);
 	create_new_img(&w);
+	wolf3d(&w);
+	init_pthread(&w);
+	//mlx_put_image_to_window(w.mlx, w.win, w.img.ptr_img, w.img.x, w.img.y);
+	//game_cycle(w);
+	//render_cycle(w);
 	init_minimap(&w); //init minimap
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);

@@ -14,20 +14,11 @@ void				*expensive_call(void *data)
 	int				oldtype;
 	t_pthread		*t;
 
-	/* allow the thread to be killed at any time */
-	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype);
-
-	/* ... calculations and expensive io here, for example:
-	 *          * infinitely loop
-	 *                   */
+	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype); /* allow the thread to be killed at any time */
 	t = (t_pthread *)data;
-	printf("t int: %d\n", (int)t->t);
-	t->func(t->w);
-	//for (;;) {}
-	//printf("", w->w.);
-	//f(w);
-	/* wake up the caller if we've completed in time */
-	pthread_cond_signal(&done);
+	t->func(t->w); /* calculations and expensive io here, for example: infinitely loop */
+	//printf("t int: %d\n", (int)t->t);
+	pthread_cond_signal(&done); /* wake up the caller if we've completed in time */
 	return NULL;
 }
 
@@ -37,6 +28,7 @@ int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data)
 	struct timespec	abs_time;
 	pthread_t		tid;
 	int				err;
+	t_pthread		*t;
 
 	pthread_mutex_lock(&calculating);
 	/* pthread cond_timedwait expects an absolute time to wait until */
@@ -49,7 +41,11 @@ int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data)
 	 *                   */
 	err = pthread_cond_timedwait(&done, &calculating, &abs_time);
 	if (err == ETIMEDOUT)
+	{
+		t = (t_pthread *)data;
+		t->reinit(t->w);
 		fprintf(stderr, "%s: calculation timed out\n", __func__);
+	}
 	if (!err)
 		pthread_mutex_unlock(&calculating);
 	return err;

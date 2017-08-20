@@ -271,8 +271,11 @@ typedef struct		s_info
 
 typedef struct		s_opti
 {
-	int				gamecycle_delay;
-	int				lastgamecycle_time;
+	//int			gamecycle_delay;
+	struct timespec max_wait;
+	struct timespec gamecycle_delay;
+	//int			lastgamecycle_time;
+	struct timespec	lastgamecycle_time;
 }					t_opti;
 
 typedef struct		s_player
@@ -338,6 +341,7 @@ typedef struct		s_pthread
 	int				t;
 	t_wind			*w;
 	void			(*func) (t_wind *w);
+	void			(*reinit) (t_wind *w);
 }					t_pthread;
 
 #endif

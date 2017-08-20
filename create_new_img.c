@@ -23,6 +23,7 @@ int				create_new_img(t_wind *w)
 	if (w->w.info.bg)
 		w_draw_background_color(w);
 	//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_imgbg, w->img.x, w->img.y);
+	//render_cycle(w);
 	wolf3d(w);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 	//mlx_put_image_to_window(w->mlx, w->win, w->w.text[0].ptr_img, w->img.x, w->img.y);
