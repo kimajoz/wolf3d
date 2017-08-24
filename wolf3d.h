@@ -55,6 +55,8 @@ int				prog(char *filename);
 void			wolf3d(t_wind *w);
 void			w_cast_rays(t_wind *w);
 void			w_render_sprites(t_wind *w);
+
+int				game_cycle(t_wind *w);
 void			render_cycle(t_wind *w);
 void			init_pthread(t_wind *w);
 
