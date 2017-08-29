@@ -23,6 +23,8 @@
 # define TWOPI (M_PI * 2)
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
+# define SPRWIDTH 64
+# define SPRHEIGHT 64
 # define MARGINIT 3
 # define IC_DGREY 3355443//Rgb 51,51,51
 # define IC_MGREY 7829367//Rgb 119,119,119
@@ -54,7 +56,9 @@ void			put_info(t_wind *w);
 int				prog(char *filename);
 void			wolf3d(t_wind *w);
 void			w_cast_rays(t_wind *w);
+void			w_clear_vis_sprites(t_wind *w);
 void			w_render_sprites(t_wind *w);
+int				getcolor(t_img *img, int x, int y);
 
 int				game_cycle(t_wind *w);
 void			render_cycle(t_wind *w);
@@ -70,8 +74,8 @@ void			init_texture(t_wind *w);
 void			init_sprites(t_wind *w);
 void			draw_texture(t_wind *w, int n);
 //void			move(t_wind *w, double time_delay);
-//void			move(t_wind *w);
-void			move(t_wind *w, struct timespec time_delay);
+void			move(t_wind *w);
+//void			move(t_wind *w, struct timespec time_delay);
 void			init_minimap(t_wind *w);
 //void			init_screen_texture(t_wind *w);
 //void			w_texture_walls(t_wind *w);

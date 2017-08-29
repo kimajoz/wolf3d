@@ -38,9 +38,9 @@ void			init_minimap(t_wind *w)
 		j = 0;
 		while (j < (w->b.nbr_elem_line[(i / MMS)] * MMS))
 		{
-			if (w->w.tab_int_spr[i / MMS][j / MMS] == 1) // Tables
+			if (w->w.tab_int_spr[i / MMS][j / MMS].i == 1) // Tables
 				mlibx_draw_pixel(w, j, i, "0xFF0000");
-			else if (w->w.tab_int_spr[i / MMS][j / MMS] == 4) //Lamps
+			else if (w->w.tab_int_spr[i / MMS][j / MMS].i == 4) //Lamps
 				mlibx_draw_pixel(w, j, i, "0x00FF00");
 			else if (w->b.tab_int[i / MMS][j / MMS] > 0)
 				mlibx_draw_pixel(w, j, i, "0xFFFFFF");
@@ -65,25 +65,25 @@ void			render_cycle(t_wind *w)
 int						game_cycle(t_wind *w)
 {
 	struct timespec		now;
-	struct timespec		time_delay;
-	struct timespec		cycle_delay;
+	//struct timespec		time_delay;
+	//struct timespec		cycle_delay;
 
 	clock_gettime(CLOCK_REALTIME, &now);
 	// We calculate time since last game logic
-	time_delay.tv_sec = now.tv_sec - w->w.o.lastgamecycle_time.tv_sec;
-	time_delay.tv_nsec = now.tv_nsec - w->w.o.lastgamecycle_time.tv_nsec;
-	printf("time_delay: %ld sec %ld nsec\n", time_delay.tv_sec, time_delay.tv_nsec);
+	//time_delay.tv_sec = now.tv_sec - w->w.o.lastgamecycle_time.tv_sec;
+	//time_delay.tv_nsec = now.tv_nsec - w->w.o.lastgamecycle_time.tv_nsec;
+	//printf("time_delay: %ld sec %ld nsec\n", time_delay.tv_sec, time_delay.tv_nsec);
 
-	move(w, time_delay);
-	//move(w);
-	cycle_delay.tv_nsec = w->w.o.gamecycle_delay.tv_nsec;
+	//move(w, time_delay);
+	move(w);
+	//cycle_delay.tv_nsec = w->w.o.gamecycle_delay.tv_nsec;
 
 	//printf("time_delay: %.3f\n", time_delay);
-	if (time_delay.tv_nsec < cycle_delay.tv_nsec)
+	/*if (time_delay.tv_nsec < cycle_delay.tv_nsec)
 	{
 		nanosleep(&cycle_delay, NULL);
 		printf("time_delay smaller\n");
-	}
+	}*/
 	// Time we lost since last cycle
 	//if (time_delay > cycle_delay)
 		//cycle_delay = ft_fmax(1, cycle_delay - (time_delay - cycle_delay));
@@ -118,11 +118,13 @@ void					wolf3d(t_wind *w)
 	//ft_pthread_do_or_timeout(&max_wait, (void *)&data);
 	//ft_set_time_out(w, game_cycle, cycle_delay);
 
-	//game_cycle(w);
+	game_cycle(w);
 	//move(w);
 	//render_cycle(w);
 	init_minimap(w);
 
+	w_clear_vis_sprites(w);
 	w_cast_rays(w);
+	w_render_sprites(w);
 	//w_render_sprites(w);
 }

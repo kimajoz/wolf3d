@@ -19,7 +19,7 @@ int				is_blocking(t_dpoint pos, t_wind *w)
 	return (0);
 }
 
-void			move(t_wind *w, struct timespec time_delay)
+void			move(t_wind *w)
 {
 	t_dpoint	tmp;
 	double		movestep;
@@ -27,17 +27,17 @@ void			move(t_wind *w, struct timespec time_delay)
 
 	tmp = (t_dpoint){0, 0, 0};
 	// we calculate the mult of time_delay/gamecycle_delay
-	printf("gamecycle_delay: %d\n", (int)w->w.o.gamecycle_delay.tv_nsec);
-	printf("time_delay: %ld\n", time_delay.tv_nsec);
-	printf("time_delay minus: %d\n", (int)(w->w.o.gamecycle_delay.tv_nsec - time_delay.tv_nsec));
-	printf("time_delay minus2: %.3f\n", (double)(time_delay.tv_nsec / w->w.o.gamecycle_delay.tv_nsec));
-	printf("time_delay minus3: %.3f\n", (double)12000000 / 33000000);
-	//mult = 1;
+	//printf("gamecycle_delay: %d\n", (int)w->w.o.gamecycle_delay.tv_nsec);
+	//printf("time_delay: %ld\n", time_delay.tv_nsec);
+	//printf("time_delay minus: %d\n", (int)(w->w.o.gamecycle_delay.tv_nsec - time_delay.tv_nsec));
+	//printf("time_delay minus2: %.3f\n", (double)(time_delay.tv_nsec / w->w.o.gamecycle_delay.tv_nsec));
+	//printf("time_delay minus3: %.3f\n", (double)12000000 / 33000000);
+	mult = 1;
 	//mult = (int)(w->w.o.gamecycle_delay.tv_nsec - time_delay.tv_nsec) / (int)w->w.o.gamecycle_delay.tv_nsec;
-	mult = (double)(time_delay.tv_nsec) / w->w.o.gamecycle_delay.tv_nsec;
+	//mult = (double)(time_delay.tv_nsec) / w->w.o.gamecycle_delay.tv_nsec;
 	//printf("move time_delay.tv_nsec : %ld\n", time_delay.tv_nsec);
 	//printf("move gamecycle_delay.tv_nsec : %ldn", w->w.o.gamecycle_delay.tv_nsec);
-	printf("move mult: %.3f\n", mult);
+	//printf("move mult: %.3f\n", mult);
 	/*printf("time_delay2: %.3f\n", time_delay);
 	printf("w->w.o.gamecycle_delay: %d\n", w->w.o.gamecycle_delay);
 	printf("mult: %.3f\n", mult);*/

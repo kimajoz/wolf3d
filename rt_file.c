@@ -17,14 +17,14 @@ void		create_spr_map(t_wind *w)
 	int		y;
 	int		x;
 
-	w->w.tab_int_spr = malloc(w->b.nbrtot_of_line * sizeof(int *));
+	w->w.tab_int_spr = malloc(w->b.nbrtot_of_line * sizeof(t_sprite *));
 	y = 0;
 	while (y < w->b.nbrtot_of_line)
 	{
-		w->w.tab_int_spr[y] = malloc(w->b.nbr_elem_line[3] * sizeof(int));
+		w->w.tab_int_spr[y] = malloc(w->b.nbr_elem_line[3] * sizeof(t_sprite));
 		x = 0;
 		while (x < w->b.nbr_elem_line[3])
-			w->w.tab_int_spr[y][x++] = 0;
+			w->w.tab_int_spr[y][x++].i = 0;
 		y++;
 	}
 }
@@ -38,6 +38,7 @@ void		set_spr_to_prog(int fd, t_wind *w)
 
 	init_sprites(w);
 	create_spr_map(w);
+	w_clear_vis_sprites(w); //Set sprite visibility to 0 for first time
 	j = 0;
 	while (get_next_line(fd, &line))
 	{
@@ -47,7 +48,7 @@ void		set_spr_to_prog(int fd, t_wind *w)
 		x = 0;
 		if (tab[x][0] != '#')
 		{
-			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])] = ft_atoi(tab[0]);
+			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].i = ft_atoi(tab[0]);
 			while (tab[x])
 				ft_strdel(&tab[x++]);
 			j++;

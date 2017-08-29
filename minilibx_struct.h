@@ -278,6 +278,14 @@ typedef struct		s_opti
 	struct timespec	lastgamecycle_time;
 }					t_opti;
 
+
+typedef struct		s_sprite
+{
+	int				i;
+	int				vis;
+	int				block;
+}					t_sprite;
+
 typedef struct		s_player
 {
 	int				speed;
@@ -312,7 +320,7 @@ typedef struct		s_wolf
 	t_img			*sprite; //lst text
 	char			**lst_sprite; //lst text
 	int				*sprite_block;
-	int				**tab_int_spr;
+	t_sprite		**tab_int_spr;
 	t_opti			o;
 	int				sprnumb;
 

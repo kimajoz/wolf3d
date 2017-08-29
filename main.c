@@ -119,7 +119,7 @@ int				prog(char *filename)
 	init_minimap(&w); //init minimap
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
-	mlx_loop_hook(w.mlx, game_cycle, &w);
+	//mlx_loop_hook(w.mlx, game_cycle, &w);
 	mlx_expose_hook(w.win, expose_hook, &w);
 	mlx_loop(w.mlx);
 	return (0);
