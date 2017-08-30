@@ -95,6 +95,19 @@ void				w_draw_the_wall(t_wind *w, int i)
 		mlibx_draw_pixel_line_int(p, pd, w, w->w.color);
 }
 
+
+void			push_visible_spr(t_wind *w, t_sprite spr)
+{
+	int			x;
+
+	x = 0;
+	w->w.sprnbvis++;
+	while(x < w->w.sprnbvis)
+		x++;
+	//w->w.spr_visible = malloc(sizeof(t_sprite) * x);
+	w->w.spr_visible[x] = spr;
+}
+
 void			w_verticales_lines_check(t_wind *w, double ray_angle,
 		double right)
 {
@@ -114,9 +127,13 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 		if (wall.x < 0 || wall.y < 0)
 			break ;
 		// Set sprite visibility on:
-		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].i && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
+		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
+		{
+			ft_putendl("vue !");
 			w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
-		if ((w->w.tab_int_spr[(int)wall.y][(int)wall.x].i > 0) || (w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
+			push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
+		}
+		if (/*(w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0) || */(w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
 		{
 			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
 			w->w.dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
@@ -124,7 +141,7 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 			w->w.texX = fmod(p.y, 1) * TEXWIDTH; // keep the float number after coma.
 			if (!right) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
 			w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
-			w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].i;
+			w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
 			w->w.color = (p.x < w->cam.pos.x) ? IC_FGREEN : IC_FBLUE;
 			w->w.side = 1; // Verticales lines
 			break ;
@@ -153,9 +170,14 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 		if (wall.x < 0 || wall.y < 0)
 			break ;
 		// Set sprite visibility on:
-		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].i && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
+
+		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
+		{
+			ft_putendl("vue !");
 			w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
-		if ((w->w.tab_int_spr[(int)wall.y][(int)wall.x].i > 0) || (w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
+			push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
+		}
+		if (/*(w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0) || */(w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
 		{
 			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
 			w->w.block_dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
@@ -166,7 +188,7 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 				w->w.texX = fmod(p.x, 1) * TEXWIDTH; // keep the float number after coma.
 				if (!up) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
 				w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
-				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].i;
+				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
 				w->w.color = p.y < w->cam.pos.z ? IC_FYELLOW : IC_FPURPLE;
 				w->w.side = 0; // Horizontales lines
 				break ;

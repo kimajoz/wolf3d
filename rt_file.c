@@ -24,9 +24,24 @@ void		create_spr_map(t_wind *w)
 		w->w.tab_int_spr[y] = malloc(w->b.nbr_elem_line[3] * sizeof(t_sprite));
 		x = 0;
 		while (x < w->b.nbr_elem_line[3])
-			w->w.tab_int_spr[y][x++].i = 0;
+		{
+			w->w.tab_int_spr[y][x++].vis = 0;
+			w->w.tab_int_spr[y][x++].num = 0;
+		}
 		y++;
 	}
+}
+
+int			get_spr_block_by_type(t_wind *w, int num_spr)
+{
+	int		boolb;
+
+	boolb = 1; //(we cannot go through sprites by default).
+	while ( < w->)
+	{
+
+	}
+	return (boolb);
 }
 
 void		set_spr_to_prog(int fd, t_wind *w)
@@ -37,9 +52,11 @@ void		set_spr_to_prog(int fd, t_wind *w)
 	int		j;
 
 	init_sprites(w);
+	w->w.sprnbvis = 0;
 	create_spr_map(w);
-	w_clear_vis_sprites(w); //Set sprite visibility to 0 for first time
+	//w_clear_vis_sprites(w); //Set sprite visibility to 0 for first time
 	j = 0;
+	// We set the sprites inside the map:
 	while (get_next_line(fd, &line))
 	{
 		//w->w.tab_int_spr[j] = malloc(w->b.nbr_elem_line[3] * sizeof(int));
@@ -48,7 +65,8 @@ void		set_spr_to_prog(int fd, t_wind *w)
 		x = 0;
 		if (tab[x][0] != '#')
 		{
-			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].i = ft_atoi(tab[0]);
+			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].num = ft_atoi(tab[0]);
+			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].block = get_spr_block_by_type(w, tab[0]);
 			while (tab[x])
 				ft_strdel(&tab[x++]);
 			j++;

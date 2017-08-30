@@ -38,9 +38,9 @@ void			init_minimap(t_wind *w)
 		j = 0;
 		while (j < (w->b.nbr_elem_line[(i / MMS)] * MMS))
 		{
-			if (w->w.tab_int_spr[i / MMS][j / MMS].i == 1) // Tables
+			if (w->w.tab_int_spr[i / MMS][j / MMS].num == 1) // Tables
 				mlibx_draw_pixel(w, j, i, "0xFF0000");
-			else if (w->w.tab_int_spr[i / MMS][j / MMS].i == 4) //Lamps
+			else if (w->w.tab_int_spr[i / MMS][j / MMS].num == 4) //Lamps
 				mlibx_draw_pixel(w, j, i, "0x00FF00");
 			else if (w->b.tab_int[i / MMS][j / MMS] > 0)
 				mlibx_draw_pixel(w, j, i, "0xFFFFFF");
@@ -123,8 +123,8 @@ void					wolf3d(t_wind *w)
 	//render_cycle(w);
 	init_minimap(w);
 
+	// https://dev.opera.com/articles/3d-games-with-canvas-and-raycasting-part-2/
 	w_clear_vis_sprites(w);
 	w_cast_rays(w);
 	w_render_sprites(w);
-	//w_render_sprites(w);
 }

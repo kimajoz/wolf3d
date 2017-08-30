@@ -281,7 +281,9 @@ typedef struct		s_opti
 
 typedef struct		s_sprite
 {
-	int				i;
+	int				num;
+	int				posx;
+	int				posy;
 	int				vis;
 	int				block;
 }					t_sprite;
@@ -319,8 +321,10 @@ typedef struct		s_wolf
 	double			lineheight;
 	t_img			*sprite; //lst text
 	char			**lst_sprite; //lst text
-	int				*sprite_block;
+	int				*spr_block;
 	t_sprite		**tab_int_spr;
+	int				sprnbvis;
+	t_sprite		*spr_visible;
 	t_opti			o;
 	int				sprnumb;
 

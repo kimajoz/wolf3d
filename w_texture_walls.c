@@ -41,24 +41,6 @@ int				aff_block(int *block, int numargs, ...)
 	return (0);
 }
 
-void			create_sprite_map(t_wind *w)
-{
-	int			x;
-	int			y;
-
-	while (y < w->b.nbrtot_of_line)
-	{
-		x = 0;
-		while (x < w->b.nbr_elem_line[y])
-		{
-			if (w->b.tab_int[y][x] > 0)
-				mlibx_draw_pixel(w, x, y, "0xFFFFFF");
-			x++;
-		}
-		y++;
-	}
-}
-
 void			check_type_xpm(char **lst, int numb)
 {
 	int			i;

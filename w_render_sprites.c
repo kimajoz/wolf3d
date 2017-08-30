@@ -2,18 +2,16 @@
 
 void		w_clear_vis_sprites(t_wind *w)
 {
-	int		y;
 	int		x;
 
-	y = 0;
-	while (y < w->b.nbrtot_of_line)
+	x = 0;
+	while (x < w->w.sprnbvis)
 	{
-		w->w.tab_int_spr[y] = malloc(w->b.nbr_elem_line[3] * sizeof(t_sprite));
-		x = 0;
-		while (x < w->b.nbr_elem_line[3])
-			w->w.tab_int_spr[y][x++].vis = 0;
-		y++;
+		w->w.spr_visible[x].vis = 0;
+		x++;
 	}
+	free(w->w.spr_visible);
+	w->w.sprnbvis = 0;
 }
 
 void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
@@ -90,23 +88,18 @@ void		w_calc_render_spr(int z, int x, t_wind *w)
 
 void		w_render_sprites(t_wind *w)
 {
-	int		y;
 	int		x;
 
-	y = 0;
 	printf("-----------------------------------------------\n");
-	while (y < w->b.nbrtot_of_line)
+	x = 0;
+	printf("nb sprites visibles: %d - ", w->w.sprnbvis);
+	printf("sprites visibles: ");
+	while (x < w->w.sprnbvis)
 	{
-		x = 0;
-		while (x < w->b.nbr_elem_line[3])
-		{
-			printf("%d", w->w.tab_int_spr[y][x].vis);
-			/*if (w->w.tab_int_spr[y][x].vis == 1)
-				w_calc_render_spr(y, x, w);*/
-			x++;
-		}
-		printf("\n");
-		y++;
+		printf("%d", w->w.spr_visible[x].num);
+		/*if (w->w.tab_int_spr[y][x].vis == 1)
+			w_calc_render_spr(y, x, w);*/
+		x++;
 	}
-
+	printf("\n");
 }
