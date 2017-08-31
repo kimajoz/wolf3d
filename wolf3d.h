@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/21 15:50:38 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/08/31 18:26:54 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # include <stdlib.h>
 # include <stdio.h> // A SUPPRIMER !
 
-int				**rt_file(char *filename, int y, t_wind *w, int needed);
+int				rt_file(char *filename, int y, t_wind *w, int needed);
 int				ft_check_parsing(char *filename);
 int				ft_check_parsing_param(char *filename);
 int				ft_print_error_type_parsing(int x, int y);

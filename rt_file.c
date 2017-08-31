@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 23:09:57 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/08/31 18:29:03 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,17 @@ void		create_spr_map(t_wind *w)
 
 int			get_spr_block_by_type(t_wind *w, int num_spr)
 {
+	int		i;
 	int		boolb;
 
+	i = 0;
 	boolb = 1; //(we cannot go through sprites by default).
-	while ( < w->)
-	{
-
-	}
+	while (i < num_spr && i < w->w.sprnb)
+		i++;
+	//printf("finale i: %d", i);
+	if (i == num_spr)
+		boolb = w->w.sprite[i].block;
+	//printf("blocktype: %d", boolb);
 	return (boolb);
 }
 
@@ -66,7 +70,7 @@ void		set_spr_to_prog(int fd, t_wind *w)
 		if (tab[x][0] != '#')
 		{
 			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].num = ft_atoi(tab[0]);
-			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].block = get_spr_block_by_type(w, tab[0]);
+			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].block = get_spr_block_by_type(w, ft_atoi(tab[0]));
 			while (tab[x])
 				ft_strdel(&tab[x++]);
 			j++;
@@ -134,17 +138,16 @@ int			**insert_file_to_prog(int fd, int y, t_wind *w)
 	return (tab_int);
 }
 
-int			**rt_file(char *filename, int y, t_wind *w, int needed)
+int			rt_file(char *filename, int y, t_wind *w, int needed)
 {
 	int		fd;
 	int		fd1;
 	char	*line;
-	int		**tab_int;
 
 	fd = open(filename, O_RDONLY);
 	fd1 = open(filename, O_RDONLY);
 	if (ft_check_fd(fd1, filename, needed) == 1)
-		return (NULL);
+		return (0);
 	y = 0;
 	if (ft_strstr(filename, "scn"))
 	{
@@ -155,18 +158,20 @@ int			**rt_file(char *filename, int y, t_wind *w, int needed)
 		}
 		w->b.nbrtot_of_line = y + 1;
 		if (ft_check_parsing(filename) == 1)
-			return (NULL);
-		tab_int = insert_file_to_prog(fd, y, w);
+			return (0);
+		else
+			w->b.tab_int = insert_file_to_prog(fd, y, w);
 	}
 	else if (ft_strstr(filename, "spr"))
 		set_spr_to_prog(fd, w);
 	else if (ft_strstr(filename, "par"))
 	{
 		if (ft_check_parsing_param(filename) == 1)
-			return (NULL);
-		set_param_to_prog(fd, w);
+			return (0);
+		else
+			set_param_to_prog(fd, w);
 	}
 	close(fd1);
 	close(fd);
-	return (tab_int);
+	return (1);
 }

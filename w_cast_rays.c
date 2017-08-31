@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/21 16:01:01 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/08/31 19:26:14 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void				w_draw_the_wall(t_wind *w, int i)
 		{
 			h++;
 			w->w.texY = (TEXHEIGHT / projsliceh) * h;
-			if (w->w.sprnumb)
-			{
+			//if (w->w.sprnumb)
+			//{
 				//ft_putendl("sprnumb before");
 				//printf("sprnumb: %d\n", w->w.sprnumb);
 				//col = mlx_get_color_value(w->mlx, w->w.sprite[w->w.sprnumb - 1]);
@@ -82,9 +82,9 @@ void				w_draw_the_wall(t_wind *w, int i)
 
 				//col = getcolor(&w->w.sprite[w->w.sprnumb - 1], w->w.texX, w->w.texY);
 				//ft_putendl("sprnumb after");
-			}
-			else
-				w->w.color = getcolor(&w->w.text[w->w.textnumb], w->w.texX, w->w.texY);
+			//}
+			//else
+			w->w.color = getcolor(&w->w.text[w->w.textnumb], w->w.texX, w->w.texY);
 
 			if (mlibx_dot_in_window(w, rint(p.x), y))
 				mlibx_draw_dot(w, (int)p.x, y, w->w.color);
@@ -129,9 +129,10 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 		// Set sprite visibility on:
 		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
 		{
-			ft_putendl("vue !");
+			ft_putendl("vue vert !");
+			printf("posy: %d, posx: %d\n", (int)wall.y, (int)wall.x);
 			w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
-			push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
+			//push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
 		}
 		if (/*(w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0) || */(w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
 		{
@@ -173,9 +174,10 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 
 		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
 		{
-			ft_putendl("vue !");
+			ft_putendl("vue  horiz!");
+			printf("posy: %d, posx: %d\n", (int)wall.y, (int)wall.x);
 			w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
-			push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
+			//push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
 		}
 		if (/*(w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0) || */(w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
 		{

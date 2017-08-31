@@ -21,7 +21,7 @@ int				aff_text_name(char **lst_text, int numargs, ...)
 	return (0);
 }
 
-int				aff_block(int *block, int numargs, ...)
+int				aff_block(t_sprimg *block, int numargs, ...)
 {
 	int			i;
 	va_list		list; //access ellipsis through va_list
@@ -34,7 +34,7 @@ int				aff_block(int *block, int numargs, ...)
 		int arg = va_arg(list, int);
 		//block[i] = malloc(sizeof(char) * ft_strlen(arg) + 1);
 		//ft_strcpy(lst_text[i], arg);
-		block[i] = arg;
+		block[i].block = arg;
 		i++;
 	}
 	va_end(list);
@@ -61,34 +61,33 @@ void			check_type_xpm(char **lst, int numb)
 void			init_sprites(t_wind *w)
 {
 	int			i;
-	int			numb;
 	int			fd;
 
 	i = 0;
-	numb = 5;
-	w->w.lst_sprite = malloc(sizeof(char *) * numb);
-	aff_text_name(w->w.lst_sprite, numb,
+	w->w.sprnb = 5;
+	w->w.lst_sprite = malloc(sizeof(char *) * w->w.sprnb);
+	aff_text_name(w->w.lst_sprite, w->w.sprnb,
 						"img/sprites/table-chairs.xpm",
 						"img/sprites/armor.xpm",
 						"img/sprites/plant-green.xpm",
 						"img/sprites/lamp.xpm",
 						"img/sprites/guard.xpm");
-	check_type_xpm(w->w.lst_sprite, 5);
-	//aff_block(w->w.sprite_block, 1, 1, 1, 0, 1);
-	w->w.sprite = malloc(sizeof(t_img) * numb);
-	while (i < numb)
+	check_type_xpm(w->w.lst_sprite, w->w.sprnb);
+	w->w.sprite = malloc(sizeof(t_sprimg) * w->w.sprnb);
+	while (i < w->w.sprnb)
 	{
 		fd = open(w->w.lst_sprite[i], O_RDONLY);
 		if (ft_check_fd(fd, w->w.lst_sprite[i], 1) == 0)
 		{
-			w->w.sprite[i].ptr_img = mlx_xpm_file_to_image(w->mlx, w->w.lst_sprite[i], &(w->w.sprite[i].width), &(w->w.sprite[i].height));
-			w->w.sprite[i].pxl_ptr = mlx_get_data_addr(w->w.sprite[i].ptr_img, &w->w.sprite[i].bpp, &w->w.sprite[i].size_line, &w->w.sprite[i].endian);
+			w->w.sprite[i].img.ptr_img = mlx_xpm_file_to_image(w->mlx, w->w.lst_sprite[i], &(w->w.sprite[i].img.width), &(w->w.sprite[i].img.height));
+			w->w.sprite[i].img.pxl_ptr = mlx_get_data_addr(w->w.sprite[i].img.ptr_img, &w->w.sprite[i].img.bpp, &w->w.sprite[i].img.size_line, &w->w.sprite[i].img.endian);
 		}
 		else
 			exit(EXIT_FAILURE);
 		//printf("bpp: %d\n", w->w.sprite[i].bpp);
 		i++;
 	}
+	aff_block(w->w.sprite, w->w.sprnb, 1, 1, 1, 0, 1);
 }
 
 void			init_texture(t_wind *w)

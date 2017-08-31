@@ -2,6 +2,22 @@
 
 void		w_clear_vis_sprites(t_wind *w)
 {
+	int		y;
+	int		x;
+
+	y = 0;
+	while (y < w->b.nbrtot_of_line)
+	{
+		w->w.tab_int_spr[y] = malloc(w->b.nbr_elem_line[3] * sizeof(t_sprite));
+		x = 0;
+		while (x < w->b.nbr_elem_line[3])
+			w->w.tab_int_spr[y][x++].vis = 0;
+		y++;
+	}
+}
+/*
+void		w_clear_vis_sprites(t_wind *w)
+{
 	int		x;
 
 	x = 0;
@@ -12,7 +28,7 @@ void		w_clear_vis_sprites(t_wind *w)
 	}
 	free(w->w.spr_visible);
 	w->w.sprnbvis = 0;
-}
+}*/
 
 void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 {
@@ -27,7 +43,7 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 		{
 			// We set color due to pos on spr texture
 
-			w->w.color = getcolor(&w->w.sprite[w->w.sprnumb - 1], x, y);
+			w->w.color = getcolor(&w->w.sprite[w->w.sprnumb - 1].img, x, y);
 			// We set color in img to show on screen
 			if (mlibx_dot_in_window(w, bx + x, by + y))
 				mlibx_draw_dot(w, bx + x, by + y, w->w.color);
@@ -56,7 +72,7 @@ void		w_calc_render_spr(int z, int x, t_wind *w)
 	// Translate position to viewer sprite
 	dx = x + 0.5 - w->cam.pos.x;
 	dz = z + 0.5 - w->cam.pos.z;
-	
+
 	// Distance to sprite
 	dist = sqrt(dx * dx + dz * dz);
 
@@ -85,21 +101,45 @@ void		w_calc_render_spr(int z, int x, t_wind *w)
 	w_set_pxl_spr(s_xleft, s_ytop, size, w);
 	printf("render spr lastend\n");
 }
+/*
+   void		w_render_sprites(t_wind *w)
+   {
+   int		x;
+
+   printf("-----------------------------------------------\n");
+   x = 0;
+   printf("nb sprites visibles: %d - ", w->w.sprnbvis);
+   printf("sprites visibles: ");
+   while (x < w->w.sprnbvis)
+   {
+   printf("%d", w->w.spr_visible[x].num);
+//if (w->w.tab_int_spr[y][x].vis == 1)
+//w_calc_render_spr(y, x, w);
+x++;
+}
+printf("\n");
+}*/
 
 void		w_render_sprites(t_wind *w)
 {
+	int		y;
 	int		x;
 
+	y = 0;
 	printf("-----------------------------------------------\n");
-	x = 0;
-	printf("nb sprites visibles: %d - ", w->w.sprnbvis);
-	printf("sprites visibles: ");
-	while (x < w->w.sprnbvis)
+	while (y < w->b.nbrtot_of_line)
 	{
-		printf("%d", w->w.spr_visible[x].num);
-		/*if (w->w.tab_int_spr[y][x].vis == 1)
-			w_calc_render_spr(y, x, w);*/
-		x++;
+		x = 0;
+		while (x < w->b.nbr_elem_line[3])
+		{
+			printf("%d", w->w.tab_int_spr[y][x].vis);
+			//printf("%d", w->w.tab_int_spr[y][x].num);
+			/*if (w->w.tab_int_spr[y][x].vis == 1)
+			 *				w_calc_render_spr(y, x, w);*/
+			x++;
+		}
+		printf("\n");
+		y++;
 	}
-	printf("\n");
+
 }

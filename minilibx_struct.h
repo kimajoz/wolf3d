@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/21 14:03:58 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/08/31 16:55:34 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,6 +278,11 @@ typedef struct		s_opti
 	struct timespec	lastgamecycle_time;
 }					t_opti;
 
+typedef struct		s_sprimg
+{
+	t_img			img; //lst text
+	int				block;
+}					t_sprimg;
 
 typedef struct		s_sprite
 {
@@ -319,9 +324,9 @@ typedef struct		s_wolf
 	char			**lst_text; //lst text
 	t_img			*text;
 	double			lineheight;
-	t_img			*sprite; //lst text
+	int				sprnb;
+	t_sprimg		*sprite; //lst text
 	char			**lst_sprite; //lst text
-	int				*spr_block;
 	t_sprite		**tab_int_spr;
 	int				sprnbvis;
 	t_sprite		*spr_visible;
