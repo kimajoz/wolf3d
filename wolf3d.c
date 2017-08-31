@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 23:14:40 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/08/31 13:55:16 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ void			render_cycle(t_wind *w)
 
 int						game_cycle(t_wind *w)
 {
-	struct timespec		now;
+	//struct timespec		now;
 	//struct timespec		time_delay;
 	//struct timespec		cycle_delay;
 
-	clock_gettime(CLOCK_REALTIME, &now);
+	//clock_gettime(CLOCK_REALTIME, &now);
 	// We calculate time since last game logic
 	//time_delay.tv_sec = now.tv_sec - w->w.o.lastgamecycle_time.tv_sec;
 	//time_delay.tv_nsec = now.tv_nsec - w->w.o.lastgamecycle_time.tv_nsec;
@@ -87,7 +87,7 @@ int						game_cycle(t_wind *w)
 	// Time we lost since last cycle
 	//if (time_delay > cycle_delay)
 		//cycle_delay = ft_fmax(1, cycle_delay - (time_delay - cycle_delay));
-	w->w.o.lastgamecycle_time = now;
+	//w->w.o.lastgamecycle_time = now;
 
 	//ft_set_time_out(w, wolf3d, cycle_delay);
 

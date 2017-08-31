@@ -6,6 +6,24 @@
 #include <string.h>
 #include "../inc/libft.h"
 
+/* For clock_gettime() func that does not exist on mac */
+/*
+#if defined(__MACH__) && !defined(CLOCK_REALTIME)
+#include <sys/time.h>
+#define CLOCK_REALTIME 0
+// clock_gettime is not implemented on older versions of OS X (< 10.12).
+// // If implemented, CLOCK_REALTIME will have already been defined.
+int clock_gettime(int clk_id, struct timespec* t) {
+	struct timeval now;
+	int rv = gettimeofday(&now, NULL);
+	if (rv) return rv;
+	t->tv_sec  = now.tv_sec;
+	t->tv_nsec = now.tv_usec * 1000;
+	return 0;
+}
+#endif*/
+
+
 pthread_mutex_t calculating = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t done = PTHREAD_COND_INITIALIZER;
 
@@ -32,7 +50,7 @@ int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data)
 
 	pthread_mutex_lock(&calculating);
 	/* pthread cond_timedwait expects an absolute time to wait until */
-	clock_gettime(CLOCK_REALTIME, &abs_time);
+	//clock_gettime(CLOCK_REALTIME, &abs_time);
 	abs_time.tv_sec += max_wait->tv_sec;
 	abs_time.tv_nsec += max_wait->tv_nsec;
 	pthread_create(&tid, NULL, expensive_call, data);
@@ -51,17 +69,17 @@ int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data)
 	return err;
 }
 /*
-int main()
-{
-	struct timespec max_wait;
+   int main()
+   {
+   struct timespec max_wait;
 
-	memset(&max_wait, 0, sizeof(max_wait));
-	*/
-	/* wait at most 2 seconds */
-	//max_wait.tv_sec = 2;
-	/* wait at most 30 milliseconde = 30 000 000 de nanoseconds */
-	/*max_wait.tv_nsec = 30000000;
-	do_or_timeout(&max_wait);
+   memset(&max_wait, 0, sizeof(max_wait));
+   */
+/* wait at most 2 seconds */
+//max_wait.tv_sec = 2;
+/* wait at most 30 milliseconde = 30 000 000 de nanoseconds */
+/*max_wait.tv_nsec = 30000000;
+  do_or_timeout(&max_wait);
 
-	return 0;
-}*/
+  return 0;
+  }*/
