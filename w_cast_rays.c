@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/08/31 19:26:14 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/01 14:21:44 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 			ft_putendl("vue vert !");
 			printf("posy: %d, posx: %d\n", (int)wall.y, (int)wall.x);
 			w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
+			w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
+			w_calc_render_spr((int)wall.y, (int)wall.x, w);
 			//push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
 		}
 		if (/*(w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0) || */(w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
@@ -142,7 +144,6 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 			w->w.texX = fmod(p.y, 1) * TEXWIDTH; // keep the float number after coma.
 			if (!right) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
 			w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
-			w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
 			w->w.color = (p.x < w->cam.pos.x) ? IC_FGREEN : IC_FBLUE;
 			w->w.side = 1; // Verticales lines
 			break ;
@@ -177,6 +178,8 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 			ft_putendl("vue  horiz!");
 			printf("posy: %d, posx: %d\n", (int)wall.y, (int)wall.x);
 			w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
+			w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
+			w_calc_render_spr((int)wall.y, (int)wall.x, w);
 			//push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
 		}
 		if (/*(w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0) || */(w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
@@ -190,7 +193,6 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 				w->w.texX = fmod(p.x, 1) * TEXWIDTH; // keep the float number after coma.
 				if (!up) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
 				w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
-				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
 				w->w.color = p.y < w->cam.pos.z ? IC_FYELLOW : IC_FPURPLE;
 				w->w.side = 0; // Horizontales lines
 				break ;
@@ -207,6 +209,7 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 	double		up;
 
 	w->w.dist = 0;
+	w->w.distspr = 0;
 	w->w.hit = (t_dpoint){0, 0, 0};
 	ray_angle = ft_degreetorad(ray_angle);
 	ray_angle = fmod(ray_angle, TWOPI);

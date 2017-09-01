@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/08/31 18:26:54 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/01 12:56:19 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void			wolf3d(t_wind *w);
 void			w_cast_rays(t_wind *w);
 void			w_clear_vis_sprites(t_wind *w);
 void			w_render_sprites(t_wind *w);
+void			w_calc_render_spr(int z, int x, t_wind *w);
 int				getcolor(t_img *img, int x, int y);
 
 int				game_cycle(t_wind *w);

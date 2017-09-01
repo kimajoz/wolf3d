@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/08/31 16:55:34 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/01 14:00:21 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,7 +332,8 @@ typedef struct		s_wolf
 	t_sprite		*spr_visible;
 	t_opti			o;
 	int				sprnumb;
-
+	double			distspr;
+	double			block_distspr;
 }					t_wolf;
 
 typedef struct		s_wind
