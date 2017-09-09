@@ -25,8 +25,9 @@ void		create_spr_map(t_wind *w)
 		x = 0;
 		while (x < w->b.nbr_elem_line[3])
 		{
-			w->w.tab_int_spr[y][x++].vis = 0;
-			w->w.tab_int_spr[y][x++].num = 0;
+			w->w.tab_int_spr[y][x].vis = 0;
+			w->w.tab_int_spr[y][x].num = 0;
+			x++;
 		}
 		y++;
 	}

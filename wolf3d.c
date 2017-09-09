@@ -125,4 +125,5 @@ void					wolf3d(t_wind *w)
 
 	// https://dev.opera.com/articles/3d-games-with-canvas-and-raycasting-part-2/
 	w_cast_rays(w);
+	//w_render_sprites(w);
 }

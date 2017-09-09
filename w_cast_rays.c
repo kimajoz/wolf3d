@@ -115,8 +115,8 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 	t_dpoint	p;
 	t_dpoint	wall;
 	t_dpoint	dist;
-	t_dpoint	distspr;
 
+	w->w.foundh = 0;
 	w->w.slope = sin(ray_angle) / cos(ray_angle);
 	d.x = right ? 1 : -1;
 	d.y = (w->w.slope < 360) ? d.x * w->w.slope : 0;
@@ -127,42 +127,50 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 		wall = (t_dpoint){floor(p.x + (right ? 0 : -1)), floor(p.y), 0};
 		if (wall.x < 0 || wall.y < 0)
 			break ;
-		// Set sprite visibility on:
-		/*if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
+		if ((w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
 		{
-			ft_putendl("vue vert !");
-			printf("posy: %d, posx: %d\n", (int)wall.y, (int)wall.x);
-			w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
-			w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
-			w_calc_render_spr((int)wall.y, (int)wall.x, w);*/
-			//push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
-		//}
-		if ((w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0) || (w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
-		{
-			if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0)
-				distspr = (t_dpoint){((p.x + 0.5) * MMS) - (w->cam.pos.x * MMS), ((p.y + 0.5) * MMS) - (w->cam.pos.z * MMS), 0};
-			else
-				dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
-			w->w.distspr = sqrt(pow(distspr.x, 2) + pow(distspr.y, 2));
+			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
 			w->w.dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
 			w->w.hit = p;
-			if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0 && w->w.block_distspr < w->w.dist)
-			{
-				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
-				w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
-				//w_calc_render_spr((int)wall.y, (int)wall.x, dist, w);
-				w_render_sprites(w);
-			}
-			else
-			{
-				w->w.texX = fmod(p.y, 1) * TEXWIDTH; // keep the float number after coma.
-				if (!right) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
-				w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
-				w->w.color = (p.x < w->cam.pos.x) ? IC_FGREEN : IC_FBLUE;
-				w->w.side = 1; // Verticales lines
-			}
-			break ;
+			w->w.texX = fmod(p.y, 1) * TEXWIDTH; // keep the float number after coma.
+			if (!right) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
+			w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
+			w->w.color = (p.x < w->cam.pos.x) ? IC_FGREEN : IC_FBLUE;
+			w->w.side = 1; // Verticales lines
+			w->w.bolspr = 0;
+			w->w.foundh = 1;
 		}
+		// Set sprite visibility on if over classic texture:
+		//if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
+		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0)
+		{
+			//ft_putendl("hit spr v !");
+			w->w.memdistspr = (t_dpoint){((p.x + 0.5)) - (w->cam.pos.x), ((p.y + 0.5)) - (w->cam.pos.z), 0};
+			w->w.distspr = sqrt(pow(w->w.memdistspr.x, 2) + pow(w->w.memdistspr.y, 2));
+			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist))
+			{
+				/*ft_putendl("hit spr v ! smaller than dist");
+				printf("dist: %.3f, dist spr h: %.3f", w->w.dist, w->w.block_distspr);
+				ft_putstr("ext v");
+				ft_putstr(" wall.y : ");
+				ft_putnbr((int)wall.y);
+				ft_putstr(" wall.x : ");
+				ft_putnbr((int)wall.x);
+				ft_putstr("num : ");
+				ft_putnbr((int)w->w.tab_int_spr[(int)wall.y][(int)wall.x].num);
+				ft_putstr("\n");*/
+				w->w.dist = w->w.block_distspr;
+				w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
+				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
+				w->w.bolspr = 1;
+				w->w.foundh = 1;
+				//push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
+				//w_calc_render_spr((int)wall.y, (int)wall.x, dist, w);
+				//w_render_sprites(w);
+			}
+		}
+		if (w->w.foundh) // if found text or sprite
+			break ;
 		p.x += d.x;
 		p.y += d.y;
 	}
@@ -175,8 +183,8 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 	t_dpoint	p;
 	t_dpoint	wall;
 	t_dpoint	dist;
-	t_dpoint	distspr;
 
+	w->w.foundh = 0;
 	w->w.slope = cos(ray_angle) / sin(ray_angle);
 	d.y = up ? -1 : 1;
 	d.x = (w->w.slope < 360) ? (d.y * w->w.slope) : 0;
@@ -187,43 +195,58 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 		wall = (t_dpoint){floor(p.x), floor(p.y + (up ? -1 : 0)), 0};
 		if (wall.x < 0 || wall.y < 0)
 			break ;
-		// Set sprite visibility on:
-
-		/*if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
+		if ((w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
 		{
-			ft_putendl("vue  horiz!");
-			printf("posy: %d, posx: %d\n", (int)wall.y, (int)wall.x);*/
-			//push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
-		//}
-		if ((w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0) || (w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
-		{
-			if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0)
-				distspr = (t_dpoint){((p.x + 0.5) * MMS) - (w->cam.pos.x * MMS), ((p.y + 0.5) * MMS) - (w->cam.pos.z * MMS), 0};
-			else
-				dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
+			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
 			w->w.block_dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
-			w->w.block_distspr = sqrt(pow(distspr.x, 2) + pow(distspr.y, 2));
 			if (!w->w.dist || w->w.block_dist < w->w.dist)
 			{
 				w->w.dist = w->w.block_dist;
 				w->w.hit = p;
-				if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0 && w->w.block_distspr < w->w.dist)
-				{
-					w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
-					w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
-					//w_calc_render_spr((int)wall.y, (int)wall.x, dist, w);
-					w_render_sprites(w);
-				}
-				else
-				{
-					w->w.texX = fmod(p.x, 1) * TEXWIDTH; // keep the float number after coma.
-					if (!up) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
-					w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
-					w->w.color = p.y < w->cam.pos.z ? IC_FYELLOW : IC_FPURPLE;
-					w->w.side = 0; // Horizontales lines
-				}
-				break ;
+				w->w.texX = fmod(p.x, 1) * TEXWIDTH; // keep the float number after coma.
+				if (!up) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
+				w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
+				w->w.color = p.y < w->cam.pos.z ? IC_FYELLOW : IC_FPURPLE;
+				w->w.side = 0; // Horizontales lines
+				w->w.bolspr = 0;
+				w->w.foundh = 1;
+				//break ;
 			}
+		}
+		// Set sprite visibility on:
+		//if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
+		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0)
+		{
+			//ft_putendl("hit spr h !");
+			w->w.memdistspr = (t_dpoint){((p.x + 0.5)) - (w->cam.pos.x), (p.y + 0.5) - (w->cam.pos.z), 0};
+			w->w.block_distspr = sqrt(pow(w->w.memdistspr.x, 2) + pow(w->w.memdistspr.y, 2));
+			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist) || !w->w.dist)
+			{
+				/*ft_putendl("hit spr h ! smaller than dist");
+				ft_putnbr(w->w.block_distspr);
+				printf("dist spr h: %.3f\n", w->w.block_distspr);
+				ft_putstr("ext h ");
+				ft_putstr(" wall.y : ");
+				ft_putnbr((int)wall.y);
+				ft_putstr(" wall.x : ");
+				ft_putnbr((int)wall.x);
+				ft_putstr("num : ");
+				ft_putnbr((int)w->w.tab_int_spr[(int)wall.y][(int)wall.x].num);
+				ft_putstr("\n");*/
+				w->w.dist = w->w.block_distspr;
+				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
+				w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
+				w->w.bolspr = 1;
+				w->w.foundh = 1;
+				//w_calc_render_spr((int)wall.y, (int)wall.x, dist, w);
+				//w_render_sprites(w);
+			}
+			//push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
+		}
+		if (w->w.foundh) // if found text or sprite
+		{
+			//ft_putendl("break");
+			break ;
 		}
 		p.x += d.x;
 		p.y += d.y;
@@ -237,6 +260,7 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 
 	w->w.dist = 0;
 	w->w.distspr = 0;
+	w->w.bolspr = 0;
 	w->w.hit = (t_dpoint){0, 0, 0};
 	ray_angle = ft_degreetorad(ray_angle);
 	ray_angle = fmod(ray_angle, TWOPI);
@@ -249,7 +273,10 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 		if (w->w.info.ray_minimap)
 			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x00FF00");
 		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
-		w_draw_the_wall(w, raynumb);
+		if (w->w.bolspr)
+			w_render_sprites(w);
+		else
+			w_draw_the_wall(w, raynumb);
 	}
 }
 
@@ -258,7 +285,7 @@ void			w_cast_rays(t_wind *w)
 	int			i;
 	double		angle;
 
-	w->cam.vp.dist = (w->cam.vp.w / 2) / tan(ft_degreetorad(FOV / 2));
+	w->cam.vp.dist = ((w->cam.vp.w - w->w.marginw) / 2) / tan(ft_degreetorad(FOV / 2));
 	w->cam.anglebetrays = (double)FOV / (double)w->w.info.raynumb;
 	w->w.slicew = w->cam.vp.w / w->w.info.raynumb;
 	angle = w->cam.rot.y - (FOV / 2);

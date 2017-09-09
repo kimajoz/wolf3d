@@ -58,7 +58,7 @@ void			wolf3d(t_wind *w);
 void			w_cast_rays(t_wind *w);
 void			w_clear_vis_sprites(t_wind *w);
 void			w_render_sprites(t_wind *w);
-void			w_calc_render_spr(int z, int x, t_dpoint dist, t_wind *w);
+void			w_calc_render_spr(int z, int x, t_wind *w);
 int				getcolor(t_img *img, int x, int y);
 
 int				game_cycle(t_wind *w);

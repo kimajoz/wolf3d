@@ -332,6 +332,9 @@ typedef struct		s_wolf
 	t_sprite		*spr_visible;
 	t_opti			o;
 	int				sprnumb;
+	int				bolspr;
+	int				foundh;
+	t_dpoint		memdistspr;
 	double			distspr;
 	double			block_distspr;
 }					t_wolf;
