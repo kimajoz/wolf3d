@@ -273,10 +273,9 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 		if (w->w.info.ray_minimap)
 			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x00FF00");
 		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
+		w_draw_the_wall(w, raynumb);
 		if (w->w.bolspr)
 			w_render_sprites(w);
-		else
-			w_draw_the_wall(w, raynumb);
 	}
 }
 

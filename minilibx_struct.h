@@ -96,6 +96,12 @@ typedef struct		s_vec
 	float			len;
 }					t_vec;
 
+typedef struct		s_screen
+{
+	int				zdepth;
+	int				color;
+}					t_screen;
+
 typedef struct		s_viewplane
 {
 	float			w;
@@ -355,6 +361,7 @@ typedef struct		s_wind
 	t_obj			obj;
 	t_matrice_rot	mr;
 	t_wolf			w;
+	t_screen		**screen;
 }					t_wind;
 
 typedef struct		s_pthread

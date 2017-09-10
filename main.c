@@ -36,7 +36,28 @@ static void		init_player_pos(t_wind *w)
 		w->cam.rot.y = 0;
 	}
 }
+/*
+static void		init_screen(t_wind *w)
+{
+	int			y;
+	int			x;
 
+	w->screen = malloc(w->height * sizeof(t_screen *));
+	y = 0;
+	while (y < w->height)
+	{
+		x = 0;
+		w->screen[y] = malloc(w->width * sizeof(t_screen));
+		while (x < w->width)
+		{
+			w->screen[y][x].color = 0;
+			w->screen[y][x].zdepth = 0;
+			x++;
+		}
+		y++;
+	}
+}
+*/
 static int		set_parameters(t_wind *w)
 {
 	w->img.width = 800;
@@ -111,7 +132,7 @@ int				prog(char *filename)
 	set_parameters(&w);
 	init_texture(&w);
 	create_new_img(&w);
-	wolf3d(&w);
+	//wolf3d(&w);
 	//init_pthread(&w);
 	//mlx_put_image_to_window(w.mlx, w.win, w.img.ptr_img, w.img.x, w.img.y);
 	//game_cycle(w);

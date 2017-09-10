@@ -52,8 +52,13 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 			//printf("sprite perc x: %.3f, y: %.3f, valuex: %d, valuey: %d\n", percx, percy, (int)(percx * 64), (int)(percy * 64));
 			w->w.color = getcolor(&w->w.sprite[w->w.sprnumb - 1].img, percx * 64, percy * 64);
 			// We set color in img to show on screen
-			if (mlibx_dot_in_window(w, bx + x, by + y))
+			if (mlibx_dot_in_window(w, bx + x, by + y) && w->w.color != 0)
+			{
 				mlibx_draw_dot(w, bx + x, by + y, w->w.color);
+				//We set zdepth to draw it later by depth
+				//w->screen[by + y][bx + x].zdepth = 10;
+				//w->screen[by + y][bx + x].color = w->w.color;
+			}
 			x++;
 		}
 		y++;
