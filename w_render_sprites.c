@@ -40,8 +40,8 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 	//double	gpercy;
 
 	// We go through all the pixel on the screen.
-	printf("sprite draw y start: %d, end: %d\n", by, (by + size));
-	printf("sprite draw x start: %d, end: %d\n", bx, (bx + size));
+	/*printf("sprite draw y start: %d, end: %d\n", by, (by + size));
+	printf("sprite draw x start: %d, end: %d\n", bx, (bx + size));*/
 	//gpercx = (double)(w->width - w->w.marginw) / (double)size;
 	//gpercx = (double)size / (double)64;
 	//gpercy = (double)size / (double)64;
@@ -75,7 +75,7 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 	}
 }
 
-void			w_calc_render_spr(int z, int x, t_wind *w)
+void			w_calc_render_spr(t_wind *w)
 {
 	double	sprite_angle;
 	int		size;
@@ -87,7 +87,7 @@ void			w_calc_render_spr(int z, int x, t_wind *w)
 	//double	distaftrot;
 	//double	zindex;
 
-	printf("render spr posx: %d, posz: %d\n", x, z);
+	//printf("render spr posx: %d, posz: %d\n", x, z);
 	// Translate position to viewer sprite
 	//dist = (t_dpoint){((x + 0.5) * MMS) - (w->cam.pos.x * MMS), 0, ((z + 0.5) * MMS) - (w->cam.pos.z * MMS)};
 
@@ -102,14 +102,14 @@ void			w_calc_render_spr(int z, int x, t_wind *w)
 		// Sprite angle relative to viewing angle
 		sprite_angle = atan2(w->w.memdistspr.y, w->w.memdistspr.x) - ft_degreetorad(w->cam.rot.y);
 		//printf("atan angle: %.3f\n",  atan2(w->w.memdistspr.y, w->w.memdistspr.x));
-		printf("sprites angle: %.3f\n", sprite_angle);
-		printf("cos sprites angle: %.3f\n", cos(sprite_angle));
+		//printf("sprites angle: %.3f\n", sprite_angle);
+		/* printf("cos sprites angle: %.3f\n", cos(sprite_angle));
 		printf("w->w.dist: %.3f\n", w->w.dist);
 		printf("cos sprites angle * dist: %.3f\n", cos(sprite_angle) * w->w.dist);
-		printf("w->cam.vp.dist: %.3f\n", w->cam.vp.dist);
+		printf("w->cam.vp.dist: %.3f\n", w->cam.vp.dist);*/
 		// Size of the sprite
 		size = w->cam.vp.dist / (cos(sprite_angle) * w->w.dist);
-		//printf("size sprites: %d\n", size);
+		printf("size sprites: %d\n", size);
 
 		// Define X pos of text on the screen
 		xtextp = tan(sprite_angle) * w->cam.vp.dist;
@@ -132,7 +132,7 @@ void			w_calc_render_spr(int z, int x, t_wind *w)
 		//zindex = -floor(distaftrot * 1000);
 
 		//printf("render spr preend\n");
-		printf("sprites textx: %.3f, texty: %.3f size: %d\n", s_xleft, s_ytop, size);
+		//printf("sprites textx: %.3f, texty: %.3f size: %d\n", s_xleft, s_ytop, size);
 		w_set_pxl_spr(s_xleft, s_ytop, size, w);
 		//printf("render spr lastend\n");
 }
@@ -143,7 +143,7 @@ void		w_render_sprites(t_wind *w)
 	int		x;
 
 	y = 0;
-	printf("-----------------------------------------------\n");
+	//printf("-----------------------------------------------\n");
 	while (y < w->b.nbrtot_of_line)
 	{
 		x = 0;
@@ -152,10 +152,10 @@ void		w_render_sprites(t_wind *w)
 			//printf("%d", w->w.tab_int_spr[y][x].vis);
 			//printf("%d", w->w.tab_int_spr[y][x].num);
 			if (w->w.tab_int_spr[y][x].vis == 1)
-				w_calc_render_spr(y, x, w);
+				w_calc_render_spr(w);
 			x++;
 		}
-		printf("\n");
+		//printf("\n");
 		y++;
 	}
 

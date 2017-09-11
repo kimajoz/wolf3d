@@ -4,12 +4,12 @@
 4;10;7
 4;12;7
 #Lamps in bottom corridor
-4;5;22
-4;12;22
-4;19;22
+4;4;13
+4;11;13
+4;19;13
 #Tables in long bottom room
-1;10;18
-1;15;18
+1;3;18
+1;5;18
 #Lamps in long bottom room
-4;8;18
+4;15;18
 4;17;18

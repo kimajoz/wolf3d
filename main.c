@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/11 14:50:27 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/11 17:06:02 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ static int		set_parameters(t_wind *w)
 	w->w.color_mray = "0xFF0000";
 	w->w.color_mfov = "0xFFFFFF";
 	w->w.info.raynumb = RAYNUMB;
-	w->w.info.ray_minimap = 0;
-	w->w.info.bg = 0;
+	w->w.info.ray_minimap = 1;
+	w->w.info.bg = 1;
 	w->w.info.texture = 1;
 	w->w.info.sound = 0;
 	w->w.o.lastgamecycle_time.tv_sec = 0;

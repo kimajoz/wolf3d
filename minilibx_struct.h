@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/01 14:00:21 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/11 18:39:55 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,6 +343,7 @@ typedef struct		s_wolf
 	t_dpoint		memdistspr;
 	double			distspr;
 	double			block_distspr;
+	double			block_distsprreal;
 }					t_wolf;
 
 typedef struct		s_wind
