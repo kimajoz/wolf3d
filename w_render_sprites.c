@@ -64,8 +64,10 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 			{
 				mlibx_draw_dot(w, bx + x, by + y, w->w.color);
 				//We set zdepth to draw it later by depth
-				//w->screen[by + y][bx + x].zdepth = 10;
-				//w->screen[by + y][bx + x].color = w->w.color;
+
+				if (w->w.dist < w->screen[by + y][bx + x].zdepth && w->w.dist > 0.001)
+					w->screen[by + y][bx + x].zdepth = w->w.dist;
+				w->screen[by + y][bx + x].color = w->w.color;
 			}
 			x++;
 		}

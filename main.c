@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/08/31 18:35:30 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/11 14:50:27 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		init_player_pos(t_wind *w)
 		w->cam.rot.y = 0;
 	}
 }
-/*
+
 static void		init_screen(t_wind *w)
 {
 	int			y;
@@ -57,7 +57,45 @@ static void		init_screen(t_wind *w)
 		y++;
 	}
 }
-*/
+
+static void		clear_screen(t_wind *w)
+{
+	int			y;
+	int			x;
+
+	y = 0;
+	while (y < w->height)
+	{
+		x = 0;
+		while (x < w->width)
+		{
+			w->screen[y][x].color = 0;
+			w->screen[y][x].zdepth = 0;
+			x++;
+		}
+		y++;
+	}
+}
+
+void			render_screen(t_wind *w)
+{
+	int			y;
+	int			x;
+
+	y = 0;
+	while (y < w->height)
+	{
+		x = 0;
+		while (x < w->width)
+		{
+			mlibx_draw_dot(w, x, y, w->screen[y][x].color);
+			x++;
+		}
+		y++;
+	}
+	clear_screen(w);
+}
+
 static int		set_parameters(t_wind *w)
 {
 	w->img.width = 800;
@@ -131,6 +169,7 @@ int				prog(char *filename)
 		return (0);
 	set_parameters(&w);
 	init_texture(&w);
+	init_screen(&w);
 	create_new_img(&w);
 	//wolf3d(&w);
 	//init_pthread(&w);

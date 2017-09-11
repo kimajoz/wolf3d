@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/01 14:34:51 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/11 14:43:48 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void			w_clear_vis_sprites(t_wind *w);
 void			w_render_sprites(t_wind *w);
 void			w_calc_render_spr(int z, int x, t_wind *w);
 int				getcolor(t_img *img, int x, int y);
-
+void			render_screen(t_wind *w);
 int				game_cycle(t_wind *w);
 void			render_cycle(t_wind *w);
 void			init_pthread(t_wind *w);
