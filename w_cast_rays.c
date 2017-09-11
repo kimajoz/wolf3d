@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/01 16:30:00 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/11 14:01:42 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,14 +139,39 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 			w->w.side = 1; // Verticales lines
 			w->w.bolspr = 0;
 			w->w.foundh = 1;
+			break ;
 		}
+		p.x += d.x;
+		p.y += d.y;
+	}
+}
+
+void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
+		double right)
+{
+	t_dpoint	d;
+	t_dpoint	p;
+	t_dpoint	wall;
+	t_dpoint	dist;
+
+	w->w.foundh = 0;
+	w->w.slope = sin(ray_angle) / cos(ray_angle);
+	d.x = right ? 1 : -1;
+	d.y = (w->w.slope < 360) ? d.x * w->w.slope : 0;
+	p.x = right ? ceil(w->cam.pos.x) : floor(w->cam.pos.x);
+	p.y = (w->cam.pos.z) + (p.x - w->cam.pos.x) * w->w.slope;
+	while (p.x >= 0 && p.x < w->b.nbr_elem_line[0] && p.y >= 0 && p.y < w->b.nbrtot_of_line)
+	{
+		wall = (t_dpoint){floor(p.x + (right ? 0 : -1)), floor(p.y), 0};
+		if (wall.x < 0 || wall.y < 0)
+			break ;
 		// Set sprite visibility on if over classic texture:
 		//if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
-		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0)
+		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0 && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 		{
 			//ft_putendl("hit spr v !");
-			w->w.memdistspr = (t_dpoint){((p.x + 0.5)) - (w->cam.pos.x), ((p.y + 0.5)) - (w->cam.pos.z), 0};
-			w->w.distspr = sqrt(pow(w->w.memdistspr.x, 2) + pow(w->w.memdistspr.y, 2));
+			dist = (t_dpoint){((p.x + 0.5)) - (w->cam.pos.x), ((p.y + 0.5)) - (w->cam.pos.z), 0};
+			w->w.block_distspr = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
 			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist))
 			{
 				/*ft_putendl("hit spr v ! smaller than dist");
@@ -160,6 +185,7 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 				ft_putnbr((int)w->w.tab_int_spr[(int)wall.y][(int)wall.x].num);
 				ft_putstr("\n");*/
 				w->w.dist = w->w.block_distspr;
+				w->w.memdistspr = dist; // We save dist for angle of sprites later
 				w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
 				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
 				w->w.bolspr = 1;
@@ -167,10 +193,9 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 				//push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
 				//w_calc_render_spr((int)wall.y, (int)wall.x, dist, w);
 				//w_render_sprites(w);
+				break ;
 			}
 		}
-		if (w->w.foundh) // if found text or sprite
-			break ;
 		p.x += d.x;
 		p.y += d.y;
 	}
@@ -210,16 +235,41 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 				w->w.side = 0; // Horizontales lines
 				w->w.bolspr = 0;
 				w->w.foundh = 1;
-				//break ;
+				break ;
 			}
 		}
+		p.x += d.x;
+		p.y += d.y;
+	}
+}
+
+void			w_horizontales_lines_check_spr(t_wind *w, double ray_angle,
+		double up)
+{
+	t_dpoint	d;
+	t_dpoint	p;
+	t_dpoint	wall;
+	t_dpoint	dist;
+
+	w->w.foundh = 0;
+	w->w.slope = cos(ray_angle) / sin(ray_angle);
+	d.y = up ? -1 : 1;
+	d.x = (w->w.slope < 360) ? (d.y * w->w.slope) : 0;
+	p.y = up ? floor(w->cam.pos.z) : ceil(w->cam.pos.z);
+	p.x = w->cam.pos.x + (p.y - w->cam.pos.z) * w->w.slope;
+	while (p.x >= 0 && p.x < w->b.nbr_elem_line[0] && p.y >= 0 && p.y < w->b.nbrtot_of_line)
+	{
+		wall = (t_dpoint){floor(p.x), floor(p.y + (up ? -1 : 0)), 0};
+		if (wall.x < 0 || wall.y < 0)
+			break ;
+
 		// Set sprite visibility on:
 		//if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
-		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0)
+		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0 && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 		{
 			//ft_putendl("hit spr h !");
-			w->w.memdistspr = (t_dpoint){((p.x + 0.5)) - (w->cam.pos.x), (p.y + 0.5) - (w->cam.pos.z), 0};
-			w->w.block_distspr = sqrt(pow(w->w.memdistspr.x, 2) + pow(w->w.memdistspr.y, 2));
+			dist = (t_dpoint){((p.x + 0.5)) - (w->cam.pos.x), (p.y + 0.5) - (w->cam.pos.z), 0};
+			w->w.block_distspr = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
 			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist) || !w->w.dist)
 			{
 				/*ft_putendl("hit spr h ! smaller than dist");
@@ -234,19 +284,15 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 				ft_putnbr((int)w->w.tab_int_spr[(int)wall.y][(int)wall.x].num);
 				ft_putstr("\n");*/
 				w->w.dist = w->w.block_distspr;
+				w->w.memdistspr = dist; // We save dist for angle of sprites later
 				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
 				w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
 				w->w.bolspr = 1;
 				w->w.foundh = 1;
 				//w_calc_render_spr((int)wall.y, (int)wall.x, dist, w);
 				//w_render_sprites(w);
+				break ;
 			}
-			//push_visible_spr(w, w->w.tab_int_spr[(int)wall.y][(int)wall.x]);
-		}
-		if (w->w.foundh) // if found text or sprite
-		{
-			//ft_putendl("break");
-			break ;
 		}
 		p.x += d.x;
 		p.y += d.y;
@@ -270,13 +316,17 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 	w_horizontales_lines_check(w, ray_angle, up);
 	if (w->w.dist)
 	{
-		if (w->w.info.ray_minimap)
-			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x00FF00");
 		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
 		w_draw_the_wall(w, raynumb);
-		if (w->w.bolspr)
-			w_render_sprites(w);
 	}
+	w_verticales_lines_check_spr(w, ray_angle, right);
+	w_horizontales_lines_check_spr(w, ray_angle, up);
+	if (w->w.dist)
+		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
+	if (w->w.bolspr)
+		w_render_sprites(w);
+	if (w->w.info.ray_minimap)
+		w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x00FF00");
 }
 
 void			w_cast_rays(t_wind *w)

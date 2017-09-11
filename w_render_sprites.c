@@ -36,9 +36,16 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 	int		y;
 	double	percx;
 	double	percy;
+	//double	gpercx;
+	//double	gpercy;
 
+	// We go through all the pixel on the screen.
 	printf("sprite draw y start: %d, end: %d\n", by, (by + size));
 	printf("sprite draw x start: %d, end: %d\n", bx, (bx + size));
+	//gpercx = (double)(w->width - w->w.marginw) / (double)size;
+	//gpercx = (double)size / (double)64;
+	//gpercy = (double)size / (double)64;
+	//gpercy = (double)w->height / (double)size;
 	y = 0;
 	while ((by + y) < (by + size))
 	{
@@ -50,6 +57,7 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 			percx = (double)x / (double)size;
 			percy = (double)y / (double)size;
 			//printf("sprite perc x: %.3f, y: %.3f, valuex: %d, valuey: %d\n", percx, percy, (int)(percx * 64), (int)(percy * 64));
+			//We get color for each pixel
 			w->w.color = getcolor(&w->w.sprite[w->w.sprnumb - 1].img, percx * 64, percy * 64);
 			// We set color in img to show on screen
 			if (mlibx_dot_in_window(w, bx + x, by + y) && w->w.color != 0)
@@ -108,6 +116,7 @@ void			w_calc_render_spr(int z, int x, t_wind *w)
 		printf("w->cam.vp.dist: %.3f\n", w->cam.vp.dist);
 		printf("xtextp: %.3f\n", xtextp);
 		printf("size/2: %d\n", (size / 2));*/
+		//s_xleft = ((w->width) / 2) + xtextp - (size / 2);
 		s_xleft = ((w->width - w->w.marginw) / 2) + xtextp - (size / 2) + w->w.marginw;
 
 		// Define Y pos of text on the screen
@@ -125,24 +134,6 @@ void			w_calc_render_spr(int z, int x, t_wind *w)
 		w_set_pxl_spr(s_xleft, s_ytop, size, w);
 		//printf("render spr lastend\n");
 }
-/*
-   void		w_render_sprites(t_wind *w)
-   {
-   int		x;
-
-   printf("-----------------------------------------------\n");
-   x = 0;
-   printf("nb sprites visibles: %d - ", w->w.sprnbvis);
-   printf("sprites visibles: ");
-   while (x < w->w.sprnbvis)
-   {
-   printf("%d", w->w.spr_visible[x].num);
-//if (w->w.tab_int_spr[y][x].vis == 1)
-//w_calc_render_spr(y, x, w);
-x++;
-}
-printf("\n");
-}*/
 
 void		w_render_sprites(t_wind *w)
 {
