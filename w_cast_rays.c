@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/11 18:54:48 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/12 20:33:15 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,13 @@ void				w_draw_the_wall(t_wind *w, int i)
 			w->w.color = getcolor(&w->w.text[w->w.textnumb], w->w.texX, w->w.texY);
 			if (mlibx_dot_in_window(w, rint(p.x), y))
 			{
-				mlibx_draw_dot(w, (int)p.x, y, w->w.color);
 				//We set zdepth depending on dist :
-				if (w->w.dist < w->screen[y][(int)p.x].zdepth && w->w.dist > 0.001)
-					w->screen[y][(int)p.x].zdepth = w->w.dist;
-				w->screen[y][(int)p.x].color = w->w.color;
+				//if (w->w.dist > 0.001)
+				//{
+				mlibx_draw_dot(w, (int)p.x, y, w->w.color);
+					//w->screen[y][(int)p.x].zdepth = w->w.dist;
+					//w->screen[y][(int)p.x].color = w->w.color;
+				//}
 			}
 			y++;
 		}
@@ -182,12 +184,12 @@ void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 			w->w.block_distsprreal = sqrt(pow(distreal.x, 2) + pow(distreal.y, 2));
 			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist))
 				w->w.hit = p; // To see hits for sprites on minimap
-			if ( (!(w->w.block_distsprreal > -0.001 && w->w.block_distsprreal < 0.001) && w->w.block_distsprreal < w->w.dist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
+			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distsprreal < 0.001) && w->w.block_distsprreal < w->w.dist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 
 			{
-				ft_putendl("hit spr v ! smaller than dist");
-				printf("dist: %.3f, dist spr v: %.3f\n", w->w.dist, w->w.block_distspr);
-				printf("minimap hitp.y: %.3f, hitp.x: %.3f\n", p.y, p.x);
+				//ft_putendl("hit spr v ! smaller than dist");
+				//printf("dist: %.3f, dist spr v: %.3f\n", w->w.dist, w->w.block_distspr);
+				//printf("minimap hitp.y: %.3f, hitp.x: %.3f\n", p.y, p.x);
 				/*ft_putstr("ext v");
 				ft_putstr(" wall.y : ");
 				ft_putnbr((int)wall.y);
@@ -290,9 +292,9 @@ void			w_horizontales_lines_check_spr(t_wind *w, double ray_angle,
 				w->w.hit = p; // To see hits for sprites on minimap
 			if ( (!(w->w.block_distsprreal > -0.001 && w->w.block_distsprreal < 0.001) && w->w.block_distsprreal < w->w.dist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 			{
-				ft_putendl("hit spr h ! smaller than dist");
-				printf("dist: %.3f, dist spr h: %.3f\n", w->w.dist, w->w.block_distsprreal);
-				printf("minimap hitp.y: %.3f, hitp.x: %.3f\n", p.y, p.x);
+				//ft_putendl("hit spr h ! smaller than dist");
+				//printf("dist: %.3f, dist spr h: %.3f\n", w->w.dist, w->w.block_distspr);
+				//printf("minimap hitp.y: %.3f, hitp.x: %.3f\n", p.y, p.x);
 				/*ft_putstr("ext h ");
 				ft_putstr(" wall.y : ");
 				ft_putnbr((int)wall.y);
@@ -322,7 +324,6 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 {
 	double		right;
 	double		up;
-	double		olddist;
 
 	w->w.dist = 0;
 	w->w.distspr = 0;
@@ -334,25 +335,36 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 	up = (ray_angle < 0 || ray_angle > M_PI);
 	w_verticales_lines_check(w, ray_angle, right);
 	w_horizontales_lines_check(w, ray_angle, up);
-	olddist = w->w.dist;
+	w->w.olddist = w->w.dist;
 	if (w->w.dist)
 	{
-		//if (w->w.info.ray_minimap)
-			//w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x00FF00");
+		if (w->w.info.ray_minimap)
+			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x00FF00");
 		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
 		w_draw_the_wall(w, raynumb);
 	}
+}
+
+void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
+{
+	double		right;
+	double		up;
+
+	w->w.dist = 0;
+	w->w.distspr = 0;
+	w->w.bolspr = 0;
 	w->w.hit = (t_dpoint){0, 0, 0};
-	w->w.dist = olddist; // we reset the old dist to draw spr.
+	ray_angle = ft_degreetorad(ray_angle);
+	ray_angle = fmod(ray_angle, TWOPI);
+	right = (ray_angle > TWOPI * 0.75 || ray_angle < TWOPI * 0.25);
+	up = (ray_angle < 0 || ray_angle > M_PI);
+	w->w.dist = 0; // we reset the old dist to draw spr (before fisheyes effect).
 	w_verticales_lines_check_spr(w, ray_angle, right);
 	w_horizontales_lines_check_spr(w, ray_angle, up);
-	if (w->w.dist)
+	if (w->w.olddist > w->w.dist && !(w->w.dist > -0.001 && w->w.dist < 0.001))
 	{
 		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
 		w_render_sprites(w);
-	}
-	if (w->w.dist)
-	{
 		if (w->w.info.ray_minimap)
 			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x0000FF");
 	}
@@ -373,6 +385,16 @@ void			w_cast_rays(t_wind *w)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;
 		w_cast_single_ray(w, angle, i);
+		angle += w->cam.anglebetrays;
+		i++;
+	}
+	angle = w->cam.rot.y - (FOV / 2);
+	w->w.correct_fisheyes = FOV / 2;
+	i = 0;
+	while (i < w->w.info.raynumb)
+	{
+		w->w.correct_fisheyes -= w->cam.anglebetrays;
+		w_cast_single_ray_spr(w, angle);
 		angle += w->cam.anglebetrays;
 		i++;
 	}

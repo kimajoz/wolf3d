@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/11 17:06:02 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/12 20:39:09 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 static void		init_player_pos(t_wind *w)
 {
+	w->cam.rot.x = 0;
+	w->cam.rot.z = 0;
 	if (w->w.player.init_pos != NULL)
 	{
 		w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
@@ -35,6 +37,15 @@ static void		init_player_pos(t_wind *w)
 		w->cam.pos.z = 1.5;
 		w->cam.rot.y = 0;
 	}
+}
+
+static void		init_player_game(t_wind *w)
+{
+	w->w.player.gameover = 0;
+	w->w.player.score = 0;
+	w->w.player.health = 100;
+	w->w.player.object = ft_strnew(ft_strlen("No objects"));
+	ft_strcpy(w->w.player.object, "No objects");
 }
 
 static void		init_screen(t_wind *w)
@@ -121,6 +132,7 @@ static int		set_parameters(t_wind *w)
 	w->w.info.bg = 1;
 	w->w.info.texture = 1;
 	w->w.info.sound = 0;
+	init_player_game(w);
 	w->w.o.lastgamecycle_time.tv_sec = 0;
 	w->w.o.lastgamecycle_time.tv_nsec = 0;
 	//w->w.o.lastgamecycle_time = 0;
@@ -179,6 +191,7 @@ int				prog(char *filename)
 	init_minimap(&w); //init minimap
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
+	mlx_loop_hook(w.mlx, w_game_timer_cycle, &w);
 	//mlx_loop_hook(w.mlx, game_cycle, &w);
 	mlx_expose_hook(w.win, expose_hook, &w);
 	mlx_loop(w.mlx);

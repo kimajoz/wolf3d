@@ -8,6 +8,7 @@ SRC=	main.c \
 		w_draw_background_color.c \
 		w_texture_walls.c \
 		w_render_sprites.c \
+		w_game_timer_cycle.c \
 		rt_file.c \
 		rt_parsing.c \
 		create_new_window.c \

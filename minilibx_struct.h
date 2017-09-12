@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/11 18:39:55 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/12 20:38:25 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct		s_vec
 
 typedef struct		s_screen
 {
-	int				zdepth;
+	double			zdepth;
 	int				color;
 }					t_screen;
 
@@ -306,12 +306,18 @@ typedef struct		s_player
 	double			rotspeed;
 	double			movespeed;
 	int				*init_pos;
+	int				score;
+	int				timeout;
+	int				health;
+	int				gameover;
+	char			*object;
 }					t_player;
 
 typedef struct		s_wolf
 {
 	t_player		player;
 	double			dist;
+	double			olddist;
 	double			dist_correct;
 	double			slicew;
 	double			slope;

@@ -62,12 +62,14 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 			// We set color in img to show on screen
 			if (mlibx_dot_in_window(w, bx + x, by + y) && w->w.color != 0)
 			{
-				mlibx_draw_dot(w, bx + x, by + y, w->w.color);
-				//We set zdepth to draw it later by depth
-
 				if (w->w.dist < w->screen[by + y][bx + x].zdepth && w->w.dist > 0.001)
-					w->screen[by + y][bx + x].zdepth = w->w.dist;
-				w->screen[by + y][bx + x].color = w->w.color;
+				{
+					printf("dist sprite:%.3f, screen.zdepth:%.3f\n", w->w.dist, (w->screen[by + y][bx + x].zdepth));
+					mlibx_draw_dot(w, bx + x, by + y, w->w.color);
+					//We set zdepth to draw it later by depth
+					//w->screen[by + y][bx + x].zdepth = w->w.dist;
+					//w->screen[by + y][bx + x].color = w->w.color;
+				}
 			}
 			x++;
 		}
@@ -100,16 +102,20 @@ void			w_calc_render_spr(t_wind *w)
 		//printf("check dist viez spr: %.3f\n", w->w.distspr);
 		//w->w.distspr = w->w.block_distspr;
 		// Sprite angle relative to viewing angle
+		//printf("memdistspr: %.3f\n", w->w.memdistspr.y);
 		sprite_angle = atan2(w->w.memdistspr.y, w->w.memdistspr.x) - ft_degreetorad(w->cam.rot.y);
 		//printf("atan angle: %.3f\n",  atan2(w->w.memdistspr.y, w->w.memdistspr.x));
-		//printf("sprites angle: %.3f\n", sprite_angle);
-		/* printf("cos sprites angle: %.3f\n", cos(sprite_angle));
+		/*printf("sprites angle: %.3f\n", sprite_angle);
+		printf("cos sprites angle: %.3f\n", cos(sprite_angle));
 		printf("w->w.dist: %.3f\n", w->w.dist);
 		printf("cos sprites angle * dist: %.3f\n", cos(sprite_angle) * w->w.dist);
 		printf("w->cam.vp.dist: %.3f\n", w->cam.vp.dist);*/
 		// Size of the sprite
-		size = w->cam.vp.dist / (cos(sprite_angle) * w->w.dist);
-		printf("size sprites: %d\n", size);
+		if (cos(sprite_angle) < 0.001)
+			size = w->cam.vp.dist / (1 * w->w.dist);
+		else
+			size = w->cam.vp.dist / (cos(sprite_angle) * w->w.dist);
+		//printf("size sprites: %d\n", size);
 
 		// Define X pos of text on the screen
 		xtextp = tan(sprite_angle) * w->cam.vp.dist;
@@ -118,8 +124,8 @@ void			w_calc_render_spr(t_wind *w)
 		printf("w->cam.vp.dist: %.3f\n", w->cam.vp.dist);
 		printf("xtextp: %.3f\n", xtextp);
 		printf("size/2: %d\n", (size / 2));*/
-		//s_xleft = ((w->width) / 2) + xtextp - (size / 2);
-		s_xleft = ((w->width - w->w.marginw) / 2) + xtextp - (size / 2) + w->w.marginw;
+		s_xleft = ((w->width) / 2) + xtextp - (size / 2);
+		//s_xleft = ((w->width - w->w.marginw) / 2) + xtextp - (size / 2) + w->w.marginw;
 
 		// Define Y pos of text on the screen
 		// Y is constant since we keep sprites at the same height and vertical position
