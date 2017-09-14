@@ -62,14 +62,14 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 			// We set color in img to show on screen
 			if (mlibx_dot_in_window(w, bx + x, by + y) && w->w.color != 0)
 			{
-				if (w->w.dist < w->screen[by + y][bx + x].zdepth && w->w.dist > 0.001)
-				{
-					printf("dist sprite:%.3f, screen.zdepth:%.3f\n", w->w.dist, (w->screen[by + y][bx + x].zdepth));
+				//if (w->w.dist < w->screen[by + y][bx + x].zdepth && w->w.dist > 0.001)
+				//{
+					//printf("dist sprite:%.3f, screen.zdepth:%.3f\n", w->w.dist, (w->screen[by + y][bx + x].zdepth));
 					mlibx_draw_dot(w, bx + x, by + y, w->w.color);
 					//We set zdepth to draw it later by depth
 					//w->screen[by + y][bx + x].zdepth = w->w.dist;
 					//w->screen[by + y][bx + x].color = w->w.color;
-				}
+				//}
 			}
 			x++;
 		}
@@ -111,19 +111,20 @@ void			w_calc_render_spr(t_wind *w)
 		printf("cos sprites angle * dist: %.3f\n", cos(sprite_angle) * w->w.dist);
 		printf("w->cam.vp.dist: %.3f\n", w->cam.vp.dist);*/
 		// Size of the sprite
-		if (cos(sprite_angle) < 0.001)
-			size = w->cam.vp.dist / (1 * w->w.dist);
-		else
-			size = w->cam.vp.dist / (cos(sprite_angle) * w->w.dist);
+		//if (cos(sprite_angle) < 0.001)
+			//size = w->cam.vp.dist / (1 * w->w.dist);
+		//else
+			//size = w->cam.vp.dist / (cos(sprite_angle) * w->w.dist);
+		size = w->cam.vp.dist / (cos(sprite_angle) * w->w.block_distsprreal);
 		//printf("size sprites: %d\n", size);
 
 		// Define X pos of text on the screen
 		xtextp = tan(sprite_angle) * w->cam.vp.dist;
-		/*printf("width/2: %d\n", (w->width / 2) + w->w.marginw);
+		printf("width/2: %d\n", (w->width / 2) + w->w.marginw);
 		printf("tan(ft_degreetorad(sprite_angle)) : %.3f\n", tan(ft_degreetorad(sprite_angle)));
 		printf("w->cam.vp.dist: %.3f\n", w->cam.vp.dist);
 		printf("xtextp: %.3f\n", xtextp);
-		printf("size/2: %d\n", (size / 2));*/
+		printf("size/2: %d\n", (size / 2));
 		s_xleft = ((w->width) / 2) + xtextp - (size / 2);
 		//s_xleft = ((w->width - w->w.marginw) / 2) + xtextp - (size / 2) + w->w.marginw;
 
@@ -147,6 +148,7 @@ void		w_render_sprites(t_wind *w)
 {
 	int		y;
 	int		x;
+
 
 	y = 0;
 	//printf("-----------------------------------------------\n");

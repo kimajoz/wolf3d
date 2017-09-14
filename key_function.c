@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/21 09:32:54 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/14 14:37:20 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,14 @@ int				keypress_function(int keycode, t_wind *w)
 {
 	if (keycode == EXIT)
 		exit(0);
-	keypress_function01(keycode, w);
-	keypress_function02(keycode, w);
-	mlx_destroy_image(w->mlx, w->img.ptr_img);
-	create_new_img(w);
-	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
-	put_info(w);
+	if (w->w.player.gameover == 0)
+	{
+		keypress_function01(keycode, w);
+		keypress_function02(keycode, w);
+		mlx_destroy_image(w->mlx, w->img.ptr_img);
+		create_new_img(w);
+		mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
+		put_info(w);
+	}
 	return (0);
 }

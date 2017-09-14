@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/12 20:33:15 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/14 20:05:45 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ void				w_draw_the_wall(t_wind *w, int i)
 				//We set zdepth depending on dist :
 				//if (w->w.dist > 0.001)
 				//{
+				//if(w->w.side == 1)
+					//w->w.color = (w->w.color & 0xfefefe) >> 1; // col darker
+					//w->w.color = (w->w.color & 0x7f7f7f) << 1; // col lighter -> not needed here as 4 wall 4 colors and does not work with textures
 				mlibx_draw_dot(w, (int)p.x, y, w->w.color);
 					//w->screen[y][(int)p.x].zdepth = w->w.dist;
 					//w->screen[y][(int)p.x].color = w->w.color;
@@ -179,26 +182,25 @@ void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 		{
 			//ft_putendl("hit spr v !");
 			dist = (t_dpoint){(p.x * MMS) - ((w->cam.pos.x + 0.5) * MMS), (p.y * MMS) - ((w->cam.pos.z + 0.5) * MMS), 0};
-			distreal = (t_dpoint){p.x - (w->cam.pos.x + 0.5), p.y - (w->cam.pos.z + 0.5), 0};
 			w->w.block_distspr = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
-			w->w.block_distsprreal = sqrt(pow(distreal.x, 2) + pow(distreal.y, 2));
-			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist))
+			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.olddist))
 				w->w.hit = p; // To see hits for sprites on minimap
-			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distsprreal < 0.001) && w->w.block_distsprreal < w->w.dist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
-
+			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001)) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 			{
 				//ft_putendl("hit spr v ! smaller than dist");
-				//printf("dist: %.3f, dist spr v: %.3f\n", w->w.dist, w->w.block_distspr);
+				printf("dist: %.3f, dist spr v: %.3f\n", w->w.dist, w->w.block_distspr);
 				//printf("minimap hitp.y: %.3f, hitp.x: %.3f\n", p.y, p.x);
-				/*ft_putstr("ext v");
+				ft_putstr("ext v");
 				ft_putstr(" wall.y : ");
 				ft_putnbr((int)wall.y);
 				ft_putstr(" wall.x : ");
 				ft_putnbr((int)wall.x);
 				ft_putstr("num : ");
 				ft_putnbr((int)w->w.tab_int_spr[(int)wall.y][(int)wall.x].num);
-				ft_putstr("\n");*/
-				w->w.dist = w->w.block_distsprreal;
+				ft_putstr("\n");
+				w->w.dist = w->w.block_distspr;
+				distreal = (t_dpoint){p.x - (w->cam.pos.x + 0.5), p.y - (w->cam.pos.z + 0.5), 0};
+				w->w.block_distsprreal = sqrt(pow(distreal.x, 2) + pow(distreal.y, 2));
 				w->w.memdistspr = distreal;
 				w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
 				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
@@ -285,25 +287,25 @@ void			w_horizontales_lines_check_spr(t_wind *w, double ray_angle,
 			//ft_putendl("hit spr h !");
 			//Dist for minimap ray intersection
 			dist = (t_dpoint){(p.x * MMS) - ((w->cam.pos.x + 0.5) * MMS), (p.y * MMS) - ((w->cam.pos.z + 0.5) * MMS), 0};
-			distreal = (t_dpoint){p.x - (w->cam.pos.x + 0.5), p.y - (w->cam.pos.z + 0.5), 0}; //Dist for real ray intersection
 			w->w.block_distspr = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
-			w->w.block_distsprreal = sqrt(pow(distreal.x, 2) + pow(distreal.y, 2));
 			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist))
 				w->w.hit = p; // To see hits for sprites on minimap
-			if ( (!(w->w.block_distsprreal > -0.001 && w->w.block_distsprreal < 0.001) && w->w.block_distsprreal < w->w.dist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
+			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 			{
 				//ft_putendl("hit spr h ! smaller than dist");
-				//printf("dist: %.3f, dist spr h: %.3f\n", w->w.dist, w->w.block_distspr);
+				printf("dist: %.3f, dist spr h: %.3f\n", w->w.dist, w->w.block_distspr);
 				//printf("minimap hitp.y: %.3f, hitp.x: %.3f\n", p.y, p.x);
-				/*ft_putstr("ext h ");
+				ft_putstr("ext h ");
 				ft_putstr(" wall.y : ");
 				ft_putnbr((int)wall.y);
 				ft_putstr(" wall.x : ");
 				ft_putnbr((int)wall.x);
 				ft_putstr("num : ");
 				ft_putnbr((int)w->w.tab_int_spr[(int)wall.y][(int)wall.x].num);
-				ft_putstr("\n");*/
-				w->w.dist = w->w.block_distsprreal;
+				ft_putstr("\n");
+				w->w.dist = w->w.block_distspr;
+				distreal = (t_dpoint){p.x - (w->cam.pos.x + 0.5), p.y - (w->cam.pos.z + 0.5), 0}; //Dist for real ray intersection
+				w->w.block_distsprreal = sqrt(pow(distreal.x, 2) + pow(distreal.y, 2));
 				w->w.memdistspr = distreal; // save dist for angle of sprites later
 				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
 				w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
@@ -361,12 +363,12 @@ void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 	w->w.dist = 0; // we reset the old dist to draw spr (before fisheyes effect).
 	w_verticales_lines_check_spr(w, ray_angle, right);
 	w_horizontales_lines_check_spr(w, ray_angle, up);
-	if (w->w.olddist > w->w.dist && !(w->w.dist > -0.001 && w->w.dist < 0.001))
+	if (w->w.dist < w->w.olddist && !(w->w.dist > -0.001 && w->w.dist < 0.001))
 	{
-		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
-		w_render_sprites(w);
 		if (w->w.info.ray_minimap)
 			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x0000FF");
+		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
+		w_render_sprites(w);
 	}
 }
 
@@ -375,7 +377,7 @@ void			w_cast_rays(t_wind *w)
 	int			i;
 	double		angle;
 
-	w->cam.vp.dist = ((w->cam.vp.w - w->w.marginw) / 2) / tan(ft_degreetorad(FOV / 2));
+	w->cam.vp.dist = ((w->cam.vp.w) / 2) / tan(ft_degreetorad(FOV / 2));
 	w->cam.anglebetrays = (double)FOV / (double)w->w.info.raynumb;
 	w->w.slicew = w->cam.vp.w / w->w.info.raynumb;
 	angle = w->cam.rot.y - (FOV / 2);

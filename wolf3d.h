@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/12 20:25:51 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/14 20:38:18 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define SPRWIDTH 64
 # define SPRHEIGHT 64
 # define MARGINIT 3
-# define TIMEOUT_GAME 2
+# define TIMEOUT_GAME 60
 # define IC_DGREY 3355443//Rgb 51,51,51
 # define IC_MGREY 7829367//Rgb 119,119,119
 # define IC_FGREEN 65280//Rgb 0,255,0
@@ -56,6 +56,7 @@ int				ft_count_lines(t_wind *w, char *filename);
 void			put_info(t_wind *w);
 void			put_info_timeout(t_wind *w, int rightm, int bl);
 int				w_game_timer_cycle(t_wind *w);
+int				w_play_music();
 int				prog(char *filename);
 void			wolf3d(t_wind *w);
 void			w_cast_rays(t_wind *w);
