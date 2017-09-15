@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/14 21:01:28 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/15 16:17:40 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ int				prog(char *filename)
 
 int				main(int argc, char **argv)
 {
-	w_play_music();
+	//w_play_music();
 	if (argc != 2)
 		ft_putstr("usage");
 	else

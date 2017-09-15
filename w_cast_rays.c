@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/14 20:05:45 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/15 16:59:43 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,9 +183,10 @@ void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 			//ft_putendl("hit spr v !");
 			dist = (t_dpoint){(p.x * MMS) - ((w->cam.pos.x + 0.5) * MMS), (p.y * MMS) - ((w->cam.pos.z + 0.5) * MMS), 0};
 			w->w.block_distspr = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
-			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.olddist))
+			//if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.olddist))
+			if ( (!ft_fiszero(w->w.block_distspr)))
 				w->w.hit = p; // To see hits for sprites on minimap
-			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001)) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
+			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001)) && (w->w.block_distspr < w->w.olddist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 			{
 				//ft_putendl("hit spr v ! smaller than dist");
 				printf("dist: %.3f, dist spr v: %.3f\n", w->w.dist, w->w.block_distspr);
@@ -288,7 +289,8 @@ void			w_horizontales_lines_check_spr(t_wind *w, double ray_angle,
 			//Dist for minimap ray intersection
 			dist = (t_dpoint){(p.x * MMS) - ((w->cam.pos.x + 0.5) * MMS), (p.y * MMS) - ((w->cam.pos.z + 0.5) * MMS), 0};
 			w->w.block_distspr = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
-			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist))
+			//if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist))
+			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001)))
 				w->w.hit = p; // To see hits for sprites on minimap
 			if ( (!(w->w.block_distspr > -0.001 && w->w.block_distspr < 0.001) && w->w.block_distspr < w->w.dist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 			{
@@ -363,7 +365,10 @@ void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 	w->w.dist = 0; // we reset the old dist to draw spr (before fisheyes effect).
 	w_verticales_lines_check_spr(w, ray_angle, right);
 	w_horizontales_lines_check_spr(w, ray_angle, up);
-	if (w->w.dist < w->w.olddist && !(w->w.dist > -0.001 && w->w.dist < 0.001))
+	//if (w->w.dist < w->w.olddist && !(w->w.dist > -0.001 && w->w.dist < 0.001))
+	//if (!(w->w.dist > -0.001 && w->w.dist < 0.001))
+	if ((w->w.dist < w->w.olddist && !ft_fiszero(w->w.olddist)) ||
+		(ft_fiszero(w->w.olddist) && !ft_fiszero(w->w.dist)))
 	{
 		if (w->w.info.ray_minimap)
 			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x0000FF");
