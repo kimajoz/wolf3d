@@ -120,11 +120,11 @@ void			w_calc_render_spr(t_wind *w)
 
 		// Define X pos of text on the screen
 		xtextp = tan(sprite_angle) * w->cam.vp.dist;
-		printf("width/2: %d\n", (w->width / 2) + w->w.marginw);
+		/*printf("width/2: %d\n", (w->width / 2) + w->w.marginw);
 		printf("tan(ft_degreetorad(sprite_angle)) : %.3f\n", tan(ft_degreetorad(sprite_angle)));
 		printf("w->cam.vp.dist: %.3f\n", w->cam.vp.dist);
 		printf("xtextp: %.3f\n", xtextp);
-		printf("size/2: %d\n", (size / 2));
+		printf("size/2: %d\n", (size / 2));*/
 		s_xleft = ((w->width) / 2) + xtextp - (size / 2);
 		//s_xleft = ((w->width - w->w.marginw) / 2) + xtextp - (size / 2) + w->w.marginw;
 

@@ -13,11 +13,14 @@
 #include "../inc/libft.h"
 #include <stdlib.h>
 
-int			ft_play_sound(char *filename)
+int			ft_play_sound(char *filename, int os)
 {
 	char	*cmd;
 
-	cmd = ft_strjoin("afplay ", filename);
+	if (os == 0) // Linux
+		cmd = ft_strjoin("aplay ", filename);
+	else if (os == 1) // Macos
+		cmd = ft_strjoin("afplay ", filename);
 	system(cmd);
 	free(cmd);
 	return 0;

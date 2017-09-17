@@ -29,13 +29,16 @@ pthread_cond_t done = PTHREAD_COND_INITIALIZER;
 
 void				*expensive_call(void *data)
 {
-	int				oldtype;
+	//int				oldtype;
 	t_pthread		*t;
 
-	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype); /* allow the thread to be killed at any time */
+	pthread_cond_wait(&done, &calculating);
+	//pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype); /* allow the thread to be killed at any time */
 	t = (t_pthread *)data;
-	t->func(t->w); /* calculations and expensive io here, for example: infinitely loop */
-	//printf("t int: %d\n", (int)t->t);
+	//t->func(); /* calculations and expensive io here, for example: infinitely loop */
+	printf("t int: %d\n", (int)t->t);
+	//printf("w->extensive call: %d\n", (int)t->w->w.dist);
+	//t->func(t->w); /* calculations and expensive io here, for example: infinitely loop */
 	pthread_cond_signal(&done); /* wake up the caller if we've completed in time */
 	return NULL;
 }
@@ -45,7 +48,7 @@ int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data)
 {
 	struct timespec	abs_time;
 	pthread_t		tid;
-	int				err;
+	//int				err;
 	t_pthread		*t;
 
 	pthread_mutex_lock(&calculating);
@@ -54,19 +57,26 @@ int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data)
 	abs_time.tv_sec += max_wait->tv_sec;
 	abs_time.tv_nsec += max_wait->tv_nsec;
 	pthread_create(&tid, NULL, expensive_call, data);
+	t = (t_pthread *)data;
+	printf("t int first: %d\n", (int)t->t);
 	/* pthread_cond_timedwait can return spuriously: this should
 	 *          * be in a loop for production code
 	 *                   */
-	err = pthread_cond_timedwait(&done, &calculating, &abs_time);
+	pthread_mutex_unlock(&calculating);
+	/*err = pthread_cond_timedwait(&done, &calculating, &abs_time);
 	if (err == ETIMEDOUT)
 	{
-		t = (t_pthread *)data;
-		t->reinit(t->w);
+		//t = (t_pthread *)data;
+		//t->reinit(t->w);
+		printf("err:%d\n", err);
 		fprintf(stderr, "%s: calculation timed out\n", __func__);
 	}
 	if (!err)
+	{
+		printf("pas derreur\n");
 		pthread_mutex_unlock(&calculating);
-	return err;
+	}*/
+	return 0;
 }
 /*
    int main()

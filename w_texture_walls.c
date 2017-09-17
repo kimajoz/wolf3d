@@ -71,6 +71,8 @@ void			init_sprites(t_wind *w)
 						"img/sprites/armor.xpm",
 						"img/sprites/plant-green.xpm",
 						"img/sprites/lamp.xpm",
+						"img/sprites/lustre.xpm",
+						"img/sprites/pillar.xpm",
 						"img/sprites/guard.xpm");
 	check_type_xpm(w->w.lst_sprite, w->w.sprnb);
 	w->w.sprite = malloc(sizeof(t_sprimg) * w->w.sprnb);
@@ -94,10 +96,12 @@ void			init_texture(t_wind *w)
 {
 	int			i;
 	int			fd;
+	int			nbtext;
 
 	i = 0;
-	w->w.lst_text = malloc(sizeof(char *) * 10);
-	aff_text_name(w->w.lst_text, 10, "img/greystone.xpm",
+	nbtext = 10;
+	w->w.lst_text = malloc(sizeof(char *) * nbtext);
+	aff_text_name(w->w.lst_text, nbtext, "img/greystone.xpm",
 						"img/mossy.xpm",
 						"img/redbrick.xpm",
 						"img/purplestone.xpm",
@@ -105,11 +109,11 @@ void			init_texture(t_wind *w)
 						"img/colorstone.xpm",
 						"img/bluestone.xpm",
 						"img/eagle.xpm",
-						"img/greenlight.xpm",
-						"img/pillar.xpm");
-	check_type_xpm(w->w.lst_text, 10);
-	w->w.text = malloc(sizeof(t_img) * 10);
-	while (i < 10)
+						"img/blue_brick_hi.xpm",
+						"img/wall_red_door.xpm");
+	check_type_xpm(w->w.lst_text, nbtext);
+	w->w.text = malloc(sizeof(t_img) * nbtext);
+	while (i < nbtext)
 	{
 		fd = open(w->w.lst_text[i], O_RDONLY);
 		if (ft_check_fd(fd, w->w.lst_text[i], 1) == 0)

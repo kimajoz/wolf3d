@@ -130,6 +130,6 @@ double				ft_fmax(double a, double b);
 int					ft_fiszero(double value);
 
 int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data);
-int					ft_play_sound(char *filename);
+int					ft_play_sound(char *filename, int system);
 
 #endif

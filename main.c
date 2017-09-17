@@ -183,6 +183,7 @@ int				prog(char *filename)
 	init_texture(&w);
 	init_screen(&w);
 	create_new_img(&w);
+	w_play_music(&w);
 	//wolf3d(&w);
 	//init_pthread(&w);
 	//mlx_put_image_to_window(w.mlx, w.win, w.img.ptr_img, w.img.x, w.img.y);
@@ -200,7 +201,6 @@ int				prog(char *filename)
 
 int				main(int argc, char **argv)
 {
-	//w_play_music();
 	if (argc != 2)
 		ft_putstr("usage");
 	else

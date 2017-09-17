@@ -35,10 +35,17 @@
 # define IC_FPURPLE 16711935//Rgb 255,0,255
 
 # if MACROKEY == 1
+	# define OS 1
+# else
+	# define OS 0
+# endif
+
+# if MACROKEY == 1
 #  include "minilibx_macos/mlx.h"
 # else
 #  include "minilibx/mlx.h"
 # endif
+# include <pthread.h>
 # include "libft/inc/libft.h"
 # include "minilibx_struct.h"
 # include "libft/inc/get_next_line.h"

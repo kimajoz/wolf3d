@@ -99,24 +99,8 @@ int						game_cycle(t_wind *w)
 
 void					wolf3d(t_wind *w)
 {
-	//struct timespec		max_wait;
-	//t_pthread			data;
 
 	//init_minimap(w);
-	//memset(&max_wait, 0, sizeof(max_wait));
-
-	/* wait at most 2 seconds */
-	//max_wait.tv_sec = 2;
-	/* wait at most 30 milliseconde = 30 000 000 de nanoseconds */
-	//max_wait.tv_nsec = 30000000;
-	//ref here:
-	// http://forums.devshed.com/programming-42/declaring-function-structure-545529.html
-	//data.t = 55;
-	//data.w = w;
-	//data.func = game_cycle;
-	//data->func(data->w);
-	//ft_pthread_do_or_timeout(&max_wait, (void *)&data);
-	//ft_set_time_out(w, game_cycle, cycle_delay);
 	w_clear_vis_sprites(w);
 	game_cycle(w);
 	//move(w);

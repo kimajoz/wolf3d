@@ -13,6 +13,8 @@
 #ifndef MINILIBX_STRUCT_H
 # define MINILIBX_STRUCT_H
 
+# include <pthread.h>
+
 typedef struct		s_rgbcolorf
 {
 	float			r;
@@ -313,6 +315,21 @@ typedef struct		s_player
 	char			*object;
 }					t_player;
 
+typedef struct		s_pthread
+{
+	int				t;
+	//t_wind			*w;
+	//void			(*func);
+	void			(*func) (void*);
+	//void			(*func) (t_wind *w);
+	//void			(*reinit) (t_wind *w);
+}					t_pthread;
+
+typedef struct		s_lstpthread
+{
+	pthread_t		ptmusic;
+}					t_lstpthread;
+
 typedef struct		s_wolf
 {
 	t_player		player;
@@ -369,14 +386,7 @@ typedef struct		s_wind
 	t_matrice_rot	mr;
 	t_wolf			w;
 	t_screen		**screen;
+	t_lstpthread	lpth;
 }					t_wind;
-
-typedef struct		s_pthread
-{
-	int				t;
-	t_wind			*w;
-	void			(*func) (t_wind *w);
-	void			(*reinit) (t_wind *w);
-}					t_pthread;
 
 #endif
