@@ -125,8 +125,8 @@ void			w_calc_render_spr(t_wind *w)
 		printf("w->cam.vp.dist: %.3f\n", w->cam.vp.dist);
 		printf("xtextp: %.3f\n", xtextp);
 		printf("size/2: %d\n", (size / 2));*/
-		s_xleft = ((w->width) / 2) + xtextp - (size / 2);
-		//s_xleft = ((w->width - w->w.marginw) / 2) + xtextp - (size / 2) + w->w.marginw;
+		//s_xleft = ((w->width) / 2) + xtextp - (size / 2);
+		s_xleft = ((w->width - w->w.marginw) / 2) + xtextp - (size / 2) + w->w.marginw;
 
 		// Define Y pos of text on the screen
 		// Y is constant since we keep sprites at the same height and vertical position

@@ -327,7 +327,11 @@ typedef struct		s_pthread
 
 typedef struct		s_lstpthread
 {
-	pthread_t		ptmusic;
+	pthread_t		ptchrono;
+	pthread_t		musicstart;
+	pthread_t		fxwalk;
+	pthread_t		fxheartb;
+	pthread_t		musicgameover;
 }					t_lstpthread;
 
 typedef struct		s_wolf
@@ -367,6 +371,7 @@ typedef struct		s_wolf
 	double			distspr;
 	double			block_distspr;
 	double			block_distsprreal;
+	char			*songname;
 }					t_wolf;
 
 typedef struct		s_wind

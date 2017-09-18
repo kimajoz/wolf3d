@@ -62,8 +62,9 @@ int				ft_count_lines(t_wind *w, char *filename);
 
 void			put_info(t_wind *w);
 void			put_info_timeout(t_wind *w, int rightm, int bl);
-int				w_game_timer_cycle(t_wind *w);
-int				w_play_music();
+void			*w_game_timer_cycle(void *data);
+void			w_play_chronotime(t_wind *w);
+int				w_play_music(t_wind *w, pthread_t addresspth, char *url, int loop);
 int				prog(char *filename);
 void			wolf3d(t_wind *w);
 void			w_cast_rays(t_wind *w);

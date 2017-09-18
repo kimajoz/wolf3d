@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
+#include <pthread.h>
 /*
 void			w_play_set_sounds_url(t_wind *w)
 {
@@ -28,51 +28,45 @@ void			w_play_set_sounds_url(t_wind *w)
 	}
 }*/
 
-void			*w_play_m_theme(void *data)
+// For sound wav references
+// http://soundbible.com/tags-walking.html
+// To cut wav file: https://ubuntuforums.org/showthread.php?t=1719664
+
+void			*w_play(void *data)
 {
 	t_wind		*w;
 
+	ft_putendl("w_play");
 	w = (t_wind *)data;
-	//ft_putendl("play music");
-	printf("playtheme: %.3f", w->w.dist);
-	//ft_play_sound("sounds/loops/footsteps-4.wav");
-	while (1)
-		ft_play_sound("sounds/loops/M-Audio-Venom-Mysterio-C2.wav", OS);
+	//printf("playtheme: %.3f", w->w.dist);
+	ft_play_sound(w->w.songname, OS);
 	return (0);
 }
 
-/*int						w_pthread_music(t_wind *w)
+void			*w_play_loop(void *data)
 {
-	struct timespec		max_wait;
-	t_pthread			*data;
+	t_wind		*w;
 
-	memset(&max_wait, 0, sizeof(max_wait));*/
-	
-	/* wait at most 2 seconds */
-	//max_wait.tv_sec = 20;
-	//max_wait.tv_sec = 2;
-	/* wait at most 30 milliseconde = 30 000 000 de nanoseconds */
-	//max_wait.tv_nsec = 30000000;
-	//ref here:
-	// http://forums.devshed.com/programming-42/declaring-function-structure-545529.html
-	/*data = malloc(sizeof(t_pthread *));
-	data->t = 55;
-	data->w = w;
-	data->func = (void *)(*w_play_m_theme)(w);*/
-	//data->func = (void)(*w_play_m_theme)(w);
-	//data->func(data->w);
-	//ft_pthread_do_or_timeout(&max_wait, (void *)data);
-	//ft_set_time_out(w, game_cycle, cycle_delay);
-	//return (0);
-//}
+	ft_putendl("w_play_loop");
+	//https://stackoverflow.com/questions/30883238/running-background-process-in-c-using-pthread
+	w = (t_wind *)data;
+	//ft_putendl("play music");
+	//ft_putendl("start loop");
+	//printf("playtheme: %.3f", w->w.dist);
+	//ft_play_sound("sounds/loops/footsteps-4.wav");
+	while (1)
+		ft_play_sound(w->w.songname, OS);
+	return (0);
+}
 
-int				w_play_music(t_wind *w)
+int				w_play_music(t_wind *w, pthread_t addresspth, char *url, int loop)
 {
-	//int th1;
-
-	printf("playtheme: %.3f", w->w.dist);
-	// create the thread
-	pthread_create( &w->lpth.ptmusic, NULL, w_play_m_theme, (void*)w);
-	//w_pthread_music(w);
+	w->w.songname = ft_strnew(ft_strlen(url));
+	ft_strcpy(w->w.songname, url);
+	//printf("playtheme3: %s\n", w->w.songname);
+	if (loop)
+		pthread_create( &addresspth, NULL, w_play_loop, (void*)w);
+	else
+		pthread_create( &addresspth, NULL, w_play, (void*)w);
 	return (0);
 }

@@ -55,6 +55,12 @@ void			move(t_wind *w)
 
 static void		keypress_function01(int keycode, t_wind *w)
 {
+	if ((keycode == U_ARROW) || (keycode == D_ARROW))
+	{
+		ft_putendl("appuie");
+		w_play_music(w, w->lpth.fxwalk, "sounds/loops/footsteps-4_loop.wav", 0);
+		pthread_join(w->lpth.fxwalk, NULL);
+	}
 	if (keycode == L_ARROW)
 		w->w.player.dir = -1;
 	else if (keycode == R_ARROW)

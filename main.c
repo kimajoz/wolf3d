@@ -183,7 +183,10 @@ int				prog(char *filename)
 	init_texture(&w);
 	init_screen(&w);
 	create_new_img(&w);
-	w_play_music(&w);
+	w_play_music(&w, w.lpth.musicstart, "sounds/loops/Casio-MT-45-16-Beat.wav", 1);
+	ft_putendl("w_play");
+	pthread_join(w.lpth.musicstart, NULL);
+	w_play_chronotime(&w);
 	//wolf3d(&w);
 	//init_pthread(&w);
 	//mlx_put_image_to_window(w.mlx, w.win, w.img.ptr_img, w.img.x, w.img.y);
@@ -192,7 +195,7 @@ int				prog(char *filename)
 	init_minimap(&w); //init minimap
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
-	mlx_loop_hook(w.mlx, w_game_timer_cycle, &w);
+	//mlx_loop_hook(w.mlx, w_game_timer_cycle, &w);
 	//mlx_loop_hook(w.mlx, game_cycle, &w);
 	mlx_expose_hook(w.win, expose_hook, &w);
 	mlx_loop(w.mlx);
