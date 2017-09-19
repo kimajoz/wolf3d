@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/19 15:02:33 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/19 16:04:47 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int				game_cycle(t_wind *w);
 void			render_cycle(t_wind *w);
 void			init_pthread(t_wind *w);
 
+void			w_mlibx_draw_pixel_line_int(t_point point, t_point pointd,
+		t_wind *w, int color);
 void			w_print_radar_ray(t_wind *w, double cx, double cy, int angle);
 void			w_print_radar_fov(t_wind *w, double cx, double cy, int angle);
 void			w_print_radar_ray_hitwall(t_wind *w, double cx, double cy,

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/19 11:52:44 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/19 16:16:03 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int				keypress_function(int keycode, t_wind *w)
 		keypress_function02(keycode, w);
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
 		create_new_img(w);
+		init_minimap(w);
 		mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 		put_info(w);
 	}

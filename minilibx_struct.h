@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/12 20:38:25 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/19 17:50:13 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,7 +371,10 @@ typedef struct		s_wolf
 	double			distspr;
 	double			block_distspr;
 	double			block_distsprreal;
+	double			mindistspr;
 	char			*songname;
+	double			xtextp;
+	double			s_xleft;
 }					t_wolf;
 
 typedef struct		s_wind

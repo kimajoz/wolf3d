@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 13:38:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/11 17:02:45 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/19 16:13:52 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				create_new_img(t_wind *w)
 		w_draw_background_color(w);
 	//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_imgbg, w->img.x, w->img.y);
 	wolf3d(w);
-	//render_screen(w);
+	render_screen(w);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 	return (0);
 }

@@ -10,6 +10,7 @@ SRC=	main.c \
 		w_render_sprites.c \
 		w_game_timer_cycle.c \
 		w_play_music.c \
+		w_mlibx_draw_pixel_line.c \
 		rt_file.c \
 		rt_parsing.c \
 		create_new_window.c \
