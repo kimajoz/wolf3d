@@ -25,7 +25,7 @@ LIB= -lm -L libft -lft
 LIB2= -L minilibx_macos -L/usr/local/lib/ -I/usr/local/include
 LIB3= -lmlx -framework OpenGL -framework AppKit
 FLAG= -Wall -Werror -Wextra
-PTHREAD = -pthread -lrt
+PTHREAD = -pthread
 KEY= 1
 endif
 ifeq ($(UNAME), Linux) # LINUX

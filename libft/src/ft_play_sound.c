@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 20:09:13 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/14 20:23:56 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/19 11:50:52 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int			ft_play_sound(char *filename, int os)
 		cmd = ft_strjoin("aplay ", filename);
 	else if (os == 1) // Macos
 		cmd = ft_strjoin("afplay ", filename);
+	else
+		cmd = ft_strjoin("aplay ", filename);
 	system(cmd);
 	free(cmd);
 	return 0;

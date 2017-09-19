@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/15 16:59:43 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/19 15:41:57 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 		{
 			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
 			w->w.dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
+			printf(" vwall dist: %.3f\n", w->w.dist);
 			w->w.hit = p;
 			w->w.texX = fmod(p.y, 1) * TEXWIDTH; // keep the float number after coma.
 			if (!right) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
@@ -192,19 +193,20 @@ void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 			if ( (!(ft_fiszero(w->w.block_distspr)) && w->w.block_distspr < w->w.olddist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 			{
 				//ft_putendl("hit spr v ! smaller than dist");
-				/*printf("dist: %.3f, dist spr v: %.3f\n", w->w.dist, w->w.block_distspr);
-				//printf("minimap hitp.y: %.3f, hitp.x: %.3f\n", p.y, p.x);
+				//printf("dist: %.3f, dist spr v: %.3f\n", w->w.dist, w->w.block_distspr);
+				//printf("minimap hitp.y: %.3f, hitp.x: %.3f\n", p.y, p.x);*/
 				ft_putstr("ext v");
 				ft_putstr(" wall.y : ");
 				ft_putnbr((int)wall.y);
 				ft_putstr(" wall.x : ");
 				ft_putnbr((int)wall.x);
-				ft_putstr("num : ");
+				ft_putstr(" num : ");
 				ft_putnbr((int)w->w.tab_int_spr[(int)wall.y][(int)wall.x].num);
-				ft_putstr("\n");*/
+				//ft_putstr("\n");
+				printf(" olddist: %.3f, dist: %.3f\n", w->w.olddist, w->w.block_distspr);
 				w->w.dist = w->w.block_distspr;
 				distreal = (t_dpoint){p.x - (w->cam.pos.x + 0.5), p.y - (w->cam.pos.z + 0.5), 0};
-				w->w.block_distsprreal = sqrt(pow(distreal.x, 2) + pow(distreal.y, 2));
+			w->w.block_distsprreal = sqrt(pow(distreal.x, 2) + pow(distreal.y, 2));
 				w->w.memdistspr = distreal;
 				w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
 				w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
@@ -244,10 +246,11 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 		{
 			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
 			w->w.block_dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
-			if (!w->w.dist || (w->w.block_dist < w->w.dist
-						&& !(w->w.block_dist > -0.001 && w->w.block_dist < 0.001)  ))
+			if (!w->w.dist ||
+				(w->w.block_dist < w->w.dist && !ft_fiszero(w->w.block_dist)))
 			{
 				w->w.dist = w->w.block_dist;
+				printf(" hwall dist: %.3f\n", w->w.dist);
 				w->w.hit = p;
 				w->w.texX = fmod(p.x, 1) * TEXWIDTH; // keep the float number after coma.
 				if (!up) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
@@ -300,17 +303,17 @@ void			w_horizontales_lines_check_spr(t_wind *w, double ray_angle,
 			if ( ((!ft_fiszero(w->w.block_distspr)) && w->w.block_distspr < w->w.olddist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 			{
 				//ft_putendl("hit spr h ! smaller than dist");
-				//printf("olddist: %.3f, dist: %.3f\n", w->w.olddist, w->w.dist);
 				/*printf("dist: %.3f, dist spr h: %.3f\n", w->w.dist, w->w.block_distspr);
-				//printf("minimap hitp.y: %.3f, hitp.x: %.3f\n", p.y, p.x);
+				//printf("minimap hitp.y: %.3f, hitp.x: %.3f\n", p.y, p.x);*/
 				ft_putstr("ext h ");
 				ft_putstr(" wall.y : ");
 				ft_putnbr((int)wall.y);
 				ft_putstr(" wall.x : ");
 				ft_putnbr((int)wall.x);
-				ft_putstr("num : ");
+				ft_putstr(" num : ");
 				ft_putnbr((int)w->w.tab_int_spr[(int)wall.y][(int)wall.x].num);
-				ft_putstr("\n");*/
+				//ft_putstr("\n");
+				printf(" olddist: %.3f, dist: %.3f\n", w->w.olddist, w->w.block_distspr);
 				w->w.dist = w->w.block_distspr;
 				distreal = (t_dpoint){p.x - (w->cam.pos.x + 0.5), p.y - (w->cam.pos.z + 0.5), 0}; //Dist for real ray intersection
 				w->w.block_distsprreal = sqrt(pow(distreal.x, 2) + pow(distreal.y, 2));
@@ -372,14 +375,17 @@ void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 	w_verticales_lines_check_spr(w, ray_angle, right);
 	w_horizontales_lines_check_spr(w, ray_angle, up);
 	//if (w->w.dist < w->w.olddist && !(w->w.dist > -0.001 && w->w.dist < 0.001))
-	//if (!(w->w.dist > -0.001 && w->w.dist < 0.001))
 	if ((w->w.dist < w->w.olddist && !ft_fiszero(w->w.olddist)) ||
 		(ft_fiszero(w->w.olddist) && !ft_fiszero(w->w.dist)))
 	{
 		if (w->w.info.ray_minimap)
 			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, "0x0000FF");
-		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
-		w_render_sprites(w);
+		//w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
+		if (!ft_fiszero(w->w.dist))
+		{
+			//ft_putendl("time rendered");
+			w_render_sprites(w);
+		}
 	}
 }
 
@@ -394,6 +400,7 @@ void			w_cast_rays(t_wind *w)
 	angle = w->cam.rot.y - (FOV / 2);
 	w->w.correct_fisheyes = FOV / 2;
 	i = 0;
+	//ft_putendl("walls");
 	while (i < w->w.info.raynumb)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;
@@ -404,6 +411,7 @@ void			w_cast_rays(t_wind *w)
 	angle = w->cam.rot.y - (FOV / 2);
 	w->w.correct_fisheyes = FOV / 2;
 	i = 0;
+	//ft_putendl("sprites");
 	while (i < w->w.info.raynumb)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/15 16:17:40 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/19 11:52:25 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,9 +183,8 @@ int				prog(char *filename)
 	init_texture(&w);
 	init_screen(&w);
 	create_new_img(&w);
-	w_play_music(&w, w.lpth.musicstart, "sounds/loops/Casio-MT-45-16-Beat.wav", 1);
-	ft_putendl("w_play");
-	pthread_join(w.lpth.musicstart, NULL);
+	//w_play_music(&w, w.lpth.musicstart, "sounds/loops/Casio-MT-45-16-Beat.wav", 1);
+	//pthread_join(w.lpth.musicstart, NULL);
 	w_play_chronotime(&w);
 	//wolf3d(&w);
 	//init_pthread(&w);

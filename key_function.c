@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/14 14:37:20 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/19 11:52:44 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static void		keypress_function01(int keycode, t_wind *w)
 {
 	if ((keycode == U_ARROW) || (keycode == D_ARROW))
 	{
-		ft_putendl("appuie");
-		w_play_music(w, w->lpth.fxwalk, "sounds/loops/footsteps-4_loop.wav", 0);
-		pthread_join(w->lpth.fxwalk, NULL);
+		//ft_putendl("appuie");
+		//w_play_music(w, w->lpth.fxwalk, "sounds/loops/footsteps-4_loop.wav", 0);
+		//pthread_join(w->lpth.fxwalk, NULL);
 	}
 	if (keycode == L_ARROW)
 		w->w.player.dir = -1;
