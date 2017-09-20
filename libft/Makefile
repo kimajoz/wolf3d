@@ -6,7 +6,7 @@
 #    By: pbillett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 14:11:23 by pbillett          #+#    #+#              #
-#    Updated: 2017/09/15 16:55:24 by pbillett         ###   ########.fr        #
+#    Updated: 2017/09/20 16:59:42 by pbillett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ SRC= src/ft_lstiter.c \
 	src/ft_pthread_do_or_timeout.c \
 	src/ft_fmax.c \
 	src/ft_fiszero.c \
+	src/ft_check_type.c \
 	src/ft_play_sound.c \
 	src/ft_rot_fabs.c
 CFLAGS= -Wall -Werror -Wextra

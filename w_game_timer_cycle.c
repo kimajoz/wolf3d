@@ -6,14 +6,14 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 20:19:22 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/14 20:44:46 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 14:31:19 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <time.h>
 
-void	w_game_over_draw_bg(t_wind *w)
+void	w_draw_colored_bg(t_wind *w, int color)
 {
 	int				x;
 	int				y;
@@ -24,19 +24,38 @@ void	w_game_over_draw_bg(t_wind *w)
 		x = w->w.marginw;
 		while (x < w->width)
 		{
-			mlibx_draw_dot(w, x, y, 0xcc0000);
+			mlibx_draw_dot(w, x, y, color);
 			x++;
 		}
 		y++;
 	}
 }
 
+void			w_win_level(t_wind *w)
+{
+	w_draw_colored_bg(w, 0x0000cc);
+	w_play_music(w, w->lpth.musicgameover, "sounds/loops/Casio-CZ-5000-Synth-Bass-C1.wav", 0);
+	pthread_join(w->lpth.musicgameover, NULL);
+}
+
+void			check_win_game(t_wind *w)
+{
+	//printf("win point.x: %d, point.y: %d\n", w->w.player.end_pos[0], w->w.player.end_pos[1]);
+	//printf("current point.x: %d, point.y: %d\n", (int)w->cam.pos.x, (int)w->cam.pos.z);
+	if (((int)w->cam.pos.x == w->w.player.end_pos[0]) &&
+			((int)w->cam.pos.z == w->w.player.end_pos[1]) && !w->w.player.win)
+	{
+		ft_putendl("You win !");
+		w->w.player.win = 1;
+	}
+}
+
 void	w_game_over(t_wind *w)
 {
 	w->w.player.health = 0;
-	w->w.player.score = 0;
+	w->w.player.totalscore = 0;
 	w->w.player.gameover = 1;
-	w_game_over_draw_bg(w);
+	w_draw_colored_bg(w, 0xcc0000);
 	w_play_music(w, w->lpth.musicgameover, "sounds/loops/Casio-CZ-5000-Synth-Bass-C1.wav", 0);
 	pthread_join(w->lpth.musicgameover, NULL);
 }
@@ -70,6 +89,9 @@ void				*w_game_timer_cycle(void *data)
 			ft_putendl("time out of game show gameover");
 			w_game_over(w);
 		}
+		check_win_game(w);
+		if (w->w.player.win)
+			w_win_level(w);
 		if (w->w.player.health < 10 && w->w.player.gameover == 0)
 		{
 			w_play_music(w, w->lpth.fxheartb, "sounds/loops/Heartbeat.wav", 0);

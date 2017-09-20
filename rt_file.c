@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/08/31 18:29:03 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 13:50:44 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		set_param_to_prog(int fd, t_wind *w)
 	int		y;
 
 	w->w.player.init_pos = malloc(3 * sizeof(double));
+	w->w.player.end_pos = malloc(3 * sizeof(double));
 	j = 0;
 	y = 0;
 	while (get_next_line(fd, &line))
@@ -102,6 +103,8 @@ void		set_param_to_prog(int fd, t_wind *w)
 			{
 				if (j == 0)
 					w->w.player.init_pos[x] = ft_atoi(tab[x]);
+				if (j == 1)
+					w->w.player.end_pos[x] = ft_atoi(tab[x]);
 				ft_strdel(&tab[x++]);
 			}
 			j++;

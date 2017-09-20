@@ -7,9 +7,11 @@ SRC=	main.c \
 		w_print_radar_fov.c \
 		w_draw_background_color.c \
 		w_texture_walls.c \
+		w_cast_single_ray_spr.c \
 		w_render_sprites.c \
 		w_game_timer_cycle.c \
 		w_play_music.c \
+		w_gun_fire.c \
 		w_mlibx_draw_pixel_line.c \
 		rt_file.c \
 		rt_parsing.c \

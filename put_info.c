@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:52:45 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/12 20:41:09 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 14:46:41 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,25 @@ void				put_info_game(t_wind *w, int row, int bl)
 	put_string("Objects:", row, midm + 22, w);
 	put_string(w->w.player.object, row, midm + bl + 24, w);
 	put_string("Score:", row, rightm, w);
-	put_string(ft_itoa((int)w->w.player.score), row, rightm + bl + 1, w);
+	put_string(ft_itoa((int)w->w.player.totalscore), row, rightm + bl + 1, w);
 	row++;
 	if (w->w.player.gameover)
 		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) - 15, (w->height / 2), 0xFFFFFF, "GAME OVER");
+	else if (w->w.player.win)
+	{
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) - 50, (w->height / 2) - 200, 0xFFFFFF, "YOU WIN !");
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) - 50, (w->height / 2) - 150, 0xFFFFFF, "LEVEL 1");
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) - 50, (w->height / 2) - 100, 0xFFFFFF, "Points: ");
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) + rightm - 50, (w->height / 2) - 100, 0xFFFFFF, ft_itoa((int)w->w.player.points));
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) - 50, (w->height / 2) - 80, 0xFFFFFF, "Kills: ");
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) + rightm - 50, (w->height / 2) - 80, 0xFFFFFF, ft_itoa((int)w->w.player.kills));
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) - 50, (w->height / 2) - 60, 0xFFFFFF, "Health: ");
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) + rightm - 50, (w->height / 2) - 60, 0xFFFFFF, ft_itoa((int)w->w.player.health));
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) - 50, (w->height / 2) - 40, 0xFFFFFF, "Bonus Time: ");
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) + rightm, (w->height / 2) - 40, 0xFFFFFF, ft_itoa(TIMEOUT_GAME - (int)w->w.player.timeout));
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) - 50, (w->height / 2) + 20, 0xFFFFFF, "Total: ");
+		mlx_string_put(w->mlx, w->win, ((w->width / 3) * 2) + rightm - 50, (w->height / 2) + 20, 0xFFFFFF, ft_itoa((int)w->w.player.points + w->w.player.kills + w->w.player.health + (TIMEOUT_GAME - (int)w->w.player.timeout)));
+	}
 }
 
 void				put_info(t_wind *w)

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 14:06:46 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/19 16:15:49 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 19:01:12 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,9 @@ int			key_release_function(int keycode, t_wind *w)
 		w->w.player.dir = 0;
 	else if (keycode == U_ARROW || keycode == D_ARROW)
 		w->w.player.speed = 0;
+	else if (keycode == SPACE)
+		w->w.player.opendoor = 0;
+	else if (keycode == CTRL_R)
+		w->w.player.fire = 0;
 	return (0);
 }

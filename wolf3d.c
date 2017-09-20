@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/19 16:14:16 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 19:13:04 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,10 @@ void					wolf3d(t_wind *w)
 	//move(w);
 	//render_cycle(w);
 
-	init_minimap(w);
+	//init_minimap(w);
 	// https://dev.opera.com/articles/3d-games-with-canvas-and-raycasting-part-2/
 	w_cast_rays(w);
+	w_gun_fire(w);
 	//ft_putendl("end render");
 	//w_render_sprites(w);
 }

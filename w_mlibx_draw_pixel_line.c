@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 16:02:09 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/19 16:08:22 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 12:36:21 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_line		w_mlibx_set_parameters_tline(t_line v)
 	return (v);
 }
 
-void		w_mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, char *color)
+void		w_mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, int color)
 {
 	t_line	v;
 
@@ -71,7 +71,11 @@ void		w_mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, char *co
 		if (v.y != v.ydest)
 			v.y += (v.sign_y * (v.diff_y / v.bigdiff));
 		if (mlibx_dot_in_window(w, rint(v.x), rint(v.y)))
-			mlibx_draw_pixel(w, rint(v.x), rint(v.y), color);
+		{
+			w->screen[(int)rint(v.y)][(int)rint(v.x)].color = color;
+			w->screen[(int)rint(v.y)][(int)rint(v.x)].zdepth = -10;
+			//mlibx_draw_pixel(w, rint(v.x), rint(v.y), color);
+		}
 	}
 }
 

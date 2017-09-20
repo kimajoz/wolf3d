@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/19 17:50:13 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 18:01:43 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,11 +308,18 @@ typedef struct		s_player
 	double			rotspeed;
 	double			movespeed;
 	int				*init_pos;
-	int				score;
+	int				*end_pos;
 	int				timeout;
 	int				health;
+	int				bonus;
+	int				kills;
+	int				points;
+	int				totalscore;
 	int				gameover;
+	int				win;
 	char			*object;
+	int				opendoor;
+	int				fire;
 }					t_player;
 
 typedef struct		s_pthread
@@ -345,8 +352,8 @@ typedef struct		s_wolf
 	t_dpoint		hit;
 	double			block_dist;
 	int				color;
-	char			*color_mfov;
-	char			*color_mray;
+	int				color_mfov;
+	int				color_mray;
 	double			correct_fisheyes;
 	int				marginw;
 	int				side;
@@ -355,7 +362,9 @@ typedef struct		s_wolf
 	int				texX;
 	int				texY;
 	char			**lst_text; //lst text
+	char			**lst_weapon; //lst text
 	t_img			*text;
+	t_img			*weapon;
 	double			lineheight;
 	int				sprnb;
 	t_sprimg		*sprite; //lst text
@@ -375,6 +384,7 @@ typedef struct		s_wolf
 	char			*songname;
 	double			xtextp;
 	double			s_xleft;
+	int				tmpgun;
 }					t_wolf;
 
 typedef struct		s_wind

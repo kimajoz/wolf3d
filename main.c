@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/19 16:59:49 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 18:08:18 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,13 @@ static void		init_player_pos(t_wind *w)
 static void		init_player_game(t_wind *w)
 {
 	w->w.player.gameover = 0;
-	w->w.player.score = 0;
+	w->w.player.win = 0;
+	w->w.player.points = 0;
+	w->w.player.kills = 0;
+	w->w.player.totalscore = 0;
 	w->w.player.health = 100;
+	w->w.player.opendoor = 0;
+	w->w.player.fire = 0;
 	w->w.player.object = ft_strnew(ft_strlen("No objects"));
 	ft_strcpy(w->w.player.object, "No objects");
 }
@@ -125,8 +130,8 @@ static int		set_parameters(t_wind *w)
 	w->w.player.rotspeed = 5;
 	w->w.player.movespeed = MOVESP;
 	w->w.marginw = w->b.nbr_elem_line[0] * MMS;
-	w->w.color_mray = "0xFF0000";
-	w->w.color_mfov = "0xFFFFFF";
+	w->w.color_mray = 0xFF0000;
+	w->w.color_mfov = 0xFFFFFF;
 	w->w.info.raynumb = RAYNUMB;
 	w->w.info.ray_minimap = 1;
 	w->w.info.bg = 1;
@@ -135,6 +140,7 @@ static int		set_parameters(t_wind *w)
 	init_player_game(w);
 	w->w.o.lastgamecycle_time.tv_sec = 0;
 	w->w.o.lastgamecycle_time.tv_nsec = 0;
+	w->w.tmpgun = 0;
 	//w->w.o.lastgamecycle_time = 0;
 	//w->w.o.gamecycle_delay = 1000 / 30; //30fps
 	w->w.o.gamecycle_delay.tv_sec = 0; //30fps
@@ -181,6 +187,7 @@ int				prog(char *filename)
 		return (0);
 	set_parameters(&w);
 	init_texture(&w);
+	init_guns(&w);
 	init_screen(&w);
 	create_new_img(&w);
 	//w_play_music(&w, w.lpth.musicstart, "sounds/loops/Casio-MT-45-16-Beat.wav", 1);

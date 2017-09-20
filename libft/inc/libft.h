@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 12:11:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/15 16:54:51 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 17:03:39 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ char				*ft_get_time_clean(void);
 void				ft_set_time_out(t_wind *w, void (*f)(t_wind *w), double endtime);
 double				ft_fmax(double a, double b);
 int					ft_fiszero(double value);
+void				ft_check_type(char **lst, int numb, char *type);
 
 int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data);
 int					ft_play_sound(char *filename, int system);

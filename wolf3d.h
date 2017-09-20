@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/19 16:04:47 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 18:47:58 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define SPRHEIGHT 64
 # define MARGINIT 3
 # define TIMEOUT_GAME 120
+# define GUNW 84
+# define GUNH 103
 # define IC_DGREY 3355443//Rgb 51,51,51
 # define IC_MGREY 7829367//Rgb 119,119,119
 # define IC_FGREEN 65280//Rgb 0,255,0
@@ -54,54 +56,50 @@
 # include <stdlib.h>
 # include <stdio.h> // A SUPPRIMER !
 
-int				rt_file(char *filename, int y, t_wind *w, int needed);
-int				ft_check_parsing(char *filename);
-int				ft_check_parsing_param(char *filename);
-int				ft_print_error_type_parsing(int x, int y);
-int				ft_count_lines(t_wind *w, char *filename);
-
-void			put_info(t_wind *w);
-void			put_info_timeout(t_wind *w, int rightm, int bl);
-void			*w_game_timer_cycle(void *data);
-void			w_play_chronotime(t_wind *w);
-int				w_play_music(t_wind *w, pthread_t addresspth, char *url, int loop);
-int				prog(char *filename);
-void			wolf3d(t_wind *w);
-void			w_cast_rays(t_wind *w);
-void			w_clear_vis_sprites(t_wind *w);
-void			w_render_sprites(t_wind *w);
-void			w_calc_render_spr(t_wind *w);
-int				getcolor(t_img *img, int x, int y);
-void			render_screen(t_wind *w);
-int				game_cycle(t_wind *w);
-void			render_cycle(t_wind *w);
-void			init_pthread(t_wind *w);
-
-void			w_mlibx_draw_pixel_line_int(t_point point, t_point pointd,
+int			rt_file(char *filename, int y, t_wind *w, int needed);
+int			ft_check_parsing(char *filename);
+int			ft_check_parsing_param(char *filename);
+int			ft_print_error_type_parsing(int x, int y);
+int			ft_count_lines(t_wind *w, char *filename);
+void		put_info(t_wind *w);
+void		put_info_timeout(t_wind *w, int rightm, int bl);
+void		*w_game_timer_cycle(void *data);
+void		w_play_chronotime(t_wind *w);
+int			w_play_music(t_wind *w, pthread_t addresspth, char *url, int loop);
+int			prog(char *filename);
+void		wolf3d(t_wind *w);
+void		w_cast_rays(t_wind *w);
+void		w_cast_single_ray_spr(t_wind *w, double ray_angle);
+void		w_clear_vis_sprites(t_wind *w);
+void		w_render_sprites(t_wind *w);
+void		w_calc_render_spr(t_wind *w);
+int			getcolor(t_img *img, int x, int y);
+void		render_screen(t_wind *w);
+void		w_gun_fire(t_wind *w);
+int			game_cycle(t_wind *w);
+void		render_cycle(t_wind *w);
+void		w_draw_colored_bg(t_wind *w, int color);
+void		init_pthread(t_wind *w);
+void		w_mlibx_draw_pixel_line_int(t_point point, t_point pointd,
 		t_wind *w, int color);
-void			w_print_radar_ray(t_wind *w, double cx, double cy, int angle);
-void			w_print_radar_fov(t_wind *w, double cx, double cy, int angle);
-void			w_print_radar_ray_hitwall(t_wind *w, double cx, double cy,
-		char *color);
-void			w_draw_background_color(t_wind *w);
-
-void			init_texture(t_wind *w);
-void			init_sprites(t_wind *w);
-void			draw_texture(t_wind *w, int n);
-//void			move(t_wind *w, double time_delay);
-void			move(t_wind *w);
-//void			move(t_wind *w, struct timespec time_delay);
-void			init_minimap(t_wind *w);
-//void			init_screen_texture(t_wind *w);
-//void			w_texture_walls(t_wind *w);
-
-t_wind			create_new_window(char *title, int width, int height);
-int				create_new_img(t_wind *w);
-
-int				dot_in_window(t_wind *w, int x, int y);
-int				keypress_function(int keycode, t_wind *w);
-int				key_release_function(int keycode, t_wind *w);
-
-int				expose_hook(t_wind *w);
+void		w_mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, int color);
+void		w_print_radar_ray(t_wind *w, double cx, double cy, int angle);
+void		w_print_radar_fov(t_wind *w, double cx, double cy, int angle);
+void		w_print_radar_ray_hitwall(t_wind *w, double cx, double cy,
+		int color);
+void		w_draw_background_color(t_wind *w);
+void		init_texture(t_wind *w);
+void		init_sprites(t_wind *w);
+void		init_guns(t_wind *w);
+void		draw_texture(t_wind *w, int n);
+void		move(t_wind *w);
+void		init_minimap(t_wind *w);
+t_wind		create_new_window(char *title, int width, int height);
+int			create_new_img(t_wind *w);
+int			dot_in_window(t_wind *w, int x, int y);
+int			keypress_function(int keycode, t_wind *w);
+int			key_release_function(int keycode, t_wind *w);
+int			expose_hook(t_wind *w);
+void		w_set_pxl_spr(int bx, int by, int size, t_wind *w);
 
 #endif

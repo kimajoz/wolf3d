@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   w_texture_walls.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/20 15:26:08 by pbillett          #+#    #+#             */
+/*   Updated: 2017/09/20 18:33:01 by pbillett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <stdarg.h> //for ellipsis
@@ -41,23 +52,6 @@ int				aff_block(t_sprimg *block, int numargs, ...)
 	return (0);
 }
 
-void			check_type_xpm(char **lst, int numb)
-{
-	int			i;
-
-	i = 0;
-	while (i < numb)
-	{
-		if (ft_strstr(lst[i], "xpm") == 0)
-		{
-			ft_putstr("Warning !");
-			ft_putstr(lst[i]);
-			ft_putendl(" file should be of xpm extension.");
-		}
-		i++;
-	}
-}
-
 void			init_sprites(t_wind *w)
 {
 	int			i;
@@ -74,7 +68,7 @@ void			init_sprites(t_wind *w)
 						"img/sprites/lustre.xpm",
 						"img/sprites/pillar.xpm",
 						"img/sprites/guard.xpm");
-	check_type_xpm(w->w.lst_sprite, w->w.sprnb);
+	ft_check_type(w->w.lst_sprite, w->w.sprnb, "xpm");
 	w->w.sprite = malloc(sizeof(t_sprimg) * w->w.sprnb);
 	while (i < w->w.sprnb)
 	{
@@ -99,19 +93,20 @@ void			init_texture(t_wind *w)
 	int			nbtext;
 
 	i = 0;
-	nbtext = 10;
+	nbtext = 11;
 	w->w.lst_text = malloc(sizeof(char *) * nbtext);
-	aff_text_name(w->w.lst_text, nbtext, "img/greystone.xpm",
-						"img/mossy.xpm",
-						"img/redbrick.xpm",
-						"img/purplestone.xpm",
-						"img/wood.xpm",
-						"img/colorstone.xpm",
-						"img/bluestone.xpm",
-						"img/eagle.xpm",
-						"img/blue_brick_hi.xpm",
-						"img/wall_red_door.xpm");
-	check_type_xpm(w->w.lst_text, nbtext);
+	aff_text_name(w->w.lst_text, nbtext, "img/walls/greystone.xpm",
+						"img/walls/mossy.xpm",
+						"img/walls/redbrick.xpm",
+						"img/walls/purplestone.xpm",
+						"img/walls/wood.xpm",
+						"img/walls/colorstone.xpm",
+						"img/walls/bluestone.xpm",
+						"img/walls/eagle.xpm",
+						"img/walls/blue_brick_hi.xpm",
+						"img/walls/doorm.xpm",
+						"img/walls/wall_red_door.xpm");
+	ft_check_type(w->w.lst_text, nbtext, "xpm");
 	w->w.text = malloc(sizeof(t_img) * nbtext);
 	while (i < nbtext)
 	{
@@ -127,83 +122,30 @@ void			init_texture(t_wind *w)
 	}
 }
 
-/*
-void			draw_texture(t_wind *w, int n)
-{
-	int			y;
-	int			x;
-	//t_rgbcolor	col;
-	//char		*hexcol;
-	int			*res;
-
-	x = 0;
-	y = 0;
-	while (x < w->w.textw)
-	{
-		while (y < w->w.texth)
-		{
-			res = (w->w.text[n] + (y * w->w.sline[n]) + (x * (w->w.bpp[n])));
-			//col.g = (int)(w->w.text[n] + (y * w->w.sline[n]) + (x * (w->w.bpp[n])) + 1);
-			//col.b = (int)(w->w.text[n] + (y * w->w.sline[n]) + (x * (w->w.bpp[n])) + 2);
-			printf("res:%i\n", *res);
-			//hexcol = ft_rgbtohexa(col);
-			//mlibx_draw_pixel(w, x, y, hexcol);
-			y++;
-		}
-		x++;
-	}
-
-}*/
-
-
-/*
-void			init_screen_texture(t_wind *w)
+void			init_guns(t_wind *w)
 {
 	int			i;
-	int			strip_w;
-	int			id;
-	int			xpm1_x;
-	int			xpm1_y;
+	int			fd;
+	int			nbtext;
 
-	i = w->w.marginw;
-	id = 0;
-	strip_w = 2;
-	w->w.sstrip = malloc(sizeof(void **) * w->width);
-	while (i < w->width)
+	i = 0;
+	nbtext = 1;
+	w->w.lst_weapon = malloc(sizeof(char *) * nbtext);
+	// to edit img online: https://www.freeonlinephotoeditor.com/
+	// to convert png to xpm: https://convertio.co/fr/png-xpm/
+	aff_text_name(w->w.lst_weapon, nbtext, "img/guns/guns.xpm");
+	ft_check_type(w->w.lst_weapon, nbtext, "xpm");
+	w->w.weapon = malloc(sizeof(t_img) * nbtext);
+	while (i < nbtext)
 	{
-		w->w.sstrip[id] = malloc(sizeof(void *));
-		w->w.sstrip[id] = mlx_xpm_file_to_image(w->mlx,"img/walls.xpm",&xpm1_x,&xpm1_y);
-		mlx_put_image_to_window(w->mlx, w->win, w->w.sstrip[id], i, 0);
-		i += strip_w;
-		id++;
+		fd = open(w->w.lst_weapon[i], O_RDONLY);
+		if (ft_check_fd(fd, w->w.lst_weapon[i], 1) == 0)
+		{
+			w->w.weapon[i].ptr_img = mlx_xpm_file_to_image(w->mlx, w->w.lst_weapon[i], &(w->w.weapon[i].width), &(w->w.weapon[i].height));
+			w->w.weapon[i].pxl_ptr = mlx_get_data_addr(w->w.weapon[i].ptr_img, &w->w.weapon[i].bpp, &w->w.weapon[i].size_line, &w->w.weapon[i].endian);
+		}
+		else
+			exit(EXIT_FAILURE);
+		i++;
 	}
-}*/
-/*
-void			w_texture_walls(t_wind *w)
-{
-	void		*im2;
-	int			xpm1_x;
-	int			xpm1_y;
-	//char		*data2;
-	//int			endian2;
-	//int			sl2;
-
-	//printf(" => Xpm from file ...");
-	//if (!(im2 = mlx_xpm_file_to_image(w->mlx,"open.xpm",&xpm1_x,&xpm1_y)))
-	if (!(im2 = mlx_xpm_file_to_image(w->mlx,"img/walls.xpm",&xpm1_x,&xpm1_y)))
-	{
-	  printf(" !! KO !!\n");
-	  exit(1);
-	}
-	//w->img.ptr_img
-	//w->img.pxl_ptr = mlx_get_data_addr(w->img.ptr_img, &w->img.bits_per_pixel, &w->img.size_line, &w->img.endian_type);
-	//mlx_get_data_addr(w->img.ptr_img, &w->img.bits_per_pixel, &sl2, &endian2);
-	//printf("OK (xpm %dx%d)(img bpp2: %d, sizeline2: %d endian: %d)\n",
-	//xpm1_x, xpm1_y, w->img.bits_per_pixel, sl2, endian2);
-
-	//printf(" => Put xpm ...");
-	//mlx_put_image_to_window(w->mlx, w->win, im2, 0, 0);
-	mlx_put_image_to_window(w->mlx, w->win, im2, 100, 100);
-	//printf("OK\n");
-	//sleep(2);
-}*/
+}

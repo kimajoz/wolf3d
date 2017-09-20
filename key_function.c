@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/19 16:16:03 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/20 19:12:52 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void			move(t_wind *w)
 
 static void		keypress_function01(int keycode, t_wind *w)
 {
-	if ((keycode == U_ARROW) || (keycode == D_ARROW))
-	{
+	//if ((keycode == U_ARROW) || (keycode == D_ARROW))
+	//{
 		//ft_putendl("appuie");
 		//w_play_music(w, w->lpth.fxwalk, "sounds/loops/footsteps-4_loop.wav", 0);
 		//pthread_join(w->lpth.fxwalk, NULL);
-	}
+	//}
 	if (keycode == L_ARROW)
 		w->w.player.dir = -1;
 	else if (keycode == R_ARROW)
@@ -69,6 +69,16 @@ static void		keypress_function01(int keycode, t_wind *w)
 		w->w.player.speed = 1;
 	else if (keycode == D_ARROW)
 		w->w.player.speed = -1;
+	else if (keycode == SPACE)
+	{
+		ft_putendl("space");
+		w->w.player.opendoor = 1;
+	}
+	else if (keycode == CTRL_R)
+	{
+		ft_putendl("fire");
+		w->w.player.fire = 1;
+	}
 }
 
 static void		keypress_function02(int keycode, t_wind *w)
@@ -100,8 +110,9 @@ int				keypress_function(int keycode, t_wind *w)
 {
 	if (keycode == EXIT)
 		exit(0);
-	if (w->w.player.gameover == 0)
+	if (!w->w.player.gameover && !w->w.player.win)
 	{
+		ft_putendl("press");
 		keypress_function01(keycode, w);
 		keypress_function02(keycode, w);
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
