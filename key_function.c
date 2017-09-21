@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 19:12:52 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:39:05 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,23 @@ void			move(t_wind *w)
 	w->cam.rot.y = mult * ft_rot_fabs(w->cam.rot.y + w->w.player.dir * w->w.player.rotspeed);
 	tmp.x = w->cam.pos.x + cos(ft_degreetorad(w->cam.rot.y)) * movestep;
 	tmp.z = w->cam.pos.z + sin(ft_degreetorad(w->cam.rot.y)) * movestep;
-	if (is_blocking(tmp, w) != 1)
+	if (is_blocking(tmp, w) != 1 || w->w.tab_int_spr[(int)tmp.z][(int)tmp.x].block != 1)
 	{
 		w->cam.pos.x = tmp.x;
 		w->cam.pos.z = tmp.z;
 	}
+	else
+		ft_putendl("blocking");
 }
 
 static void		keypress_function01(int keycode, t_wind *w)
 {
-	//if ((keycode == U_ARROW) || (keycode == D_ARROW))
-	//{
-		//ft_putendl("appuie");
-		//w_play_music(w, w->lpth.fxwalk, "sounds/loops/footsteps-4_loop.wav", 0);
-		//pthread_join(w->lpth.fxwalk, NULL);
-	//}
+	if (((keycode == U_ARROW) || (keycode == D_ARROW)) && w->w.info.sound)
+	{
+		ft_putendl("appuie");
+		w_play_music(w, w->lpth.fxwalk, "sounds/loops/footsteps-4_loop.wav", 0);
+		pthread_join(w->lpth.fxwalk, NULL);
+	}
 	if (keycode == L_ARROW)
 		w->w.player.dir = -1;
 	else if (keycode == R_ARROW)
@@ -78,6 +80,15 @@ static void		keypress_function01(int keycode, t_wind *w)
 	{
 		ft_putendl("fire");
 		w->w.player.fire = 1;
+	}
+	else if (keycode == KEY_R)
+	{
+		w->w.player.ammunition += 7;
+		if (w->w.info.sound)
+		{
+			w_play_music(w, w->lpth.fxguncocking, "sounds/loops/gun-cocking-01.wav", 0);
+			pthread_join(w->lpth.fxguncocking, NULL);
+		}
 	}
 }
 
@@ -104,20 +115,25 @@ static void		keypress_function02(int keycode, t_wind *w)
 		w->w.info.texture = (w->w.info.texture) ? 0 : 1;
 	else if (keycode == KEY_8)
 		w->w.info.sound = (w->w.info.sound) ? 0 : 1;
+	else if (keycode == TAB_L)
+		w->w.info.tabinfo = (w->w.info.tabinfo) ? 0 : 1;
 }
 
 int				keypress_function(int keycode, t_wind *w)
 {
+	//ft_putnbr(keycode);
+	//ft_putchar('\n');
 	if (keycode == EXIT)
 		exit(0);
 	if (!w->w.player.gameover && !w->w.player.win)
 	{
-		ft_putendl("press");
+		//ft_putendl("press");
 		keypress_function01(keycode, w);
 		keypress_function02(keycode, w);
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
 		create_new_img(w);
-		init_minimap(w);
+		if (w->w.info.tabinfo)
+			init_minimap(w);
 		mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 		put_info(w);
 	}

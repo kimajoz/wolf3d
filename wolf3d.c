@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 19:13:04 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:44:07 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ int						game_cycle(t_wind *w)
 
 void					wolf3d(t_wind *w)
 {
+	if (!w->w.info.tabinfo)
+		w->w.marginw = 0;
+	else
+		w->w.marginw = w->b.nbr_elem_line[0] * MMS;
 	//ft_putendl("start render");
 	//init_minimap(w);
 	w_clear_vis_sprites(w);

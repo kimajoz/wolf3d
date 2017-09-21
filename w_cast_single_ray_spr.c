@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:31:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 13:34:02 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:07:27 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,10 +164,10 @@ void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 		//ft_putendl("not equal");
 		w->w.dist = w->w.block_distspr;
 	}
-	if ((w->w.dist < w->w.olddist && !ft_fiszero(w->w.olddist)) ||
+	if ((w->w.dist < w->w.olddist && !ft_fiszero(w->w.dist)) ||
 		(ft_fiszero(w->w.olddist) && !ft_fiszero(w->w.dist)))
 	{
-		if (w->w.info.ray_minimap)
+		if (w->w.info.ray_minimap && w->w.info.tabinfo)
 			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, 0x0000FF);
 		//w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
 		if (!ft_fiszero(w->w.dist))

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 18:01:43 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:02:02 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,7 @@ typedef struct		s_info
 	int				raynumb;
 	int				texture;
 	int				sound;
-
+	int				tabinfo;
 }					t_info;
 
 typedef struct		s_opti
@@ -320,6 +320,8 @@ typedef struct		s_player
 	char			*object;
 	int				opendoor;
 	int				fire;
+	int				ammureload;
+	int				ammunition;
 }					t_player;
 
 typedef struct		s_pthread
@@ -337,6 +339,9 @@ typedef struct		s_lstpthread
 	pthread_t		ptchrono;
 	pthread_t		musicstart;
 	pthread_t		fxwalk;
+	pthread_t		fxgunshot;
+	pthread_t		fxgunbulletfall;
+	pthread_t		fxguncocking;
 	pthread_t		fxheartb;
 	pthread_t		musicgameover;
 }					t_lstpthread;

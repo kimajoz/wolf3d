@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:52:45 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 14:46:41 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 18:29:13 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ void				put_info_cam(t_wind *w, int leftm, int row, int bl)
 	put_string(ft_itoa((int)w->cam.rot.y), row, leftm + bl + 6, w);
 	put_string("z: ", row, leftm + bl + 10, w);
 	put_string(ft_itoa((int)w->cam.rot.z), row, leftm + bl + 12, w);
+	row++;
+	/*put_string("fire: ", row, leftm + bl + 10, w);
+	put_string(ft_itoa((int)w->w.player.fire), row, leftm + bl + 12, w);
+	row++;
+	put_string("firetmp: ", row, leftm + bl + 10, w);
+	put_string(ft_itoa((int)w->w.tmpgun), row, leftm + bl + 12, w);*/
 }
 
 void				put_info_timeout(t_wind *w, int rightm, int bl)
@@ -64,8 +70,10 @@ void				put_info_game(t_wind *w, int row, int bl)
 	row = w->b.nbrtot_of_line + 4;
 	put_string("Health:", row, midm, w);
 	put_string(ft_itoa((int)w->w.player.health), row, midm + 7, w);
-	put_string("Objects:", row, midm + 22, w);
-	put_string(w->w.player.object, row, midm + bl + 24, w);
+	put_string("Ammunition:", row, midm + 12, w);
+	put_string(ft_itoa((int)w->w.player.ammunition), row, midm + 24, w);
+	put_string("Objects:", row, midm + 27, w);
+	put_string(w->w.player.object, row, midm + bl + 29, w);
 	put_string("Score:", row, rightm, w);
 	put_string(ft_itoa((int)w->w.player.totalscore), row, rightm + bl + 1, w);
 	row++;

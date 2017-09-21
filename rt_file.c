@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 13:50:44 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 17:48:45 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ int			rt_file(char *filename, int y, t_wind *w, int needed)
 	if (ft_check_fd(fd1, filename, needed) == 1)
 		return (0);
 	y = 0;
+	/*if (ft_strstr(filename, "config"))
+		w_get_configs(fd1, &line);*/
 	if (ft_strstr(filename, "scn"))
 	{
 		while (get_next_line(fd1, &line))

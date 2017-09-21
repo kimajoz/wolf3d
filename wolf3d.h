@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 18:47:58 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 13:02:37 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		w_calc_render_spr(t_wind *w);
 int			getcolor(t_img *img, int x, int y);
 void		render_screen(t_wind *w);
 void		w_gun_fire(t_wind *w);
+void		w_gun_fire_loop(t_wind *w);
 int			game_cycle(t_wind *w);
 void		render_cycle(t_wind *w);
 void		w_draw_colored_bg(t_wind *w, int color);

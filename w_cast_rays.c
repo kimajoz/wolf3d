@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 13:33:21 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:27:06 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 	w_horizontales_lines_check(w, ray_angle, up);
 	if (w->w.dist)
 	{
-		if (w->w.info.ray_minimap)
+		if (w->w.info.ray_minimap && w->w.info.tabinfo)
 			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, 0x00FF00);
 		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
 		w->w.olddist = w->w.dist;

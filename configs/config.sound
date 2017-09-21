@@ -1,4 +1,6 @@
 S_STARTMUSIC "sounds/loops/Casio-MT-45-16-Beat.wav"
 S_FOOTSTEP "sounds/loops/footsteps-4_loop.wav"
+S_GUNESHOOT "sounds/loops/gun-gunshot-01.wav"
+S_GUNCOCKING "sounds/loops/gun-cocking-01.wav"
 S_HEARBEAT "sounds/loops/Heartbeat.wav"
 S_GAMEOVER "sounds/loops/Casio-CZ-5000-Synth-Bass-C1.wav"

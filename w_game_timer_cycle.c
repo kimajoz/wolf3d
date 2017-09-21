@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 20:19:22 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 14:31:19 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:39:54 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ void	w_draw_colored_bg(t_wind *w, int color)
 void			w_win_level(t_wind *w)
 {
 	w_draw_colored_bg(w, 0x0000cc);
-	w_play_music(w, w->lpth.musicgameover, "sounds/loops/Casio-CZ-5000-Synth-Bass-C1.wav", 0);
-	pthread_join(w->lpth.musicgameover, NULL);
+	if (w->w.info.sound)
+	{
+		w_play_music(w, w->lpth.musicgameover, "sounds/loops/Casio-CZ-5000-Synth-Bass-C1.wav", 0);
+		pthread_join(w->lpth.musicgameover, NULL);
+	}
 }
 
 void			check_win_game(t_wind *w)
@@ -56,8 +59,11 @@ void	w_game_over(t_wind *w)
 	w->w.player.totalscore = 0;
 	w->w.player.gameover = 1;
 	w_draw_colored_bg(w, 0xcc0000);
-	w_play_music(w, w->lpth.musicgameover, "sounds/loops/Casio-CZ-5000-Synth-Bass-C1.wav", 0);
-	pthread_join(w->lpth.musicgameover, NULL);
+	if (w->w.info.sound)
+	{
+		w_play_music(w, w->lpth.musicgameover, "sounds/loops/Casio-CZ-5000-Synth-Bass-C1.wav", 0);
+		pthread_join(w->lpth.musicgameover, NULL);
+	}
 }
 
 void				*w_game_timer_cycle(void *data)
@@ -90,13 +96,24 @@ void				*w_game_timer_cycle(void *data)
 			w_game_over(w);
 		}
 		check_win_game(w);
+		if (w->w.player.fire == 1 && w->w.tmpgun == 0)
+			w_gun_fire_loop(w);
 		if (w->w.player.win)
 			w_win_level(w);
-		if (w->w.player.health < 10 && w->w.player.gameover == 0)
+		if ((w->w.player.health < 10 && w->w.player.gameover == 0) && (w->w.info.sound))
 		{
 			w_play_music(w, w->lpth.fxheartb, "sounds/loops/Heartbeat.wav", 0);
 			pthread_join(w->lpth.fxheartb, NULL);
 		}
+		if (!w->w.info.tabinfo)
+		{
+			//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
+			//put_info(w);
+			//if (w->w.info.bg)
+				//w_draw_background_color(w);
+			//w->w.marginw = 0;
+		}
+
 	}
 	ft_putendl("end of the while");
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);

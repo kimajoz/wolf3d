@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 14:06:46 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 19:01:12 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:08:34 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ int			expose_hook(t_wind *w)
 {
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img,
 	w->img.x, w->img.y);
-	//w_texture_walls(w);
 	put_info(w);
-	//mlx_put_image_to_window(w->mlx, w->win, w->w.text[0], w->img.width, w->img.height);
 	return (0);
 }
 
@@ -40,6 +38,7 @@ int			turntable(t_wind *w)
 
 int			key_release_function(int keycode, t_wind *w)
 {
+	//ft_putendl("release");
 	if (keycode == SPACE)
 		w->p.space_mousemove = 0;
 	else if (keycode == R_ARROW || keycode == L_ARROW)
@@ -49,6 +48,21 @@ int			key_release_function(int keycode, t_wind *w)
 	else if (keycode == SPACE)
 		w->w.player.opendoor = 0;
 	else if (keycode == CTRL_R)
+	{
+		ft_putendl("release fire");
 		w->w.player.fire = 0;
+		w->w.dist = 0.2;
+		w->w.tmpgun = 1;
+		//mlx_destroy_image(w->mlx, w->img.ptr_img);
+		//wolf3d(w);
+		//render_screen(w);
+		//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
+		//create_new_img(w);
+		//init_minimap(w);
+		//w_set_pxl_spr((w->width / 2) + (GUNW * 2), w->height - GUNH * 2, GUNH * 2, w);
+		//put_info(w);
+		w->w.dist = 0;
+		w->w.tmpgun = 0;
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 14:44:56 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 15:43:41 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:02:47 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@
 #  define F2 22
 #  define F3 26
 #  define SPACE 49
-#  define CTRL_R 264
+#  define CTRL_R 269
+#  define TAB_L 48
 # else
 #  define EXIT 65307
 #  define KEY_S 115
@@ -90,6 +91,7 @@
 #  define F2 65471
 #  define F3 65472
 #  define SPACE 32
-#  define CTRL_R 0
+#  define CTRL_R 269
+#  define TAB_L 48
 # endif
 #endif

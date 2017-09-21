@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 18:08:18 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:43:39 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ static int		set_parameters(t_wind *w)
 {
 	w->img.width = 800;
 	w->img.height = 600;
-	w->img.margin = 100;
 	w->p.help = 1;
 	w->p.m.button1 = 0;
 	w->p.m.button2 = 0;
@@ -141,6 +140,8 @@ static int		set_parameters(t_wind *w)
 	w->w.o.lastgamecycle_time.tv_sec = 0;
 	w->w.o.lastgamecycle_time.tv_nsec = 0;
 	w->w.tmpgun = 0;
+	w->w.player.ammunition = 7;
+	w->w.info.tabinfo = 1;
 	//w->w.o.lastgamecycle_time = 0;
 	//w->w.o.gamecycle_delay = 1000 / 30; //30fps
 	w->w.o.gamecycle_delay.tv_sec = 0; //30fps
@@ -179,6 +180,9 @@ int				prog(char *filename)
 		return (0);
 	else
 		rt_file(filename, w.b.y, &w, 1);
+	// Load all configs (of walls, sprites, sound, and guns from config folder)
+	//if (!rt_file("configs/config.spr", w.b.y, &w, 1))
+		//return (0);
 	// Load sprites and params if any
 	fsprites = new_file_name(filename, ".spr");
 	fparam = new_file_name(filename, ".par");
@@ -190,15 +194,19 @@ int				prog(char *filename)
 	init_guns(&w);
 	init_screen(&w);
 	create_new_img(&w);
-	//w_play_music(&w, w.lpth.musicstart, "sounds/loops/Casio-MT-45-16-Beat.wav", 1);
-	//pthread_join(w.lpth.musicstart, NULL);
+	if (w.w.info.sound)
+	{
+		w_play_music(&w, w.lpth.musicstart, "sounds/loops/Casio-MT-45-16-Beat.wav", 1);
+		pthread_join(w.lpth.musicstart, NULL);
+	}
 	w_play_chronotime(&w);
 	//wolf3d(&w);
 	//init_pthread(&w);
 	//mlx_put_image_to_window(w.mlx, w.win, w.img.ptr_img, w.img.x, w.img.y);
 	//game_cycle(w);
 	//render_cycle(w);
-	init_minimap(&w); //init minimap
+	if (w.w.info.tabinfo)
+		init_minimap(&w); //init minimap
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
 	//mlx_loop_hook(w.mlx, w_game_timer_cycle, &w);
