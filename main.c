@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/21 19:43:39 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/27 20:37:51 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,11 @@ static int		set_parameters(t_wind *w)
 	w->cam.vp.h = 400;
 	w->cam.pos.y = CUBESIZE / 2;
 	init_player_pos(w);
+	w->w.player.dir = 0;
+	w->w.player.speed = 0;
 	w->w.player.rotspeed = 5;
 	w->w.player.movespeed = MOVESP;
+	w->w.player.fov = FOV;
 	w->w.marginw = w->b.nbr_elem_line[0] * MMS;
 	w->w.color_mray = 0xFF0000;
 	w->w.color_mfov = 0xFFFFFF;
@@ -195,10 +198,7 @@ int				prog(char *filename)
 	init_screen(&w);
 	create_new_img(&w);
 	if (w.w.info.sound)
-	{
 		w_play_music(&w, w.lpth.musicstart, "sounds/loops/Casio-MT-45-16-Beat.wav", 1);
-		pthread_join(w.lpth.musicstart, NULL);
-	}
 	w_play_chronotime(&w);
 	//wolf3d(&w);
 	//init_pthread(&w);

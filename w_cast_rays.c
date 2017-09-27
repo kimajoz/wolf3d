@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/21 19:27:06 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/27 20:39:48 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ void				w_draw_the_wall(t_wind *w, int i)
 	int				y;
 	int				h;
 
-	projsliceh = (CUBESIZE * FOV) / w->w.dist;
+	projsliceh = (CUBESIZE * w->w.player.fov) / w->w.dist;
 	p = (t_point){(i * w->w.slicew), (w->height / 2) - (projsliceh / 2), 0};
 	pd = (t_point){p.x, p.y + projsliceh, 0};
 	p.x += w->w.marginw;
 	pd.x += w->w.marginw;
+	//printf("p.x: %d, p.y: %d\n", p.x, p.y);
+	//printf("pd.x: %d, pd.y: %d\n", pd.x, pd.y);
 	if (w->w.info.texture)
 	{
 		h = 0;
@@ -189,11 +191,11 @@ void			w_cast_rays(t_wind *w)
 	int			i;
 	double		angle;
 
-	w->cam.vp.dist = ((w->cam.vp.w) / 2) / tan(ft_degreetorad(FOV / 2));
-	w->cam.anglebetrays = (double)FOV / (double)w->w.info.raynumb;
-	w->w.slicew = w->cam.vp.w / w->w.info.raynumb;
-	angle = w->cam.rot.y - (FOV / 2);
-	w->w.correct_fisheyes = FOV / 2;
+	w->cam.vp.dist = ((w->cam.vp.w) / 2) / tan(ft_degreetorad(w->w.player.fov / 2));
+	w->cam.anglebetrays = (double)w->w.player.fov / (double)w->w.info.raynumb;
+	w->w.slicew = w->width / w->w.info.raynumb;
+	angle = w->cam.rot.y - (w->w.player.fov / 2);
+	w->w.correct_fisheyes = w->w.player.fov / 2;
 	i = 0;
 	//ft_putendl("walls");
 	while (i < w->w.info.raynumb)
@@ -203,8 +205,8 @@ void			w_cast_rays(t_wind *w)
 		angle += w->cam.anglebetrays;
 		i++;
 	}
-	angle = w->cam.rot.y - (FOV / 2);
-	w->w.correct_fisheyes = FOV / 2;
+	angle = w->cam.rot.y - (w->w.player.fov / 2);
+	w->w.correct_fisheyes = w->w.player.fov / 2;
 	i = 0;
 	//ft_putendl("sprites");
 	while (i < w->w.info.raynumb)

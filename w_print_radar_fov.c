@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 12:39:17 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/27 20:39:19 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ void			w_print_radar_fov(t_wind *w, double cx, double cy, int angle)
 	t_point		pd;
 
 	p = (t_point){cx * MMS, cy * MMS, 0};
-	pd = (t_point){cos(ft_degreetorad(angle - (FOV / 2))) * RADARL + p.x,
-		sin(ft_degreetorad(angle - (FOV / 2))) * RADARL + p.y, 0};
+	pd = (t_point){cos(ft_degreetorad(angle - (w->w.player.fov / 2))) * RADARL
+		+ p.x, sin(ft_degreetorad(angle - (w->w.player.fov / 2))) * RADARL +
+		p.y, 0};
 	w_mlibx_draw_pixel_line(p, pd, w, w->w.color_mfov);
-	pd = (t_point){cos(ft_degreetorad(angle + (FOV / 2))) * RADARL + p.x,
-		sin(ft_degreetorad(angle + (FOV / 2))) * RADARL + p.y, 0};
+	pd = (t_point){cos(ft_degreetorad(angle + (w->w.player.fov / 2))) * RADARL
+		+ p.x, sin(ft_degreetorad(angle + (w->w.player.fov / 2))) * RADARL +
+		p.y, 0};
 	w_mlibx_draw_pixel_line(p, pd, w, w->w.color_mfov);
 }

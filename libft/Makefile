@@ -6,7 +6,7 @@
 #    By: pbillett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 14:11:23 by pbillett          #+#    #+#              #
-#    Updated: 2017/09/20 16:59:42 by pbillett         ###   ########.fr        #
+#    Updated: 2017/09/27 18:03:53 by pbillett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ SRC= src/ft_lstiter.c \
 	src/ft_fiszero.c \
 	src/ft_check_type.c \
 	src/ft_play_sound.c \
+	src/ft_get_sound_duration.c \
 	src/ft_rot_fabs.c
 CFLAGS= -Wall -Werror -Wextra
 SRCDIR= src

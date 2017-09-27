@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 12:11:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/20 17:03:39 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:12:00 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ void				ft_check_type(char **lst, int numb, char *type);
 
 int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data);
 int					ft_play_sound(char *filename, int system);
+double				ft_get_sound_duration(char *filename, int os);
 
 #endif

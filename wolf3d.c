@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/21 19:44:07 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/27 20:49:55 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,23 @@ void			render_cycle(t_wind *w)
 	//update_minimap(w);
 	w_cast_rays(w);
 }*/
+void			tab_info(t_wind *w)
+{
+	if (!w->w.info.tabinfo)
+	{
+		w->w.marginw = 0;
+		w->w.info.raynumb = w->width;
+		w->w.player.fov = 70;
+		if (w->w.info.bg)
+			w_draw_background_color(w);
+	}
+	else
+	{
+		w->w.marginw = w->b.nbr_elem_line[0] * MMS;
+		w->w.info.raynumb = w->width - w->w.marginw;
+		w->w.player.fov = 50;
+	}
+}
 
 int						game_cycle(t_wind *w)
 {
@@ -99,10 +116,7 @@ int						game_cycle(t_wind *w)
 
 void					wolf3d(t_wind *w)
 {
-	if (!w->w.info.tabinfo)
-		w->w.marginw = 0;
-	else
-		w->w.marginw = w->b.nbr_elem_line[0] * MMS;
+	tab_info(w);
 	//ft_putendl("start render");
 	//init_minimap(w);
 	w_clear_vis_sprites(w);

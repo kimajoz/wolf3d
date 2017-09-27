@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 20:19:22 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/21 19:39:54 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/27 19:55:39 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,11 @@ void				*w_game_timer_cycle(void *data)
 		}
 		millisec += msec;
 		//printf("timeout sec:%d, milliseconde: %d, i:%d\n", (int)millisec/1000, (int)millisec, i); // Print of time
+		if (w->w.player.win)
+			w_win_level(w);
 		if (w->w.player.gameover == 0) // https://stackoverflow.com/questions/17167949/how-to-use-timer-in-c
 			w->w.player.timeout = millisec/1000; // Set for wolf3d timeout
-		if (w->w.player.timeout > TIMEOUT_GAME)
+		if (w->w.player.timeout > TIMEOUT_GAME && !w->w.player.win)
 		{
 			ft_putendl("time out of game show gameover");
 			w_game_over(w);
@@ -98,8 +100,6 @@ void				*w_game_timer_cycle(void *data)
 		check_win_game(w);
 		if (w->w.player.fire == 1 && w->w.tmpgun == 0)
 			w_gun_fire_loop(w);
-		if (w->w.player.win)
-			w_win_level(w);
 		if ((w->w.player.health < 10 && w->w.player.gameover == 0) && (w->w.info.sound))
 		{
 			w_play_music(w, w->lpth.fxheartb, "sounds/loops/Heartbeat.wav", 0);

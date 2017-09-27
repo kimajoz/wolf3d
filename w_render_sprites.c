@@ -33,9 +33,9 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 			// We set color due to pos on spr texture
 			//ft_putstr("i");
 			//printf("w->w.sprnumb: %d\n", w->w.sprnumb);
-			if (w->w.player.fire == 1)
+			if (w->w.player.fire == 1 && w->w.player.ammunition)
 				percx = (double)(x + (GUNW * 2.6)) / (double)size; //gun fire
-			else if (w->w.player.fire == 2)
+			else if (w->w.player.fire == 2 && w->w.player.ammunition)
 				percx = (double)(x + (GUNW * 5)) / (double)size; //gun fire 2
 			else
 				percx = (double)x / (double)size;

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/21 19:39:05 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/27 19:21:41 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ static void		keypress_function01(int keycode, t_wind *w)
 	if (((keycode == U_ARROW) || (keycode == D_ARROW)) && w->w.info.sound)
 	{
 		ft_putendl("appuie");
+		w->w.player.kp.upwalk = 0;
+		pthread_cancel(w->lpth.fxwalk); // Annule l'ancien thread de son
 		w_play_music(w, w->lpth.fxwalk, "sounds/loops/footsteps-4_loop.wav", 0);
-		pthread_join(w->lpth.fxwalk, NULL);
 	}
 	if (keycode == L_ARROW)
 		w->w.player.dir = -1;
@@ -86,8 +87,8 @@ static void		keypress_function01(int keycode, t_wind *w)
 		w->w.player.ammunition += 7;
 		if (w->w.info.sound)
 		{
+			pthread_cancel(w->lpth.fxguncocking); // Annule l'ancien thread de son
 			w_play_music(w, w->lpth.fxguncocking, "sounds/loops/gun-cocking-01.wav", 0);
-			pthread_join(w->lpth.fxguncocking, NULL);
 		}
 	}
 }

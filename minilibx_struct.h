@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/21 19:02:02 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/09/27 20:37:04 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,6 +301,12 @@ typedef struct		s_sprite
 	int				block;
 }					t_sprite;
 
+typedef struct		s_keyplayer
+{
+	int				upwalk;
+
+}					t_keyplayer;
+
 typedef struct		s_player
 {
 	int				speed;
@@ -309,6 +315,7 @@ typedef struct		s_player
 	double			movespeed;
 	int				*init_pos;
 	int				*end_pos;
+	int				prevtimeout;
 	int				timeout;
 	int				health;
 	int				bonus;
@@ -322,6 +329,8 @@ typedef struct		s_player
 	int				fire;
 	int				ammureload;
 	int				ammunition;
+	t_keyplayer		kp;
+	int				fov;
 }					t_player;
 
 typedef struct		s_pthread
@@ -390,6 +399,7 @@ typedef struct		s_wolf
 	double			xtextp;
 	double			s_xleft;
 	int				tmpgun;
+	int				timemusic;
 }					t_wolf;
 
 typedef struct		s_wind
