@@ -102,3 +102,9 @@ void		w_mlibx_draw_pixel_line_int(t_point point, t_point pointd, t_wind *w, int 
 		}
 	}
 }
+
+void		w_mlibx_draw_pixel(t_wind *w, int x, int y, int color, int depth)
+{
+			w->screen[y][x].zdepth = depth;
+			w->screen[y][x].color = color;
+}

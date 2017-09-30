@@ -315,8 +315,9 @@ typedef struct		s_player
 	double			movespeed;
 	int				*init_pos;
 	int				*end_pos;
-	int				prevtimeout;
 	int				timeout;
+	int				prevtimeoutimg;
+	int				prevtimeoutm;
 	int				health;
 	int				bonus;
 	int				kills;
@@ -369,6 +370,7 @@ typedef struct		s_wolf
 	int				color_mfov;
 	int				color_mray;
 	double			correct_fisheyes;
+	int				marginwfset;
 	int				marginw;
 	int				side;
 	t_info			info;
@@ -400,6 +402,7 @@ typedef struct		s_wolf
 	double			s_xleft;
 	int				tmpgun;
 	int				timemusic;
+	int				timeimg;
 }					t_wolf;
 
 typedef struct		s_wind

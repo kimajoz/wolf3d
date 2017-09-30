@@ -74,7 +74,7 @@ static void		init_screen(t_wind *w)
 	}
 }
 
-static void		clear_screen(t_wind *w)
+void			clear_screen(t_wind *w)
 {
 	int			y;
 	int			x;
@@ -109,7 +109,6 @@ void			render_screen(t_wind *w)
 		}
 		y++;
 	}
-	clear_screen(w);
 }
 
 static int		set_parameters(t_wind *w)
@@ -131,7 +130,8 @@ static int		set_parameters(t_wind *w)
 	w->w.player.rotspeed = 5;
 	w->w.player.movespeed = MOVESP;
 	w->w.player.fov = FOV;
-	w->w.marginw = w->b.nbr_elem_line[0] * MMS;
+	w->w.marginwfset = w->b.nbr_elem_line[0] * MMS;
+	w->w.marginw = w->w.marginwfset;
 	w->w.color_mray = 0xFF0000;
 	w->w.color_mfov = 0xFFFFFF;
 	w->w.info.raynumb = RAYNUMB;
@@ -210,7 +210,7 @@ int				prog(char *filename)
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
 	//mlx_loop_hook(w.mlx, w_game_timer_cycle, &w);
-	//mlx_loop_hook(w.mlx, game_cycle, &w);
+	mlx_loop_hook(w.mlx, hook_render, &w);
 	mlx_expose_hook(w.win, expose_hook, &w);
 	mlx_loop(w.mlx);
 	return (0);

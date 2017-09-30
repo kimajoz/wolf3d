@@ -133,10 +133,7 @@ int				keypress_function(int keycode, t_wind *w)
 		keypress_function02(keycode, w);
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
 		create_new_img(w);
-		if (w->w.info.tabinfo)
-			init_minimap(w);
-		mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
-		put_info(w);
+		//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 	}
 	return (0);
 }

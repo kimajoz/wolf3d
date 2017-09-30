@@ -22,6 +22,15 @@ int			expose_hook(t_wind *w)
 	return (0);
 }
 
+int			hook_render(t_wind *w)
+{
+	mlx_destroy_image(w->mlx, w->img.ptr_img);
+	create_new_img(w);
+	//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x,
+	//w->img.y);
+	return (0);
+}
+
 int			turntable(t_wind *w)
 {
 	if (w->p.turntable)

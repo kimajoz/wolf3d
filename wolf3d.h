@@ -67,7 +67,7 @@ void		*w_game_timer_cycle(void *data);
 void		w_play_chronotime(t_wind *w);
 int			w_play_music(t_wind *w, pthread_t addresspth, char *url, int loop);
 int			prog(char *filename);
-void		wolf3d(t_wind *w);
+int			wolf3d(t_wind *w);
 void		w_cast_rays(t_wind *w);
 void		w_cast_single_ray_spr(t_wind *w, double ray_angle);
 void		w_clear_vis_sprites(t_wind *w);
@@ -75,6 +75,7 @@ void		w_render_sprites(t_wind *w);
 void		w_calc_render_spr(t_wind *w);
 int			getcolor(t_img *img, int x, int y);
 void		render_screen(t_wind *w);
+void		clear_screen(t_wind *w);
 void		w_gun_fire(t_wind *w);
 void		w_gun_fire_loop(t_wind *w);
 int			game_cycle(t_wind *w);
@@ -84,6 +85,7 @@ void		init_pthread(t_wind *w);
 void		w_mlibx_draw_pixel_line_int(t_point point, t_point pointd,
 		t_wind *w, int color);
 void		w_mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, int color);
+void		w_mlibx_draw_pixel(t_wind *w, int x, int y, int color, int depth);
 void		w_print_radar_ray(t_wind *w, double cx, double cy, int angle);
 void		w_print_radar_fov(t_wind *w, double cx, double cy, int angle);
 void		w_print_radar_ray_hitwall(t_wind *w, double cx, double cy,
@@ -102,5 +104,6 @@ int			keypress_function(int keycode, t_wind *w);
 int			key_release_function(int keycode, t_wind *w);
 int			expose_hook(t_wind *w);
 void		w_set_pxl_spr(int bx, int by, int size, t_wind *w);
+int			hook_render(t_wind *w);
 
 #endif

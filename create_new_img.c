@@ -21,11 +21,7 @@ int				create_new_img(t_wind *w)
 	//printf("endian screen: %d\n", w->img.endian);
 	w->img.octet_per_pixel = w->img.bpp / 8;
 
-	if (w->w.info.bg)
-		w_draw_background_color(w);
 	//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_imgbg, w->img.x, w->img.y);
 	wolf3d(w);
-	render_screen(w);
-	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 	return (0);
 }

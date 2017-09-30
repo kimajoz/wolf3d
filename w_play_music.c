@@ -47,21 +47,21 @@ void			*w_play(void *data)
 	if (ft_strstr(w->w.songname, "gunshot") || ft_strcmp(w->w.songname, "bullet"))
 		w->w.timemusic = 1;
 	printf("sound duration: %d\n", w->w.timemusic);
-	if ((w->w.player.prevtimeout + w->w.timemusic) < w->w.player.timeout || !w->w.player.prevtimeout
+	if ((w->w.player.prevtimeoutm + w->w.timemusic) < w->w.player.timeout || !w->w.player.prevtimeoutm
 		|| ft_strstr(w->w.songname, "gunshot") // exception for unlimited repetead fireshoot
 		|| ft_strstr(w->w.songname, "gun-cocking")) // exception for gun reload
 	{
 		ft_putstr("-> Ok to play ");
 		ft_putendl(w->w.songname);
-		w->w.player.prevtimeout = w->w.player.timeout;
+		w->w.player.prevtimeoutm = w->w.player.timeout;
 		ft_play_sound(w->w.songname, OS);
 	}
 	else
 	{
 		ft_putstr("-> Not Ok to play ");
-		printf("prevtimeout+music: %d < timeout: %d\n", (w->w.player.prevtimeout + w->w.timemusic), w->w.player.timeout);
+		printf("prevtimeoutm+music: %d < timeout: %d\n", (w->w.player.prevtimeoutm + w->w.timemusic), w->w.player.timeout);
 		ft_putstr(" ou");
-		ft_putnbr(w->w.player.prevtimeout);
+		ft_putnbr(w->w.player.prevtimeoutm);
 		ft_putendl(" n'existe pas");
 	}
 	return (0);
@@ -94,7 +94,7 @@ int				w_play_music(t_wind *w, pthread_t addresspth, char *url, int loop)
 	else
 		pthread_create( &addresspth, NULL, w_play, (void*)w);
 	pthread_join(w->lpth.musicstart, NULL); // Pour que le script se termine avant la fin du programme
-	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL); // autorise l'annulation du thread
+	//pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL); // autorise l'annulation du thread
 	//pthread_setcanceltype(3, PTHREAD_CANCEL_DEFERRED); // Asynchronous cancelability means that the thread can be canceled at any time -> numb 3
 	return (0);
 }
