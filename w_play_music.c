@@ -46,7 +46,7 @@ void			*w_play(void *data)
 		w->w.timemusic = 1;
 	if (ft_strstr(w->w.songname, "gunshot") || ft_strcmp(w->w.songname, "bullet"))
 		w->w.timemusic = 1;
-	printf("sound duration: %d\n", w->w.timemusic);
+	printf("sound duration: %.3f\n", w->w.timemusic);
 	if ((w->w.player.prevtimeoutm + w->w.timemusic) < w->w.player.timeout || !w->w.player.prevtimeoutm
 		|| ft_strstr(w->w.songname, "gunshot") // exception for unlimited repetead fireshoot
 		|| ft_strstr(w->w.songname, "gun-cocking")) // exception for gun reload
@@ -59,7 +59,7 @@ void			*w_play(void *data)
 	else
 	{
 		ft_putstr("-> Not Ok to play ");
-		printf("prevtimeoutm+music: %d < timeout: %d\n", (w->w.player.prevtimeoutm + w->w.timemusic), w->w.player.timeout);
+		printf("prevtimeoutm+music: %.3f < timeout: %.3f\n", (w->w.player.prevtimeoutm + w->w.timemusic), w->w.player.timeout);
 		ft_putstr(" ou");
 		ft_putnbr(w->w.player.prevtimeoutm);
 		ft_putendl(" n'existe pas");

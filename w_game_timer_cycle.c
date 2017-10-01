@@ -91,7 +91,10 @@ void				*w_game_timer_cycle(void *data)
 		if (w->w.player.win)
 			w_win_level(w);
 		if (w->w.player.gameover == 0) // https://stackoverflow.com/questions/17167949/how-to-use-timer-in-c
+		{
 			w->w.player.timeout = millisec/1000; // Set for wolf3d timeout
+			//printf("");
+		}
 		if (w->w.player.timeout > TIMEOUT_GAME && !w->w.player.win)
 		{
 			ft_putendl("time out of game show gameover");

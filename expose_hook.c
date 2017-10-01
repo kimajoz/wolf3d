@@ -24,8 +24,11 @@ int			expose_hook(t_wind *w)
 
 int			hook_render(t_wind *w)
 {
-	mlx_destroy_image(w->mlx, w->img.ptr_img);
-	create_new_img(w);
+	if (!w->w.player.kp.upwalk)
+	{
+		mlx_destroy_image(w->mlx, w->img.ptr_img);
+		create_new_img(w);
+	}
 	//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x,
 	//w->img.y);
 	return (0);
@@ -48,6 +51,11 @@ int			turntable(t_wind *w)
 int			key_release_function(int keycode, t_wind *w)
 {
 	//ft_putendl("release");
+	if (keycode == R_ARROW || keycode == L_ARROW || keycode == U_ARROW || keycode == D_ARROW)
+	{
+		ft_putendl("release");
+		w->w.player.kp.upwalk = 1;
+	}
 	if (keycode == SPACE)
 		w->p.space_mousemove = 0;
 	else if (keycode == R_ARROW || keycode == L_ARROW)

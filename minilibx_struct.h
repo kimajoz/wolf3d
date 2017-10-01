@@ -315,9 +315,9 @@ typedef struct		s_player
 	double			movespeed;
 	int				*init_pos;
 	int				*end_pos;
-	int				timeout;
-	int				prevtimeoutimg;
-	int				prevtimeoutm;
+	double			timeout;
+	double			prevtimeoutimg;
+	double			prevtimeoutm;
 	int				health;
 	int				bonus;
 	int				kills;
@@ -401,8 +401,8 @@ typedef struct		s_wolf
 	double			xtextp;
 	double			s_xleft;
 	int				tmpgun;
-	int				timemusic;
-	int				timeimg;
+	double			timemusic;
+	double			timeimg;
 }					t_wolf;
 
 typedef struct		s_wind

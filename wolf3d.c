@@ -116,43 +116,46 @@ int						game_cycle(t_wind *w)
 
 int					wolf3d(t_wind *w)
 {
-	//ft_putendl("start render");
-	//init_minimap(w);
-	w_clear_vis_sprites(w);
-	game_cycle(w);
-	//move(w);
-	//render_cycle(w);
+	//if (w->w.player.kp.upwalk == 0)
+	//{
+		//ft_putendl("start render");
+		//init_minimap(w);
+		w_clear_vis_sprites(w);
+		game_cycle(w);
+		//move(w);
+		//render_cycle(w);
 
-	//init_minimap(w);
-	// https://dev.opera.com/articles/3d-games-with-canvas-and-raycasting-part-2/
-	w->w.timeimg = 1; //nb img /sec
-	if ((w->w.player.prevtimeoutimg + w->w.timeimg) < w->w.player.timeout || !w->w.player.prevtimeoutimg)
-	{
-		//ft_putendl("-> Ok to print img ");
-		w->w.player.prevtimeoutimg = w->w.player.timeout;
-		clear_screen(w);
-		if (w->w.info.bg)
-			w_draw_background_color(w);
-		if (w->w.info.tabinfo)
-			init_minimap(w);
-		//tab_info(w);
-		w_cast_rays(w);
-		w_gun_fire(w);
-		render_screen(w);
-	}
-	else
-	{
-		//ft_putstr("-> Not Ok to print img");
-		//printf("prevtimeoutimg+timeimg: %d < timeout: %d\n", (w->w.player.prevtimeoutimg + w->w.timeimg), w->w.player.timeout);
-		//ft_putstr(" ou");
-		//ft_putnbr(w->w.player.prevtimeoutimg);
-		//ft_putendl(" n'existe pas");
-		//mlx_destroy_image(w->mlx, w->img.ptr_img);
-		render_screen(w);
-		//ft_putendl("try to put img to window");
-	}
-	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
-	put_info(w);
+		//init_minimap(w);
+		// https://dev.opera.com/articles/3d-games-with-canvas-and-raycasting-part-2/
+		w->w.timeimg = 0.5; //nb img /sec
+		if ((w->w.player.prevtimeoutimg + w->w.timeimg) < w->w.player.timeout || !w->w.player.prevtimeoutimg)
+		{
+			//ft_putendl("-> Ok to print img ");
+			w->w.player.prevtimeoutimg = w->w.player.timeout;
+			clear_screen(w);
+			if (w->w.info.bg)
+				w_draw_background_color(w);
+			if (w->w.info.tabinfo)
+				init_minimap(w);
+			//tab_info(w);
+			w_cast_rays(w);
+			w_gun_fire(w);
+			render_screen(w);
+		}
+		else if ((w->w.player.prevtimeoutimg + w->w.timeimg) > w->w.player.timeout && w->w.player.prevtimeoutimg)
+		{
+			//ft_putstr("-> Not Ok to print img");
+			printf("prevtimeoutimg+timeimg: %.3f < timeout: %.3f\n", (w->w.player.prevtimeoutimg + w->w.timeimg), w->w.player.timeout);
+			//ft_putstr(" ou");
+			//ft_putnbr(w->w.player.prevtimeoutimg);
+			//ft_putendl(" n'existe pas");
+			//mlx_destroy_image(w->mlx, w->img.ptr_img);
+			render_screen(w);
+			//ft_putendl("try to put img to window");
+		}
+		mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
+		put_info(w);
+	//}
 	//ft_putendl("end render");
 	//w_render_sprites(w);
 	return (0);

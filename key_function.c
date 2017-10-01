@@ -57,11 +57,12 @@ void			move(t_wind *w)
 
 static void		keypress_function01(int keycode, t_wind *w)
 {
+	if (keycode == U_ARROW || keycode == D_ARROW || keycode == R_ARROW || keycode == L_ARROW)
+		w->w.player.kp.upwalk = 0;
 	if (((keycode == U_ARROW) || (keycode == D_ARROW)) && w->w.info.sound)
 	{
 		ft_putendl("appuie");
-		w->w.player.kp.upwalk = 0;
-		pthread_cancel(w->lpth.fxwalk); // Annule l'ancien thread de son
+		//pthread_cancel(w->lpth.fxwalk); // Annule l'ancien thread de son
 		w_play_music(w, w->lpth.fxwalk, "sounds/loops/footsteps-4_loop.wav", 0);
 	}
 	if (keycode == L_ARROW)
