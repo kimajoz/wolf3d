@@ -354,6 +354,7 @@ typedef struct		s_lstpthread
 	pthread_t		fxguncocking;
 	pthread_t		fxheartb;
 	pthread_t		musicgameover;
+	pthread_t		fxturnonsound;
 }					t_lstpthread;
 
 typedef struct		s_wolf

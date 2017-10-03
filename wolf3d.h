@@ -105,5 +105,6 @@ int			key_release_function(int keycode, t_wind *w);
 int			expose_hook(t_wind *w);
 void		w_set_pxl_spr(int bx, int by, int size, t_wind *w);
 int			hook_render(t_wind *w);
+void		w_wait(t_wind *w, int timesec, int ifnum, int setnum);
 
 #endif

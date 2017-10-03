@@ -12,9 +12,31 @@
 
 #include "wolf3d.h"
 
+void				w_wait(t_wind *w, int timesec, int ifnum, int setnum)
+{
+	int		i;
+
+	i = 0;
+	if (w->w.player.fire == ifnum)
+	{
+		ft_putstr("fire ");
+		ft_putnbr(ifnum);
+		ft_putstr(" wait");
+		while(i < timesec)
+		{
+			ft_putstr(".");
+			i++;
+		}
+		w->w.player.fire = setnum;
+	}
+}
+
 void		w_gun_fire(t_wind *w)
 {
-	//ft_putendl("gun fire");
+	//int		i;
+
+	//i = 0;
+	ft_putendl("print gun fire image !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	//ft_putnbr(w->w.info.sound);
 	w->w.dist = 0.2;
 	w->w.tmpgun = 1;
@@ -22,10 +44,14 @@ void		w_gun_fire(t_wind *w)
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 	w->w.dist = 0;
 	w->w.tmpgun = 0;
+	w_wait(w, 25, 2, 0);
 }
 
 void				w_gun_fire_loop(t_wind *w)
 {
+	//int				i;
+
+	//i = 0;
 	ft_putendl("gun_fire_loop start");
 	if (!w->w.player.ammureload)
 		w->w.player.ammureload = 0;
@@ -38,7 +64,7 @@ void				w_gun_fire_loop(t_wind *w)
 		//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 		w->w.player.ammunition--; // remove bullet
 		w->w.player.ammureload++; // until reload
-		printf("reload: %d\n", w->w.player.ammureload);
+		//printf("reload: %d\n", w->w.player.ammureload);
 		if (w->w.info.sound)
 			w_play_music(w, w->lpth.fxgunshot, "sounds/loops/gun-gunshot-01.wav", 0);
 		if (w->w.player.ammureload > 7)
@@ -50,14 +76,8 @@ void				w_gun_fire_loop(t_wind *w)
 	}
 	else if (!w->w.player.ammunition && w->w.info.sound) // No bullet please reload
 		w_play_music(w, w->lpth.fxgunbulletfall, "sounds/loops/empty-bullet-shell-fall-01.wav", 0);
+	w_wait(w, 25, 1, 2);
 	//init_minimap(w);
 	//put_info(w);
-	/*if (w->w.player.fire == 1)
-		w->w.player.fire = 2;
-	w_gun_fire(w);
-	if (w->w.player.fire == 2)
-		w->w.player.fire = 0;
-	w_gun_fire(w);*/
-	w->w.player.fire = 0;
-	ft_putendl("gun_fire_loop end");
+	//ft_putendl("gun_fire_loop end");
 }

@@ -46,23 +46,23 @@ void			*w_play(void *data)
 		w->w.timemusic = 1;
 	if (ft_strstr(w->w.songname, "gunshot") || ft_strcmp(w->w.songname, "bullet"))
 		w->w.timemusic = 1;
-	printf("sound duration: %.3f\n", w->w.timemusic);
+	//printf("sound duration: %.3f\n", w->w.timemusic);
 	if ((w->w.player.prevtimeoutm + w->w.timemusic) < w->w.player.timeout || !w->w.player.prevtimeoutm
 		|| ft_strstr(w->w.songname, "gunshot") // exception for unlimited repetead fireshoot
 		|| ft_strstr(w->w.songname, "gun-cocking")) // exception for gun reload
 	{
-		ft_putstr("-> Ok to play ");
-		ft_putendl(w->w.songname);
+		//ft_putstr("-> Ok to play ");
+		//ft_putendl(w->w.songname);
 		w->w.player.prevtimeoutm = w->w.player.timeout;
 		ft_play_sound(w->w.songname, OS);
 	}
 	else
 	{
-		ft_putstr("-> Not Ok to play ");
-		printf("prevtimeoutm+music: %.3f < timeout: %.3f\n", (w->w.player.prevtimeoutm + w->w.timemusic), w->w.player.timeout);
-		ft_putstr(" ou");
-		ft_putnbr(w->w.player.prevtimeoutm);
-		ft_putendl(" n'existe pas");
+		//ft_putstr("-> Not Ok to play ");
+		//printf("prevtimeoutm+music: %.3f < timeout: %.3f\n", (w->w.player.prevtimeoutm + w->w.timemusic), w->w.player.timeout);
+		//ft_putstr(" ou");
+		//ft_putnbr(w->w.player.prevtimeoutm);
+		//ft_putendl(" n'existe pas");
 	}
 	return (0);
 }
@@ -71,7 +71,7 @@ void			*w_play_loop(void *data)
 {
 	t_wind		*w;
 
-	ft_putendl("w_play_loop");
+	//ft_putendl("w_play_loop");
 	//https://stackoverflow.com/questions/30883238/running-background-process-in-c-using-pthread
 	w = (t_wind *)data;
 	//ft_putendl("play music");

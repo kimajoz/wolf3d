@@ -33,22 +33,6 @@ void		create_spr_map(t_wind *w)
 	}
 }
 
-int			get_spr_block_by_type(t_wind *w, int num_spr)
-{
-	int		i;
-	int		boolb;
-
-	i = 0;
-	boolb = 1; //(we cannot go through sprites by default).
-	while (i < num_spr && i < w->w.sprnb)
-		i++;
-	//printf("finale i: %d", i);
-	if (i == num_spr)
-		boolb = w->w.sprite[i].block;
-	//printf("blocktype: %d", boolb);
-	return (boolb);
-}
-
 void		set_spr_to_prog(int fd, t_wind *w)
 {
 	char	*line;
@@ -71,7 +55,7 @@ void		set_spr_to_prog(int fd, t_wind *w)
 		if (tab[x][0] != '#')
 		{
 			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].num = ft_atoi(tab[0]);
-			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].block = get_spr_block_by_type(w, ft_atoi(tab[0]));
+			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].block = w->w.sprite[ft_atoi(tab[0])].block;
 			while (tab[x])
 				ft_strdel(&tab[x++]);
 			j++;

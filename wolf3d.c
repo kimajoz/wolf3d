@@ -116,6 +116,9 @@ int						game_cycle(t_wind *w)
 
 int					wolf3d(t_wind *w)
 {
+	ft_putstr("fire status:");
+	ft_putnbr(w->w.player.fire);
+	ft_putchar('\n');
 	//if (w->w.player.kp.upwalk == 0)
 	//{
 		//ft_putendl("start render");
@@ -127,10 +130,10 @@ int					wolf3d(t_wind *w)
 
 		//init_minimap(w);
 		// https://dev.opera.com/articles/3d-games-with-canvas-and-raycasting-part-2/
-		w->w.timeimg = 0.5; //nb img /sec
+		w->w.timeimg = 0.3; //nb img /sec
 		if ((w->w.player.prevtimeoutimg + w->w.timeimg) < w->w.player.timeout || !w->w.player.prevtimeoutimg)
 		{
-			//ft_putendl("-> Ok to print img ");
+			ft_putendl("-> Ok to print img ");
 			w->w.player.prevtimeoutimg = w->w.player.timeout;
 			clear_screen(w);
 			if (w->w.info.bg)
@@ -144,8 +147,8 @@ int					wolf3d(t_wind *w)
 		}
 		else if ((w->w.player.prevtimeoutimg + w->w.timeimg) > w->w.player.timeout && w->w.player.prevtimeoutimg)
 		{
-			//ft_putstr("-> Not Ok to print img");
-			printf("prevtimeoutimg+timeimg: %.3f < timeout: %.3f\n", (w->w.player.prevtimeoutimg + w->w.timeimg), w->w.player.timeout);
+			ft_putendl("-> Not Ok to print img");
+			//printf("prevtimeoutimg+timeimg: %.3f < timeout: %.3f\n", (w->w.player.prevtimeoutimg + w->w.timeimg), w->w.player.timeout);
 			//ft_putstr(" ou");
 			//ft_putnbr(w->w.player.prevtimeoutimg);
 			//ft_putendl(" n'existe pas");

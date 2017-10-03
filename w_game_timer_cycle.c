@@ -126,7 +126,8 @@ void				*w_game_timer_cycle(void *data)
 
 void			w_play_chronotime(t_wind *w)
 {
-	printf("playchrono: %.3f", w->w.dist);
+	ft_putendl("playchrono");
+	//printf("playchrono: %.3f", w->w.dist);
 	//while (w->w.player.timeout < TIMEOUT_GAME)
 	pthread_create( &w->lpth.ptchrono, NULL, w_game_timer_cycle, (void*)w);
 }

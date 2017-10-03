@@ -24,7 +24,7 @@ int			expose_hook(t_wind *w)
 
 int			hook_render(t_wind *w)
 {
-	if (!w->w.player.kp.upwalk)
+	if (!w->w.player.kp.upwalk || w->w.player.fire != 0)
 	{
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
 		create_new_img(w);
@@ -53,7 +53,7 @@ int			key_release_function(int keycode, t_wind *w)
 	//ft_putendl("release");
 	if (keycode == R_ARROW || keycode == L_ARROW || keycode == U_ARROW || keycode == D_ARROW)
 	{
-		ft_putendl("release");
+		//ft_putendl("release");
 		w->w.player.kp.upwalk = 1;
 	}
 	if (keycode == SPACE)
@@ -67,9 +67,9 @@ int			key_release_function(int keycode, t_wind *w)
 	else if (keycode == CTRL_R)
 	{
 		ft_putendl("release fire");
-		w->w.player.fire = 0;
-		w->w.dist = 0.2;
-		w->w.tmpgun = 1;
+		//w->w.player.fire = 0;
+		//w->w.dist = 0.2;
+		//w->w.tmpgun = 1;
 		//mlx_destroy_image(w->mlx, w->img.ptr_img);
 		//wolf3d(w);
 		//render_screen(w);
@@ -78,8 +78,8 @@ int			key_release_function(int keycode, t_wind *w)
 		//init_minimap(w);
 		//w_set_pxl_spr((w->width / 2) + (GUNW * 2), w->height - GUNH * 2, GUNH * 2, w);
 		//put_info(w);
-		w->w.dist = 0;
-		w->w.tmpgun = 0;
+		//w->w.dist = 0;
+		//w->w.tmpgun = 0;
 	}
 	return (0);
 }

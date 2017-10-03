@@ -65,6 +65,7 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 void			w_calc_render_spr(t_wind *w)
 {
 	double		sprite_angle;
+	int			sprite_angled;
 	int			size;
 	//double		xtextp;
 	//double		s_xleft; // pos x text on screen
@@ -76,20 +77,29 @@ void			w_calc_render_spr(t_wind *w)
 	printf("w->w.memdistspr.x: %.3f, w->w.memdistspr.y: %.3f\n",  w->w.memdistspr.x,  w->w.memdistspr.y);
 	printf("rot player in radian %.3f\n", ft_degreetorad(w->cam.rot.y));*/
 	sprite_angle = atan2(w->w.memdistspr.y, w->w.memdistspr.x) - ft_degreetorad(w->cam.rot.y);
-	/*printf("sprite_angle %.3f\n", sprite_angle);
-	printf("sprite_angle degree %.3f\n", ft_radtodegree(sprite_angle));*/
-	size = w->cam.vp.dist / (cos(sprite_angle) * w->w.block_distsprreal);
-	/*printf("w->cam.vp.dist %.3f\n", w->cam.vp.dist);
-	printf("w->w.block_distsprreal %.3f\n", w->w.block_distsprreal);*/
-	// Define X pos of text on the screen
-	w->w.xtextp = tan(sprite_angle) * w->cam.vp.dist;
-	//printf("xtextp %.3f\n", w->w.xtextp);
-	w->w.s_xleft = (((w->width) / 2) + w->w.xtextp) - (size / 2);
-	//s_xleft = ((w->width - w->w.marginw) / 2) + xtextp - (size / 2) + w->w.marginw;
-	// Define Y pos of text on the screen
-	s_ytop = (w->height - size) / 2;
-	//printf("textx: %.3f, texty: %.3f size: %d\n", w->w.s_xleft, s_ytop, size);
-	w_set_pxl_spr(w->w.s_xleft, s_ytop, size, w);
+	printf("sprite_angle %.3f\n", sprite_angle);
+	sprite_angled = (int)ft_radtodegree(sprite_angle);
+	printf("sprite_angle degree %d\n", sprite_angled);
+	if (sprite_angled > -(FOV / 2) && sprite_angled < (FOV / 2))
+	{
+		printf("angle ok! \n");
+		size = w->cam.vp.dist / (cos(sprite_angle) * w->w.block_distsprreal);
+		
+		printf("w->cam.vp.dist %.3f\n", w->cam.vp.dist);
+		printf("w->w.block_distsprreal %.3f\n", w->w.block_distsprreal);
+		// Define X pos of text on the screen
+		w->w.xtextp = tan(sprite_angle) * w->cam.vp.dist;
+		printf("xtextp %.3f\n", w->w.xtextp);
+		w->w.s_xleft = (((w->width) / 2) + w->w.xtextp) - (size / 2);
+		//s_xleft = ((w->width - w->w.marginw) / 2) + xtextp - (size / 2) + w->w.marginw;
+		// Define Y pos of text on the screen
+		s_ytop = (w->height - size) / 2;
+		w_set_pxl_spr(w->w.s_xleft, s_ytop, size, w);
+		//printf("xtextp: %.3f, s_ytop: %.3f size: %d\n", w->w.xtextp, s_ytop, size);
+		printf("s_xleft: %.3f, s_ytop: %.3f size: %d\n", w->w.s_xleft, s_ytop, size);
+	}
+	else
+		printf("angle too small or too high! \n");
 }
 
 void		w_render_sprites(t_wind *w)

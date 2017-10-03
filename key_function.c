@@ -46,8 +46,9 @@ void			move(t_wind *w)
 	w->cam.rot.y = mult * ft_rot_fabs(w->cam.rot.y + w->w.player.dir * w->w.player.rotspeed);
 	tmp.x = w->cam.pos.x + cos(ft_degreetorad(w->cam.rot.y)) * movestep;
 	tmp.z = w->cam.pos.z + sin(ft_degreetorad(w->cam.rot.y)) * movestep;
-	if (is_blocking(tmp, w) != 1 || w->w.tab_int_spr[(int)tmp.z][(int)tmp.x].block != 1)
+	if (is_blocking(tmp, w) != 1 && w->w.tab_int_spr[(int)tmp.z][(int)tmp.x].block != 1)
 	{
+		//printf("statut bloquant sprite: %d posx:%d, poxy:%d\n", w->w.tab_int_spr[(int)tmp.z][(int)tmp.x].block, (int)tmp.z, (int)tmp.x);
 		w->cam.pos.x = tmp.x;
 		w->cam.pos.z = tmp.z;
 	}
@@ -95,7 +96,8 @@ static void		keypress_function01(int keycode, t_wind *w)
 }
 
 static void		keypress_function02(int keycode, t_wind *w)
-{	if (keycode == KEY_1)
+{
+	if (keycode == KEY_1)
 		w->w.info.raynumb = 60;
 	else if (keycode == KEY_2)
 	{
@@ -116,7 +118,18 @@ static void		keypress_function02(int keycode, t_wind *w)
 	else if (keycode == KEY_7)
 		w->w.info.texture = (w->w.info.texture) ? 0 : 1;
 	else if (keycode == KEY_8)
-		w->w.info.sound = (w->w.info.sound) ? 0 : 1;
+	{
+		if (w->w.info.sound)
+		{
+			w->w.info.sound = 0;
+			w_play_music(w, w->lpth.fxwalk, "sounds/comedy_effect_steak.wav", 0);
+		}
+		else
+		{
+			w->w.info.sound = 1;
+			w_play_music(w, w->lpth.fxturnonsound, "sounds/cartoon_sound_effects_pop.wav", 0);
+		}
+	}
 	else if (keycode == TAB_L)
 		w->w.info.tabinfo = (w->w.info.tabinfo) ? 0 : 1;
 }

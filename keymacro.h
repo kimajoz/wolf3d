@@ -91,7 +91,7 @@
 #  define F2 65471
 #  define F3 65472
 #  define SPACE 32
-#  define CTRL_R 269
-#  define TAB_L 48
+#  define CTRL_R 65508
+#  define TAB_L 65289
 # endif
 #endif

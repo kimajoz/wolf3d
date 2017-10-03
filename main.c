@@ -138,7 +138,7 @@ static int		set_parameters(t_wind *w)
 	w->w.info.ray_minimap = 1;
 	w->w.info.bg = 1;
 	w->w.info.texture = 1;
-	w->w.info.sound = 0;
+	w->w.info.sound = 1;
 	init_player_game(w);
 	w->w.o.lastgamecycle_time.tv_sec = 0;
 	w->w.o.lastgamecycle_time.tv_nsec = 0;
@@ -198,7 +198,7 @@ int				prog(char *filename)
 	init_screen(&w);
 	create_new_img(&w);
 	if (w.w.info.sound)
-		w_play_music(&w, w.lpth.musicstart, "sounds/loops/Casio-MT-45-16-Beat.wav", 1);
+		w_play_music(&w, w.lpth.musicstart, "sounds/loops/Casio-MT-45-16-Beat.wav", 0);
 	w_play_chronotime(&w);
 	//wolf3d(&w);
 	//init_pthread(&w);
