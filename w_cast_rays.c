@@ -6,66 +6,35 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/27 20:39:48 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/04 18:31:27 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int				getcolor(t_img *img, int x, int y)
+void			w_draw_the_wall(t_wind *w, int i)
 {
-	int			color;
-	int			c;
-
-	c = y * img->size_line + (x * (img->bpp / 8));
-	color = img->pxl_ptr[c];
-	if (color == -120 && img->pxl_ptr[c + 1] == 0 && img->pxl_ptr[c + 2] == -104)
-		return (256 * 256 * 256 + 256 * 256 + 256);
-	color += img->pxl_ptr[c + 1] * 256;
-	color += img->pxl_ptr[c + 2] * 256 * 256;
-	return (color);
-}
-
-void		ft_int_to_rgb(t_wind *w, int x, int y, int color)
-{
-	char	b;
-	char	g;
-	char	r;
-	int		i;
-
-	if (color == 256 * 256 * 256 + 256 * 256 + 256)
-		return ;
-	i = ((w->img.size_line * y) + (x * (w->img.bpp / 8)));
-	b = color % 256;
-	g = (color / 256) % 256;
-	r = (color / 256 / 256) % 256;
-	printf("r:%d, g:%d, b:%d, i:%d\n", r, g, b, i);
-}
-
-void				w_draw_the_wall(t_wind *w, int i)
-{
-	double			projsliceh;
-	t_point			p;
-	t_point			pd;
-	int				y;
-	int				h;
+	double		projsliceh;
+	t_point		p;
+	t_point		pd;
+	int			y;
+	int			h;
 
 	projsliceh = (CUBESIZE * w->w.player.fov) / w->w.dist;
 	p = (t_point){(i * w->w.slicew), (w->height / 2) - (projsliceh / 2), 0};
 	pd = (t_point){p.x, p.y + projsliceh, 0};
 	p.x += w->w.marginw;
 	pd.x += w->w.marginw;
-	//printf("p.x: %d, p.y: %d\n", p.x, p.y);
-	//printf("pd.x: %d, pd.y: %d\n", pd.x, pd.y);
 	if (w->w.info.texture)
 	{
 		h = 0;
 		y = p.y;
-		while(y < pd.y)
+		while (y < pd.y)
 		{
 			h++;
 			w->w.texY = (TEXHEIGHT / projsliceh) * h;
-			w->w.color = getcolor(&w->w.text[w->w.textnumb], w->w.texX, w->w.texY);
+			w->w.color = getcolor(&w->w.text[w->w.textnumb], w->w.texX,
+					w->w.texY);
 			if (mlibx_dot_in_window(w, rint(p.x), y))
 			{
 				w->screen[y][(int)p.x].zdepth = w->w.dist;
@@ -92,22 +61,23 @@ void			w_verticales_lines_check(t_wind *w, double ray_angle,
 	d.y = (w->w.slope < 360) ? d.x * w->w.slope : 0;
 	p.x = right ? ceil(w->cam.pos.x) : floor(w->cam.pos.x);
 	p.y = (w->cam.pos.z) + (p.x - w->cam.pos.x) * w->w.slope;
-	while (p.x >= 0 && p.x < w->b.nbr_elem_line[0] && p.y >= 0 && p.y < w->b.nbrtot_of_line)
+	while (p.x >= 0 && p.x < w->b.nbr_elem_line[0] && p.y >= 0 && p.y <
+		w->b.nbrtot_of_line)
 	{
 		wall = (t_dpoint){floor(p.x + (right ? 0 : -1)), floor(p.y), 0};
 		if (wall.x < 0 || wall.y < 0)
 			break ;
 		if ((w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
 		{
-			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
+			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) -
+				(w->cam.pos.z * MMS), 0};
 			w->w.dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
-			//printf(" vwall dist: %.3f\n", w->w.dist);
 			w->w.hit = p;
-			w->w.texX = fmod(p.y, 1) * TEXWIDTH; // keep the float number after coma.
-			if (!right) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
+			w->w.texX = (!right) ? TEXWIDTH - (fmod(p.y, 1) * TEXWIDTH) :
+				fmod(p.y, 1) * TEXWIDTH;
 			w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
 			w->w.color = (p.x < w->cam.pos.x) ? IC_FGREEN : IC_FBLUE;
-			w->w.side = 1; // Verticales lines
+			w->w.side = 1;
 			w->w.bolspr = 0;
 			w->w.foundh = 1;
 			break ;
@@ -131,26 +101,27 @@ void			w_horizontales_lines_check(t_wind *w, double ray_angle,
 	d.x = (w->w.slope < 360) ? (d.y * w->w.slope) : 0;
 	p.y = up ? floor(w->cam.pos.z) : ceil(w->cam.pos.z);
 	p.x = w->cam.pos.x + (p.y - w->cam.pos.z) * w->w.slope;
-	while (p.x >= 0 && p.x < w->b.nbr_elem_line[0] && p.y >= 0 && p.y < w->b.nbrtot_of_line)
+	while (p.x >= 0 && p.x < w->b.nbr_elem_line[0] && p.y >= 0 && p.y <
+			w->b.nbrtot_of_line)
 	{
 		wall = (t_dpoint){floor(p.x), floor(p.y + (up ? -1 : 0)), 0};
 		if (wall.x < 0 || wall.y < 0)
 			break ;
 		if ((w->b.tab_int[(int)wall.y][(int)wall.x] > 0))
 		{
-			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS) - (w->cam.pos.z * MMS), 0};
+			dist = (t_dpoint){(p.x * MMS) - (w->cam.pos.x * MMS), (p.y * MMS)
+				- (w->cam.pos.z * MMS), 0};
 			w->w.block_dist = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
 			if (!w->w.dist ||
 				(w->w.block_dist < w->w.dist && !ft_fiszero(w->w.block_dist)))
 			{
 				w->w.dist = w->w.block_dist;
-				//printf(" hwall dist: %.3f\n", w->w.dist);
 				w->w.hit = p;
-				w->w.texX = fmod(p.x, 1) * TEXWIDTH; // keep the float number after coma.
-				if (!up) w->w.texX = TEXWIDTH - w->w.texX; // if we're looking to the left side of the map, the texture should be reversed
+				w->w.texX = (!up) ? TEXWIDTH - (fmod(p.x, 1) * TEXWIDTH) :
+					fmod(p.x, 1) * TEXWIDTH;
 				w->w.textnumb = w->b.tab_int[(int)wall.y][(int)wall.x] - 1;
 				w->w.color = p.y < w->cam.pos.z ? IC_FYELLOW : IC_FPURPLE;
-				w->w.side = 0; // Horizontales lines
+				w->w.side = 0;
 				w->w.bolspr = 0;
 				w->w.foundh = 1;
 				break ;
@@ -191,13 +162,13 @@ void			w_cast_rays(t_wind *w)
 	int			i;
 	double		angle;
 
-	w->cam.vp.dist = ((w->cam.vp.w) / 2) / tan(ft_degreetorad(w->w.player.fov / 2));
+	w->cam.vp.dist = ((w->cam.vp.w) / 2) / tan(ft_degreetorad(w->w.player.fov
+		/ 2));
 	w->cam.anglebetrays = (double)w->w.player.fov / (double)w->w.info.raynumb;
 	w->w.slicew = w->width / w->w.info.raynumb;
 	angle = w->cam.rot.y - (w->w.player.fov / 2);
 	w->w.correct_fisheyes = w->w.player.fov / 2;
 	i = 0;
-	//ft_putendl("walls");
 	while (i < w->w.info.raynumb)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;
@@ -208,7 +179,6 @@ void			w_cast_rays(t_wind *w)
 	angle = w->cam.rot.y - (w->w.player.fov / 2);
 	w->w.correct_fisheyes = w->w.player.fov / 2;
 	i = 0;
-	//ft_putendl("sprites");
 	while (i < w->w.info.raynumb)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;

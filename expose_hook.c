@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 14:06:46 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/27 19:22:02 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/04 18:59:54 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int			hook_render(t_wind *w)
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
 		create_new_img(w);
 	}
-	//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x,
-	//w->img.y);
 	return (0);
 }
 
@@ -50,12 +48,9 @@ int			turntable(t_wind *w)
 
 int			key_release_function(int keycode, t_wind *w)
 {
-	//ft_putendl("release");
-	if (keycode == R_ARROW || keycode == L_ARROW || keycode == U_ARROW || keycode == D_ARROW)
-	{
-		//ft_putendl("release");
+	if (keycode == R_ARROW || keycode == L_ARROW || keycode == U_ARROW ||
+	keycode == D_ARROW)
 		w->w.player.kp.upwalk = 1;
-	}
 	if (keycode == SPACE)
 		w->p.space_mousemove = 0;
 	else if (keycode == R_ARROW || keycode == L_ARROW)
@@ -64,22 +59,5 @@ int			key_release_function(int keycode, t_wind *w)
 		w->w.player.speed = 0;
 	else if (keycode == SPACE)
 		w->w.player.opendoor = 0;
-	else if (keycode == CTRL_R)
-	{
-		ft_putendl("release fire");
-		//w->w.player.fire = 0;
-		//w->w.dist = 0.2;
-		//w->w.tmpgun = 1;
-		//mlx_destroy_image(w->mlx, w->img.ptr_img);
-		//wolf3d(w);
-		//render_screen(w);
-		//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
-		//create_new_img(w);
-		//init_minimap(w);
-		//w_set_pxl_spr((w->width / 2) + (GUNW * 2), w->height - GUNH * 2, GUNH * 2, w);
-		//put_info(w);
-		//w->w.dist = 0;
-		//w->w.tmpgun = 0;
-	}
 	return (0);
 }

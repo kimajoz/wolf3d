@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/21 13:02:37 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/04 20:15:21 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@
 # define IC_FYELLOW 16776960//Rgb 255,255,0
 # define IC_FPURPLE 16711935//Rgb 255,0,255
 
+#define S_STARTL1 "sounds/loops/Casio-MT-45-16-Beat.wav"
+#define S_FOOTSTEP "sounds/loops/footsteps-4_loop.wav"
+#define S_GUNSHOT "sounds/loops/gun-gunshot-01.wav"
+#define S_BULLETFALL "sounds/loops/empty-bullet-shell-fall-01.wav"
+#define S_GUNCOKING "sounds/loops/gun-cocking-01.wav"
+#define S_GAMEOVER "sounds/loops/Casio-CZ-5000-Synth-Bass-C1.wav"
+#define S_HEARTBEAT "sounds/loops/Heartbeat.wav"
+#define S_ONSOUND "sounds/comedy_effect_steak.wav"
+#define S_OFFSOUND "sounds/cartoon_sound_effects_pop.wav"
+
 # if MACROKEY == 1
 	# define OS 1
 # else
@@ -56,7 +66,8 @@
 # include <stdlib.h>
 # include <stdio.h> // A SUPPRIMER !
 
-int			rt_file(char *filename, int y, t_wind *w, int needed);
+int			w_check_progstart(t_wind *w, char *filename);
+int			rt_file(char *filename, t_wind *w, int needed);
 int			ft_check_parsing(char *filename);
 int			ft_check_parsing_param(char *filename);
 int			ft_print_error_type_parsing(int x, int y);
@@ -66,6 +77,7 @@ void		put_info_timeout(t_wind *w, int rightm, int bl);
 void		*w_game_timer_cycle(void *data);
 void		w_play_chronotime(t_wind *w);
 int			w_play_music(t_wind *w, pthread_t addresspth, char *url, int loop);
+void		w_sound_toggle(t_wind *w);
 int			prog(char *filename);
 int			wolf3d(t_wind *w);
 void		w_cast_rays(t_wind *w);
@@ -73,9 +85,6 @@ void		w_cast_single_ray_spr(t_wind *w, double ray_angle);
 void		w_clear_vis_sprites(t_wind *w);
 void		w_render_sprites(t_wind *w);
 void		w_calc_render_spr(t_wind *w);
-int			getcolor(t_img *img, int x, int y);
-void		render_screen(t_wind *w);
-void		clear_screen(t_wind *w);
 void		w_gun_fire(t_wind *w);
 void		w_gun_fire_loop(t_wind *w);
 int			game_cycle(t_wind *w);
@@ -85,7 +94,7 @@ void		init_pthread(t_wind *w);
 void		w_mlibx_draw_pixel_line_int(t_point point, t_point pointd,
 		t_wind *w, int color);
 void		w_mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, int color);
-void		w_mlibx_draw_pixel(t_wind *w, int x, int y, int color, int depth);
+void		w_mlibx_draw_pixel(t_wind *w, int x, int y, int color);
 void		w_print_radar_ray(t_wind *w, double cx, double cy, int angle);
 void		w_print_radar_fov(t_wind *w, double cx, double cy, int angle);
 void		w_print_radar_ray_hitwall(t_wind *w, double cx, double cy,
@@ -105,6 +114,15 @@ int			key_release_function(int keycode, t_wind *w);
 int			expose_hook(t_wind *w);
 void		w_set_pxl_spr(int bx, int by, int size, t_wind *w);
 int			hook_render(t_wind *w);
-void		w_wait(t_wind *w, int timesec, int ifnum, int setnum);
+void		mlibx_putstring(char *s, int l, int c, t_wind *w);
+void		w_win_level(t_wind *w);
+void		check_win_game(t_wind *w);
+void		w_game_over(t_wind *w);
+int			getcolor(t_img *img, int x, int y);
+void		w_init_player_pos(t_wind *w);
+void		w_init_player_game(t_wind *w);
+void		w_init_screen(t_wind *w);
+void		w_clear_screen(t_wind *w);
+void		w_render_screen(t_wind *w);
 
 #endif

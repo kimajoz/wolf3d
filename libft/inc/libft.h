@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 12:11:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/27 18:12:00 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/04 18:19:08 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char				*ft_rgbftohexa(t_rgbcolorf rgbcolorf);
 t_rgbcolor			ft_hexatorgb(char *hexcolor);
 int					ft_hextoint(char *s);
 char				*ft_inttohex(int n);
+int					*ft_inttorgb(int color);
 t_listofnodes		ft_listofnodes_init(t_listp_path *tmp);
 void				ft_listofnodes_free(t_listofnodes *lstnodes);
 t_point				*ft_pointnew(int x, int y, int z);
@@ -129,6 +130,8 @@ void				ft_set_time_out(t_wind *w, void (*f)(t_wind *w), double endtime);
 double				ft_fmax(double a, double b);
 int					ft_fiszero(double value);
 void				ft_check_type(char **lst, int numb, char *type);
+int					ft_iget_sign(int first, int second);
+int					ft_iget_diff(int first, int second);
 
 int					ft_pthread_do_or_timeout(struct timespec *max_wait, void *data);
 int					ft_play_sound(char *filename, int system);

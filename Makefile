@@ -3,6 +3,7 @@ UNAME := $(shell uname)
 NAME=wolf3d
 SRC=	main.c \
 		wolf3d.c \
+		w_check_progstart.c \
 		w_cast_rays.c \
 		w_print_radar_fov.c \
 		w_draw_background_color.c \
@@ -10,9 +11,13 @@ SRC=	main.c \
 		w_cast_single_ray_spr.c \
 		w_render_sprites.c \
 		w_game_timer_cycle.c \
+		w_game_over.c \
 		w_play_music.c \
 		w_gun_fire.c \
+		w_get_configs.c \
 		w_mlibx_draw_pixel_line.c \
+		w_init_player_game.c \
+		mlibx_putstring.c \
 		rt_file.c \
 		rt_parsing.c \
 		create_new_window.c \

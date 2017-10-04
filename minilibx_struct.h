@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/27 20:37:04 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/04 20:10:33 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ typedef struct		s_browsefile
 	int				nbrtot_of_line;
 	int				nbr_of_line;
 	int				*nbr_elem_line;
+	int				needed;
 }					t_browsefile;
 
 typedef struct		s_img
@@ -277,18 +278,9 @@ typedef struct		s_info
 	int				tabinfo;
 }					t_info;
 
-typedef struct		s_opti
-{
-	//int			gamecycle_delay;
-	//int			lastgamecycle_time;
-	struct timespec max_wait;
-	struct timespec gamecycle_delay;
-	struct timespec	lastgamecycle_time;
-}					t_opti;
-
 typedef struct		s_sprimg
 {
-	t_img			img; //lst text
+	t_img			img;
 	int				block;
 }					t_sprimg;
 
@@ -389,7 +381,6 @@ typedef struct		s_wolf
 	t_sprite		**tab_int_spr;
 	int				sprnbvis;
 	t_sprite		*spr_visible;
-	t_opti			o;
 	int				sprnumb;
 	int				bolspr;
 	int				foundh;
@@ -404,6 +395,7 @@ typedef struct		s_wolf
 	int				tmpgun;
 	double			timemusic;
 	double			timeimg;
+	double			tmpmsec;
 }					t_wolf;
 
 typedef struct		s_wind

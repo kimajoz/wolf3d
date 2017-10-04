@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/21 17:48:45 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/04 20:24:52 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,18 @@ void		set_spr_to_prog(int fd, t_wind *w)
 	init_sprites(w);
 	w->w.sprnbvis = 0;
 	create_spr_map(w);
-	//w_clear_vis_sprites(w); //Set sprite visibility to 0 for first time
 	j = 0;
-	// We set the sprites inside the map:
 	while (get_next_line(fd, &line))
 	{
-		//w->w.tab_int_spr[j] = malloc(w->b.nbr_elem_line[3] * sizeof(int));
 		tab = ft_strsplit(line, ';');
 		ft_strdel(&line);
 		x = 0;
 		if (tab[x][0] != '#')
 		{
-			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].num = ft_atoi(tab[0]);
-			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].block = w->w.sprite[ft_atoi(tab[0])].block;
+			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].num =
+				ft_atoi(tab[0]);
+			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].block =
+				w->w.sprite[ft_atoi(tab[0])].block;
 			while (tab[x])
 				ft_strdel(&tab[x++]);
 			j++;
@@ -72,6 +71,7 @@ void		set_param_to_prog(int fd, t_wind *w)
 	int		j;
 	int		y;
 
+	ft_putendl("set params to prog");
 	w->w.player.init_pos = malloc(3 * sizeof(double));
 	w->w.player.end_pos = malloc(3 * sizeof(double));
 	j = 0;
@@ -126,32 +126,41 @@ int			**insert_file_to_prog(int fd, int y, t_wind *w)
 	return (tab_int);
 }
 
-int			rt_file(char *filename, int y, t_wind *w, int needed)
+int			w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 {
-	int		fd;
 	int		fd1;
-	char	*line;
+	int		y;
 
-	fd = open(filename, O_RDONLY);
-	fd1 = open(filename, O_RDONLY);
-	if (ft_check_fd(fd1, filename, needed) == 1)
+	fd1 = open(*filename, O_RDONLY);
+	if (ft_check_fd(fd1, *filename, w->b.needed) == 1)
 		return (0);
 	y = 0;
-	/*if (ft_strstr(filename, "config"))
-		w_get_configs(fd1, &line);*/
-	if (ft_strstr(filename, "scn"))
+	if (ft_strstr(*filename, "scn"))
 	{
-		while (get_next_line(fd1, &line))
+		while (get_next_line(fd1, line))
 		{
-			ft_strdel(&line);
+			ft_strdel(line);
 			y++;
 		}
 		w->b.nbrtot_of_line = y + 1;
-		if (ft_check_parsing(filename) == 1)
+		if (ft_check_parsing(*filename) == 1)
 			return (0);
 		else
-			w->b.tab_int = insert_file_to_prog(fd, y, w);
+			w->b.tab_int = insert_file_to_prog(*fd, y, w);
 	}
+	close(fd1);
+	return (1);
+}
+
+int			rt_file(char *filename, t_wind *w, int needed)
+{
+	int		fd;
+	char	*line;
+
+	fd = open(filename, O_RDONLY);
+	w->b.needed = needed;
+	if (!w_insert_tab_int(w, &fd, &line, &filename))
+		return (0);
 	else if (ft_strstr(filename, "spr"))
 		set_spr_to_prog(fd, w);
 	else if (ft_strstr(filename, "par"))
@@ -161,7 +170,6 @@ int			rt_file(char *filename, int y, t_wind *w, int needed)
 		else
 			set_param_to_prog(fd, w);
 	}
-	close(fd1);
 	close(fd);
 	return (1);
 }
