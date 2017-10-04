@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 12:41:05 by pbillett          #+#    #+#             */
-/*   Updated: 2017/09/27 19:39:49 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/04 15:39:14 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,38 +33,33 @@ void				w_wait(t_wind *w, int timesec, int ifnum, int setnum)
 
 void		w_gun_fire(t_wind *w)
 {
-	//int		i;
-
-	//i = 0;
-	ft_putendl("print gun fire image !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-	//ft_putnbr(w->w.info.sound);
+	if (w->w.player.fire == 2 || w->w.player.fire == 1)
+	{
+		ft_putendl("print gun fire image !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		ft_putnbr(w->w.player.fire);
+		ft_putchar('\n');
+	}
 	w->w.dist = 0.2;
 	w->w.tmpgun = 1;
+	if (w->w.player.fire == 1)
+		w_wait(w, 2, 1, 2);
+	else if (w->w.player.fire == 2)
+		w_wait(w, 2, 2, 0);
 	w_set_pxl_spr((w->width / 2) + (GUNW * 2), w->height - GUNH * 2, GUNH * 2, w);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 	w->w.dist = 0;
 	w->w.tmpgun = 0;
-	w_wait(w, 25, 2, 0);
-}
+	}
 
 void				w_gun_fire_loop(t_wind *w)
 {
-	//int				i;
-
-	//i = 0;
 	ft_putendl("gun_fire_loop start");
 	if (!w->w.player.ammureload)
 		w->w.player.ammureload = 0;
 	if (w->w.player.ammunition) // remove bullet
 	{
-		//mlx_destroy_image(w->mlx, w->img.ptr_img);
-		//wolf3d(w);
-		//create_new_img(w);
-		//w_gun_fire(w);
-		//mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 		w->w.player.ammunition--; // remove bullet
 		w->w.player.ammureload++; // until reload
-		//printf("reload: %d\n", w->w.player.ammureload);
 		if (w->w.info.sound)
 			w_play_music(w, w->lpth.fxgunshot, "sounds/loops/gun-gunshot-01.wav", 0);
 		if (w->w.player.ammureload > 7)
@@ -76,8 +71,4 @@ void				w_gun_fire_loop(t_wind *w)
 	}
 	else if (!w->w.player.ammunition && w->w.info.sound) // No bullet please reload
 		w_play_music(w, w->lpth.fxgunbulletfall, "sounds/loops/empty-bullet-shell-fall-01.wav", 0);
-	w_wait(w, 25, 1, 2);
-	//init_minimap(w);
-	//put_info(w);
-	//ft_putendl("gun_fire_loop end");
 }
