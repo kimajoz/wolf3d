@@ -26,7 +26,7 @@
 # define SPRWIDTH 64
 # define SPRHEIGHT 64
 # define MARGINIT 3
-# define TIMEOUT_GAME 120
+# define TIMEOUT_GAME 1490
 # define GUNW 84
 # define GUNH 103
 # define IC_DGREY 3355443//Rgb 51,51,51

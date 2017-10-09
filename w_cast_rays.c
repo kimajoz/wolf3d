@@ -149,8 +149,8 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 	w_horizontales_lines_check(w, ray_angle, up);
 	if (w->w.dist)
 	{
-		if (w->w.info.ray_minimap && w->w.info.tabinfo)
-			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, 0x00FF00);
+		//if (w->w.info.ray_minimap && w->w.info.tabinfo)
+			//w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, 0x00FF00);
 		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
 		w->w.olddist = w->w.dist;
 		w_draw_the_wall(w, raynumb);

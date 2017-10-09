@@ -358,6 +358,7 @@ typedef struct		s_wolf
 	double			slicew;
 	double			slope;
 	t_dpoint		hit;
+	t_dpoint		hit2;
 	double			block_dist;
 	int				color;
 	int				color_mfov;

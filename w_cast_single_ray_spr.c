@@ -44,6 +44,8 @@ void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 			if ((!(ft_fiszero(w->w.block_distspr)) && w->w.block_distspr <
 		w->w.olddist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 			{
+				printf("dist current sprite: %.3f, wall: %.3f\n", w->w.block_distspr, w->w.olddist);
+				w->w.hit2 = p;
 				w->w.mindistspr = w->w.block_distspr;
 				distreal = (t_dpoint){p.x - (w->cam.pos.x + 0.5), p.y -
 				(w->cam.pos.z + 0.5), 0};
@@ -94,6 +96,7 @@ void			w_horizontales_lines_check_spr(t_wind *w, double ray_angle,
 			if (((!ft_fiszero(w->w.block_distspr)) && w->w.block_distspr <
 		w->w.olddist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 			{
+				w->w.hit2 = p;
 				w->w.mindistspr = w->w.block_distspr;
 				distreal = (t_dpoint){p.x - (w->cam.pos.x + 0.5), p.y -
 					(w->cam.pos.z + 0.5), 0};
@@ -122,6 +125,7 @@ void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 	w->w.hit = (t_dpoint){0, 0, 0};
 	ray_angle = ft_degreetorad(ray_angle);
 	ray_angle = fmod(ray_angle, TWOPI);
+	//printf("ray_angle spr:%.3f\n", ray_angle);
 	right = (ray_angle > TWOPI * 0.75 || ray_angle < TWOPI * 0.25);
 	up = (ray_angle < 0 || ray_angle > M_PI);
 	w->w.dist = 0;
@@ -130,11 +134,12 @@ void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 	w_horizontales_lines_check_spr(w, ray_angle, up);
 	if (!ft_fiszero(w->w.mindistspr))
 		w->w.dist = w->w.block_distspr;
+	//if (w->w.info.ray_minimap && w->w.info.tabinfo)
+	w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, 0x0000FF);
+	w_print_radar_ray_hitwall(w, w->w.hit2.x, w->w.hit2.y, 0x00FFFF);
 	if ((w->w.dist < w->w.olddist && !ft_fiszero(w->w.dist)) ||
 		(ft_fiszero(w->w.olddist) && !ft_fiszero(w->w.dist)))
 	{
-		if (w->w.info.ray_minimap && w->w.info.tabinfo)
-			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, 0x0000FF);
 		if (!ft_fiszero(w->w.dist))
 			w_render_sprites(w);
 	}
