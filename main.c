@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 19:36:44 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/09 18:27:23 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ static void		set_parameters2(t_wind *w)
 	w->w.tmpgun = 0;
 	w->w.player.ammunition = 7;
 	w->w.info.tabinfo = 1;
+	w->w.xtextp = 0;
+	w->w.hit = (t_dpoint){0, 0, 0};
+	w->w.hit2 = (t_dpoint){0, 0, 0};
 }
 
 static void		set_parameters(t_wind *w)

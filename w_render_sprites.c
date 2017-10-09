@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 16:04:31 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 20:26:42 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:12:30 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,34 +66,37 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 	}
 }
 
-void			w_calc_render_spr(t_wind *w)
+void		w_calc_render_spr(t_wind *w)
 {
-	double		sprite_angle;
-	int			sprite_angled;
-	int			size;
-	double		s_ytop;
+	double	sprite_angle;
+	int		size;
+	double	s_ytop;
 
+	// https://dev.opera.com/articles/3d-games-with-canvas-and-raycasting-part-2/
 	sprite_angle = fmod(atan2(w->w.memdistspr.y, w->w.memdistspr.x) -
 		ft_degreetorad(w->cam.rot.y), TWOPI);
+	printf("--------------------------------------------------------------------\n");
 	printf("sprite_angle %.3f\n", sprite_angle);
-	sprite_angled = (int)ft_radtodegree(sprite_angle);
-	printf("sprite_angle degree %d\n", sprite_angled);
-	//if (sprite_angled > -(FOV / 2) && sprite_angled < (FOV / 2))
-	//{
+	w->w.sprite_angled = (int)ft_radtodegree(sprite_angle);
+	printf("sprite_angle degree %d\n", w->w.sprite_angled);
+	if (w->w.sprite_angled > -(FOV / 2) && w->w.sprite_angled < (FOV / 2))
+	{
 		printf("angle ok! \n");
 		size = w->cam.vp.dist / (cos(sprite_angle) * w->w.block_distsprreal);
 		printf("w->cam.vp.dist %.3f\n", w->cam.vp.dist);
 		printf("w->w.block_distsprreal %.3f\n", w->w.block_distsprreal);
+		printf("w->cam.vp.dist %.3f\n", w->cam.vp.dist);
+		printf("size: %d\n", size);
 		w->w.xtextp = tan(sprite_angle) * w->cam.vp.dist;
+		if (w->w.xtextp < 0)
+			w->w.xtextp = -w->w.xtextp;
 		printf("xtextp %.3f\n", w->w.xtextp);
-		w->w.s_xleft = (((w->width) / 2) + w->w.xtextp) - (size / 2);
+		w->w.s_xleft = ((w->width) / 2) - (size / 2) + w->w.xtextp;
 		//s_xleft = ((w->width - w->w.marginw) / 2) + xtextp - (size / 2) + w->w.marginw;
 		s_ytop = (w->height - size) / 2;
 		w_set_pxl_spr(w->w.s_xleft, s_ytop, size, w);
 		printf("s_xleft: %.3f, s_ytop: %.3f size: %d\n", w->w.s_xleft, s_ytop, size);
-	//}
-	//else
-		//printf("angle too small or too high! \n");
+	}
 }
 
 void		w_render_sprites(t_wind *w)

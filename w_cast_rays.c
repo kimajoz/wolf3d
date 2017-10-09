@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 18:31:27 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/09 17:56:16 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,17 +173,17 @@ void			w_cast_rays(t_wind *w)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;
 		w_cast_single_ray(w, angle, i);
+		w_cast_single_ray_spr(w, angle);
 		angle += w->cam.anglebetrays;
 		i++;
-	}
+	}/*
 	angle = w->cam.rot.y - (w->w.player.fov / 2);
 	w->w.correct_fisheyes = w->w.player.fov / 2;
 	i = 0;
 	while (i < w->w.info.raynumb)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;
-		w_cast_single_ray_spr(w, angle);
 		angle += w->cam.anglebetrays;
 		i++;
-	}
+	}*/
 }

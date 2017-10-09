@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 20:10:33 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/09 18:58:04 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,6 +397,7 @@ typedef struct		s_wolf
 	double			timemusic;
 	double			timeimg;
 	double			tmpmsec;
+	int				sprite_angled;
 }					t_wolf;
 
 typedef struct		s_wind

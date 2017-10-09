@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:31:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 18:36:47 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:01:11 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void			w_horizontales_lines_check_spr(t_wind *w, double ray_angle,
 			if (((!ft_fiszero(w->w.block_distspr)) && w->w.block_distspr <
 		w->w.olddist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
 			{
+				printf("dist current sprite: %.3f, wall: %.3f\n", w->w.block_distspr, w->w.olddist);
 				w->w.hit2 = p;
 				w->w.mindistspr = w->w.block_distspr;
 				distreal = (t_dpoint){p.x - (w->cam.pos.x + 0.5), p.y -
@@ -136,6 +137,7 @@ void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 		w->w.dist = w->w.block_distspr;
 	//if (w->w.info.ray_minimap && w->w.info.tabinfo)
 	w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, 0x0000FF);
+	//if (w->w.sprite_angled > -(FOV / 2) && w->w.sprite_angled < (FOV / 2))
 	w_print_radar_ray_hitwall(w, w->w.hit2.x, w->w.hit2.y, 0x00FFFF);
 	if ((w->w.dist < w->w.olddist && !ft_fiszero(w->w.dist)) ||
 		(ft_fiszero(w->w.olddist) && !ft_fiszero(w->w.dist)))
