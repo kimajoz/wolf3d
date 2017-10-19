@@ -68,8 +68,8 @@
 
 int			w_check_progstart(t_wind *w, char *filename);
 int			rt_file(char *filename, t_wind *w, int needed);
-int			ft_check_parsing(char *filename);
-int			ft_check_parsing_param(char *filename);
+void		ft_check_parsing(t_wind *w, char *filename);
+void		ft_check_parsing_param(char *filename);
 int			ft_print_error_type_parsing(int x, int y);
 int			ft_count_lines(t_wind *w, char *filename);
 void		put_info(t_wind *w);
@@ -84,6 +84,7 @@ void		w_cast_rays(t_wind *w);
 void		w_cast_single_ray_spr(t_wind *w, double ray_angle);
 void		w_clear_vis_sprites(t_wind *w);
 void		w_render_sprites(t_wind *w);
+void		w_set_pxl_spr_root(int bx, int by, int size, t_wind *w);
 void		w_calc_render_spr(t_wind *w);
 void		w_gun_fire(t_wind *w);
 void		w_gun_fire_loop(t_wind *w);
@@ -112,7 +113,6 @@ int			dot_in_window(t_wind *w, int x, int y);
 int			keypress_function(int keycode, t_wind *w);
 int			key_release_function(int keycode, t_wind *w);
 int			expose_hook(t_wind *w);
-void		w_set_pxl_spr(int bx, int by, int size, t_wind *w);
 int			hook_render(t_wind *w);
 void		mlibx_putstring(char *s, int l, int c, t_wind *w);
 void		w_win_level(t_wind *w);
@@ -124,5 +124,9 @@ void		w_init_player_game(t_wind *w);
 void		w_init_screen(t_wind *w);
 void		w_clear_screen(t_wind *w);
 void		w_render_screen(t_wind *w);
+void		set_spr_to_prog(int fd, t_wind *w);
+void		w_set_pxlfiletoimg(t_wind *w, int max, char **lst, void *d);
+void		w_verticales_lines_check(t_wind *w, double ray_angle);
+void		w_horizontales_lines_check(t_wind *w, double ray_angle);
 
 #endif

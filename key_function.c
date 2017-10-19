@@ -62,6 +62,7 @@ static void		keypress_function01(int keycode, t_wind *w)
 	else if (keycode == KEY_R)
 	{
 		w->w.player.ammunition += 7;
+		w->w.player.ammureload = 1;
 		if (w->w.info.sound)
 			w_play_music(w, w->lpth.fxguncocking, S_GUNCOKING, 0);
 	}

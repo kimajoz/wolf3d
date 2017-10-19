@@ -19,7 +19,6 @@ int			ft_print_error_parsing(int x, int y)
 	ft_putnbr(x);
 	ft_putstr(" -> needs ");
 	ft_putstr(" lenght of the line ");
-	//ft_putnbr(w->b.nbr_elem_line[0]);
 	ft_putstr(") on line ");
 	ft_putnbr(y + 1);
 	ft_putstr(".");
@@ -53,7 +52,7 @@ int			ft_numdigit(char *n)
 	return (0);
 }
 
-int			ft_check_parsing_param(char *filename)
+void		ft_check_parsing_param(char *filename)
 {
 	int		fd;
 	char	**tab;
@@ -73,14 +72,13 @@ int			ft_check_parsing_param(char *filename)
 				ft_strdel(&tab[i++]);
 			free(tab);
 			if (i != 3)
-				return (ft_print_error_parsing(i, y));
+				exit (ft_print_error_parsing(i, y));
 		}
 		y++;
 	}
-	return (0);
 }
 
-int			ft_check_parsing(char *filename)
+void		ft_check_parsing(t_wind *w, char *filename)
 {
 	int		fd;
 	char	**tab;
@@ -99,10 +97,9 @@ int			ft_check_parsing(char *filename)
 			while (tab[i])
 				ft_strdel(&tab[i++]);
 			free(tab);
-			//if (i != w->b.nbr_elem_line[0])
-				//return (ft_print_error_parsing(i, y));
+			if (i != w->b.tmpneline)
+				exit(ft_print_error_parsing(i, y));
 		}
 		y++;
 	}
-	return (0);
 }

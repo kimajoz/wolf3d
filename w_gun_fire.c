@@ -33,7 +33,7 @@ void				w_gun_fire(t_wind *w)
 		w_wait(w, 2, 1, 2);
 	else if (w->w.player.fire == 2)
 		w_wait(w, 2, 2, 0);
-	w_set_pxl_spr((w->width / 2) + (GUNW * 2), w->height - GUNH * 2, GUNH * 2,
+	w_set_pxl_spr_root((w->width / 2) + (GUNW * 2), w->height - GUNH * 2, GUNH * 2,
 		w);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 	w->w.dist = 0;
@@ -42,17 +42,22 @@ void				w_gun_fire(t_wind *w)
 
 void				w_gun_fire_loop(t_wind *w)
 {
+	ft_putendl("gun fire loop");
+	ft_putstr("reload:");
+	ft_putnbr(w->w.player.ammureload);
+	ft_putstr("\n");
+	w->w.tmpgun = 1;
 	if (!w->w.player.ammureload)
-		w->w.player.ammureload = 0;
+		w->w.player.ammureload = 1;
 	if (w->w.player.ammunition)
 	{
 		w->w.player.ammunition--;
 		w->w.player.ammureload++;
 		if (w->w.info.sound)
 			w_play_music(w, w->lpth.fxgunshot, S_GUNSHOT, 0);
-		if (w->w.player.ammureload > 7)
+		if (w->w.player.ammureload > 6)
 		{
-			w->w.player.ammureload = 0;
+			w->w.player.ammureload = 1;
 			if (w->w.info.sound)
 				w_play_music(w, w->lpth.fxgunbulletfall, S_BULLETFALL, 0);
 		}

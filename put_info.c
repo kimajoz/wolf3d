@@ -21,7 +21,7 @@
 
 void				put_info_cam(t_wind *w, int leftm, int row, int bl)
 {
-	row = w->b.nbrtot_of_line / 1.5;
+	row = w->b.nbrtot_of_line / 1.8;
 	mlibx_putstring("player.speed :", row, 1, w);
 	mlibx_putstring(ft_itoa((int)w->w.player.speed), row, leftm + bl + 5, w);
 	row++;
@@ -111,6 +111,10 @@ void				put_info(t_wind *w)
 
 	row = 14;
 	put_info_cam(w, LEFTM, row, BL);
+	row = 19;
+	mlibx_putstring("Ctrl(right): fire | r: reload", row, 1, w);
+	row = 20;
+	mlibx_putstring("Space: open doors", row, 1, w);
 	row = 22;
 	mlibx_putstring("1/4: Rays min/max", row, 1, w);
 	row = 23;

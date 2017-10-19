@@ -5,9 +5,11 @@ SRC=	main.c \
 		wolf3d.c \
 		w_check_progstart.c \
 		w_cast_rays.c \
+		w_verticales_lines_check.c \
 		w_print_radar_fov.c \
 		w_draw_background_color.c \
 		w_texture_walls.c \
+		w_set_pxlfiletoimg.c \
 		w_cast_single_ray_spr.c \
 		w_render_sprites.c \
 		w_game_timer_cycle.c \
@@ -20,6 +22,7 @@ SRC=	main.c \
 		mlibx_putstring.c \
 		rt_file.c \
 		rt_parsing.c \
+		w_create_spr_map.c \
 		create_new_window.c \
 		create_new_img.c \
 		key_function.c \

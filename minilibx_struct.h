@@ -187,6 +187,7 @@ typedef struct		s_browsefile
 	char			**tab_char;
 	int				nbrtot_of_line;
 	int				nbr_of_line;
+	int				tmpneline;
 	int				*nbr_elem_line;
 	int				needed;
 }					t_browsefile;
@@ -357,8 +358,11 @@ typedef struct		s_wolf
 	double			dist_correct;
 	double			slicew;
 	double			slope;
+	double			up;
+	double			right;
 	t_dpoint		hit;
 	t_dpoint		hit2;
+	t_dpoint		wall;
 	double			block_dist;
 	int				color;
 	int				color_mfov;
@@ -383,8 +387,10 @@ typedef struct		s_wolf
 	int				sprnbvis;
 	t_sprite		*spr_visible;
 	int				sprnumb;
-	int				bolspr;
-	int				foundh;
+	int				pxl_x;
+	int				pxl_y;
+	int				percx;
+	int				percy;
 	t_dpoint		memdistspr;
 	double			distspr;
 	double			block_distspr;
@@ -398,6 +404,7 @@ typedef struct		s_wolf
 	double			timeimg;
 	double			tmpmsec;
 	int				sprite_angled;
+	int				isprite;
 }					t_wolf;
 
 typedef struct		s_wind
