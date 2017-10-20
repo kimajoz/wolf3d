@@ -49,7 +49,7 @@ void			w_draw_the_wall(t_wind *w, int i)
 	if (w->w.info.texture)
 		w_draw_band_wall(w, &p, &pd, projsliceh);
 	else
-		mlibx_draw_pixel_line_int(p, pd, w, w->w.color);
+		w_mlibx_draw_pixel_line_int(p, pd, w, w->w.color);
 }
 
 void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
@@ -65,8 +65,8 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 	w_horizontales_lines_check(w, ray_angle);
 	if (w->w.dist)
 	{
-		//if (w->w.info.ray_minimap && w->w.info.tabinfo)
-			//w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, 0x00FF00);
+		if (w->w.info.ray_minimap && w->w.info.tabinfo)
+			w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, IC_FGREEN);
 		w->w.dist = w->w.dist * cos(ft_degreetorad(w->w.correct_fisheyes));
 		w->w.olddist = w->w.dist;
 		w_draw_the_wall(w, raynumb);

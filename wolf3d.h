@@ -31,10 +31,10 @@
 # define GUNH 103
 # define IC_DGREY 3355443//Rgb 51,51,51
 # define IC_MGREY 7829367//Rgb 119,119,119
-# define IC_FGREEN 65280//Rgb 0,255,0
-# define IC_FBLUE 255//Rgb 0,0,255
-# define IC_FYELLOW 16776960//Rgb 255,255,0
-# define IC_FPURPLE 16711935//Rgb 255,0,255
+# define IC_FGREEN 0x00FF00//Rgb 0,255,0
+# define IC_FBLUE 0x0000FF//Rgb 0,0,255
+# define IC_FYELLOW 0xFFFF00 //Rgb 255,255,0
+# define IC_FPURPLE 0xFF00FF //Rgb 255,0,255
 
 #define S_STARTL1 "sounds/loops/Casio-MT-45-16-Beat.wav"
 #define S_FOOTSTEP "sounds/loops/footsteps-4_loop.wav"
