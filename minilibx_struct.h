@@ -353,6 +353,7 @@ typedef struct		s_lstpthread
 typedef struct		s_wolf
 {
 	t_player		player;
+	int				curray;
 	double			dist;
 	double			olddist;
 	double			dist_correct;
@@ -380,11 +381,14 @@ typedef struct		s_wolf
 	t_img			*text;
 	t_img			*weapon;
 	double			lineheight;
+	int				nbtotsprprog;
+	int				sprnbvis;
+	t_sprite		*visiblespr;
+	t_sprite		*oldvisiblespr;
 	int				sprnb;
 	t_sprimg		*sprite; //lst text
 	char			**lst_sprite; //lst text
 	t_sprite		**tab_int_spr;
-	int				sprnbvis;
 	t_sprite		*spr_visible;
 	int				sprnumb;
 	int				pxl_x;
