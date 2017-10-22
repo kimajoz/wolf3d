@@ -77,6 +77,7 @@ void			w_cast_rays(t_wind *w)
 {
 	double		angle;
 
+	w->w.distspr = 0;
 	w->cam.vp.dist = ((w->cam.vp.w) / 2) / tan(ft_degreetorad(w->w.player.fov
 		/ 2));
 	w->cam.anglebetrays = (double)w->w.player.fov / (double)w->w.info.raynumb;

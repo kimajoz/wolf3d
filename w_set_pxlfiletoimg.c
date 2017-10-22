@@ -39,8 +39,8 @@ void *d)
 		}
 		else
 			exit(EXIT_FAILURE);
+		close(fd);
 		i++;
 	}
-	close(fd);
 }
 

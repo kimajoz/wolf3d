@@ -12,7 +12,7 @@
 
 #include "wolf3d.h"
 /*
-   int				v_testspr(t_wind *w,  t_dpoint p,  t_dpoint dist, t_dpoint wall)
+int				v_testspr(t_wind *w,  t_dpoint p,  t_dpoint dist, t_dpoint wall)
    {
    dist = (t_dpoint){(p.x * MMS) - ((w->cam.pos.x + 0.5) * MMS),
    (p.y * MMS) - ((w->cam.pos.z + 0.5) * MMS), 0};
@@ -31,7 +31,7 @@
    }
    }
    return (0);
-   }*/
+}*/
 
 void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 		double right)
@@ -56,7 +56,7 @@ void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 		{
 			w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
 			w->w.visiblespr[w->w.sprnbvis] = w->w.tab_int_spr[(int)wall.y][(int)wall.x];
-			w->w.sprnbvis++;
+			w->w.bolspr = 1;
 		}
 		//if (v_testspr(w, p, dist, wall))
 		//break ;
@@ -64,7 +64,6 @@ void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 		p.y += d.y;
 	}
 }
-
 
 void			w_horizontales_lines_check_spr(t_wind *w, double ray_angle,
 		double up)
@@ -88,7 +87,7 @@ void			w_horizontales_lines_check_spr(t_wind *w, double ray_angle,
 		{
 			w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
 			w->w.visiblespr[w->w.sprnbvis] = w->w.tab_int_spr[(int)wall.y][(int)wall.x];
-			w->w.sprnbvis++;
+			w->w.bolspr = 1;
 		}
 		//if (h_testspr(w, p, dist, wall))
 			//break ;
@@ -102,8 +101,8 @@ void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 	double		right;
 	double		up;
 
-	ft_putendl("w_cast_single_ray_spr 01");
-	w->w.distspr = 0;
+	//ft_putendl("w_cast_single_ray_spr 01");
+	w->w.bolspr = 0;
 	w->w.hit = (t_dpoint){0, 0, 0};
 	ray_angle = ft_degreetorad(ray_angle);
 	ray_angle = fmod(ray_angle, TWOPI);
@@ -114,6 +113,8 @@ void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 	w->w.mindistspr = 0;
 	w_verticales_lines_check_spr(w, ray_angle, right);
 	w_horizontales_lines_check_spr(w, ray_angle, up);
+	if (w->w.bolspr)
+		w->w.sprnbvis++;
 	//if (!ft_fiszero(w->w.mindistspr))
 	//w->w.dist = w->w.block_distspr;
 	//if (w->w.info.ray_minimap && w->w.info.tabinfo)
