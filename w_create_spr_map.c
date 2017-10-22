@@ -51,7 +51,10 @@ void		set_spr_to_prog(int fd, t_wind *w)
 				ft_strdel(&tab[x++]);
 			w->w.nbtotsprprog++;
 		}
-		free(tab);
+		ft_putendl("before free init_sprites");
+		//free(tab);
+		ft_putendl("after free init_sprites");
 	}
 	w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite));
+	ft_putendl("after free init_sprites 2");
 }

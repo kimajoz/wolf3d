@@ -12,26 +12,26 @@
 
 #include "wolf3d.h"
 /*
-int				v_testspr(t_wind *w,  t_dpoint p,  t_dpoint dist, t_dpoint wall)
-{
-	dist = (t_dpoint){(p.x * MMS) - ((w->cam.pos.x + 0.5) * MMS),
-			(p.y * MMS) - ((w->cam.pos.z + 0.5) * MMS), 0};
-	w->w.block_distspr = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
-	if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0)
-	{
-		if ((!(ft_fiszero(w->w.block_distspr)) && w->w.block_distspr <
-	w->w.olddist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
-		{
-			printf("dist current sprite: %.3f, wall: %.3f\n", w->w.block_distspr, w->w.olddist);
-			w->w.hit2 = p;
-			w->w.mindistspr = w->w.block_distspr;
-			w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
-			w->w.sprnbvis++;
-			return (1);
-		}
-	}
-	return (0);
-}*/
+   int				v_testspr(t_wind *w,  t_dpoint p,  t_dpoint dist, t_dpoint wall)
+   {
+   dist = (t_dpoint){(p.x * MMS) - ((w->cam.pos.x + 0.5) * MMS),
+   (p.y * MMS) - ((w->cam.pos.z + 0.5) * MMS), 0};
+   w->w.block_distspr = sqrt(pow(dist.x, 2) + pow(dist.y, 2));
+   if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0)
+   {
+   if ((!(ft_fiszero(w->w.block_distspr)) && w->w.block_distspr <
+   w->w.olddist) && w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis != 1)
+   {
+   printf("dist current sprite: %.3f, wall: %.3f\n", w->w.block_distspr, w->w.olddist);
+   w->w.hit2 = p;
+   w->w.mindistspr = w->w.block_distspr;
+   w->w.sprnumb = w->w.tab_int_spr[(int)wall.y][(int)wall.x].num;
+   w->w.sprnbvis++;
+   return (1);
+   }
+   }
+   return (0);
+   }*/
 
 void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 		double right)
@@ -59,6 +59,38 @@ void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 			w->w.sprnbvis++;
 		}
 		//if (v_testspr(w, p, dist, wall))
+		//break ;
+		p.x += d.x;
+		p.y += d.y;
+	}
+}
+
+
+void			w_horizontales_lines_check_spr(t_wind *w, double ray_angle,
+		double up)
+{
+	t_dpoint	d;
+	t_dpoint	p;
+	t_dpoint	wall;
+
+	w->w.slope = cos(ray_angle) / sin(ray_angle);
+	d.y = up	 ? -1 : 1;
+	d.x = (w->w.slope < 360) ? (d.y * w->w.slope) : 0;
+	p.y = up ? floor(w->cam.pos.z + 0.5) : ceil(w->cam.pos.z + 0.5);
+	p.x = (w->cam.pos.x + 0.5) + (p.y - (w->cam.pos.z + 0.5)) * w->w.slope;
+	while (p.x >= 0 && p.x < w->b.nbr_elem_line[0] && p.y >= 0 && p.y <
+			w->b.nbrtot_of_line)
+	{
+		wall = (t_dpoint){floor(p.x), floor(p.y + (up ? -1 : 0)), 0};
+		if (wall.x < 0 || wall.y < 0)
+			break ;
+		if (w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0 && !w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
+		{
+			w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
+			w->w.visiblespr[w->w.sprnbvis] = w->w.tab_int_spr[(int)wall.y][(int)wall.x];
+			w->w.sprnbvis++;
+		}
+		//if (h_testspr(w, p, dist, wall))
 			//break ;
 		p.x += d.x;
 		p.y += d.y;
@@ -68,21 +100,22 @@ void			w_verticales_lines_check_spr(t_wind *w, double ray_angle,
 void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 {
 	double		right;
-	//double		up;
+	double		up;
 
+	ft_putendl("w_cast_single_ray_spr 01");
 	w->w.distspr = 0;
 	w->w.hit = (t_dpoint){0, 0, 0};
 	ray_angle = ft_degreetorad(ray_angle);
 	ray_angle = fmod(ray_angle, TWOPI);
 	//printf("ray_angle spr:%.3f\n", ray_angle);
 	right = (ray_angle > TWOPI * 0.75 || ray_angle < TWOPI * 0.25);
-	//up = (ray_angle < 0 || ray_angle > M_PI);
+	up = (ray_angle < 0 || ray_angle > M_PI);
 	w->w.dist = 0;
 	w->w.mindistspr = 0;
 	w_verticales_lines_check_spr(w, ray_angle, right);
-	//w_horizontales_lines_check_spr(w, ray_angle, up);
+	w_horizontales_lines_check_spr(w, ray_angle, up);
 	//if (!ft_fiszero(w->w.mindistspr))
-		//w->w.dist = w->w.block_distspr;
+	//w->w.dist = w->w.block_distspr;
 	//if (w->w.info.ray_minimap && w->w.info.tabinfo)
 	w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, 0x0000FF);
 	//if (w->w.sprite_angled > -(FOV / 2) && w->w.sprite_angled < (FOV / 2))
