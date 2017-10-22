@@ -396,7 +396,6 @@ typedef struct		s_wolf
 	int				pxl_y;
 	int				percx;
 	int				percy;
-	t_dpoint		memdistspr;
 	double			distspr;
 	double			block_distspr;
 	double			block_distsprreal;
