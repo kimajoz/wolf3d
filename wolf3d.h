@@ -128,5 +128,6 @@ void		set_spr_to_prog(int fd, t_wind *w);
 void		w_set_pxlfiletoimg(t_wind *w, int max, char **lst, void *d);
 void		w_verticales_lines_check(t_wind *w, double ray_angle);
 void		w_horizontales_lines_check(t_wind *w, double ray_angle);
+void		w_set_pxl_spr_gunr(int bx, int by, int size, t_wind *w);
 
 #endif

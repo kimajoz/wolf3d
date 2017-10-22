@@ -12,72 +12,19 @@
 
 #include "wolf3d.h"
 
-void		w_clear_vis_sprites2dspr_list(t_wind *w)
-{
-	int		i;
-
-	i = 0;
-	free(w->w.oldvisiblespr);
-	w->w.oldvisiblespr = NULL;
-	w->w.oldvisiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite));
-	while (i < w->w.sprnbvis)
-	{
-		w->w.oldvisiblespr[i] = w->w.visiblespr[i];
-		w->w.oldvisiblespr[i].vis = 0;
-		i++;
-	}
-	w->w.sprnbvis = 0;
-	//ft_putendl("before free");
-	free(w->w.visiblespr);
-	//ft_putendl("after free");
-	w->w.visiblespr = NULL;
-	//ft_putendl("after null");
-	w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite));
-}
-
-void		w_clear_vis_sprites(t_wind *w)
-{
-	//ft_putendl("after null creation");
-	int		y;
-	int		x;
-
-	// We clear grid, then we clear list:
-	y = 0;
-	while (y < w->b.nbrtot_of_line)
-	{
-		x = 0;
-		while (x < w->b.nbr_elem_line[3])
-			w->w.tab_int_spr[y][x++].vis = 0;
-		y++;
-	}
-	w_clear_vis_sprites2dspr_list(w);
-}
-
 void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 {
 	double	percx;
 	double	percy;
-	
-	//ft_putendl();
-	if (w->w.player.fire == 1 && w->w.player.ammunition)
-		percx = (double)(w->w.pxl_x + (GUNW * 2.6)) / (double)size;
-	else if (w->w.player.fire == 2 && w->w.player.ammunition)
-		percx = (double)(w->w.pxl_x + (GUNW * 5)) / (double)size;
-	else
-		percx = (double)w->w.pxl_x / (double)size;
+
+	percx = (double)w->w.pxl_x / (double)size;
 	percy = (double)w->w.pxl_y / (double)size;
-	if (w->w.tmpgun)
-		w->w.color = getcolor(&w->w.weapon[0], percx * GUNW, percy * GUNH);
-	else
-		w->w.color = getcolor(&w->w.sprite[w->w.sprnumb - 1].img, percx * 64, percy * 64);
+	w->w.color = getcolor(&w->w.sprite[w->w.sprnumb - 1].img, percx * 64, percy * 64);
 	if (mlibx_dot_in_window(w, bx + w->w.pxl_x, by + w->w.pxl_y) && w->w.color != 0 && w->w.color != 16843008)
 	{
-		//if (!w->w.tmpgun)
-			//ft_putendl("set inside");
 		if (w->w.mindistspr < w->screen[by + w->w.pxl_y][bx + w->w.pxl_x].zdepth &&
 				!ft_fiszero(w->w.block_distsprreal))
 		{
-			//printf("mindistspr: %.3f < w->screen.zdepth: %.3f\n", w->w.mindistspr, w->screen[by + w->w.pxl_y][bx + w->w.pxl_x].zdepth);
 			w->screen[by + w->w.pxl_y][bx + w->w.pxl_x].zdepth = w->w.dist;
 			w->screen[by + w->w.pxl_y][bx + w->w.pxl_x].color = w->w.color;
 		}
@@ -125,7 +72,6 @@ void			w_calc_render_spr(t_wind *w, t_sprite sprite)
 	//ft_putendl("03");
 	// Sprite angle relative to viewing angle
 	sprite_angle = fmod(atan2(d.y, d.x) - ft_degreetorad(w->cam.rot.y), TWOPI);
-
 
 	//ft_putendl("04");
 	//printf("sprite_angle %.3f\n", sprite_angle);

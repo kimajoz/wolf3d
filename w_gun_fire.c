@@ -33,7 +33,7 @@ void				w_gun_fire(t_wind *w)
 		w_wait(w, 2, 1, 2);
 	else if (w->w.player.fire == 2)
 		w_wait(w, 2, 2, 0);
-	w_set_pxl_spr_root((w->width / 2) + (GUNW * 2), w->height - GUNH * 2, GUNH * 2,
+	w_set_pxl_spr_gunr((w->width / 2) + (GUNW * 2), w->height - GUNH * 2, GUNH * 2,
 		w);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 	w->w.dist = 0;

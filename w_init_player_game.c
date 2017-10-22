@@ -58,7 +58,7 @@ void			w_init_screen(t_wind *w)
 		while (x < w->width)
 		{
 			w->screen[y][x].color = 0;
-			w->screen[y][x].zdepth = 0;
+			w->screen[y][x].zdepth = 1000;
 			x++;
 		}
 		y++;
@@ -77,7 +77,7 @@ void			w_clear_screen(t_wind *w)
 		while (x < w->width)
 		{
 			w->screen[y][x].color = 0;
-			w->screen[y][x].zdepth = 0;
+			w->screen[y][x].zdepth = 1000;
 			x++;
 		}
 		y++;

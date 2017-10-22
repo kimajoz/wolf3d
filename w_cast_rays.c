@@ -49,7 +49,7 @@ void			w_draw_the_wall(t_wind *w, int i)
 	if (w->w.info.texture)
 		w_draw_band_wall(w, &p, &pd, projsliceh);
 	else
-		mlibx_draw_pixel_line_int(p, pd, w, w->w.color);
+		w_mlibx_draw_pixel_line_int(p, pd, w, w->w.color);
 }
 
 void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
