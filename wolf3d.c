@@ -78,6 +78,14 @@ int					wolf3d(t_wind *w)
 		if (w->w.info.tabinfo)
 			init_minimap(w);
 		w_cast_rays(w);
+		/*if ((w->w.dist < w->w.olddist && !ft_fiszero(w->w.dist)) ||
+		(ft_fiszero(w->w.olddist) && !ft_fiszero(w->w.dist)))
+		{*/
+			//if (!ft_fiszero(w->w.dist))
+			w_render_sprites(w);
+		//}
+
+		//w_render_array_spr(w);
 		w_gun_fire(w);
 		w_render_screen(w);
 	}

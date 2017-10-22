@@ -12,6 +12,8 @@ SRC=	main.c \
 		w_set_pxlfiletoimg.c \
 		w_cast_single_ray_spr.c \
 		w_render_sprites.c \
+		w_clear_vis_sprites.c \
+		w_set_pxl_spr_gunr.c \
 		w_game_timer_cycle.c \
 		w_game_over.c \
 		w_play_music.c \

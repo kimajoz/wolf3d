@@ -85,7 +85,7 @@ void		w_cast_single_ray_spr(t_wind *w, double ray_angle);
 void		w_clear_vis_sprites(t_wind *w);
 void		w_render_sprites(t_wind *w);
 void		w_set_pxl_spr_root(int bx, int by, int size, t_wind *w);
-void		w_calc_render_spr(t_wind *w);
+void		w_calc_render_spr(t_wind *w, t_sprite sprite);
 void		w_gun_fire(t_wind *w);
 void		w_gun_fire_loop(t_wind *w);
 int			game_cycle(t_wind *w);
@@ -128,5 +128,6 @@ void		set_spr_to_prog(int fd, t_wind *w);
 void		w_set_pxlfiletoimg(t_wind *w, int max, char **lst, void *d);
 void		w_verticales_lines_check(t_wind *w, double ray_angle);
 void		w_horizontales_lines_check(t_wind *w, double ray_angle);
+void		w_set_pxl_spr_gunr(int bx, int by, int size, t_wind *w);
 
 #endif

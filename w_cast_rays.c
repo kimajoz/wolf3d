@@ -75,22 +75,22 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 
 void			w_cast_rays(t_wind *w)
 {
-	int			i;
 	double		angle;
 
+	w->w.distspr = 0;
 	w->cam.vp.dist = ((w->cam.vp.w) / 2) / tan(ft_degreetorad(w->w.player.fov
 		/ 2));
 	w->cam.anglebetrays = (double)w->w.player.fov / (double)w->w.info.raynumb;
 	w->w.slicew = w->width / w->w.info.raynumb;
 	angle = w->cam.rot.y - (w->w.player.fov / 2);
 	w->w.correct_fisheyes = w->w.player.fov / 2;
-	i = 0;
-	while (i < w->w.info.raynumb)
+	w->w.curray = 0;
+	while (w->w.curray < w->w.info.raynumb)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;
-		w_cast_single_ray(w, angle, i);
+		w_cast_single_ray(w, angle, w->w.curray);
 		w_cast_single_ray_spr(w, angle);
 		angle += w->cam.anglebetrays;
-		i++;
+		w->w.curray++;
 	}
 }
