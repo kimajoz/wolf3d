@@ -25,11 +25,14 @@ void				init_minimap(t_wind *w)
 		j = 0;
 		while (j < (w->b.nbr_elem_line[(i / MMS)] * MMS))
 		{
-			if (w->w.tab_int_spr[i / MMS][j / MMS].num == 1)
-				w_mlibx_draw_pixel(w, j, i, 0xFF0000);
-			else if (w->w.tab_int_spr[i / MMS][j / MMS].num == 4)
-				w_mlibx_draw_pixel(w, j, i, 0x00FF00);
-			else if (w->b.tab_int[i / MMS][j / MMS] > 0)
+			if (w->w.info.spr)
+			{
+				if (w->w.tab_int_spr[i / MMS][j / MMS].num == 1)
+					w_mlibx_draw_pixel(w, j, i, 0xFF0000);
+				else if (w->w.tab_int_spr[i / MMS][j / MMS].num == 4)
+					w_mlibx_draw_pixel(w, j, i, 0x00FF00);
+			}
+			if (w->b.tab_int[i / MMS][j / MMS] > 0)
 				w_mlibx_draw_pixel(w, j, i, 0xFFFFFF);
 			j++;
 		}
@@ -65,28 +68,41 @@ int					game_cycle(t_wind *w)
 
 int					wolf3d(t_wind *w)
 {
-	w_clear_vis_sprites(w);
+	ft_putendl("a");
+	ft_putnbr(w->w.info.spr);
+	if (w->w.info.spr)
+		w_clear_vis_sprites(w);
+	ft_putendl("b");
 	game_cycle(w);
+	ft_putendl("c");
 	w->w.timeimg = 0.1;
 	if ((w->w.player.prevtimeoutimg + w->w.timeimg) < w->w.player.timeout ||
 			!w->w.player.prevtimeoutimg)
 	{
 		w->w.player.prevtimeoutimg = w->w.player.timeout;
+		ft_putendl("d");
 		w_clear_screen(w);
+		ft_putendl("e");
 		if (w->w.info.bg)
 			w_draw_background_color(w);
+		ft_putendl("f");
 		if (w->w.info.tabinfo)
 			init_minimap(w);
+		ft_putendl("g");
 		w_cast_rays(w);
+		ft_putendl("h");
 		/*if ((w->w.dist < w->w.olddist && !ft_fiszero(w->w.dist)) ||
 		(ft_fiszero(w->w.olddist) && !ft_fiszero(w->w.dist)))
 		{*/
 			//if (!ft_fiszero(w->w.dist))
+		if (w->w.info.spr)
 			w_render_sprites(w);
+		ft_putendl("i");
 		//}
 
 		//w_render_array_spr(w);
 		w_gun_fire(w);
+		ft_putendl("j");
 		w_render_screen(w);
 	}
 	else if ((w->w.player.prevtimeoutimg + w->w.timeimg) > w->w.player.timeout

@@ -124,7 +124,7 @@ void		w_init_player_game(t_wind *w);
 void		w_init_screen(t_wind *w);
 void		w_clear_screen(t_wind *w);
 void		w_render_screen(t_wind *w);
-void		set_spr_to_prog(int fd, t_wind *w);
+int			set_spr_to_prog(int fd, char *filename, t_wind *w);
 void		w_set_pxlfiletoimg(t_wind *w, int max, char **lst, void *d);
 void		w_verticales_lines_check(t_wind *w, double ray_angle);
 void		w_horizontales_lines_check(t_wind *w, double ray_angle);

@@ -62,6 +62,8 @@ void		ft_check_parsing_param(char *filename)
 
 	y = 0;
 	fd = open(filename, O_RDONLY);
+	if (ft_check_fd(fd, filename, 1))
+		exit(EXIT_FAILURE);
 	while (get_next_line(fd, &line))
 	{
 		tab = ft_strsplit(line, ' ');

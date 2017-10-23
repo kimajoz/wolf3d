@@ -89,7 +89,8 @@ void			w_cast_rays(t_wind *w)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;
 		w_cast_single_ray(w, angle, w->w.curray);
-		w_cast_single_ray_spr(w, angle);
+		if (w->w.info.spr)
+			w_cast_single_ray_spr(w, angle);
 		angle += w->cam.anglebetrays;
 		w->w.curray++;
 	}

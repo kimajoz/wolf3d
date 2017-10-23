@@ -33,7 +33,7 @@ void			move(t_wind *w)
 	tmp.x = w->cam.pos.x + cos(ft_degreetorad(w->cam.rot.y)) * movestep;
 	tmp.z = w->cam.pos.z + sin(ft_degreetorad(w->cam.rot.y)) * movestep;
 	if (is_blocking(tmp, w) != 1 &&
-		w->w.tab_int_spr[(int)tmp.z][(int)tmp.x].block != 1)
+		((w->w.info.spr) ? (w->w.tab_int_spr[(int)tmp.z][(int)tmp.x].block != 1) : 1))
 	{
 		w->cam.pos.x = tmp.x;
 		w->cam.pos.z = tmp.z;

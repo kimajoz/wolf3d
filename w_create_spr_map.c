@@ -26,12 +26,18 @@ void		create_spr_map(t_wind *w)
 	}
 }
 
-void		set_spr_to_prog(int fd, t_wind *w)
+int			set_spr_to_prog(int fd, char *filename, t_wind *w)
 {
 	char	*line;
 	char	**tab;
 	int		x;
 
+	if (ft_check_fd(fd, filename, 0) == 1)
+	{
+		w->w.info.spr = 0;
+		return (0);
+	}
+	w->w.info.spr = 1;
 	init_sprites(w);
 	w->w.sprnbvis = 0;
 	create_spr_map(w);
@@ -57,4 +63,5 @@ void		set_spr_to_prog(int fd, t_wind *w)
 	}
 	w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite));
 	ft_putendl("after free init_sprites 2");
+	return (0);
 }

@@ -276,6 +276,7 @@ typedef struct		s_info
 	int				raynumb;
 	int				texture;
 	int				sound;
+	int				spr;
 	int				tabinfo;
 }					t_info;
 

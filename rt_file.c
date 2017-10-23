@@ -106,9 +106,10 @@ int			rt_file(char *filename, t_wind *w, int needed)
 
 	fd = open(filename, O_RDONLY);
 	w->b.needed = needed;
-	w_insert_tab_int(w, &fd, &line, &filename);
+	if (ft_strstr(filename, "scn"))
+		w_insert_tab_int(w, &fd, &line, &filename);
 	if (ft_strstr(filename, "spr"))
-		set_spr_to_prog(fd, w);
+		set_spr_to_prog(fd, filename, w);
 	else if (ft_strstr(filename, "par"))
 	{
 		ft_check_parsing_param(filename);
