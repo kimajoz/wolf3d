@@ -72,7 +72,7 @@ t_wind *w, int color)
 			v.y += (v.sign_y * (v.diff_y / v.bigdiff));
 		if (mlibx_dot_in_window(w, rint(v.x), rint(v.y)))
 		{
-			w->screen[(int)rint(v.y)][(int)rint(v.x)].zdepth = 1000;
+			w->screen[(int)rint(v.y)][(int)rint(v.x)].zdepth = w->w.dist;
 			w->screen[(int)rint(v.y)][(int)rint(v.x)].color = color;
 		}
 	}

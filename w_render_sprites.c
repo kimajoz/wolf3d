@@ -23,7 +23,7 @@ void		w_set_pxl_spr(int bx, int by, int size, t_wind *w)
 	if (mlibx_dot_in_window(w, bx + w->w.pxl_x, by + w->w.pxl_y) && w->w.color != 0 && w->w.color != 16843008)
 	{
 		if (w->w.mindistspr < w->screen[by + w->w.pxl_y][bx + w->w.pxl_x].zdepth &&
-				!ft_fiszero(w->w.block_distsprreal))
+				!ft_fiszero(w->w.block_distsprreal) && (bx + w->w.pxl_x) > w->w.marginw)
 		{
 			w->screen[by + w->w.pxl_y][bx + w->w.pxl_x].zdepth = w->w.dist;
 			w->screen[by + w->w.pxl_y][bx + w->w.pxl_x].color = w->w.color;

@@ -19,6 +19,7 @@ void			w_draw_background_color(t_wind *w)
 	t_point		pd;
 
 	i = 0;
+	w->w.dist = 1000;
 	while (i < w->height)
 	{
 		p = (t_point){w->w.marginw, i, 0};
