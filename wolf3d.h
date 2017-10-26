@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 14:26:22 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/26 16:30:25 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ void		w_set_pxlfiletoimg(t_wind *w, int max, char **lst, void *d);
 void		w_verticales_lines_check(t_wind *w, double ray_angle);
 void		w_horizontales_lines_check(t_wind *w, double ray_angle);
 void		w_set_pxl_spr_gunr(int bx, int by, int size, t_wind *w);
+void		free_tablst(char **tab);
 
 #endif

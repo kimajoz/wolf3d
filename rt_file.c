@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 13:21:27 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/26 16:30:07 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 		}
 		y++;
 	}
+	free_tablst(tab);
 }
 
 int			**insert_file_to_prog(int fd, int y, t_wind *w)
