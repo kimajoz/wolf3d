@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 15:26:08 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 17:36:35 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/26 14:02:11 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int				aff_block(t_sprimg *block, int numargs, ...)
 
 void					init_sprites(t_wind *w)
 {
-	ft_putendl("init_sprites beg");
 	w->w.sprnb = 7;
 	w->w.lst_sprite = malloc(sizeof(char *) * w->w.sprnb);
 	aff_text_name(w->w.lst_sprite, w->w.sprnb,
@@ -70,14 +69,12 @@ void					init_sprites(t_wind *w)
 	w_set_pxlfiletoimg(w, w->w.sprnb, w->w.lst_sprite, w->w.sprite);
 	w->w.isprite = 0;
 	aff_block(w->w.sprite, w->w.sprnb, 1, 1, 1, 0, 0, 1, 1);
-	ft_putendl("init_sprites ok");
 }
 
 void					init_texture(t_wind *w)
 {
 	int			nbtext;
 
-	ft_putendl("init_texture beg");
 	nbtext = 11;
 	w->w.lst_text = malloc(sizeof(char *) * nbtext);
 	aff_text_name(w->w.lst_text, nbtext, "img/walls/greystone.xpm",
@@ -94,19 +91,16 @@ void					init_texture(t_wind *w)
 	ft_check_type(w->w.lst_text, nbtext, "xpm");
 	w->w.text = malloc(sizeof(t_img) * nbtext);
 	w_set_pxlfiletoimg(w, nbtext, w->w.lst_text, w->w.text);
-	ft_putendl("init_texture ok");
 }
 
 void					init_guns(t_wind *w)
 {
 	int			nbtext;
 
-	ft_putendl("init_gun beg");
 	nbtext = 1;
 	w->w.lst_weapon = malloc(sizeof(char *) * nbtext);
 	aff_text_name(w->w.lst_weapon, nbtext, "img/guns/guns.xpm");
 	ft_check_type(w->w.lst_weapon, nbtext, "xpm");
 	w->w.weapon = malloc(sizeof(t_img) * nbtext);
 	w_set_pxlfiletoimg(w, nbtext, w->w.lst_weapon, w->w.weapon);
-	ft_putendl("init_gun ok");
 }

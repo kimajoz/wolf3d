@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   w_create_spr_map.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/26 13:06:28 by pbillett          #+#    #+#             */
+/*   Updated: 2017/10/26 13:53:35 by pbillett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "wolf3d.h"
 
@@ -26,22 +36,12 @@ void		create_spr_map(t_wind *w)
 	}
 }
 
-int			set_spr_to_prog(int fd, char *filename, t_wind *w)
+void		w_setsprcoordfile_tosprmap(int fd, t_wind *w)
 {
 	char	*line;
-	char	**tab;
 	int		x;
+	char	**tab;
 
-	if (ft_check_fd(fd, filename, 0) == 1)
-	{
-		w->w.info.spr = 0;
-		return (0);
-	}
-	w->w.info.spr = 1;
-	init_sprites(w);
-	w->w.sprnbvis = 0;
-	create_spr_map(w);
-	w->w.nbtotsprprog = 0;
 	while (get_next_line(fd, &line))
 	{
 		tab = ft_strsplit(line, ';');
@@ -57,11 +57,22 @@ int			set_spr_to_prog(int fd, char *filename, t_wind *w)
 				ft_strdel(&tab[x++]);
 			w->w.nbtotsprprog++;
 		}
-		ft_putendl("before free init_sprites");
-		//free(tab);
-		ft_putendl("after free init_sprites");
 	}
+}
+
+int			set_spr_to_prog(int fd, char *filename, t_wind *w)
+{
+	if (ft_check_fd(fd, filename, 0) == 1)
+	{
+		w->w.info.spr = 0;
+		return (0);
+	}
+	w->w.info.spr = 1;
+	init_sprites(w);
+	w->w.sprnbvis = 0;
+	create_spr_map(w);
+	w->w.nbtotsprprog = 0;
+	w_setsprcoordfile_tosprmap(fd, w);
 	w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite));
-	ft_putendl("after free init_sprites 2");
 	return (0);
 }

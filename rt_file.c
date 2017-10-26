@@ -6,11 +6,25 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 20:24:52 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/26 13:21:27 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void		free_tablst(char **tab)
+{
+	int		x;
+
+	x = 0;
+	while (tab[x])
+	{
+		ft_bzero(tab[x], ft_strlen(tab[x]));
+		ft_strdel(&tab[x]);
+		x++;
+	}
+	ft_strdel(tab);
+}
 
 void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 {
@@ -38,7 +52,6 @@ void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 			j++;
 		}
 		y++;
-		free(tab);
 	}
 }
 

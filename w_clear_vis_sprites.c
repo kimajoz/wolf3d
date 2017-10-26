@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   w_clear_vis_sprites.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/26 13:05:42 by pbillett          #+#    #+#             */
+/*   Updated: 2017/10/26 13:06:00 by pbillett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "wolf3d.h"
 
@@ -26,7 +37,6 @@ void		w_clear_vis_sprites(t_wind *w)
 	int		y;
 	int		x;
 
-	// We clear grid, then we clear list:
 	y = 0;
 	while (y < w->b.nbrtot_of_line)
 	{
@@ -37,4 +47,3 @@ void		w_clear_vis_sprites(t_wind *w)
 	}
 	w_clear_vis_sprites2dspr_list(w);
 }
-

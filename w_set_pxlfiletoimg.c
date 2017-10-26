@@ -1,5 +1,14 @@
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   w_set_pxlfiletoimg.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/26 13:33:39 by pbillett          #+#    #+#             */
+/*   Updated: 2017/10/26 13:34:19 by pbillett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "wolf3d.h"
 
@@ -30,7 +39,7 @@ void *d)
 				set_pxl_if_sprite(w, i, lst, d);
 			else
 			{
-				((t_img *)(d))[i].ptr_img = mlx_xpm_file_to_image(w->mlx, 
+				((t_img *)(d))[i].ptr_img = mlx_xpm_file_to_image(w->mlx,
 				lst[i], &((t_img *)(d))[i].width, &((t_img *)(d))[i].height);
 				((t_img *)(d))[i].pxl_ptr = mlx_get_data_addr(((t_img *)
 				(d))[i].ptr_img, &((t_img *)(d))[i].bpp, &((t_img *)
@@ -43,4 +52,3 @@ void *d)
 		i++;
 	}
 }
-

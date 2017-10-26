@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/09 18:27:23 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/26 13:03:55 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,13 @@ int				prog(char *filename)
 	set_parameters(&w);
 	init_texture(&w);
 	init_guns(&w);
-	ft_putendl("test 01");
 	w_init_screen(&w);
-	ft_putendl("test 02");
 	create_new_img(&w);
-	ft_putendl("test 03");
 	if (w.w.info.sound)
 		w_play_music(&w, w.lpth.musicstart, S_STARTL1, 0);
-	ft_putendl("test 04");
 	w_play_chronotime(&w);
-	ft_putendl("test 05");
 	if (w.w.info.tabinfo)
 		init_minimap(&w);
-	ft_putendl("test 06");
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
 	mlx_loop_hook(w.mlx, hook_render, &w);

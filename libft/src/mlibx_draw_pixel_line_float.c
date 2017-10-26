@@ -42,13 +42,9 @@ void		mlibx_draw_pixel_line_float(t_dpoint point, t_dpoint pointd, t_wind *w, ch
 	v.y = point.y;
 	v.xdest = pointd.x;
 	v.ydest = pointd.y;
-	ft_putendl("before set parameters tline");
 	v = mlibx_set_parameters_tline(v);
-	ft_putendl("set parameters tline ok");
-	ft_putstr("while");
 	while (rint(v.x) != rint(v.xdest) || rint(v.y) != rint(v.ydest))
 	{
-		ft_putchar('.');
 		if (v.x != v.xdest)
 			v.x += (v.sign_x * (v.diff_x / v.bigdiff));
 		if (v.y != v.ydest)
@@ -56,6 +52,5 @@ void		mlibx_draw_pixel_line_float(t_dpoint point, t_dpoint pointd, t_wind *w, ch
 		if (mlibx_dot_in_window(w, rint(v.x), rint(v.y)))
 			mlibx_draw_pixel(w, rint(v.x), rint(v.y), color);
 	}
-	ft_putstr("end");
 	ft_putchar('\n');
 }

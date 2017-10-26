@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:52:45 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 17:08:22 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/26 13:27:59 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ void				put_info_game(t_wind *w, int row, int bl)
 	int				rightm;
 	int				midm;
 
+	row = 29;
+	mlibx_putstring("8: Sound", row, MARGIN, w);
+	mlibx_putstring(ft_itoa((int)w->w.info.sound), row, COLUMN, w);
 	rightm = 71;
 	midm = 25;
 	put_info_timeout(w, rightm, bl);
@@ -131,8 +134,5 @@ void				put_info(t_wind *w)
 	row = 28;
 	mlibx_putstring("7: Textures", row, MARGIN, w);
 	mlibx_putstring(ft_itoa((int)w->w.info.texture), row, COLUMN, w);
-	row = 29;
-	mlibx_putstring("8: Sound", row, MARGIN, w);
-	mlibx_putstring(ft_itoa((int)w->w.info.sound), row, COLUMN, w);
 	put_info_game(w, row, BL);
 }

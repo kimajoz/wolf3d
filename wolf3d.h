@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 20:15:21 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/26 14:26:22 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,30 @@
 # define TIMEOUT_GAME 1490
 # define GUNW 84
 # define GUNH 103
-# define IC_DGREY 3355443//Rgb 51,51,51
-# define IC_MGREY 7829367//Rgb 119,119,119
-# define IC_FGREEN 0x00FF00//Rgb 0,255,0
-# define IC_FBLUE 0x0000FF//Rgb 0,0,255
-# define IC_FYELLOW 0xFFFF00 //Rgb 255,255,0
-# define IC_FPURPLE 0xFF00FF //Rgb 255,0,255
-
-#define S_STARTL1 "sounds/loops/Casio-MT-45-16-Beat.wav"
-#define S_FOOTSTEP "sounds/loops/footsteps-4_loop.wav"
-#define S_GUNSHOT "sounds/loops/gun-gunshot-01.wav"
-#define S_BULLETFALL "sounds/loops/empty-bullet-shell-fall-01.wav"
-#define S_GUNCOKING "sounds/loops/gun-cocking-01.wav"
-#define S_GAMEOVER "sounds/loops/Casio-CZ-5000-Synth-Bass-C1.wav"
-#define S_HEARTBEAT "sounds/loops/Heartbeat.wav"
-#define S_ONSOUND "sounds/comedy_effect_steak.wav"
-#define S_OFFSOUND "sounds/cartoon_sound_effects_pop.wav"
-
-# if MACROKEY == 1
-	# define OS 1
-# else
-	# define OS 0
-# endif
+# define IC_DGREY 0x333333
+# define IC_MGREY 0x777777
+# define IC_FGREEN 0x00FF00
+# define IC_FBLUE 0x0000FF
+# define IC_FYELLOW 0xFFFF00
+# define IC_FPURPLE 0xFF00FF
+# define S_STARTL1 "sounds/loops/Casio-MT-45-16-Beat.wav"
+# define S_FOOTSTEP "sounds/loops/footsteps-4_loop.wav"
+# define S_GUNSHOT "sounds/loops/gun-gunshot-01.wav"
+# define S_BULLETFALL "sounds/loops/empty-bullet-shell-fall-01.wav"
+# define S_GUNCOKING "sounds/loops/gun-cocking-01.wav"
+# define S_GAMEOVER "sounds/loops/Casio-CZ-5000-Synth-Bass-C1.wav"
+# define S_HEARTBEAT "sounds/loops/Heartbeat.wav"
+# define S_ONSOUND "sounds/comedy_effect_steak.wav"
+# define S_OFFSOUND "sounds/cartoon_sound_effects_pop.wav"
 
 # if MACROKEY == 1
+#  define OS 1
 #  include "minilibx_macos/mlx.h"
 # else
+#  define OS 0
 #  include "minilibx/mlx.h"
 # endif
+
 # include <pthread.h>
 # include "libft/inc/libft.h"
 # include "minilibx_struct.h"
@@ -64,7 +60,6 @@
 # include "keymacro.h"
 # include <math.h>
 # include <stdlib.h>
-# include <stdio.h> // A SUPPRIMER !
 
 int			w_check_progstart(t_wind *w, char *filename);
 int			rt_file(char *filename, t_wind *w, int needed);
@@ -94,7 +89,8 @@ void		w_draw_colored_bg(t_wind *w, int color);
 void		init_pthread(t_wind *w);
 void		w_mlibx_draw_pixel_line_int(t_point point, t_point pointd,
 		t_wind *w, int color);
-void		w_mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, int color);
+void		w_mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w,
+		int color);
 void		w_mlibx_draw_pixel(t_wind *w, int x, int y, int color);
 void		w_print_radar_ray(t_wind *w, double cx, double cy, int angle);
 void		w_print_radar_fov(t_wind *w, double cx, double cy, int angle);

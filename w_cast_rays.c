@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/09 17:56:16 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/26 14:18:58 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ double projsliceh)
 	while (y < pd->y)
 	{
 		h++;
-		w->w.texY = (TEXHEIGHT / projsliceh) * h;
-		w->w.color = getcolor(&w->w.text[w->w.textnumb], w->w.texX,
-				w->w.texY);
+		w->w.tex_y = (TEXHEIGHT / projsliceh) * h;
+		w->w.color = getcolor(&w->w.text[w->w.textnumb], w->w.tex_x,
+				w->w.tex_y);
 		if (mlibx_dot_in_window(w, rint(p->x), y))
 		{
 			w->screen[y][(int)p->x].zdepth = w->w.dist;

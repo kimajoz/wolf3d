@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/07/06 22:13:56 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/26 13:04:15 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void		ft_check_parsing_param(char *filename)
 				ft_strdel(&tab[i++]);
 			free(tab);
 			if (i != 3)
-				exit (ft_print_error_parsing(i, y));
+				exit(ft_print_error_parsing(i, y));
 		}
 		y++;
 	}
