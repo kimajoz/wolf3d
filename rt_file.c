@@ -80,6 +80,7 @@ int			**insert_file_to_prog(int fd, int y, t_wind *w)
 		w->b.nbr_elem_line[y++] = x;
 		free(tab);
 	}
+	free_tablst(tab);
 	w->b.nbr_of_line = y;
 	return (tab_int);
 }
@@ -106,6 +107,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 			ft_strdel(line);
 			y++;
 		}
+		free_tablst(tab);
 		w->b.nbrtot_of_line = y + 1;
 		ft_check_parsing(w, *filename);
 		w->b.tab_int = insert_file_to_prog(*fd, y, w);

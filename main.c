@@ -36,6 +36,7 @@ static void		set_parameters2(t_wind *w)
 	w->w.hit = (t_dpoint){0, 0, 0};
 	w->w.hit2 = (t_dpoint){0, 0, 0};
 	w->w.isprite = 0;
+	w->w.player.timeout = 10 / 1000;
 }
 
 static void		set_parameters(t_wind *w)

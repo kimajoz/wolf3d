@@ -85,6 +85,7 @@ void		ft_check_parsing(t_wind *w, char *filename)
 	int		fd;
 	char	**tab;
 	char	*line;
+	char	*linecp;
 	int		i;
 	int		y;
 
@@ -92,16 +93,22 @@ void		ft_check_parsing(t_wind *w, char *filename)
 	fd = open(filename, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
-		tab = ft_strsplit(line, ' ');
+		linecp = malloc(sizeof(char) * ft_strlen(line) + 1);
+		ft_strcpy(linecp, line);
+		tab = ft_strsplit(linecp, ' ');
 		i = 0;
-		if (line[0] != '#')
+		if (linecp[0] != '#')
 		{
 			while (tab[i])
-				ft_strdel(&tab[i++]);
-			free(tab);
+				i++;
+				//ft_strdel(&tab[i++]);
+			//free(tab);
 			if (i != w->b.tmpneline)
 				exit(ft_print_error_parsing(i, y));
 		}
+		ft_strdel(&linecp);
 		y++;
 	}
+	ft_strdel(&line);
+	free_tablst(tab);
 }

@@ -79,6 +79,7 @@ static char		*ft_contentofpart(char *s, char c, int x)
 		}
 		i++;
 	}
+	cont[y] = '\0';
 	return (cont);
 }
 
