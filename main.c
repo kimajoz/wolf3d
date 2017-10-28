@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 13:03:55 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/28 19:16:48 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ static void		set_parameters2(t_wind *w)
 	w->w.hit = (t_dpoint){0, 0, 0};
 	w->w.hit2 = (t_dpoint){0, 0, 0};
 	w->w.isprite = 0;
-	w->w.player.timeout = 10 / 1000;
+	w->w.player.timeout = 1 / 1000;
+	w->w.player.prevtimeoutimg = 1 / 1000;
+	//w->w.player.prevtimeoutm = 1 / 1000;
 }
 
 static void		set_parameters(t_wind *w)
@@ -69,18 +71,28 @@ int				prog(char *filename)
 {
 	t_wind		w;
 
+	ft_putendl("1");
 	if (!w_check_progstart(&w, filename))
 		return (0);
+	ft_putendl("2");
 	set_parameters(&w);
+	ft_putendl("3");
 	init_texture(&w);
+	ft_putendl("4");
 	init_guns(&w);
+	ft_putendl("5");
 	w_init_screen(&w);
+	ft_putendl("6");
 	create_new_img(&w);
+	ft_putendl("7");
 	if (w.w.info.sound)
 		w_play_music(&w, w.lpth.musicstart, S_STARTL1, 0);
+	ft_putendl("8");
 	w_play_chronotime(&w);
+	ft_putendl("9");
 	if (w.w.info.tabinfo)
 		init_minimap(&w);
+	ft_putendl("10");
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
 	mlx_loop_hook(w.mlx, hook_render, &w);

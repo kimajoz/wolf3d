@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:06:28 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 13:53:35 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/28 18:09:45 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,22 @@ void		w_setsprcoordfile_tosprmap(int fd, t_wind *w)
 
 	while (get_next_line(fd, &line))
 	{
-		tab = ft_strsplit(line, ';');
-		ft_strdel(&line);
 		x = 0;
-		if (tab[x][0] != '#')
+		if (line[0] != '#')
 		{
+			tab = ft_strsplit(line, ';');
 			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].num =
 				ft_atoi(tab[0]);
 			w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].block =
 				w->w.sprite[ft_atoi(tab[0])].block;
 			while (tab[x])
 				ft_strdel(&tab[x++]);
+			free(tab);
 			w->w.nbtotsprprog++;
 		}
+		ft_strdel(&line);
 	}
-	free_tablst(tab);
+	//free_tablst(tab);
 }
 
 int			set_spr_to_prog(int fd, char *filename, t_wind *w)

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 20:25:30 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 19:22:06 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/28 19:18:11 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ void			*w_play(void *data)
 	t_wind		*w;
 
 	w = (t_wind *)data;
-	if (ft_strstr(w->w.songname, "walk"))
-		w->w.timemusic = 1;
-	if (ft_strstr(w->w.songname, "walk"))
-		w->w.timemusic = 1;
-	if (ft_strstr(w->w.songname, "Heartbeat"))
+	if (ft_strstr(w->w.songname, "walk") || ft_strstr(w->w.songname,
+			"Heartbeat"))
 		w->w.timemusic = 1;
 	if (ft_strstr(w->w.songname, "gunshot") || ft_strcmp(w->w.songname,
 			"bullet"))
@@ -55,7 +52,8 @@ int				w_play_music(t_wind *w, pthread_t addresspth, char *url,
 		pthread_create(&addresspth, NULL, w_play_loop, (void*)w);
 	else
 		pthread_create(&addresspth, NULL, w_play, (void*)w);
-	pthread_join(w->lpth.musicstart, NULL);
+	if (w->lpth.musicstart)
+		pthread_join(w->lpth.musicstart, NULL);
 	return (0);
 }
 

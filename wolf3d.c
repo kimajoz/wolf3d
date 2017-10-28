@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 13:43:47 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/28 19:12:50 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,19 @@ int					game_cycle(t_wind *w)
 
 int					wolf3d(t_wind *w)
 {
+	ft_putendl("wol 1");
 	if (w->w.info.spr)
 		w_clear_vis_sprites(w);
+	ft_putendl("wol 2");
 	game_cycle(w);
-	w->w.timeimg = 0.1;
+	ft_putendl("wol 3");
+	game_cycle(w);
+	ft_putendl("wol 4");
+	w->w.timeimg = 0.01;
 	if ((w->w.player.prevtimeoutimg + w->w.timeimg) < w->w.player.timeout ||
 			!w->w.player.prevtimeoutimg)
 	{
+		ft_putendl("wol 5");
 		w->w.player.prevtimeoutimg = w->w.player.timeout;
 		w_clear_screen(w);
 		if (w->w.info.bg)
@@ -94,7 +100,10 @@ int					wolf3d(t_wind *w)
 	}
 	else if ((w->w.player.prevtimeoutimg + w->w.timeimg) > w->w.player.timeout
 			&& w->w.player.prevtimeoutimg)
+	{
 		w_render_screen(w);
+		ft_putendl("wol 6");
+	}
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
 	put_info(w);
 	return (0);

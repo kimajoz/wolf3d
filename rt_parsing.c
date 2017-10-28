@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 16:32:22 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/28 17:10:28 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,17 @@ void		ft_check_parsing_param(char *filename)
 		exit(EXIT_FAILURE);
 	while (get_next_line(fd, &line))
 	{
-		tab = ft_strsplit(line, ' ');
 		i = 0;
 		if (line[0] != '#')
 		{
+			tab = ft_strsplit(line, ' ');
 			while (tab[i])
 				ft_strdel(&tab[i++]);
 			free(tab);
 			if (i != 3)
 				exit(ft_print_error_parsing(i, y));
 		}
+		ft_strdel(&line);
 		y++;
 	}
 }
@@ -85,30 +86,33 @@ void		ft_check_parsing(t_wind *w, char *filename)
 	int		fd;
 	char	**tab;
 	char	*line;
-	char	*linecp;
+	//char	*linecp;
 	int		i;
 	int		y;
 
 	y = 0;
+	//ft_putendl("before rt_parsing");
 	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		exit (1);
 	while (get_next_line(fd, &line))
 	{
-		linecp = malloc(sizeof(char) * ft_strlen(line) + 1);
-		ft_strcpy(linecp, line);
-		tab = ft_strsplit(linecp, ' ');
+		//linecp = malloc(sizeof(char) * ft_strlen(line) + 1);
+		//ft_strcpy(linecp, line);
 		i = 0;
-		if (linecp[0] != '#')
+		if (line[0] != '#')
 		{
+			tab = ft_strsplit(line, ' ');
 			while (tab[i])
-				i++;
-				//ft_strdel(&tab[i++]);
-			//free(tab);
+				ft_strdel(&tab[i++]);
+			free(tab);
 			if (i != w->b.tmpneline)
 				exit(ft_print_error_parsing(i, y));
 		}
-		ft_strdel(&linecp);
+		ft_strdel(&line);
 		y++;
 	}
-	ft_strdel(&line);
-	free_tablst(tab);
+	ft_putendl("after rt_parsing");
+	//ft_strdel(&line);
+	//free_tablst(tab);
 }

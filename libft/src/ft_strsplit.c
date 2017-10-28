@@ -6,16 +6,16 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/08 22:23:59 by pbillett          #+#    #+#             */
-/*   Updated: 2016/01/08 22:26:28 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/28 17:29:45 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-static int		ft_nbrofpart(char *s, char c)
+int				ft_nbrofpart(char *s, char c)
 {
-	int i;
-	int x;
+	int			i;
+	int			x;
 
 	i = 0;
 	x = 0;
