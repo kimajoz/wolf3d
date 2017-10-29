@@ -11,7 +11,18 @@
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
-#include <stdio.h>
+
+int					ft_nbrlen(int n)
+{
+	int nbr;
+
+	nbr = 1;
+	while (n /= 10)
+	{
+		nbr++;
+	}
+	return (nbr);
+}
 
 char				*ft_itoa(int n)
 {
@@ -21,15 +32,12 @@ char				*ft_itoa(int n)
 
 	tmp = (long)n;
 	str = NULL;
-	len = ft_nbrlen(tmp);
+	len = ft_nbrlen(tmp) + (n < 0);
 	if (n < 0)
 		tmp = (tmp * -1);
 	str = ft_strnew(len);
 	if (str == NULL)
 		return (NULL);
-	if (n == 0)
-		str[0] = '0';
-	str[len] = '\0';
 	while (len > 0)
 	{
 		str[len - 1] = (tmp % 10) + '0';

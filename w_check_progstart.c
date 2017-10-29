@@ -22,7 +22,7 @@ char			*new_file_name(char *oldfilename, char *ext)
 	str = ft_strnew(ft_strlen(oldfilename));
 	strsub = ft_strsub(oldfilename, 0, ft_strlen(oldfilename) - len);
 	ft_strcpy(str, strsub);
-	free(strsub);
+	ft_strdel(&strsub);
 	ft_strcat(str, ext);
 	return (str);
 }
@@ -45,5 +45,9 @@ int				w_check_progstart(t_wind *w, char *filename)
 	fparam = new_file_name(filename, ".par");
 	rt_file(fsprites, w, 0);
 	rt_file(fparam, w, 1);
+	ft_strdel(&fsprites);
+	free(fsprites);
+	ft_strdel(&fparam);
+	free(fparam);
 	return (1);
 }

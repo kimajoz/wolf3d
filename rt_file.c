@@ -60,8 +60,8 @@ int			**insert_file_to_prog(int fd, int y, t_wind *w)
 	int		x;
 	int		len;
 
-	tab_int = malloc((y) * sizeof(int *));
-	w->b.nbr_elem_line = malloc((y) * sizeof(int *));
+	tab_int = malloc((y + 1) * sizeof(int *));
+	w->b.nbr_elem_line = malloc((y + 1) * sizeof(int *));
 	y = 0;
 	while (get_next_line(fd, &line))
 	{
@@ -75,7 +75,7 @@ int			**insert_file_to_prog(int fd, int y, t_wind *w)
 			ft_strdel(&tab[x++]);
 		}
 		w->b.nbr_elem_line[y++] = x;
-		//free(tab);
+		free(tab);
 		ft_strdel(&line);
 	}
 	w->b.nbr_of_line = y;

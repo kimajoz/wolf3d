@@ -64,7 +64,7 @@ void		w_setsprcoordfile_tosprmap(int fd, t_wind *w)
 
 int			set_spr_to_prog(int fd, char *filename, t_wind *w)
 {
-	if (ft_check_fd(fd, filename, 0) == 1)
+	if (ft_check_fd(fd, filename, 0))
 	{
 		w->w.info.spr = 0;
 		return (0);

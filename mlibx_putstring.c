@@ -15,4 +15,6 @@
 void	mlibx_putstring(char *s, int l, int c, t_wind *w)
 {
 	mlx_string_put(w->mlx, w->win, 3 + c * 10, l * 20, 0xFFFFFF, s);
+	//ft_strdel(&s);
+	//free(s);
 }

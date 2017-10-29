@@ -46,6 +46,11 @@ void			*w_play_loop(void *data)
 int				w_play_music(t_wind *w, pthread_t addresspth, char *url,
 		int loop)
 {
+	if (w->w.songname)
+	{
+		ft_strdel(&w->w.songname);
+		free(w->w.songname);
+	}
 	w->w.songname = ft_strnew(ft_strlen(url));
 	ft_strcpy(w->w.songname, url);
 	if (loop)

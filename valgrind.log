@@ -1,1412 +1,1394 @@
-==31110== Memcheck, a memory error detector
-==31110== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==31110== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
-==31110== Command: ./wolf3d maps/map2.scn
-==31110== Parent PID: 13645
-==31110== 
---31110-- 
---31110-- Valgrind options:
---31110--    -v
---31110--    --log-file=valgrind.log
---31110-- Contents of /proc/version:
---31110--   Linux version 3.19.0-56-generic (buildd@lgw01-60) (gcc version 4.9.2 (Ubuntu 4.9.2-10ubuntu13) ) #62-Ubuntu SMP Thu Mar 10 22:39:28 UTC 2016
---31110-- Arch and hwcaps: X86, LittleEndian, x86-mmxext-sse1-sse2
---31110-- Page sizes: currently 4096, max supported 4096
---31110-- Valgrind library directory: /usr/lib/valgrind
---31110-- Reading syms from /lib/i386-linux-gnu/ld-2.21.so
---31110--   Considering /lib/i386-linux-gnu/ld-2.21.so ..
---31110--   .. CRC mismatch (computed 903817cc wanted f6e519c3)
---31110--   Considering /usr/lib/debug/lib/i386-linux-gnu/ld-2.21.so ..
---31110--   .. CRC is valid
---31110-- Reading syms from /home/pbillett/work/wolf3d/wolf3d
---31110-- Reading syms from /usr/lib/valgrind/memcheck-x86-linux
---31110--   Considering /usr/lib/valgrind/memcheck-x86-linux ..
---31110--   .. CRC mismatch (computed b7cda827 wanted 155cfedc)
---31110--    object doesn't have a symbol table
---31110--    object doesn't have a dynamic symbol table
---31110-- Scheduler: using generic scheduler lock implementation.
---31110-- Reading suppressions file: /usr/lib/valgrind/default.supp
-==31110== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-31110-by-pbillett-on-???
-==31110== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-31110-by-pbillett-on-???
-==31110== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-31110-by-pbillett-on-???
-==31110== 
-==31110== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==31110== don't want to do, unless you know exactly what you're doing,
-==31110== or are doing some strange experiment):
-==31110==   /usr/lib/valgrind/../../bin/vgdb --pid=31110 ...command...
-==31110== 
-==31110== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==31110==   /path/to/gdb ./wolf3d
-==31110== and then give GDB the following command
-==31110==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=31110
-==31110== --pid is optional if only one valgrind process is running
-==31110== 
---31110-- REDIR: 0x40180a0 (ld-linux.so.2:strlen) redirected to 0x38067c32 (???)
---31110-- REDIR: 0x4017e60 (ld-linux.so.2:index) redirected to 0x38067c0d (???)
---31110-- Reading syms from /usr/lib/valgrind/vgpreload_core-x86-linux.so
---31110--   Considering /usr/lib/valgrind/vgpreload_core-x86-linux.so ..
---31110--   .. CRC mismatch (computed cf6ce89b wanted 715ba6a7)
---31110--    object doesn't have a symbol table
---31110-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so
---31110--   Considering /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so ..
---31110--   .. CRC mismatch (computed 016fabf9 wanted df1861df)
---31110--    object doesn't have a symbol table
-==31110== WARNING: new redirection conflicts with existing -- ignoring it
---31110--     old: 0x040180a0 (strlen              ) R-> (0000.0) 0x38067c32 ???
---31110--     new: 0x040180a0 (strlen              ) R-> (2007.0) 0x0402f400 strlen
---31110-- Reading syms from /lib/i386-linux-gnu/libm-2.21.so
---31110--   Considering /lib/i386-linux-gnu/libm-2.21.so ..
---31110--   .. CRC mismatch (computed bf69294d wanted 20d62bef)
---31110--   Considering /usr/lib/debug/lib/i386-linux-gnu/libm-2.21.so ..
---31110--   .. CRC is valid
---31110-- Reading syms from /usr/lib/i386-linux-gnu/libXext.so.6.4.0
---31110--   Considering /usr/lib/i386-linux-gnu/libXext.so.6.4.0 ..
---31110--   .. CRC mismatch (computed 0bcfb9a3 wanted 0864ce0b)
---31110--    object doesn't have a symbol table
---31110-- Reading syms from /usr/lib/i386-linux-gnu/libX11.so.6.3.0
---31110--   Considering /usr/lib/i386-linux-gnu/libX11.so.6.3.0 ..
---31110--   .. CRC mismatch (computed be7afb47 wanted 12d4c17d)
---31110--    object doesn't have a symbol table
---31110-- Reading syms from /lib/i386-linux-gnu/libpthread-2.21.so
---31110--   Considering /lib/i386-linux-gnu/libpthread-2.21.so ..
---31110--   .. CRC mismatch (computed b6356069 wanted 0f69024b)
---31110--   Considering /usr/lib/debug/lib/i386-linux-gnu/libpthread-2.21.so ..
---31110--   .. CRC is valid
---31110-- Reading syms from /lib/i386-linux-gnu/libc-2.21.so
---31110--   Considering /lib/i386-linux-gnu/libc-2.21.so ..
---31110--   .. CRC mismatch (computed 615e01be wanted 2917b4e5)
---31110--   Considering /usr/lib/debug/lib/i386-linux-gnu/libc-2.21.so ..
---31110--   .. CRC is valid
---31110-- Reading syms from /usr/lib/i386-linux-gnu/libxcb.so.1.1.0
---31110--    object doesn't have a symbol table
---31110-- Reading syms from /lib/i386-linux-gnu/libdl-2.21.so
---31110--   Considering /lib/i386-linux-gnu/libdl-2.21.so ..
---31110--   .. CRC mismatch (computed 94cf16e1 wanted 88a03215)
---31110--   Considering /usr/lib/debug/lib/i386-linux-gnu/libdl-2.21.so ..
---31110--   .. CRC is valid
---31110-- Reading syms from /usr/lib/i386-linux-gnu/libXau.so.6.0.0
---31110--   Considering /usr/lib/i386-linux-gnu/libXau.so.6.0.0 ..
---31110--   .. CRC mismatch (computed 18826c12 wanted c11beec2)
---31110--    object doesn't have a symbol table
---31110-- Reading syms from /usr/lib/i386-linux-gnu/libXdmcp.so.6.0.0
---31110--   Considering /usr/lib/i386-linux-gnu/libXdmcp.so.6.0.0 ..
---31110--   .. CRC mismatch (computed f73c8604 wanted 065eb269)
---31110--    object doesn't have a symbol table
---31110-- REDIR: 0x4293780 (libc.so.6:strnlen) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x4295750 (libc.so.6:strncasecmp) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x429d030 (libc.so.6:memrchr) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x42afb60 (libc.so.6:wcslen) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x42944f0 (libc.so.6:strstr) redirected to 0x4033450 (strstr)
---31110-- REDIR: 0x4293930 (libc.so.6:__GI_strrchr) redirected to 0x402edc0 (__GI_strrchr)
---31110-- REDIR: 0x428f260 (libc.so.6:malloc) redirected to 0x402c110 (malloc)
---31110-- REDIR: 0x42936c0 (libc.so.6:__GI_strlen) redirected to 0x402f380 (__GI_strlen)
---31110-- REDIR: 0x429d270 (libc.so.6:__GI_strncmp) redirected to 0x402fbd0 (__GI_strncmp)
---31110-- REDIR: 0x428fbe0 (libc.so.6:calloc) redirected to 0x402e010 (calloc)
---31110-- REDIR: 0x4295940 (libc.so.6:__GI_memcpy) redirected to 0x4031040 (__GI_memcpy)
---31110-- REDIR: 0x42938e0 (libc.so.6:rindex) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x42ae500 (libc.so.6:__strrchr_sse2_bsf) redirected to 0x402ed90 (rindex)
---31110-- REDIR: 0x42958c0 (libc.so.6:memcpy) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x4346d40 (libc.so.6:__memcpy_ssse3) redirected to 0x4030d40 (memcpy)
---31110-- REDIR: 0x428f880 (libc.so.6:free) redirected to 0x402d2f0 (free)
---31110-- REDIR: 0x4297700 (libc.so.6:strchrnul) redirected to 0x4032e50 (strchrnul)
---31110-- REDIR: 0x4314360 (libc.so.6:__strcpy_chk) redirected to 0x4032ed0 (__strcpy_chk)
---31110-- REDIR: 0x4294dd0 (libc.so.6:bcmp) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x435d5b0 (libc.so.6:__memcmp_ssse3) redirected to 0x4032080 (bcmp)
---31110-- REDIR: 0x42951e0 (libc.so.6:memset) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x43446a0 (libc.so.6:__memset_sse2) redirected to 0x40327b0 (memset)
---31110-- REDIR: 0x4293820 (libc.so.6:strncmp) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x4354790 (libc.so.6:__strncmp_ssse3) redirected to 0x402fb40 (strncmp)
---31110-- REDIR: 0x4295100 (libc.so.6:memmove) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x434ad20 (libc.so.6:__memmove_ssse3) redirected to 0x4032840 (memmove)
---31110-- REDIR: 0x428f930 (libc.so.6:realloc) redirected to 0x402e210 (realloc)
---31110-- REDIR: 0x4293880 (libc.so.6:strncpy) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x429ed90 (libc.so.6:__strncpy_ssse3) redirected to 0x402f600 (strncpy)
---31110-- REDIR: 0x4293670 (libc.so.6:strlen) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x429d370 (libc.so.6:__strlen_sse2_bsf) redirected to 0x402f360 (strlen)
-==31110== Syscall param writev(vector[...]) points to uninitialised byte(s)
-==31110==    at 0x42FD9A3: __writev_nocancel (syscall-template.S:81)
-==31110==    by 0x43DF668: ??? (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
-==31110==    by 0x43DFA87: ??? (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
-==31110==    by 0x43DFB29: xcb_writev (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
-==31110==    by 0x40E9B4D: _XSend (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
-==31110==    by 0x40E9CFC: _XReadEvents (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
-==31110==    by 0x40E8417: XWindowEvent (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
-==31110==    by 0x8051EDF: mlx_int_wait_first_expose (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051D05: mlx_new_window (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F2C2: create_new_window (create_new_window.c:23)
-==31110==    by 0x8049F74: w_check_progstart (w_check_progstart.c:42)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==  Address 0x4413e74 is 28 bytes inside a block of size 16,384 alloc'd
-==31110==    at 0x402E085: calloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x40DA07C: XOpenDisplay (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
-==31110==    by 0x8051975: mlx_init (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F27D: create_new_window (create_new_window.c:19)
-==31110==    by 0x8049F74: w_check_progstart (w_check_progstart.c:42)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x441f00f is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x441f00f is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x441f040 is 0 bytes after a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 4
-==31110==    at 0x804E4ED: free_tablst (rt_file.c:20)
-==31110==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443c128 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 4
-==31110==    at 0x80517E9: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443c128 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid write of size 4
-==31110==    at 0x80517FA: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443c128 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid write of size 4
-==31110==    at 0x8050DE9: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443c128 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443d6ef is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443d6ef is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443d720 is 0 bytes after a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x445dbdf is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x445dbdf is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x445dc10 is 0 bytes after a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 4
-==31110==    at 0x804E4ED: free_tablst (rt_file.c:20)
-==31110==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x447d890 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 4
-==31110==    at 0x80517E9: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x447d890 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid write of size 4
-==31110==    at 0x80517FA: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x447d890 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid write of size 4
-==31110==    at 0x8050DE9: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x447d890 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
---31110-- REDIR: 0x42956f0 (libc.so.6:strcasecmp) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x4356180 (libc.so.6:__strcasecmp_ssse3) redirected to 0x402fd80 (strcasecmp)
---31110-- Reading syms from /usr/lib/i386-linux-gnu/libXcursor.so.1.0.2
---31110--   Considering /usr/lib/i386-linux-gnu/libXcursor.so.1.0.2 ..
---31110--   .. CRC mismatch (computed 05ce7450 wanted 2235fc4f)
---31110--    object doesn't have a symbol table
---31110-- Reading syms from /usr/lib/i386-linux-gnu/libXrender.so.1.3.0
---31110--   Considering /usr/lib/i386-linux-gnu/libXrender.so.1.3.0 ..
---31110--   .. CRC mismatch (computed 1bbe10ae wanted 4b24b268)
---31110--    object doesn't have a symbol table
---31110-- Reading syms from /usr/lib/i386-linux-gnu/libXfixes.so.3.1.0
---31110--    object doesn't have a symbol table
---31110-- REDIR: 0x4293050 (libc.so.6:strcpy) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x429d540 (libc.so.6:__strcpy_ssse3) redirected to 0x402f440 (strcpy)
---31110-- REDIR: 0x4292d70 (libc.so.6:index) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x42ae3f0 (libc.so.6:__strchr_sse2_bsf) redirected to 0x402efb0 (index)
---31110-- REDIR: 0x4294c30 (libc.so.6:__GI_memchr) redirected to 0x4030710 (__GI_memchr)
---31110-- REDIR: 0x4292f80 (libc.so.6:strcmp) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
---31110-- REDIR: 0x4353320 (libc.so.6:__strcmp_ssse3) redirected to 0x40304e0 (strcmp)
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456755f is 1 bytes before a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456755f is 1 bytes before a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x4567567 is 0 bytes after a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456bf2f is 1 bytes before a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456bf2f is 1 bytes before a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456bf37 is 0 bytes after a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456d64f is 1 bytes before a block of size 31 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E659: set_param_to_prog (rt_file.c:37)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456d64f is 1 bytes before a block of size 31 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E659: set_param_to_prog (rt_file.c:37)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456d66f is 0 bytes after a block of size 31 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E659: set_param_to_prog (rt_file.c:37)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x402D31B: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804C9D0: w_clear_vis_sprites2dspr_list (w_clear_vis_sprites.c:20)
-==31110==    by 0x804CB65: w_clear_vis_sprites (w_clear_vis_sprites.c:48)
-==31110==    by 0x8049CCE: wolf3d (wolf3d.c:77)
-==31110==    by 0x804F3A3: create_new_img (create_new_img.c:21)
-==31110==    by 0x80497D8: prog (main.c:78)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x8049D10: wolf3d (wolf3d.c:80)
-==31110==    by 0x804F3A3: create_new_img (create_new_img.c:21)
-==31110==    by 0x80497D8: prog (main.c:78)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x8049D1F: wolf3d (wolf3d.c:80)
-==31110==    by 0x804F3A3: create_new_img (create_new_img.c:21)
-==31110==    by 0x80497D8: prog (main.c:78)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x8049D2B: wolf3d (wolf3d.c:80)
-==31110==    by 0x804F3A3: create_new_img (create_new_img.c:21)
-==31110==    by 0x80497D8: prog (main.c:78)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x4206118: pthread_join (pthread_join.c:45)
-==31110==    by 0x804D3B7: w_play_music (w_play_music.c:58)
-==31110==    by 0x80497FC: prog (main.c:80)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== Thread 2:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x804D2BB: w_play (w_play_music.c:30)
-==31110==    by 0x42051A9: start_thread (pthread_create.c:333)
-==31110==    by 0x4305FDD: clone (clone.S:122)
-==31110== 
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x804D2CA: w_play (w_play_music.c:30)
-==31110==    by 0x42051A9: start_thread (pthread_create.c:333)
-==31110==    by 0x4305FDD: clone (clone.S:122)
-==31110== 
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x804D2D2: w_play (w_play_music.c:30)
-==31110==    by 0x42051A9: start_thread (pthread_create.c:333)
-==31110==    by 0x4305FDD: clone (clone.S:122)
-==31110== 
-==31110== Thread 1:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x4206118: pthread_join (pthread_join.c:45)
-==31110==    by 0x804D3B7: w_play_music (w_play_music.c:58)
-==31110==    by 0x804F63C: keypress_function01 (key_function.c:50)
-==31110==    by 0x804F8C5: keypress_function (key_function.c:106)
-==31110==    by 0x8051DC3: mlx_loop (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x80498BC: prog (main.c:88)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== Process terminating with default action of signal 2 (SIGINT)
-==31110==    at 0x8049270: ??? (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804DD0D: w_mlibx_draw_pixel_line (w_mlibx_draw_pixel_line.c:52)
-==31110==    by 0x804B12A: w_print_radar_ray_hitwall (w_print_radar_fov.c:23)
-==31110==    by 0x804C348: w_cast_single_ray_spr (w_cast_single_ray_spr.c:92)
-==31110==    by 0x804A60D: w_cast_rays (w_cast_rays.c:93)
-==31110==    by 0x8049D91: wolf3d (wolf3d.c:89)
-==31110==    by 0x804F3A3: create_new_img (create_new_img.c:21)
-==31110==    by 0x804F8FF: keypress_function (key_function.c:109)
-==31110==    by 0x8051DC3: mlx_loop (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x80498BC: prog (main.c:88)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== HEAP SUMMARY:
-==31110==     in use at exit: 5,887,610 bytes in 2,074 blocks
-==31110==   total heap usage: 11,678 allocs, 9,604 frees, 10,031,061 bytes allocated
-==31110== 
-==31110== Searching for pointers to 2,074 not-freed blocks
-==31110== Checked 39,549,752 bytes
-==31110== 
-==31110== LEAK SUMMARY:
-==31110==    definitely lost: 4,533 bytes in 214 blocks
-==31110==    indirectly lost: 1,293 bytes in 574 blocks
-==31110==      possibly lost: 1,120 bytes in 4 blocks
-==31110==    still reachable: 5,880,664 bytes in 1,282 blocks
-==31110==         suppressed: 0 bytes in 0 blocks
-==31110== Rerun with --leak-check=full to see details of leaked memory
-==31110== 
-==31110== Use --track-origins=yes to see where uninitialised values come from
-==31110== ERROR SUMMARY: 1971 errors from 36 contexts (suppressed: 0 from 0)
-==31110== 
-==31110== 1 errors in context 1 of 36:
-==31110== Thread 2:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x804D2D2: w_play (w_play_music.c:30)
-==31110==    by 0x42051A9: start_thread (pthread_create.c:333)
-==31110==    by 0x4305FDD: clone (clone.S:122)
-==31110== 
-==31110== 
-==31110== 1 errors in context 2 of 36:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x804D2CA: w_play (w_play_music.c:30)
-==31110==    by 0x42051A9: start_thread (pthread_create.c:333)
-==31110==    by 0x4305FDD: clone (clone.S:122)
-==31110== 
-==31110== 
-==31110== 1 errors in context 3 of 36:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x804D2BB: w_play (w_play_music.c:30)
-==31110==    by 0x42051A9: start_thread (pthread_create.c:333)
-==31110==    by 0x4305FDD: clone (clone.S:122)
-==31110== 
-==31110== 
-==31110== 1 errors in context 4 of 36:
-==31110== Thread 1:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x4206118: pthread_join (pthread_join.c:45)
-==31110==    by 0x804D3B7: w_play_music (w_play_music.c:58)
-==31110==    by 0x80497FC: prog (main.c:80)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 5 of 36:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x8049D2B: wolf3d (wolf3d.c:80)
-==31110==    by 0x804F3A3: create_new_img (create_new_img.c:21)
-==31110==    by 0x80497D8: prog (main.c:78)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 6 of 36:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x8049D1F: wolf3d (wolf3d.c:80)
-==31110==    by 0x804F3A3: create_new_img (create_new_img.c:21)
-==31110==    by 0x80497D8: prog (main.c:78)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 7 of 36:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x8049D10: wolf3d (wolf3d.c:80)
-==31110==    by 0x804F3A3: create_new_img (create_new_img.c:21)
-==31110==    by 0x80497D8: prog (main.c:78)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 8 of 36:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x402D31B: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804C9D0: w_clear_vis_sprites2dspr_list (w_clear_vis_sprites.c:20)
-==31110==    by 0x804CB65: w_clear_vis_sprites (w_clear_vis_sprites.c:48)
-==31110==    by 0x8049CCE: wolf3d (wolf3d.c:77)
-==31110==    by 0x804F3A3: create_new_img (create_new_img.c:21)
-==31110==    by 0x80497D8: prog (main.c:78)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 9 of 36:
-==31110== Invalid write of size 4
-==31110==    at 0x8050DE9: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x447d890 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 10 of 36:
-==31110== Invalid write of size 4
-==31110==    at 0x80517FA: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x447d890 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 11 of 36:
-==31110== Invalid read of size 4
-==31110==    at 0x80517E9: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x447d890 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 12 of 36:
-==31110== Invalid read of size 4
-==31110==    at 0x804E4ED: free_tablst (rt_file.c:20)
-==31110==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x447d890 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 13 of 36:
-==31110== Invalid write of size 4
-==31110==    at 0x8050DE9: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443c128 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 14 of 36:
-==31110== Invalid write of size 4
-==31110==    at 0x80517FA: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443c128 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 15 of 36:
-==31110== Invalid read of size 4
-==31110==    at 0x80517E9: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E4FD: free_tablst (rt_file.c:26)
-==31110==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443c128 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 16 of 36:
-==31110== Invalid read of size 4
-==31110==    at 0x804E4ED: free_tablst (rt_file.c:20)
-==31110==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443c128 is 0 bytes inside a block of size 100 free'd
-==31110==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 1 errors in context 17 of 36:
-==31110== Syscall param writev(vector[...]) points to uninitialised byte(s)
-==31110==    at 0x42FD9A3: __writev_nocancel (syscall-template.S:81)
-==31110==    by 0x43DF668: ??? (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
-==31110==    by 0x43DFA87: ??? (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
-==31110==    by 0x43DFB29: xcb_writev (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
-==31110==    by 0x40E9B4D: _XSend (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
-==31110==    by 0x40E9CFC: _XReadEvents (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
-==31110==    by 0x40E8417: XWindowEvent (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
-==31110==    by 0x8051EDF: mlx_int_wait_first_expose (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051D05: mlx_new_window (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F2C2: create_new_window (create_new_window.c:23)
-==31110==    by 0x8049F74: w_check_progstart (w_check_progstart.c:42)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==  Address 0x4413e74 is 28 bytes inside a block of size 16,384 alloc'd
-==31110==    at 0x402E085: calloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x40DA07C: XOpenDisplay (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
-==31110==    by 0x8051975: mlx_init (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F27D: create_new_window (create_new_window.c:19)
-==31110==    by 0x8049F74: w_check_progstart (w_check_progstart.c:42)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 2 errors in context 18 of 36:
-==31110== Conditional jump or move depends on uninitialised value(s)
-==31110==    at 0x4206118: pthread_join (pthread_join.c:45)
-==31110==    by 0x804D3B7: w_play_music (w_play_music.c:58)
-==31110==    by 0x804F63C: keypress_function01 (key_function.c:50)
-==31110==    by 0x804F8C5: keypress_function (key_function.c:106)
-==31110==    by 0x8051DC3: mlx_loop (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x80498BC: prog (main.c:88)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 3 errors in context 19 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456bf37 is 0 bytes after a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 3 errors in context 20 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456bf2f is 1 bytes before a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 4 errors in context 21 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456d66f is 0 bytes after a block of size 31 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E659: set_param_to_prog (rt_file.c:37)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 4 errors in context 22 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456d64f is 1 bytes before a block of size 31 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E659: set_param_to_prog (rt_file.c:37)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 12 errors in context 23 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456bf2f is 1 bytes before a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
-==31110==    by 0x804EA63: rt_file (rt_file.c:131)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 14 errors in context 24 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x4567567 is 0 bytes after a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 14 errors in context 25 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456755f is 1 bytes before a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 18 errors in context 26 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456d64f is 1 bytes before a block of size 31 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E659: set_param_to_prog (rt_file.c:37)
-==31110==    by 0x804EA76: rt_file (rt_file.c:132)
-==31110==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 23 errors in context 27 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x441f040 is 0 bytes after a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 23 errors in context 28 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x441f00f is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 24 errors in context 29 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x445dc10 is 0 bytes after a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 24 errors in context 30 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x445dbdf is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 24 errors in context 31 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443d720 is 0 bytes after a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 24 errors in context 32 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443d6ef is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 34 errors in context 33 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x456755f is 1 bytes before a block of size 7 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
-==31110==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
-==31110==    by 0x804EA3A: rt_file (rt_file.c:128)
-==31110==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 552 errors in context 34 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x441f00f is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 576 errors in context 35 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x445dbdf is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
-==31110==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== 
-==31110== 576 errors in context 36 of 36:
-==31110== Invalid read of size 1
-==31110==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
-==31110==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110==  Address 0x443d6ef is 1 bytes before a block of size 48 alloc'd
-==31110==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
-==31110==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
-==31110==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
-==31110==    by 0x804EA0C: rt_file (rt_file.c:126)
-==31110==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
-==31110==    by 0x8049770: prog (main.c:72)
-==31110==    by 0x8049912: main (main.c:97)
-==31110== 
-==31110== ERROR SUMMARY: 1971 errors from 36 contexts (suppressed: 0 from 0)
+==21978== Memcheck, a memory error detector
+==21978== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==21978== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==21978== Command: ./wolf3d maps/map2.scn
+==21978== Parent PID: 14964
+==21978== 
+--21978-- 
+--21978-- Valgrind options:
+--21978--    -v
+--21978--    --log-file=valgrind.log
+--21978-- Contents of /proc/version:
+--21978--   Linux version 3.19.0-56-generic (buildd@lgw01-60) (gcc version 4.9.2 (Ubuntu 4.9.2-10ubuntu13) ) #62-Ubuntu SMP Thu Mar 10 22:39:28 UTC 2016
+--21978-- Arch and hwcaps: X86, LittleEndian, x86-mmxext-sse1-sse2
+--21978-- Page sizes: currently 4096, max supported 4096
+--21978-- Valgrind library directory: /usr/lib/valgrind
+--21978-- Reading syms from /lib/i386-linux-gnu/ld-2.21.so
+--21978--   Considering /lib/i386-linux-gnu/ld-2.21.so ..
+--21978--   .. CRC mismatch (computed 903817cc wanted f6e519c3)
+--21978--   Considering /usr/lib/debug/lib/i386-linux-gnu/ld-2.21.so ..
+--21978--   .. CRC is valid
+--21978-- Reading syms from /home/pbillett/work/wolf3d/wolf3d
+--21978-- Reading syms from /usr/lib/valgrind/memcheck-x86-linux
+--21978--   Considering /usr/lib/valgrind/memcheck-x86-linux ..
+--21978--   .. CRC mismatch (computed b7cda827 wanted 155cfedc)
+--21978--    object doesn't have a symbol table
+--21978--    object doesn't have a dynamic symbol table
+--21978-- Scheduler: using generic scheduler lock implementation.
+--21978-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==21978== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-21978-by-pbillett-on-???
+==21978== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-21978-by-pbillett-on-???
+==21978== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-21978-by-pbillett-on-???
+==21978== 
+==21978== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==21978== don't want to do, unless you know exactly what you're doing,
+==21978== or are doing some strange experiment):
+==21978==   /usr/lib/valgrind/../../bin/vgdb --pid=21978 ...command...
+==21978== 
+==21978== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==21978==   /path/to/gdb ./wolf3d
+==21978== and then give GDB the following command
+==21978==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=21978
+==21978== --pid is optional if only one valgrind process is running
+==21978== 
+--21978-- REDIR: 0x40180a0 (ld-linux.so.2:strlen) redirected to 0x38067c32 (???)
+--21978-- REDIR: 0x4017e60 (ld-linux.so.2:index) redirected to 0x38067c0d (???)
+--21978-- Reading syms from /usr/lib/valgrind/vgpreload_core-x86-linux.so
+--21978--   Considering /usr/lib/valgrind/vgpreload_core-x86-linux.so ..
+--21978--   .. CRC mismatch (computed cf6ce89b wanted 715ba6a7)
+--21978--    object doesn't have a symbol table
+--21978-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so
+--21978--   Considering /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so ..
+--21978--   .. CRC mismatch (computed 016fabf9 wanted df1861df)
+--21978--    object doesn't have a symbol table
+==21978== WARNING: new redirection conflicts with existing -- ignoring it
+--21978--     old: 0x040180a0 (strlen              ) R-> (0000.0) 0x38067c32 ???
+--21978--     new: 0x040180a0 (strlen              ) R-> (2007.0) 0x0402f400 strlen
+--21978-- Reading syms from /lib/i386-linux-gnu/libm-2.21.so
+--21978--   Considering /lib/i386-linux-gnu/libm-2.21.so ..
+--21978--   .. CRC mismatch (computed bf69294d wanted 20d62bef)
+--21978--   Considering /usr/lib/debug/lib/i386-linux-gnu/libm-2.21.so ..
+--21978--   .. CRC is valid
+--21978-- Reading syms from /usr/lib/i386-linux-gnu/libXext.so.6.4.0
+--21978--   Considering /usr/lib/i386-linux-gnu/libXext.so.6.4.0 ..
+--21978--   .. CRC mismatch (computed 0bcfb9a3 wanted 0864ce0b)
+--21978--    object doesn't have a symbol table
+--21978-- Reading syms from /usr/lib/i386-linux-gnu/libX11.so.6.3.0
+--21978--   Considering /usr/lib/i386-linux-gnu/libX11.so.6.3.0 ..
+--21978--   .. CRC mismatch (computed be7afb47 wanted 12d4c17d)
+--21978--    object doesn't have a symbol table
+--21978-- Reading syms from /lib/i386-linux-gnu/libpthread-2.21.so
+--21978--   Considering /lib/i386-linux-gnu/libpthread-2.21.so ..
+--21978--   .. CRC mismatch (computed b6356069 wanted 0f69024b)
+--21978--   Considering /usr/lib/debug/lib/i386-linux-gnu/libpthread-2.21.so ..
+--21978--   .. CRC is valid
+--21978-- Reading syms from /lib/i386-linux-gnu/libc-2.21.so
+--21978--   Considering /lib/i386-linux-gnu/libc-2.21.so ..
+--21978--   .. CRC mismatch (computed 615e01be wanted 2917b4e5)
+--21978--   Considering /usr/lib/debug/lib/i386-linux-gnu/libc-2.21.so ..
+--21978--   .. CRC is valid
+--21978-- Reading syms from /usr/lib/i386-linux-gnu/libxcb.so.1.1.0
+--21978--    object doesn't have a symbol table
+--21978-- Reading syms from /lib/i386-linux-gnu/libdl-2.21.so
+--21978--   Considering /lib/i386-linux-gnu/libdl-2.21.so ..
+--21978--   .. CRC mismatch (computed 94cf16e1 wanted 88a03215)
+--21978--   Considering /usr/lib/debug/lib/i386-linux-gnu/libdl-2.21.so ..
+--21978--   .. CRC is valid
+--21978-- Reading syms from /usr/lib/i386-linux-gnu/libXau.so.6.0.0
+--21978--   Considering /usr/lib/i386-linux-gnu/libXau.so.6.0.0 ..
+--21978--   .. CRC mismatch (computed 18826c12 wanted c11beec2)
+--21978--    object doesn't have a symbol table
+--21978-- Reading syms from /usr/lib/i386-linux-gnu/libXdmcp.so.6.0.0
+--21978--   Considering /usr/lib/i386-linux-gnu/libXdmcp.so.6.0.0 ..
+--21978--   .. CRC mismatch (computed f73c8604 wanted 065eb269)
+--21978--    object doesn't have a symbol table
+--21978-- REDIR: 0x4293780 (libc.so.6:strnlen) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x4295750 (libc.so.6:strncasecmp) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x429d030 (libc.so.6:memrchr) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x42afb60 (libc.so.6:wcslen) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x42944f0 (libc.so.6:strstr) redirected to 0x4033450 (strstr)
+--21978-- REDIR: 0x4293930 (libc.so.6:__GI_strrchr) redirected to 0x402edc0 (__GI_strrchr)
+--21978-- REDIR: 0x428f260 (libc.so.6:malloc) redirected to 0x402c110 (malloc)
+--21978-- REDIR: 0x42936c0 (libc.so.6:__GI_strlen) redirected to 0x402f380 (__GI_strlen)
+--21978-- REDIR: 0x429d270 (libc.so.6:__GI_strncmp) redirected to 0x402fbd0 (__GI_strncmp)
+--21978-- REDIR: 0x428fbe0 (libc.so.6:calloc) redirected to 0x402e010 (calloc)
+--21978-- REDIR: 0x4295940 (libc.so.6:__GI_memcpy) redirected to 0x4031040 (__GI_memcpy)
+--21978-- REDIR: 0x42938e0 (libc.so.6:rindex) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x42ae500 (libc.so.6:__strrchr_sse2_bsf) redirected to 0x402ed90 (rindex)
+--21978-- REDIR: 0x42958c0 (libc.so.6:memcpy) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x4346d40 (libc.so.6:__memcpy_ssse3) redirected to 0x4030d40 (memcpy)
+--21978-- REDIR: 0x428f880 (libc.so.6:free) redirected to 0x402d2f0 (free)
+--21978-- REDIR: 0x4297700 (libc.so.6:strchrnul) redirected to 0x4032e50 (strchrnul)
+--21978-- REDIR: 0x4314360 (libc.so.6:__strcpy_chk) redirected to 0x4032ed0 (__strcpy_chk)
+--21978-- REDIR: 0x4294dd0 (libc.so.6:bcmp) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x435d5b0 (libc.so.6:__memcmp_ssse3) redirected to 0x4032080 (bcmp)
+--21978-- REDIR: 0x42951e0 (libc.so.6:memset) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x43446a0 (libc.so.6:__memset_sse2) redirected to 0x40327b0 (memset)
+--21978-- REDIR: 0x4293820 (libc.so.6:strncmp) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x4354790 (libc.so.6:__strncmp_ssse3) redirected to 0x402fb40 (strncmp)
+--21978-- REDIR: 0x4295100 (libc.so.6:memmove) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x434ad20 (libc.so.6:__memmove_ssse3) redirected to 0x4032840 (memmove)
+--21978-- REDIR: 0x428f930 (libc.so.6:realloc) redirected to 0x402e210 (realloc)
+--21978-- REDIR: 0x4293880 (libc.so.6:strncpy) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x429ed90 (libc.so.6:__strncpy_ssse3) redirected to 0x402f600 (strncpy)
+--21978-- REDIR: 0x4293670 (libc.so.6:strlen) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x429d370 (libc.so.6:__strlen_sse2_bsf) redirected to 0x402f360 (strlen)
+==21978== Syscall param writev(vector[...]) points to uninitialised byte(s)
+==21978==    at 0x42FD9A3: __writev_nocancel (syscall-template.S:81)
+==21978==    by 0x43DF668: ??? (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
+==21978==    by 0x43DFA87: ??? (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
+==21978==    by 0x43DFB29: xcb_writev (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
+==21978==    by 0x40E9B4D: _XSend (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
+==21978==    by 0x40E9CFC: _XReadEvents (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
+==21978==    by 0x40E8417: XWindowEvent (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
+==21978==    by 0x8051EDF: mlx_int_wait_first_expose (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051D05: mlx_new_window (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F2C2: create_new_window (create_new_window.c:23)
+==21978==    by 0x8049F74: w_check_progstart (w_check_progstart.c:42)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==  Address 0x4413e74 is 28 bytes inside a block of size 16,384 alloc'd
+==21978==    at 0x402E085: calloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x40DA07C: XOpenDisplay (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
+==21978==    by 0x8051975: mlx_init (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F27D: create_new_window (create_new_window.c:19)
+==21978==    by 0x8049F74: w_check_progstart (w_check_progstart.c:42)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x441f137 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x441f137 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x441f168 is 0 bytes after a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 4
+==21978==    at 0x804E4ED: free_tablst (rt_file.c:20)
+==21978==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443c250 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 4
+==21978==    at 0x80517E9: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443c250 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid write of size 4
+==21978==    at 0x80517FA: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443c250 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid write of size 4
+==21978==    at 0x8050DE9: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443c250 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443d817 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443d817 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443d848 is 0 bytes after a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x445dd07 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x445dd07 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x445dd38 is 0 bytes after a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 4
+==21978==    at 0x804E4ED: free_tablst (rt_file.c:20)
+==21978==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x447d9b8 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 4
+==21978==    at 0x80517E9: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x447d9b8 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid write of size 4
+==21978==    at 0x80517FA: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x447d9b8 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid write of size 4
+==21978==    at 0x8050DE9: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x447d9b8 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+--21978-- REDIR: 0x42956f0 (libc.so.6:strcasecmp) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x4356180 (libc.so.6:__strcasecmp_ssse3) redirected to 0x402fd80 (strcasecmp)
+--21978-- Reading syms from /usr/lib/i386-linux-gnu/libXcursor.so.1.0.2
+--21978--   Considering /usr/lib/i386-linux-gnu/libXcursor.so.1.0.2 ..
+--21978--   .. CRC mismatch (computed 05ce7450 wanted 2235fc4f)
+--21978--    object doesn't have a symbol table
+--21978-- Reading syms from /usr/lib/i386-linux-gnu/libXrender.so.1.3.0
+--21978--   Considering /usr/lib/i386-linux-gnu/libXrender.so.1.3.0 ..
+--21978--   .. CRC mismatch (computed 1bbe10ae wanted 4b24b268)
+--21978--    object doesn't have a symbol table
+--21978-- Reading syms from /usr/lib/i386-linux-gnu/libXfixes.so.3.1.0
+--21978--    object doesn't have a symbol table
+--21978-- REDIR: 0x4293050 (libc.so.6:strcpy) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x429d540 (libc.so.6:__strcpy_ssse3) redirected to 0x402f440 (strcpy)
+--21978-- REDIR: 0x4292d70 (libc.so.6:index) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x42ae3f0 (libc.so.6:__strchr_sse2_bsf) redirected to 0x402efb0 (index)
+--21978-- REDIR: 0x4294c30 (libc.so.6:__GI_memchr) redirected to 0x4030710 (__GI_memchr)
+--21978-- REDIR: 0x4292f80 (libc.so.6:strcmp) redirected to 0x4026590 (_vgnU_ifunc_wrapper)
+--21978-- REDIR: 0x4353320 (libc.so.6:__strcmp_ssse3) redirected to 0x40304e0 (strcmp)
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x4566af7 is 1 bytes before a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x4566af7 is 1 bytes before a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x4566aff is 0 bytes after a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456b4c7 is 1 bytes before a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456b4c7 is 1 bytes before a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456b4cf is 0 bytes after a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456cbe7 is 1 bytes before a block of size 31 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E659: set_param_to_prog (rt_file.c:37)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456cbe7 is 1 bytes before a block of size 31 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E659: set_param_to_prog (rt_file.c:37)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456cc07 is 0 bytes after a block of size 31 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E659: set_param_to_prog (rt_file.c:37)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x402D31B: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804C9D0: w_clear_vis_sprites2dspr_list (w_clear_vis_sprites.c:20)
+==21978==    by 0x804CB65: w_clear_vis_sprites (w_clear_vis_sprites.c:48)
+==21978==    by 0x8049CCE: wolf3d (wolf3d.c:77)
+==21978==    by 0x804F3A3: create_new_img (create_new_img.c:21)
+==21978==    by 0x80497D8: prog (main.c:78)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x8049D10: wolf3d (wolf3d.c:80)
+==21978==    by 0x804F3A3: create_new_img (create_new_img.c:21)
+==21978==    by 0x80497D8: prog (main.c:78)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x8049D1F: wolf3d (wolf3d.c:80)
+==21978==    by 0x804F3A3: create_new_img (create_new_img.c:21)
+==21978==    by 0x80497D8: prog (main.c:78)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x8049D2B: wolf3d (wolf3d.c:80)
+==21978==    by 0x804F3A3: create_new_img (create_new_img.c:21)
+==21978==    by 0x80497D8: prog (main.c:78)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x4206118: pthread_join (pthread_join.c:45)
+==21978==    by 0x804D3B7: w_play_music (w_play_music.c:58)
+==21978==    by 0x80497FC: prog (main.c:80)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== Thread 2:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x804D2BB: w_play (w_play_music.c:30)
+==21978==    by 0x42051A9: start_thread (pthread_create.c:333)
+==21978==    by 0x4305FDD: clone (clone.S:122)
+==21978== 
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x804D2CA: w_play (w_play_music.c:30)
+==21978==    by 0x42051A9: start_thread (pthread_create.c:333)
+==21978==    by 0x4305FDD: clone (clone.S:122)
+==21978== 
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x804D2D2: w_play (w_play_music.c:30)
+==21978==    by 0x42051A9: start_thread (pthread_create.c:333)
+==21978==    by 0x4305FDD: clone (clone.S:122)
+==21978== 
+==21978== Thread 1:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x80503E2: hook_render (expose_hook.c:27)
+==21978==    by 0x8051DD8: mlx_loop (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x80498BC: prog (main.c:88)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+--21978-- REDIR: 0x4295560 (libc.so.6:__GI_stpcpy) redirected to 0x4032200 (__GI_stpcpy)
+==21978== 
+==21978== HEAP SUMMARY:
+==21978==     in use at exit: 5,878,817 bytes in 1,990 blocks
+==21978==   total heap usage: 11,485 allocs, 9,495 frees, 10,008,864 bytes allocated
+==21978== 
+==21978== Searching for pointers to 1,990 not-freed blocks
+==21978== Checked 22,765,740 bytes
+==21978== 
+==21978== LEAK SUMMARY:
+==21978==    definitely lost: 4,377 bytes in 178 blocks
+==21978==    indirectly lost: 1,293 bytes in 574 blocks
+==21978==      possibly lost: 560 bytes in 2 blocks
+==21978==    still reachable: 5,872,587 bytes in 1,236 blocks
+==21978==         suppressed: 0 bytes in 0 blocks
+==21978== Rerun with --leak-check=full to see details of leaked memory
+==21978== 
+==21978== Use --track-origins=yes to see where uninitialised values come from
+==21978== ERROR SUMMARY: 1970 errors from 36 contexts (suppressed: 0 from 0)
+==21978== 
+==21978== 1 errors in context 1 of 36:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x80503E2: hook_render (expose_hook.c:27)
+==21978==    by 0x8051DD8: mlx_loop (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x80498BC: prog (main.c:88)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 2 of 36:
+==21978== Thread 2:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x804D2D2: w_play (w_play_music.c:30)
+==21978==    by 0x42051A9: start_thread (pthread_create.c:333)
+==21978==    by 0x4305FDD: clone (clone.S:122)
+==21978== 
+==21978== 
+==21978== 1 errors in context 3 of 36:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x804D2CA: w_play (w_play_music.c:30)
+==21978==    by 0x42051A9: start_thread (pthread_create.c:333)
+==21978==    by 0x4305FDD: clone (clone.S:122)
+==21978== 
+==21978== 
+==21978== 1 errors in context 4 of 36:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x804D2BB: w_play (w_play_music.c:30)
+==21978==    by 0x42051A9: start_thread (pthread_create.c:333)
+==21978==    by 0x4305FDD: clone (clone.S:122)
+==21978== 
+==21978== 
+==21978== 1 errors in context 5 of 36:
+==21978== Thread 1:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x4206118: pthread_join (pthread_join.c:45)
+==21978==    by 0x804D3B7: w_play_music (w_play_music.c:58)
+==21978==    by 0x80497FC: prog (main.c:80)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 6 of 36:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x8049D2B: wolf3d (wolf3d.c:80)
+==21978==    by 0x804F3A3: create_new_img (create_new_img.c:21)
+==21978==    by 0x80497D8: prog (main.c:78)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 7 of 36:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x8049D1F: wolf3d (wolf3d.c:80)
+==21978==    by 0x804F3A3: create_new_img (create_new_img.c:21)
+==21978==    by 0x80497D8: prog (main.c:78)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 8 of 36:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x8049D10: wolf3d (wolf3d.c:80)
+==21978==    by 0x804F3A3: create_new_img (create_new_img.c:21)
+==21978==    by 0x80497D8: prog (main.c:78)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 9 of 36:
+==21978== Conditional jump or move depends on uninitialised value(s)
+==21978==    at 0x402D31B: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804C9D0: w_clear_vis_sprites2dspr_list (w_clear_vis_sprites.c:20)
+==21978==    by 0x804CB65: w_clear_vis_sprites (w_clear_vis_sprites.c:48)
+==21978==    by 0x8049CCE: wolf3d (wolf3d.c:77)
+==21978==    by 0x804F3A3: create_new_img (create_new_img.c:21)
+==21978==    by 0x80497D8: prog (main.c:78)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 10 of 36:
+==21978== Invalid write of size 4
+==21978==    at 0x8050DE9: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x447d9b8 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 11 of 36:
+==21978== Invalid write of size 4
+==21978==    at 0x80517FA: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x447d9b8 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 12 of 36:
+==21978== Invalid read of size 4
+==21978==    at 0x80517E9: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x447d9b8 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 13 of 36:
+==21978== Invalid read of size 4
+==21978==    at 0x804E4ED: free_tablst (rt_file.c:20)
+==21978==    by 0x804E7FF: insert_file_to_prog (rt_file.c:83)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x447d9b8 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E7D7: insert_file_to_prog (rt_file.c:81)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 14 of 36:
+==21978== Invalid write of size 4
+==21978==    at 0x8050DE9: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443c250 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 15 of 36:
+==21978== Invalid write of size 4
+==21978==    at 0x80517FA: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443c250 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 16 of 36:
+==21978== Invalid read of size 4
+==21978==    at 0x80517E9: ft_memdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050DE2: ft_strdel (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E4FD: free_tablst (rt_file.c:26)
+==21978==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443c250 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 17 of 36:
+==21978== Invalid read of size 4
+==21978==    at 0x804E4ED: free_tablst (rt_file.c:20)
+==21978==    by 0x804E94B: w_insert_tab_int (rt_file.c:110)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443c250 is 0 bytes inside a block of size 100 free'd
+==21978==    at 0x402D358: free (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804E912: w_insert_tab_int (rt_file.c:106)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 1 errors in context 18 of 36:
+==21978== Syscall param writev(vector[...]) points to uninitialised byte(s)
+==21978==    at 0x42FD9A3: __writev_nocancel (syscall-template.S:81)
+==21978==    by 0x43DF668: ??? (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
+==21978==    by 0x43DFA87: ??? (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
+==21978==    by 0x43DFB29: xcb_writev (in /usr/lib/i386-linux-gnu/libxcb.so.1.1.0)
+==21978==    by 0x40E9B4D: _XSend (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
+==21978==    by 0x40E9CFC: _XReadEvents (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
+==21978==    by 0x40E8417: XWindowEvent (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
+==21978==    by 0x8051EDF: mlx_int_wait_first_expose (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051D05: mlx_new_window (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F2C2: create_new_window (create_new_window.c:23)
+==21978==    by 0x8049F74: w_check_progstart (w_check_progstart.c:42)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==  Address 0x4413e74 is 28 bytes inside a block of size 16,384 alloc'd
+==21978==    at 0x402E085: calloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x40DA07C: XOpenDisplay (in /usr/lib/i386-linux-gnu/libX11.so.6.3.0)
+==21978==    by 0x8051975: mlx_init (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F27D: create_new_window (create_new_window.c:19)
+==21978==    by 0x8049F74: w_check_progstart (w_check_progstart.c:42)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 3 errors in context 19 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456b4cf is 0 bytes after a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 3 errors in context 20 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456b4c7 is 1 bytes before a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 4 errors in context 21 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456cc07 is 0 bytes after a block of size 31 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E659: set_param_to_prog (rt_file.c:37)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 4 errors in context 22 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456cbe7 is 1 bytes before a block of size 31 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E659: set_param_to_prog (rt_file.c:37)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 12 errors in context 23 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EC7D: ft_check_parsing_param (rt_parsing.c:69)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456b4c7 is 1 bytes before a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804ED0D: ft_check_parsing_param (rt_parsing.c:67)
+==21978==    by 0x804EA63: rt_file (rt_file.c:131)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 14 errors in context 24 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x4566aff is 0 bytes after a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 14 errors in context 25 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x4566af7 is 1 bytes before a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 18 errors in context 26 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E55D: set_param_to_prog (rt_file.c:39)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x456cbe7 is 1 bytes before a block of size 31 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E659: set_param_to_prog (rt_file.c:37)
+==21978==    by 0x804EA76: rt_file (rt_file.c:132)
+==21978==    by 0x8049FEC: w_check_progstart (w_check_progstart.c:47)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 23 errors in context 27 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x441f168 is 0 bytes after a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 23 errors in context 28 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x441f137 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 24 errors in context 29 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x445dd38 is 0 bytes after a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 24 errors in context 30 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x445dd07 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 24 errors in context 31 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050838: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443d848 is 0 bytes after a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 24 errors in context 32 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x8050762: ft_nbrofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050934: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443d817 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 34 errors in context 33 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F00A: w_setsprcoordfile_tosprmap (w_create_spr_map.c:47)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x4566af7 is 1 bytes before a block of size 7 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804F162: w_setsprcoordfile_tosprmap (w_create_spr_map.c:45)
+==21978==    by 0x804F219: set_spr_to_prog (w_create_spr_map.c:76)
+==21978==    by 0x804EA3A: rt_file (rt_file.c:128)
+==21978==    by 0x8049FD9: w_check_progstart (w_check_progstart.c:46)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 552 errors in context 34 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E8AA: w_insert_tab_int (rt_file.c:102)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x441f137 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E935: w_insert_tab_int (rt_file.c:100)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 576 errors in context 35 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E722: insert_file_to_prog (rt_file.c:72)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x445dd07 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x8050B37: ft_strsub (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805115A: new_linefound (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8051310: get_next_line (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804E7E9: insert_file_to_prog (rt_file.c:69)
+==21978==    by 0x804E985: w_insert_tab_int (rt_file.c:113)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== 
+==21978== 576 errors in context 36 of 36:
+==21978== Invalid read of size 1
+==21978==    at 0x80507E9: ft_lengthofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x8050874: ft_contentofpart (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x805098C: ft_strsplit (in /home/pbillett/work/wolf3d/wolf3d)
+==21978==    by 0x804EDA9: ft_check_parsing (rt_parsing.c:98)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978==  Address 0x443d817 is 1 bytes before a block of size 48 alloc'd
+==21978==    at 0x402C17C: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==21978==    by 0x804ED82: ft_check_parsing (rt_parsing.c:96)
+==21978==    by 0x804E96E: w_insert_tab_int (rt_file.c:112)
+==21978==    by 0x804EA0C: rt_file (rt_file.c:126)
+==21978==    by 0x8049F9A: w_check_progstart (w_check_progstart.c:43)
+==21978==    by 0x8049770: prog (main.c:72)
+==21978==    by 0x8049912: main (main.c:97)
+==21978== 
+==21978== ERROR SUMMARY: 1970 errors from 36 contexts (suppressed: 0 from 0)

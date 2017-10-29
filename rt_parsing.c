@@ -89,6 +89,7 @@ void		ft_check_parsing(t_wind *w, char *filename)
 	//char	*linecp;
 	int		i;
 	int		y;
+	//int		len;
 
 	y = 0;
 	//ft_putendl("before rt_parsing");
@@ -102,6 +103,8 @@ void		ft_check_parsing(t_wind *w, char *filename)
 		i = 0;
 		if (line[0] != '#')
 		{
+			//len = ft_nbrofpart(line, ' ');
+			//tab = malloc(len * sizeof(char *));
 			tab = ft_strsplit(line, ' ');
 			while (tab[i])
 				ft_strdel(&tab[i++]);

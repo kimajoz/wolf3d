@@ -16,5 +16,7 @@ int			ft_check_fd(int fd, char *filename, int needed)
 		ft_putchar('\n');
 		return (1);
 	}
+	else
+		ft_strdel(&line);
 	return (0);
 }

@@ -24,7 +24,7 @@ void				w_draw_colored_bg(t_wind *w, int color)
 		x = w->w.marginw;
 		while (x < w->width)
 		{
-			mlibx_draw_dot(w, x, y, color);
+			w_mlibx_draw_pixel(w, x, y, color);
 			x++;
 		}
 		y++;

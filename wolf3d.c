@@ -88,23 +88,34 @@ int					wolf3d(t_wind *w)
 		ft_putendl("wol 5");
 		w->w.player.prevtimeoutimg = w->w.player.timeout;
 		w_clear_screen(w);
+		ft_putendl("wol 5a");
 		if (w->w.info.bg)
 			w_draw_background_color(w);
+		ft_putendl("wol 5b");
 		if (w->w.info.tabinfo)
 			init_minimap(w);
+		ft_putendl("wol 5c");
 		w_cast_rays(w);
+		ft_putendl("wol 5d");
 		if (w->w.info.spr)
 			w_render_sprites(w);
+		ft_putendl("wol 5e");
 		w_gun_fire(w);
+		ft_putendl("wol 5f");
 		w_render_screen(w);
+		ft_putendl("wol 5g");
 	}
 	else if ((w->w.player.prevtimeoutimg + w->w.timeimg) > w->w.player.timeout
 			&& w->w.player.prevtimeoutimg)
 	{
+		ft_putendl("wol 6 prev");
 		w_render_screen(w);
 		ft_putendl("wol 6");
 	}
+	ft_putendl("wol 7");
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
+	ft_putendl("wol 8");
 	put_info(w);
+	ft_putendl("wol 9");
 	return (0);
 }

@@ -17,12 +17,19 @@ void		w_clear_vis_sprites2dspr_list(t_wind *w)
 	int		i;
 
 	i = 0;
-	if (!w->w.oldvisiblespr)
+	if (w->w.oldvisiblespr)
 	{
+		ft_putendl("w_clear_vis_sprites exist before 0");
+		//while (i < w->w.nbtotsprprog)
+			//free(&w->w.oldvisiblespr[i++]);
+		ft_putendl("w_clear_vis_sprites exist before 1");
 		free(w->w.oldvisiblespr);
+		ft_putendl("w_clear_vis_sprites exist before 2");
 		w->w.oldvisiblespr = NULL;
+		ft_putendl("w_clear_vis_sprites exist before 3");
 	}
 	w->w.oldvisiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite));
+	i = 0;
 	while (i < w->w.sprnbvis)
 	{
 		w->w.oldvisiblespr[i] = w->w.visiblespr[i];

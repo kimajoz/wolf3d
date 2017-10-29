@@ -14,11 +14,14 @@
 
 void		w_win_level(t_wind *w)
 {
+	static	int	i;
+
 	w_draw_colored_bg(w, 0x0000cc);
-	if (w->w.info.sound)
+	if (!i && w->w.info.sound)
 	{
-		w_play_music(w, w->lpth.musicgameover, S_GAMEOVER, 0);
-		pthread_join(w->lpth.musicgameover, NULL);
+		w_play_music(w, w->lpth.musicgamewin, S_GAMEOVER, 0);
+		pthread_join(w->lpth.musicgamewin, NULL);
+		i = 1;
 	}
 }
 
