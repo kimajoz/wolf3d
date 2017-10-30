@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/28 19:12:50 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/30 17:36:00 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ int					wolf3d(t_wind *w)
 	ft_putendl("wol 1");
 	if (w->w.info.spr)
 		w_clear_vis_sprites(w);
-	ft_putendl("wol 2");
+	//ft_putendl("wol 2");
 	game_cycle(w);
-	ft_putendl("wol 3");
+	//ft_putendl("wol 3");
 	game_cycle(w);
-	ft_putendl("wol 4");
+	//ft_putendl("wol 4");
 	w->w.timeimg = 0.01;
 	if ((w->w.player.prevtimeoutimg + w->w.timeimg) < w->w.player.timeout ||
 			!w->w.player.prevtimeoutimg)
@@ -88,34 +88,34 @@ int					wolf3d(t_wind *w)
 		ft_putendl("wol 5");
 		w->w.player.prevtimeoutimg = w->w.player.timeout;
 		w_clear_screen(w);
-		ft_putendl("wol 5a");
+		//ft_putendl("wol 5a");
 		if (w->w.info.bg)
 			w_draw_background_color(w);
-		ft_putendl("wol 5b");
+		//ft_putendl("wol 5b");
 		if (w->w.info.tabinfo)
 			init_minimap(w);
-		ft_putendl("wol 5c");
+		//ft_putendl("wol 5c");
 		w_cast_rays(w);
-		ft_putendl("wol 5d");
+		//ft_putendl("wol 5d");
 		if (w->w.info.spr)
 			w_render_sprites(w);
-		ft_putendl("wol 5e");
+		//ft_putendl("wol 5e");
 		w_gun_fire(w);
-		ft_putendl("wol 5f");
+		//ft_putendl("wol 5f");
 		w_render_screen(w);
-		ft_putendl("wol 5g");
+		//ft_putendl("wol 5g");
 	}
 	else if ((w->w.player.prevtimeoutimg + w->w.timeimg) > w->w.player.timeout
 			&& w->w.player.prevtimeoutimg)
 	{
 		ft_putendl("wol 6 prev");
 		w_render_screen(w);
-		ft_putendl("wol 6");
+		//ft_putendl("wol 6");
 	}
 	ft_putendl("wol 7");
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
-	ft_putendl("wol 8");
+	//ft_putendl("wol 8");
 	put_info(w);
-	ft_putendl("wol 9");
+	//ft_putendl("wol 9");
 	return (0);
 }

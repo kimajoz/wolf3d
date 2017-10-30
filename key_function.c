@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 13:12:14 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/30 14:46:08 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ static void		keypress_function01(int keycode, t_wind *w)
 	{
 		w->w.player.ammunition += 7;
 		w->w.player.ammureload = 1;
+		ft_putendl("ettt");
 		if (w->w.info.sound)
 			w_play_music(w, w->lpth.fxguncocking, S_GUNCOKING, 0);
+		ft_putendl("ettt1");
 	}
 }
 

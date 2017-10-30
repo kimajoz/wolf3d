@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:06:28 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/28 18:09:45 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/30 14:59:42 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void		w_setsprcoordfile_tosprmap(int fd, t_wind *w)
 				w->w.sprite[ft_atoi(tab[0])].block;
 			while (tab[x])
 				ft_strdel(&tab[x++]);
-			free(tab);
+			if (tab)
+				free(tab);
 			w->w.nbtotsprprog++;
 		}
 		ft_strdel(&line);

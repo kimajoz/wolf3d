@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 16:09:21 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/30 13:46:36 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,7 +304,7 @@ typedef struct				s_player
 	int						totalscore;
 	int						gameover;
 	int						win;
-	char					*object;
+	int						object;
 	int						opendoor;
 	int						fire;
 	int						ammureload;
@@ -392,6 +392,7 @@ typedef struct				s_wolf
 	double					tmpmsec;
 	int						sprite_angled;
 	int						isprite;
+	char					**legend;
 }							t_wolf;
 
 typedef struct				s_wind

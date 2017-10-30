@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 20:25:30 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/28 19:18:11 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/30 17:46:33 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,14 @@ void			*w_play(void *data)
 	{
 		w->w.player.prevtimeoutm = w->w.player.timeout;
 		ft_play_sound(w->w.songname, OS);
+		if (!w->w.songname)
+		{
+			ft_putendl("--------------------------free songname 2.");
+			free(w->w.songname);
+		}
 	}
+	ft_putendl("play music 2");
+	ft_putendl("play music 3");
 	return (0);
 }
 
@@ -46,13 +53,17 @@ void			*w_play_loop(void *data)
 int				w_play_music(t_wind *w, pthread_t addresspth, char *url,
 		int loop)
 {
-	if (w->w.songname)
+	ft_putendl("play music 1");
+	//if (!w->w.songname || !ft_strcmp(w->w.songname, url))
+		//free(w->w.songname);
+	if (!w->w.songname)
 	{
-		ft_strdel(&w->w.songname);
+		ft_putendl("--------------------------free songname 1.");
 		free(w->w.songname);
 	}
-	w->w.songname = ft_strnew(ft_strlen(url));
-	ft_strcpy(w->w.songname, url);
+	w->w.songname = ft_strdup(url);
+	//if (!url)
+		//free(url);
 	if (loop)
 		pthread_create(&addresspth, NULL, w_play_loop, (void*)w);
 	else

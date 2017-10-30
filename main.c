@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/28 19:16:48 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/30 17:46:55 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		set_parameters2(t_wind *w)
 	w->w.isprite = 0;
 	w->w.player.timeout = 1 / 1000;
 	w->w.player.prevtimeoutimg = 1 / 1000;
-	//w->w.player.prevtimeoutm = 1 / 1000;
+	w->w.player.prevtimeoutm = 1 / 1000;
 }
 
 static void		set_parameters(t_wind *w)
@@ -86,7 +86,9 @@ int				prog(char *filename)
 	create_new_img(&w);
 	ft_putendl("7");
 	if (w.w.info.sound)
+	{
 		w_play_music(&w, w.lpth.musicstart, S_STARTL1, 0);
+	}
 	ft_putendl("8");
 	w_play_chronotime(&w);
 	ft_putendl("9");

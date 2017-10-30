@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 12:41:05 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 14:03:53 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/30 14:53:01 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ void				w_gun_fire_loop(t_wind *w)
 	{
 		w->w.player.ammunition--;
 		w->w.player.ammureload++;
-		if (w->w.info.sound)
-			w_play_music(w, w->lpth.fxgunshot, S_GUNSHOT, 0);
 		if (w->w.player.ammureload > 6)
 		{
 			w->w.player.ammureload = 1;
 			if (w->w.info.sound)
 				w_play_music(w, w->lpth.fxgunbulletfall, S_BULLETFALL, 0);
 		}
+		else if (w->w.player.ammureload < 6 && w->w.info.sound)
+			w_play_music(w, w->lpth.fxgunshot, S_GUNSHOT, 0);
 	}
 	else if (!w->w.player.ammunition && w->w.info.sound)
 		w_play_music(w, w->lpth.fxgunbulletfall, S_BULLETFALL, 0);

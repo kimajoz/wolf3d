@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 18:48:27 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 19:07:03 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/10/30 14:09:24 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ void			w_init_player_game(t_wind *w)
 	w->w.player.health = 100;
 	w->w.player.opendoor = 0;
 	w->w.player.fire = 0;
-	w->w.player.object = ft_strnew(ft_strlen("No objects"));
-	ft_strcpy(w->w.player.object, "No objects");
+	w->w.player.object = 0;
 }
 
 void			w_init_screen(t_wind *w)
