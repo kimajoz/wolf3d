@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 16:31:11 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 17:23:23 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,29 +74,47 @@ int					game_cycle(t_wind *w)
 
 int					wolf3d(t_wind *w)
 {
+	ft_comment("wolf3d 01");
 	if (w->w.info.spr)
 		w_clear_vis_sprites(w);
+	ft_comment("wolf3d 02");
 	game_cycle(w);
+	ft_comment("wolf3d 03");
 	w->w.timeimg = 0.01;
 	if ((w->w.player.prevtimeoutimg + w->w.timeimg) < w->w.player.timeout ||
 			!w->w.player.prevtimeoutimg)
 	{
+		ft_comment("wolf3d 03a");
 		w->w.player.prevtimeoutimg = w->w.player.timeout;
 		w_clear_screen(w);
+		ft_comment("wolf3d 03b");
 		if (w->w.info.bg)
 			w_draw_background_color(w);
+		ft_comment("wolf3d 03c");
 		if (w->w.info.tabinfo)
 			init_minimap(w);
+		ft_comment("wolf3d 03d");
 		w_cast_rays(w);
+		ft_comment("wolf3d 03e");
 		if (w->w.info.spr)
 			w_render_sprites(w);
+		ft_comment("wolf3d 03f");
 		w_gun_fire(w);
+		ft_comment("wolf3d 03g");
 		w_render_screen(w);
+		ft_comment("wolf3d 03h");
 	}
 	else if ((w->w.player.prevtimeoutimg + w->w.timeimg) > w->w.player.timeout
 			&& w->w.player.prevtimeoutimg)
+	{
+		ft_comment("wolf3d 04");
 		w_render_screen(w);
+		ft_comment("wolf3d 04a");
+	}
+	ft_comment("wolf3d 05");
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
+	ft_comment("wolf3d 06");
 	put_info(w);
+	ft_comment("wolf3d 07");
 	return (0);
 }
