@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 11:40:08 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 12:06:58 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,15 @@ int			**insert_file_to_prog(int fd, int y, t_wind *w)
 void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 {
 	int		fd1;
+	int		fd2;
 	int		y;
 	char	**tab;
 
 	fd1 = open(*filename, O_RDONLY);
 	if (ft_check_fd(fd1, *filename, w->b.needed) == 1)
 		exit(EXIT_FAILURE);
+	close(fd1);
+	fd2 = open(*filename, O_RDONLY);
 	y = 0;
 	if (ft_strstr(*filename, "scn"))
 	{
@@ -98,7 +101,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 		ft_check_parsing(w, *filename);
 		w->b.tab_int = insert_file_to_prog(*fd, y, w);
 	}
-	close(fd1);
+	close(fd2);
 }
 
 int			rt_file(char *filename, t_wind *w, int needed)
