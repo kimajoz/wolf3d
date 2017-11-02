@@ -64,6 +64,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf $(NAME).dSYM/Contents/*
 	make fclean -C libft
 
 re: fclean all
