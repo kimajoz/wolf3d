@@ -6,15 +6,24 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/30 14:46:08 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 11:25:24 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
+int				w_insidemap(int x, int y, t_wind *w)
+{
+	if ((y >= 0 && y < w->b.nbrtot_of_line) &&
+	(x >= 0 && x < w->b.nbr_elem_line[0]))
+		return (1);
+	return (0);
+}
+
 int				is_blocking(t_dpoint pos, t_wind *w)
 {
-	if ((int)(w->b.tab_int[(int)pos.z][(int)pos.x]) > 0)
+	if (w_insidemap((int)pos.x, (int)pos.z, w) &&
+	(int)(w->b.tab_int[(int)pos.z][(int)pos.x]) > 0)
 		return (1);
 	return (0);
 }

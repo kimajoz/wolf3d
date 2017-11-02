@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/30 17:36:00 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 11:18:35 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,9 @@ int					wolf3d(t_wind *w)
 	ft_putendl("wol 1");
 	if (w->w.info.spr)
 		w_clear_vis_sprites(w);
-	//ft_putendl("wol 2");
+	ft_putendl("wol 2");
 	game_cycle(w);
-	//ft_putendl("wol 3");
-	game_cycle(w);
-	//ft_putendl("wol 4");
+	ft_putendl("wol 4");
 	w->w.timeimg = 0.01;
 	if ((w->w.player.prevtimeoutimg + w->w.timeimg) < w->w.player.timeout ||
 			!w->w.player.prevtimeoutimg)

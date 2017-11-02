@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 20:25:30 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/30 17:46:33 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 11:20:54 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,7 @@ void			*w_play_loop(void *data)
 int				w_play_music(t_wind *w, pthread_t addresspth, char *url,
 		int loop)
 {
-	ft_putendl("play music 1");
-	//if (!w->w.songname || !ft_strcmp(w->w.songname, url))
-		//free(w->w.songname);
-	if (!w->w.songname)
-	{
-		ft_putendl("--------------------------free songname 1.");
-		free(w->w.songname);
-	}
-	w->w.songname = ft_strdup(url);
+	w->w.songname = url;
 	//if (!url)
 		//free(url);
 	if (loop)
