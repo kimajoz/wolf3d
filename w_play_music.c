@@ -18,17 +18,19 @@ void			*w_play(void *data)
 	t_wind		*w;
 
 	w = (t_wind *)data;
-	if (ft_strstr(w->w.songname, "walk") || ft_strstr(w->w.songname,
-			"Heartbeat"))
-		w->w.timemusic = 1;
-	if (ft_strstr(w->w.songname, "gunshot") || ft_strcmp(w->w.songname,
-			"bullet"))
-		w->w.timemusic = 0.5;
+	//if (ft_strstr(w->w.songname, "walk") || ft_strstr(w->w.songname,
+	//		"Heartbeat"))
+	w->w.timemusic = 1;
+	//if (ft_strstr(w->w.songname, "gunshot") || ft_strcmp(w->w.songname,
+	//		"bullet"))
+		//w->w.timemusic = 0.5;
 	if ((w->w.player.prevtimeoutm + w->w.timemusic) < w->w.player.timeout ||
 			!w->w.player.prevtimeoutm)
 	{
 		w->w.player.prevtimeoutm = w->w.player.timeout;
 		ft_play_sound(w->w.songname, OS);
+		if (!w->w.songname)
+			free(w->w.songname);
 	}
 	return (0);
 }

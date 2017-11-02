@@ -26,6 +26,9 @@ int			hook_render(t_wind *w)
 {
 	if (!w->w.player.kp.upwalk || w->w.player.fire != 0)
 	{
+		ft_comment("hook_render");
+		printf("w->w.player.kp.upwalk: %d\n", w->w.player.kp.upwalk);
+		printf("w->w.player.fire: %d\n", w->w.player.fire);
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
 		create_new_img(w);
 	}
@@ -38,6 +41,7 @@ int			turntable(t_wind *w)
 	{
 		ROTABS(w->p.rot.z);
 		w->p.rot.z += 5;
+		ft_comment("turntable");
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
 		create_new_img(w);
 		mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x,

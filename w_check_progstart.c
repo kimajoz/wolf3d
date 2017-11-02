@@ -44,7 +44,7 @@ int				w_check_progstart(t_wind *w, char *filename)
 	fsprites = new_file_name(filename, ".spr");
 	fparam = new_file_name(filename, ".par");
 	rt_file(fsprites, w, 0);
-	rt_file(fparam, w, 1);
+	rt_file(fparam, w, 0);
 	ft_strdel(&fsprites);
 	free(fsprites);
 	ft_strdel(&fparam);

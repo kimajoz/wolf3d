@@ -47,17 +47,19 @@ void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 	}
 }
 
-int			**insert_file_to_prog(int fd, int y, t_wind *w)
+int			**insert_file_to_prog(char *filename, int y, t_wind *w)
 {
 	char	*line;
 	char	**tab;
 	int		**tab_int;
 	int		x;
 	int		len;
+	int		fd;
 
 	tab_int = malloc((y + 1) * sizeof(int *));
 	w->b.nbr_elem_line = malloc((y + 1) * sizeof(int *));
 	y = 0;
+	fd = open(filename, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
 		tab = ft_strsplit(line, ' ');
@@ -100,7 +102,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 		}
 		w->b.nbrtot_of_line = y;
 		ft_check_parsing(w, *filename);
-		w->b.tab_int = insert_file_to_prog(*fd, y, w);
+		w->b.tab_int = insert_file_to_prog(*filename, y, w);
 	}
 	close(fd1);
 }

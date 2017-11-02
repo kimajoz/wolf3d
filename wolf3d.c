@@ -52,15 +52,20 @@ void				init_minimap(t_wind *w)
 
 void				tab_info(t_wind *w)
 {
+	ft_comment("tab_info");
 	if (!w->w.info.tabinfo)
 	{
+		ft_comment("tab_info 1");
 		w->w.marginw = 0;
+		printf("w->w.marginw: %d\n", w->w.marginw);
 		w->w.info.raynumb = w->width;
 		w->w.player.fov = 70;
 	}
 	else
 	{
+		ft_comment("tab_info 2");
 		w->w.marginw = w->w.marginwfset;
+		printf("w->w.marginw: %d\n", w->w.marginwfset);
 		w->w.info.raynumb = w->width - w->w.marginw;
 		w->w.player.fov = 50;
 	}

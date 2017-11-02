@@ -39,6 +39,7 @@ static void		set_parameters2(t_wind *w)
 	w->w.player.timeout = 1 / 1000;
 	w->w.player.prevtimeoutimg = 1 / 1000;
 	w->w.player.prevtimeoutm = 1 / 1000;
+	tab_info(w);
 }
 
 static void		set_parameters(t_wind *w)

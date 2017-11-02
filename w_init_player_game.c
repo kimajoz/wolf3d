@@ -61,6 +61,9 @@ void			w_clear_screen(t_wind *w)
 	int			x;
 
 	y = 0;
+	ft_comment("clear screen");
+	printf("w->width: %d\n", w->width);
+	printf("w->height: %d\n", w->height);
 	while (y < w->height)
 	{
 		x = 0;

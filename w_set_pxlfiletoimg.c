@@ -29,6 +29,7 @@ void *d)
 	int		i;
 	int		fd;
 
+	ft_comment("w_set_pxlfiletoimg");
 	i = 0;
 	while (i < max)
 	{

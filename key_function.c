@@ -107,6 +107,7 @@ int				keypress_function(int keycode, t_wind *w)
 	{
 		keypress_function01(keycode, w);
 		keypress_function02(keycode, w);
+		ft_comment("key_function");
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
 		create_new_img(w);
 	}

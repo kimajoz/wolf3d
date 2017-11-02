@@ -41,7 +41,7 @@ void			w_draw_the_wall(t_wind *w, int i)
 	t_point		p;
 	t_point		pd;
 
-	ft_comment("w_draw_the_wall 01");
+	//ft_comment("w_draw_the_wall 01");
 	projsliceh = (CUBESIZE * w->w.player.fov) / w->w.dist;
 	p = (t_point){(i * w->w.slicew), (w->height / 2) - (projsliceh / 2), 0};
 	pd = (t_point){p.x, p.y + projsliceh, 0};
@@ -51,7 +51,7 @@ void			w_draw_the_wall(t_wind *w, int i)
 		w_draw_band_wall(w, &p, &pd, projsliceh);
 	else
 		w_mlibx_draw_pixel_line_int(p, pd, w, w->w.color);
-	ft_comment("w_draw_the_wall 02");
+	//ft_comment("w_draw_the_wall 02");
 }
 
 void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
