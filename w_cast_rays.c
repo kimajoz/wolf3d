@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 14:19:59 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 16:04:17 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,8 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 	ray_angle = fmod(ray_angle, TWOPI);
 	w->w.right = (ray_angle > TWOPI * 0.75 || ray_angle < TWOPI * 0.25);
 	w->w.up = (ray_angle < 0 || ray_angle > M_PI);
-	ft_comment("w_cast_single_ray 01");
 	w_verticales_lines_check(w, ray_angle);
-	ft_comment("w_cast_single_ray 02");
 	w_horizontales_lines_check(w, ray_angle);
-	ft_comment("w_cast_single_ray 03");
 	if (w->w.dist)
 	{
 		if (w->w.info.ray_minimap && w->w.info.tabinfo)
@@ -74,7 +71,6 @@ void			w_cast_single_ray(t_wind *w, double ray_angle, int raynumb)
 		w->w.olddist = w->w.dist;
 		w_draw_the_wall(w, raynumb);
 	}
-	ft_comment("w_cast_single_ray 04");
 }
 
 void			w_cast_rays(t_wind *w)
@@ -93,8 +89,10 @@ void			w_cast_rays(t_wind *w)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;
 		w_cast_single_ray(w, angle, w->w.curray);
+		ft_comment("w_cast_single_ray 04");
 		if (w->w.info.spr)
 			w_cast_single_ray_spr(w, angle);
+		ft_comment("w_cast_single_ray 04a");
 		angle += w->cam.anglebetrays;
 		w->w.curray++;
 	}

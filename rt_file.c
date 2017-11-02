@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 14:23:02 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 15:41:03 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,12 @@ int			**insert_file_to_prog(int fd, int y, t_wind *w)
 void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 {
 	int		fd1;
-	int		fd2;
 	int		y;
 	char	**tab;
 
-	fd1 = open(*filename, O_RDONLY);
-	if (ft_check_fd(fd1, *filename, w->b.needed) == 1)
+	if (ft_check_fd(*fd, *filename, w->b.needed))
 		exit(EXIT_FAILURE);
-	close(fd1);
-	fd2 = open(*filename, O_RDONLY);
+	fd1 = open(*filename, O_RDONLY);
 	y = 0;
 	if (ft_strstr(*filename, "scn"))
 	{
@@ -101,7 +98,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 		ft_check_parsing(w, *filename);
 		w->b.tab_int = insert_file_to_prog(*fd, y, w);
 	}
-	close(fd2);
+	close(fd1);
 }
 
 int			rt_file(char *filename, t_wind *w, int needed)
@@ -113,11 +110,11 @@ int			rt_file(char *filename, t_wind *w, int needed)
 	w->b.needed = needed;
 	if (ft_strstr(filename, "scn"))
 		w_insert_tab_int(w, &fd, &line, &filename);
-	if (ft_strstr(filename, "spr"))
+	else if (ft_strstr(filename, "spr"))
 		set_spr_to_prog(fd, filename, w);
 	else if (ft_strstr(filename, "par"))
 	{
-		if (!ft_check_parsing_param(filename))
+		if (!ft_check_parsing_param(filename, fd))
 		{
 			set_param_to_prog(fd, w, 0, 0);
 			w->cam.pos.x = w->w.player.init_pos[0] + 0.5;

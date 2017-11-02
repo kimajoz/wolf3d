@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 16:02:09 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 12:50:19 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 15:19:58 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,21 @@ int color)
 {
 	t_line	v;
 
-	//ft_comment("w_mlibx_draw_pixel_line 01");
 	v.x = point.x;
 	v.y = point.y;
 	v.xdest = pointd.x;
 	v.ydest = pointd.y;
-	//ft_comment("w_mlibx_draw_pixel_line 01a");
 	v = w_mlibx_set_parameters_tline(v);
-	//ft_comment("w_mlibx_draw_pixel_line 01b");
 	while (rint(v.x) != v.xdest || rint(v.y) != v.ydest)
 	{
-		////ft_comment("w_mlibx_draw_pixel_line 01c");
 		if (v.x != v.xdest)
 			v.x += (v.sign_x * (v.diff_x / v.bigdiff));
 		if (v.y != v.ydest)
 			v.y += (v.sign_y * (v.diff_y / v.bigdiff));
-		////ft_comment("w_mlibx_draw_pixel_line 01dc1");
 		if (mlibx_dot_in_window(w, rint(v.x), rint(v.y)))
 		{
-			//ft_comment("w_mlibx_draw_pixel_line 01d");
 			w->screen[(int)rint(v.y)][(int)rint(v.x)].color = color;
-			//ft_comment("w_mlibx_draw_pixel_line 01e");
 			w->screen[(int)rint(v.y)][(int)rint(v.x)].zdepth = -10;
-			//ft_comment("w_mlibx_draw_pixel_line 01f");
 		}
 	}
 }

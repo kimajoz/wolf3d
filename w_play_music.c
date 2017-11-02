@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 20:25:30 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 11:20:54 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 15:21:18 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,7 @@ void			*w_play(void *data)
 	{
 		w->w.player.prevtimeoutm = w->w.player.timeout;
 		ft_play_sound(w->w.songname, OS);
-		if (!w->w.songname)
-		{
-			ft_putendl("--------------------------free songname 2.");
-			free(w->w.songname);
-		}
 	}
-	ft_putendl("play music 2");
-	ft_putendl("play music 3");
 	return (0);
 }
 
@@ -54,8 +47,6 @@ int				w_play_music(t_wind *w, pthread_t addresspth, char *url,
 		int loop)
 {
 	w->w.songname = url;
-	//if (!url)
-		//free(url);
 	if (loop)
 		pthread_create(&addresspth, NULL, w_play_loop, (void*)w);
 	else

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 15:10:19 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 16:20:20 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define TIMEOUT_GAME 500
 # define GUNW 84
 # define GUNH 103
+# define NBLEGEND 13
 # define IC_DGREY 0x333333
 # define IC_MGREY 0x777777
 # define IC_FGREEN 0x00FF00
@@ -68,7 +69,7 @@
 int			w_check_progstart(t_wind *w, char *filename);
 int			rt_file(char *filename, t_wind *w, int needed);
 void		ft_check_parsing(t_wind *w, char *filename);
-int			ft_check_parsing_param(char *filename);
+int			ft_check_parsing_param(char *filename, int fd);
 int			ft_print_error_type_parsing(int x, int y);
 int			ft_count_lines(t_wind *w, char *filename);
 void		put_info(t_wind *w);
@@ -130,5 +131,8 @@ void		w_verticales_lines_check(t_wind *w, double ray_angle);
 void		w_horizontales_lines_check(t_wind *w, double ray_angle);
 void		w_set_pxl_spr_gunr(int bx, int by, int size, t_wind *w);
 int			w_insidemap(int x, int y, t_wind *w);
+void		legend(t_wind *w);
+void		free_legend(t_wind *w);
+void		w_mlibx_putint(int i, int row, int column, t_wind *w);
 
 #endif

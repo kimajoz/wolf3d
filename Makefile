@@ -29,6 +29,7 @@ SRC=	main.c \
 		create_new_img.c \
 		key_function.c \
 		put_info.c \
+		free_legend.c \
 		expose_hook.c
 OBJ=${SRC:.c=.o}
 

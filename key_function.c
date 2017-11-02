@@ -6,23 +6,14 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 14:22:34 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 15:34:49 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int				w_insidemap(int x, int y, t_wind *w)
-{
-	if ((y >= 0 && y < w->b.nbrtot_of_line) &&
-	(x >= 0 && x < w->b.nbr_elem_line[0]))
-		return (1);
-	return (0);
-}
-
 int				is_blocking(t_dpoint pos, t_wind *w)
 {
-	ft_comment("move 01a");
 	if (w_insidemap((int)pos.x, (int)pos.z, w) &&
 	(int)(w->b.tab_int[(int)pos.z][(int)pos.x]) > 0)
 		return (1);
@@ -42,16 +33,14 @@ void			move(t_wind *w)
 			w->w.player.rotspeed);
 	tmp.x = w->cam.pos.x + cos(ft_degreetorad(w->cam.rot.y)) * movestep;
 	tmp.z = w->cam.pos.z + sin(ft_degreetorad(w->cam.rot.y)) * movestep;
-	ft_comment("move 01");
 	if (!is_blocking(tmp, w) &&
 		((w->w.info.spr) ? (w_insidemap((int)tmp.x, (int)tmp.z, w) &&
-		 w->w.tab_int_spr[(int)tmp.z][(int)tmp.x].block
+		w->w.tab_int_spr[(int)tmp.z][(int)tmp.x].block
 			!= 1) : 1))
 	{
 		w->cam.pos.x = tmp.x;
 		w->cam.pos.z = tmp.z;
 	}
-	ft_comment("end move function");
 }
 
 static void		keypress_function01(int keycode, t_wind *w)
@@ -77,10 +66,8 @@ static void		keypress_function01(int keycode, t_wind *w)
 	{
 		w->w.player.ammunition += 7;
 		w->w.player.ammureload = 1;
-		ft_putendl("ettt");
 		if (w->w.info.sound)
 			w_play_music(w, w->lpth.fxguncocking, S_GUNCOKING, 0);
-		ft_putendl("ettt1");
 	}
 }
 

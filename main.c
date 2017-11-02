@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 14:05:54 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 16:28:56 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,19 @@ int				prog(char *filename)
 {
 	t_wind		w;
 
-	ft_putendl("0");
 	w_init_player_pos(&w);
-	ft_putendl("1");
 	if (!w_check_progstart(&w, filename))
 		return (0);
-	ft_putendl("2");
 	set_parameters(&w);
-	ft_putendl("3");
 	init_texture(&w);
-	ft_putendl("4");
 	init_guns(&w);
-	ft_putendl("5");
 	w_init_screen(&w);
-	ft_putendl("6");
 	create_new_img(&w);
-	ft_putendl("7");
 	if (w.w.info.sound)
 	{
 		w_play_music(&w, w.lpth.musicstart, S_STARTL1, 0);
 	}
-	ft_putendl("8");
 	w_play_chronotime(&w);
-	ft_putendl("9");
 	if (w.w.info.tabinfo)
 		init_minimap(&w);
 	ft_putendl("10");

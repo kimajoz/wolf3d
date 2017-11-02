@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 12:18:59 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 15:44:39 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,18 @@ int			ft_numdigit(char *n)
 	return (0);
 }
 
-int			ft_check_parsing_param(char *filename)
+int			ft_check_parsing_param(char *filename, int fd)
 {
-	int		fd;
+	int		fd1;
 	char	**tab;
 	char	*line;
 	int		i;
 	int		y;
 
 	y = 0;
-	fd = open(filename, O_RDONLY);
-	ft_comment("end ft_check_parsing_param 00");
-	if (ft_check_fd(fd, filename, 0))
+	fd1 = open(filename, O_RDONLY);
+	if (ft_check_fd(fd1, filename, 0))
 		return (1);
-	ft_comment("end ft_check_parsing_param 01");
 	while (get_next_line(fd, &line))
 	{
 		i = 0;
@@ -81,8 +79,6 @@ int			ft_check_parsing_param(char *filename)
 		ft_strdel(&line);
 		y++;
 	}
-	close(fd);
-	ft_comment("end ft_check_parsing_param");
 	return (0);
 }
 
@@ -91,25 +87,18 @@ void		ft_check_parsing(t_wind *w, char *filename)
 	int		fd;
 	char	**tab;
 	char	*line;
-	//char	*linecp;
 	int		i;
 	int		y;
-	//int		len;
 
 	y = 0;
-	//ft_putendl("before rt_parsing");
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		exit (1);
+		exit(1);
 	while (get_next_line(fd, &line))
 	{
-		//linecp = malloc(sizeof(char) * ft_strlen(line) + 1);
-		//ft_strcpy(linecp, line);
 		i = 0;
 		if (line[0] != '#')
 		{
-			//len = ft_nbrofpart(line, ' ');
-			//tab = malloc(len * sizeof(char *));
 			tab = ft_strsplit(line, ' ');
 			while (tab[i])
 				ft_strdel(&tab[i++]);
@@ -120,8 +109,4 @@ void		ft_check_parsing(t_wind *w, char *filename)
 		ft_strdel(&line);
 		y++;
 	}
-	close(fd);
-	ft_putendl("after rt_parsing");
-	//ft_strdel(&line);
-	//free_tablst(tab);
 }
