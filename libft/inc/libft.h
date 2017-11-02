@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 12:11:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/28 17:22:50 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 11:36:39 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 int					ft_nbrofpart(char *s, char c);
+void				ft_comment(char *str);
+void				ft_free_tablst(char **tab);
 
 typedef struct		s_list
 {
