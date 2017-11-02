@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 12:06:58 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 14:23:02 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 			ft_strdel(line);
 			y++;
 		}
-		w->b.nbrtot_of_line = y + 1;
+		w->b.nbrtot_of_line = y;
 		ft_check_parsing(w, *filename);
 		w->b.tab_int = insert_file_to_prog(*fd, y, w);
 	}
@@ -117,8 +117,13 @@ int			rt_file(char *filename, t_wind *w, int needed)
 		set_spr_to_prog(fd, filename, w);
 	else if (ft_strstr(filename, "par"))
 	{
-		ft_check_parsing_param(filename);
-		set_param_to_prog(fd, w, 0, 0);
+		if (!ft_check_parsing_param(filename))
+		{
+			set_param_to_prog(fd, w, 0, 0);
+			w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
+			w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
+			w->cam.rot.y = w->w.player.init_pos[2];
+		}
 	}
 	close(fd);
 	return (1);

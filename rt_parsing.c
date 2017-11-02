@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/28 17:10:28 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 12:18:59 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			ft_numdigit(char *n)
 	return (0);
 }
 
-void		ft_check_parsing_param(char *filename)
+int			ft_check_parsing_param(char *filename)
 {
 	int		fd;
 	char	**tab;
@@ -62,8 +62,10 @@ void		ft_check_parsing_param(char *filename)
 
 	y = 0;
 	fd = open(filename, O_RDONLY);
-	if (ft_check_fd(fd, filename, 1))
-		exit(EXIT_FAILURE);
+	ft_comment("end ft_check_parsing_param 00");
+	if (ft_check_fd(fd, filename, 0))
+		return (1);
+	ft_comment("end ft_check_parsing_param 01");
 	while (get_next_line(fd, &line))
 	{
 		i = 0;
@@ -79,6 +81,9 @@ void		ft_check_parsing_param(char *filename)
 		ft_strdel(&line);
 		y++;
 	}
+	close(fd);
+	ft_comment("end ft_check_parsing_param");
+	return (0);
 }
 
 void		ft_check_parsing(t_wind *w, char *filename)
@@ -115,6 +120,7 @@ void		ft_check_parsing(t_wind *w, char *filename)
 		ft_strdel(&line);
 		y++;
 	}
+	close(fd);
 	ft_putendl("after rt_parsing");
 	//ft_strdel(&line);
 	//free_tablst(tab);

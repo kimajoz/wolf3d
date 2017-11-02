@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/30 17:46:55 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 14:05:54 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int				prog(char *filename)
 {
 	t_wind		w;
 
+	ft_putendl("0");
+	w_init_player_pos(&w);
 	ft_putendl("1");
 	if (!w_check_progstart(&w, filename))
 		return (0);
@@ -96,10 +98,15 @@ int				prog(char *filename)
 		init_minimap(&w);
 	ft_putendl("10");
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
+	ft_putendl("10a");
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
+	ft_putendl("10b");
 	mlx_loop_hook(w.mlx, hook_render, &w);
+	ft_putendl("10c");
 	mlx_expose_hook(w.win, expose_hook, &w);
+	ft_putendl("10d");
 	mlx_loop(w.mlx);
+	ft_putendl("10e");
 	return (0);
 }
 

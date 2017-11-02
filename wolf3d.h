@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 16:30:25 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 15:10:19 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define SPRWIDTH 64
 # define SPRHEIGHT 64
 # define MARGINIT 3
-# define TIMEOUT_GAME 1490
+# define TIMEOUT_GAME 500
 # define GUNW 84
 # define GUNH 103
 # define IC_DGREY 0x333333
@@ -63,11 +63,12 @@
 # include "keymacro.h"
 # include <math.h>
 # include <stdlib.h>
+#include <stdio.h>
 
 int			w_check_progstart(t_wind *w, char *filename);
 int			rt_file(char *filename, t_wind *w, int needed);
 void		ft_check_parsing(t_wind *w, char *filename);
-void		ft_check_parsing_param(char *filename);
+int			ft_check_parsing_param(char *filename);
 int			ft_print_error_type_parsing(int x, int y);
 int			ft_count_lines(t_wind *w, char *filename);
 void		put_info(t_wind *w);
@@ -128,6 +129,6 @@ void		w_set_pxlfiletoimg(t_wind *w, int max, char **lst, void *d);
 void		w_verticales_lines_check(t_wind *w, double ray_angle);
 void		w_horizontales_lines_check(t_wind *w, double ray_angle);
 void		w_set_pxl_spr_gunr(int bx, int by, int size, t_wind *w);
-void		free_tablst(char **tab);
+int			w_insidemap(int x, int y, t_wind *w);
 
 #endif

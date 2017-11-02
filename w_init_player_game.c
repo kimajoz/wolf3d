@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 18:48:27 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/30 14:09:24 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 14:04:01 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,9 @@ void			w_init_player_pos(t_wind *w)
 {
 	w->cam.rot.x = 0;
 	w->cam.rot.z = 0;
-	if (w->w.player.init_pos != NULL)
-	{
-		w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
-		w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
-		w->cam.rot.y = w->w.player.init_pos[2];
-	}
-	else
-	{
-		w->cam.pos.x = 1.5;
-		w->cam.pos.z = 1.5;
-		w->cam.rot.y = 0;
-	}
+	w->cam.pos.x = 1.5;
+	w->cam.pos.z = 1.5;
+	w->cam.rot.y = 0;
 }
 
 void			w_init_player_game(t_wind *w)
