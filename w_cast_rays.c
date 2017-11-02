@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:19 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 16:04:17 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 17:14:50 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,8 @@ void			w_cast_rays(t_wind *w)
 	{
 		w->w.correct_fisheyes -= w->cam.anglebetrays;
 		w_cast_single_ray(w, angle, w->w.curray);
-		ft_comment("w_cast_single_ray 04");
 		if (w->w.info.spr)
 			w_cast_single_ray_spr(w, angle);
-		ft_comment("w_cast_single_ray 04a");
 		angle += w->cam.anglebetrays;
 		w->w.curray++;
 	}

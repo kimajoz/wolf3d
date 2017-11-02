@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/30 13:46:36 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 16:42:51 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ typedef struct				s_browsefile
 	int						**tab_int;
 	char					**tab_char;
 	int						nbrtot_of_line;
-	int						nbr_of_line;
 	int						tmpneline;
 	int						*nbr_elem_line;
 	int						needed;

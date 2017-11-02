@@ -6,11 +6,17 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 15:41:03 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 17:08:40 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void		init_mem_param(t_wind *w)
+{
+	w->w.player.init_pos = malloc(3 * sizeof(double));
+	w->w.player.end_pos = malloc(3 * sizeof(double));
+}
 
 void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 {
@@ -18,8 +24,7 @@ void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 	char	**tab;
 	int		x;
 
-	w->w.player.init_pos = malloc(3 * sizeof(double));
-	w->w.player.end_pos = malloc(3 * sizeof(double));
+	init_mem_param(w);
 	while (get_next_line(fd, &line))
 	{
 		x = 0;
@@ -68,7 +73,6 @@ int			**insert_file_to_prog(int fd, int y, t_wind *w)
 		free(tab);
 		ft_strdel(&line);
 	}
-	w->b.nbr_of_line = y;
 	return (tab_int);
 }
 
@@ -104,6 +108,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 int			rt_file(char *filename, t_wind *w, int needed)
 {
 	int		fd;
+	int		fd1;
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
@@ -114,9 +119,11 @@ int			rt_file(char *filename, t_wind *w, int needed)
 		set_spr_to_prog(fd, filename, w);
 	else if (ft_strstr(filename, "par"))
 	{
-		if (!ft_check_parsing_param(filename, fd))
+		if (!ft_check_fd(fd, filename, 0))
 		{
-			set_param_to_prog(fd, w, 0, 0);
+			ft_check_parsing_param(filename);
+			fd1 = open(filename, O_RDONLY);
+			set_param_to_prog(fd1, w, 0, 0);
 			w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
 			w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
 			w->cam.rot.y = w->w.player.init_pos[2];

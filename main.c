@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 16:28:56 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 17:12:22 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,11 @@ int				prog(char *filename)
 	w_play_chronotime(&w);
 	if (w.w.info.tabinfo)
 		init_minimap(&w);
-	ft_putendl("10");
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
-	ft_putendl("10a");
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
-	ft_putendl("10b");
 	mlx_loop_hook(w.mlx, hook_render, &w);
-	ft_putendl("10c");
 	mlx_expose_hook(w.win, expose_hook, &w);
-	ft_putendl("10d");
 	mlx_loop(w.mlx);
-	ft_putendl("10e");
 	return (0);
 }
 

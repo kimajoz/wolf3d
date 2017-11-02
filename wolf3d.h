@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 16:20:20 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 16:37:58 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@
 int			w_check_progstart(t_wind *w, char *filename);
 int			rt_file(char *filename, t_wind *w, int needed);
 void		ft_check_parsing(t_wind *w, char *filename);
-int			ft_check_parsing_param(char *filename, int fd);
+void		ft_check_parsing_param(char *filename);
 int			ft_print_error_type_parsing(int x, int y);
 int			ft_count_lines(t_wind *w, char *filename);
 void		put_info(t_wind *w);

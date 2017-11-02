@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 15:44:39 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 16:35:00 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,16 @@ int			ft_numdigit(char *n)
 	return (0);
 }
 
-int			ft_check_parsing_param(char *filename, int fd)
+void		ft_check_parsing_param(char *filename)
 {
-	int		fd1;
+	int		fd;
 	char	**tab;
 	char	*line;
 	int		i;
 	int		y;
 
 	y = 0;
-	fd1 = open(filename, O_RDONLY);
-	if (ft_check_fd(fd1, filename, 0))
-		return (1);
+	fd = open(filename, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
 		i = 0;
@@ -79,7 +77,6 @@ int			ft_check_parsing_param(char *filename, int fd)
 		ft_strdel(&line);
 		y++;
 	}
-	return (0);
 }
 
 void		ft_check_parsing(t_wind *w, char *filename)
