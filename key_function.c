@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 11:25:24 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/02 11:51:14 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int				w_insidemap(int x, int y, t_wind *w)
 
 int				is_blocking(t_dpoint pos, t_wind *w)
 {
+	ft_comment("move 01a");
 	if (w_insidemap((int)pos.x, (int)pos.z, w) &&
 	(int)(w->b.tab_int[(int)pos.z][(int)pos.x]) > 0)
 		return (1);
@@ -41,13 +42,16 @@ void			move(t_wind *w)
 			w->w.player.rotspeed);
 	tmp.x = w->cam.pos.x + cos(ft_degreetorad(w->cam.rot.y)) * movestep;
 	tmp.z = w->cam.pos.z + sin(ft_degreetorad(w->cam.rot.y)) * movestep;
-	if (is_blocking(tmp, w) != 1 &&
-		((w->w.info.spr) ? (w->w.tab_int_spr[(int)tmp.z][(int)tmp.x].block
+	ft_comment("move 01");
+	if (!is_blocking(tmp, w) &&
+		((w->w.info.spr) ? (w_insidemap((int)tmp.x, (int)tmp.z, w) &&
+		 w->w.tab_int_spr[(int)tmp.z][(int)tmp.x].block
 			!= 1) : 1))
 	{
 		w->cam.pos.x = tmp.x;
 		w->cam.pos.z = tmp.z;
 	}
+	ft_comment("end move function");
 }
 
 static void		keypress_function01(int keycode, t_wind *w)
