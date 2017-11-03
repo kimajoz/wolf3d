@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:06:28 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 12:33:08 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 11:25:09 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,11 @@ void		w_setsprcoordfile_tosprmap(int fd, t_wind *w)
 
 int			set_spr_to_prog(int fd, char *filename, t_wind *w)
 {
-	ft_comment("set_spr_to_prog 01");
 	if (ft_check_fd(fd, filename, 0))
 	{
-		ft_comment("set_spr_to_prog 02");
 		w->w.info.spr = 0;
 		return (1);
 	}
-	ft_comment("set_spr_to_prog 03");
 	w->w.info.spr = 1;
 	init_sprites(w);
 	w->w.sprnbvis = 0;

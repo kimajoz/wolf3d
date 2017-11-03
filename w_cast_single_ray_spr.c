@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:31:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 14:01:04 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 12:16:35 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,4 @@ void			w_cast_single_ray_spr(t_wind *w, double ray_angle)
 	w_horizontales_lines_check_spr(w, ray_angle, up);
 	if (w->w.bolspr)
 		w->w.sprnbvis++;
-	w_print_radar_ray_hitwall(w, w->w.hit.x, w->w.hit.y, 0x0000FF);
-	w_print_radar_ray_hitwall(w, w->w.hit2.x, w->w.hit2.y, 0x00FFFF);
 }

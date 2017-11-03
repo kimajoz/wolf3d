@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 20:25:30 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 15:21:18 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 11:16:30 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void			*w_play(void *data)
 	t_wind		*w;
 
 	w = (t_wind *)data;
-	//if (ft_strstr(w->w.songname, "walk") || ft_strstr(w->w.songname,
-	//		"Heartbeat"))
-	w->w.timemusic = 1;
-	//if (ft_strstr(w->w.songname, "gunshot") || ft_strcmp(w->w.songname,
-	//		"bullet"))
-		//w->w.timemusic = 0.5;
+	if (ft_strstr(w->w.songname, "footsteps") || ft_strstr(w->w.songname,
+			"Heartbeat"))
+		w->w.timemusic = 1;
+	if (ft_strstr(w->w.songname, "gunshot") || ft_strcmp(w->w.songname,
+			"bullet"))
+		w->w.timemusic = 0.5;
 	if ((w->w.player.prevtimeoutm + w->w.timemusic) < w->w.player.timeout ||
 			!w->w.player.prevtimeoutm)
 	{

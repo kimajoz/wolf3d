@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 17:08:40 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 12:35:06 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,35 +47,33 @@ void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 	}
 }
 
-int			**insert_file_to_prog(char *filename, int y, t_wind *w)
+void		insert_file_to_prog(char *filename, int y, t_wind *w)
 {
 	char	*line;
 	char	**tab;
-	int		**tab_int;
 	int		x;
 	int		len;
 	int		fd;
 
-	tab_int = malloc((y + 1) * sizeof(int *));
-	w->b.nbr_elem_line = malloc((y + 1) * sizeof(int *));
 	y = 0;
+	w->b.tab_int = malloc((y + 1) * sizeof(int *));
+	w->b.nbr_elem_line = malloc((y + 1) * sizeof(int *));
 	fd = open(filename, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
 		tab = ft_strsplit(line, ' ');
 		len = ft_nbrofpart(line, ' ');
-		tab_int[y] = malloc(len * sizeof(int));
+		w->b.tab_int[y] = malloc(len * sizeof(int));
 		x = 0;
 		while (tab[x])
 		{
-			tab_int[y][x] = ft_atoi(tab[x]);
+			w->b.tab_int[y][x] = ft_atoi(tab[x]);
 			ft_strdel(&tab[x++]);
 		}
 		w->b.nbr_elem_line[y++] = x;
 		free(tab);
 		ft_strdel(&line);
 	}
-	return (tab_int);
 }
 
 void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
@@ -102,7 +100,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 		}
 		w->b.nbrtot_of_line = y;
 		ft_check_parsing(w, *filename);
-		w->b.tab_int = insert_file_to_prog(*filename, y, w);
+		insert_file_to_prog(*filename, y, w);
 	}
 	close(fd1);
 }
@@ -129,6 +127,7 @@ int			rt_file(char *filename, t_wind *w, int needed)
 			w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
 			w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
 			w->cam.rot.y = w->w.player.init_pos[2];
+			w->w.bolpar = 1;
 		}
 	}
 	close(fd);

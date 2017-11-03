@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 18:48:27 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 14:04:01 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 11:24:22 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ void			w_clear_screen(t_wind *w)
 	int			x;
 
 	y = 0;
-	ft_comment("clear screen");
-	printf("w->width: %d\n", w->width);
-	printf("w->height: %d\n", w->height);
 	while (y < w->height)
 	{
 		x = 0;

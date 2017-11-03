@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:33:39 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/28 18:34:08 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 11:16:50 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void *d)
 	int		i;
 	int		fd;
 
-	ft_comment("w_set_pxlfiletoimg");
 	i = 0;
 	while (i < max)
 	{

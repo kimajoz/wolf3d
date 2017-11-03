@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 17:18:29 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 11:08:57 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void		set_parameters2(t_wind *w)
 	w->w.hit = (t_dpoint){0, 0, 0};
 	w->w.hit2 = (t_dpoint){0, 0, 0};
 	w->w.isprite = 0;
+	w->w.bolpar = 0;
 	w->w.player.timeout = 1 / 1000;
 	w->w.player.prevtimeoutimg = 1 / 1000;
 	w->w.player.prevtimeoutm = 1 / 1000;
@@ -72,44 +73,24 @@ int				prog(char *filename)
 {
 	t_wind		w;
 
-	ft_comment("01");
 	w_init_player_pos(&w);
-	ft_comment("02");
 	if (!w_check_progstart(&w, filename))
 		return (0);
-	ft_comment("03");
 	set_parameters(&w);
-	ft_comment("04");
 	init_texture(&w);
-	ft_comment("05");
 	init_guns(&w);
-	ft_comment("06");
 	w_init_screen(&w);
-	ft_comment("07");
 	create_new_img(&w);
-	ft_comment("08");
 	if (w.w.info.sound)
-	{
-		ft_comment("08a");
 		w_play_music(&w, w.lpth.musicstart, S_STARTL1, 0);
-		ft_comment("08b");
-	}
-	ft_comment("09");
 	w_play_chronotime(&w);
-	ft_comment("10");
 	if (w.w.info.tabinfo)
 		init_minimap(&w);
-	ft_comment("11");
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
-	ft_comment("12");
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
-	ft_comment("13");
 	mlx_loop_hook(w.mlx, hook_render, &w);
-	ft_comment("14");
 	mlx_expose_hook(w.win, expose_hook, &w);
-	ft_comment("15");
 	mlx_loop(w.mlx);
-	ft_comment("16");
 	return (0);
 }
 

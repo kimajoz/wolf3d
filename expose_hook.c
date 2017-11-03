@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 14:06:46 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 18:59:54 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 11:08:23 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 
 int			expose_hook(t_wind *w)
 {
-	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img,
-	w->img.x, w->img.y);
+	if (w->img.ptr_img)
+		mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x,
+				w->img.y);
 	put_info(w);
 	return (0);
 }
@@ -26,9 +27,6 @@ int			hook_render(t_wind *w)
 {
 	if (!w->w.player.kp.upwalk || w->w.player.fire != 0)
 	{
-		ft_comment("hook_render");
-		printf("w->w.player.kp.upwalk: %d\n", w->w.player.kp.upwalk);
-		printf("w->w.player.fire: %d\n", w->w.player.fire);
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
 		create_new_img(w);
 	}
@@ -41,7 +39,6 @@ int			turntable(t_wind *w)
 	{
 		ROTABS(w->p.rot.z);
 		w->p.rot.z += 5;
-		ft_comment("turntable");
 		mlx_destroy_image(w->mlx, w->img.ptr_img);
 		create_new_img(w);
 		mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x,

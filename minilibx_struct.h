@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 16:42:51 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 11:07:31 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,6 +347,7 @@ typedef struct				s_wolf
 	t_dpoint				hit2;
 	t_dpoint				wall;
 	int						bolspr;
+	int						bolpar;
 	double					block_dist;
 	int						color;
 	int						color_mfov;
