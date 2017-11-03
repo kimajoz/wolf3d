@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 11:07:31 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 17:43:04 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,7 @@ typedef struct				s_lstpthread
 
 typedef struct				s_wolf
 {
+	pthread_mutex_t			mutex_lock;
 	t_player				player;
 	int						curray;
 	double					dist;

@@ -6,12 +6,11 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 20:25:30 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 11:16:30 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 17:58:21 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-#include <pthread.h>
 
 void			*w_play(void *data)
 {
@@ -20,7 +19,7 @@ void			*w_play(void *data)
 	w = (t_wind *)data;
 	if (ft_strstr(w->w.songname, "footsteps") || ft_strstr(w->w.songname,
 			"Heartbeat"))
-		w->w.timemusic = 1;
+		w->w.timemusic = 2;
 	if (ft_strstr(w->w.songname, "gunshot") || ft_strcmp(w->w.songname,
 			"bullet"))
 		w->w.timemusic = 0.5;
@@ -48,13 +47,15 @@ void			*w_play_loop(void *data)
 int				w_play_music(t_wind *w, pthread_t addresspth, char *url,
 		int loop)
 {
+	pthread_mutex_lock(&w->w.mutex_lock);
 	w->w.songname = url;
 	if (loop)
 		pthread_create(&addresspth, NULL, w_play_loop, (void*)w);
 	else
 		pthread_create(&addresspth, NULL, w_play, (void*)w);
-	if (w->lpth.musicstart)
-		pthread_join(w->lpth.musicstart, NULL);
+	//pthread_setcancelstate (PTHREAD_CANCEL_ENABLE, NULL);
+	//pthread_cancel (addresspth);
+	pthread_mutex_unlock(&w->w.mutex_lock);
 	return (0);
 }
 

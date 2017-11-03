@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 16:37:58 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 17:43:54 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@
 # include "keymacro.h"
 # include <math.h>
 # include <stdlib.h>
+# include <pthread.h>
 #include <stdio.h>
 
 int			w_check_progstart(t_wind *w, char *filename);

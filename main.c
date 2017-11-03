@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 11:08:57 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 18:02:07 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int				prog(char *filename)
 {
 	t_wind		w;
 
+	pthread_mutex_init(&w.w.mutex_lock, NULL);
 	w_init_player_pos(&w);
 	if (!w_check_progstart(&w, filename))
 		return (0);

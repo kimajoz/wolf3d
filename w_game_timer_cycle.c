@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 20:19:22 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 12:19:13 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/03 17:41:09 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void				w_check_value_timer(t_wind *w, double millisec)
 	if ((w->w.player.health < 10 && w->w.player.gameover == 0) &&
 			w->w.info.sound)
 		w_play_music(w, w->lpth.fxheartb, S_HEARTBEAT, 0);
-	ft_comment("w_check_value_timer");
+	//ft_comment("w_check_value_timer");
 }
 
 void				*w_game_timer_cycle(void *data)
@@ -71,13 +71,15 @@ void				*w_game_timer_cycle(void *data)
 		w_check_value_timer(w, millisec);
 	}
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
-	ft_comment("w_check_value_timer2");
+	//ft_comment("w_check_value_timer2");
 	put_info(w);
-	ft_comment("w_check_value_timer333");
+	//ft_comment("w_check_value_timer333");
 	return (0);
 }
 
 void				w_play_chronotime(t_wind *w)
 {
+	pthread_mutex_lock(&w->w.mutex_lock);
 	pthread_create(&w->lpth.ptchrono, NULL, w_game_timer_cycle, (void*)w);
+	pthread_mutex_unlock(&w->w.mutex_lock);
 }
