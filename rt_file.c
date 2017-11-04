@@ -55,9 +55,9 @@ void		insert_file_to_prog(char *filename, int y, t_wind *w)
 	int		len;
 	int		fd;
 
-	y = 0;
 	w->b.tab_int = malloc((y + 1) * sizeof(int *));
 	w->b.nbr_elem_line = malloc((y + 1) * sizeof(int *));
+	y = 0;
 	fd = open(filename, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
