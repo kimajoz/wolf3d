@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 16:30:50 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 21:04:59 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,13 @@ static void		keypress_function01(int keycode, t_wind *w)
 		w->w.player.fire = 1;
 	else if (keycode == KEY_R)
 	{
-		w->w.player.ammunition += 7;
-		w->w.player.ammureload = 1;
-		if (w->w.info.sound)
-			w_play_music(w, w->lpth.fxguncocking, S_GUNCOKING, 0);
+		if (w->w.player.ammunition < 17)
+		{
+			w->w.player.ammunition += 7;
+			w->w.player.ammureload = 1;
+			if (w->w.info.sound)
+				w_play_music(w, w->lpth.fxguncocking, S_GUNCOKING, 0);
+		}
 	}
 }
 
@@ -77,8 +80,8 @@ static void		keypress_function02(int keycode, t_wind *w)
 		w->w.info.raynumb = 60;
 	else if (keycode == KEY_2)
 	{
-		w->w.info.raynumb = (w->w.info.raynumb < w->width) ?
-			(w->w.info.raynumb - 10) : w->w.info.raynumb;
+		w->w.info.raynumb = (w->w.info.raynumb < w->width &&
+		w->w.info.raynumb > 10) ? (w->w.info.raynumb - 10) : w->w.info.raynumb;
 	}
 	else if (keycode == KEY_3)
 	{

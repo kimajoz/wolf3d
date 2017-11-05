@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 20:40:35 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 21:14:11 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int				prog(char *filename)
 int				main(int argc, char **argv)
 {
 	if (argc != 2)
-		ft_putstr("usage");
+		ft_putendl("usage: ./wolf3d file.scn");
 	else
 		prog(argv[1]);
 	return (0);

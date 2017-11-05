@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 20:46:40 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 20:57:48 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ int			rt_file(char *filename, t_wind *w, int needed)
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
+	if (ft_check_fd(fd, filename, 1))
+		exit(EXIT_FAILURE);
 	w->b.needed = needed;
 	if (ft_strstr(filename, "scn"))
 		w_insert_tab_int(w, &fd, &line, &filename);
