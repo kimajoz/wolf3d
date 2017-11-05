@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 17:43:54 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:32:10 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@
 # include <math.h>
 # include <stdlib.h>
 # include <pthread.h>
-#include <stdio.h>
 
 int			w_check_progstart(t_wind *w, char *filename);
 int			rt_file(char *filename, t_wind *w, int needed);

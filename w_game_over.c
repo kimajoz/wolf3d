@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 17:58:01 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 17:24:02 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:31:04 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		w_win_level(t_wind *w)
 
 void		check_win_game(t_wind *w)
 {
-	//printf("bolpar:%d\n", w->w.bolpar);
 	if (w->w.bolpar == 1)
 	{
 		if (((int)w->cam.pos.x == w->w.player.end_pos[0]) &&

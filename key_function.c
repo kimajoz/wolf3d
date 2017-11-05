@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:01:12 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 17:22:47 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:30:50 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int				is_blocking(t_dpoint pos, t_wind *w)
 {
-	/*printf("inside the map: %d\n", w_insidemap((int)pos.x, (int)pos.z, w));
-	printf("pos.x: %d, pos.y:%d \n", (int)pos.x, (int)pos.z);
-	printf("nbrtot_of_line: %d, nbr_elem_line:%d \n", w->b.nbrtot_of_line, w->b.nbr_elem_line[0]);*/
 	if (w_insidemap((int)pos.x, (int)pos.z, w) &&
 	(int)(w->b.tab_int[(int)pos.z][(int)pos.x]) > 0)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 20:25:30 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 17:58:21 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:31:36 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int				w_play_music(t_wind *w, pthread_t addresspth, char *url,
 		pthread_create(&addresspth, NULL, w_play_loop, (void*)w);
 	else
 		pthread_create(&addresspth, NULL, w_play, (void*)w);
-	//pthread_setcancelstate (PTHREAD_CANCEL_ENABLE, NULL);
-	//pthread_cancel (addresspth);
 	pthread_mutex_unlock(&w->w.mutex_lock);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 17:22:37 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:31:51 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void				init_minimap(t_wind *w)
 	int			i;
 	int			j;
 
-	//printf("w->b.nbrtot_of_line: %d\n", w->b.nbrtot_of_line);
-	//printf("w->b.nbr_elem_line[0]: %d\n", w->b.nbr_elem_line[0]);
 	i = 0;
 	while (i < (w->b.nbrtot_of_line * MMS))
 	{
