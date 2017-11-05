@@ -6,7 +6,7 @@
 #    By: pbillett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 14:11:23 by pbillett          #+#    #+#              #
-#    Updated: 2017/11/02 11:37:57 by pbillett         ###   ########.fr        #
+#    Updated: 2017/11/05 16:50:42 by pbillett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,6 @@ SRC= src/ft_lstiter.c \
 	src/ft_get_millitime.c \
 	src/ft_get_time_clean.c \
 	src/ft_set_time_out.c \
-	src/ft_pthread_do_or_timeout.c \
 	src/ft_fmax.c \
 	src/ft_fiszero.c \
 	src/ft_check_type.c \

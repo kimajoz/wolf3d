@@ -6,13 +6,12 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 17:52:49 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 16:44:58 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:48:59 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 double		ft_get_sound_duration(char *filename, int os)
 {
