@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 18:02:07 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:19:48 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void		set_parameters2(t_wind *w)
 	w->w.hit = (t_dpoint){0, 0, 0};
 	w->w.hit2 = (t_dpoint){0, 0, 0};
 	w->w.isprite = 0;
-	w->w.bolpar = 0;
 	w->w.player.timeout = 1 / 1000;
 	w->w.player.prevtimeoutimg = 1 / 1000;
 	w->w.player.prevtimeoutm = 1 / 1000;
@@ -74,6 +73,7 @@ int				prog(char *filename)
 	t_wind		w;
 
 	pthread_mutex_init(&w.w.mutex_lock, NULL);
+	w.w.bolpar = 0;
 	w_init_player_pos(&w);
 	if (!w_check_progstart(&w, filename))
 		return (0);
