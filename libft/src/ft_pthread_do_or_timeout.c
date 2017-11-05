@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_pthread_do_or_timeout.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/05 16:36:41 by pbillett          #+#    #+#             */
+/*   Updated: 2017/11/05 16:36:51 by pbillett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <time.h>
 #include <pthread.h>
 #include <stdio.h>
@@ -22,7 +34,6 @@ int clock_gettime(int clk_id, struct timespec* t) {
 	return 0;
 }
 #endif*/
-
 
 pthread_mutex_t calculating = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t done = PTHREAD_COND_INITIALIZER;

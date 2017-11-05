@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlibx_draw_pixel_line.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/05 16:35:38 by pbillett          #+#    #+#             */
+/*   Updated: 2017/11/05 16:35:46 by pbillett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/libft.h"
 
@@ -43,7 +54,8 @@ t_line		mlibx_set_parameters_tline(t_line v)
 	return (v);
 }
 
-void		mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, char *color)
+void		mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w,
+		char *color)
 {
 	t_line	v;
 
@@ -63,7 +75,8 @@ void		mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, char *colo
 	}
 }
 
-void		mlibx_draw_pixel_line_int(t_point point, t_point pointd, t_wind *w, int color)
+void		mlibx_draw_pixel_line_int(t_point point, t_point pointd, t_wind *w,
+		int color)
 {
 	t_line	v;
 

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:04:05 by pbillett          #+#    #+#             */
-/*   Updated: 2017/04/04 12:17:20 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:46:38 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int				divide(int n, int div)
 	else
 		hex[i++] = n % 10 + 'A';
 	return (hex);
-
-
 }
 
 char			*ft_inttohex_comp(int n)
@@ -42,7 +40,6 @@ char			*ft_inttohex_comp(int n)
 	hex[i++] = 'x';
 	ft_strcpy(hex[i++], ft_itoa(n / 4096));
 	reste = n % 4096;
-
 	dizaine = n / 16;
 	if (dizaine < 10)
 		hex[i++] = dizaine + '0';

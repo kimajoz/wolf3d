@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlibx_draw_pixel_line_float.c                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/05 16:34:25 by pbillett          #+#    #+#             */
+/*   Updated: 2017/11/05 16:35:12 by pbillett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-static int	get_sign(int first, int second)
+static int		get_sign(int first, int second)
 {
-	int		sign;
+	int			sign;
 
 	if (first > second)
 		sign = -1;
@@ -22,7 +33,7 @@ static float	get_diff(float i, float j)
 	return (res);
 }
 
-t_line		mlibx_set_parameters_tline(t_line v)
+t_line			mlibx_set_parameters_tline(t_line v)
 {
 	v.midx = v.xdest + ((rint(v.x) - v.xdest) / 2);
 	v.midy = v.ydest + ((rint(v.y) - v.ydest) / 2);
@@ -34,9 +45,10 @@ t_line		mlibx_set_parameters_tline(t_line v)
 	return (v);
 }
 
-void		mlibx_draw_pixel_line_float(t_dpoint point, t_dpoint pointd, t_wind *w, char *color)
+void			mlibx_draw_pixel_line_float(t_dpoint point, t_dpoint pointd,
+		t_wind *w, char *color)
 {
-	t_line	v;
+	t_line		v;
 
 	v.x = point.x;
 	v.y = point.y;
