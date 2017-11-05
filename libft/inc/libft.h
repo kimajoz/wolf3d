@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ../inc/libft.h                                            :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 12:11:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 16:50:16 by pbillett         ###   ########.fr       */
+/*   Created: 2017/11/05 17:08:33 by pbillett          #+#    #+#             */
+/*   Updated: 2017/11/05 17:12:23 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 char				*ft_itoa(int n);
 void				ft_putlstnbr(int *lstnbr, int numbelem);
-
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 char				*ft_strnew(size_t size);
@@ -93,7 +92,6 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_sort_list(t_list *lst, int (*cmp)(int, int));
-
 float				ft_squared(float n);
 float				ft_pythagore(float a, float b);
 double				ft_degreetorad(double degrees);
@@ -113,12 +111,17 @@ t_listp_path		*ft_freepath(t_listp_path *list);
 void				ft_sort_listofnodes_foreach_nodes(t_listofnodes *lstnodes);
 t_wind				mlibx_create_new_window(char *title, int width, int height);
 int					mlibx_dot_in_window(t_wind *w, int x, int y);
-void				mlibx_draw_circle(t_wind *w, t_point centp, int rayon, char *hexcol);
-void				mlibx_draw_circlef(t_wind *w, t_point centp, int rayon, char *hexcol);
+void				mlibx_draw_circle(t_wind *w, t_point centp, int rayon,
+char *hexcol);
+void				mlibx_draw_circlef(t_wind *w, t_point centp, int rayon,
+char *hexcol);
 void				mlibx_draw_pixel(t_wind *w, int x, int y, char *hexacolor);
-void				mlibx_draw_pixel_line_float(t_dpoint point, t_dpoint pointd, t_wind *w, char *color);
-void				mlibx_draw_pixel_line(t_point point, t_point pointd, t_wind *w, char *color);
-void		mlibx_draw_pixel_line_int(t_point point, t_point pointd, t_wind *w, int color);
+void				mlibx_draw_pixel_line_float(t_dpoint point,
+t_dpoint pointd, t_wind *w, char *color);
+void				mlibx_draw_pixel_line(t_point point, t_point pointd,
+t_wind *w, char *color);
+void				mlibx_draw_pixel_line_int(t_point point, t_point pointd,
+t_wind *w, int color);
 void				mlibx_draw_dot(t_wind *w, int x, int y, int color);
 t_line				ft_set_parameters_tline(t_line v);
 int					ft_get_sign(int first, int second);
@@ -129,13 +132,13 @@ double				ft_rot_fabs(double n);
 double				ft_get_time(void);
 double				ft_get_millitime(void);
 char				*ft_get_time_clean(void);
-void				ft_set_time_out(t_wind *w, void (*f)(t_wind *w), double endtime);
+void				ft_set_time_out(t_wind *w, void (*f)(t_wind *w),
+double endtime);
 double				ft_fmax(double a, double b);
 int					ft_fiszero(double value);
 void				ft_check_type(char **lst, int numb, char *type);
 int					ft_iget_sign(int first, int second);
 int					ft_iget_diff(int first, int second);
-
 int					ft_play_sound(char *filename, int system);
 double				ft_get_sound_duration(char *filename, int os);
 

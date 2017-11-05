@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 18:34:44 by pbillett          #+#    #+#             */
-/*   Updated: 2017/01/19 12:44:08 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 17:08:01 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ typedef struct		s_fd {
 	struct s_fd		*next;
 }					t_fd;
 
-int			ft_check_fd(int fd, char *filename, int optional);
+int					ft_check_fd(int fd, char *filename, int optional);
 
 #endif
