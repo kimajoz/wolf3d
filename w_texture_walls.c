@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 15:26:08 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/26 14:02:11 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 20:52:22 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static int				aff_text_name(char **lst_text, int numargs, ...)
 	while (i < numargs)
 	{
 		arg = va_arg(list, char *);
-		lst_text[i] = malloc(sizeof(char) * ft_strlen(arg) + 1);
+		if (!(lst_text[i] = malloc(sizeof(char) * ft_strlen(arg) + 1)))
+			exit(0);
 		ft_strcpy(lst_text[i], arg);
 		i++;
 	}
@@ -53,7 +54,8 @@ static int				aff_block(t_sprimg *block, int numargs, ...)
 void					init_sprites(t_wind *w)
 {
 	w->w.sprnb = 7;
-	w->w.lst_sprite = malloc(sizeof(char *) * w->w.sprnb);
+	if (!(w->w.lst_sprite = malloc(sizeof(char *) * w->w.sprnb)))
+		exit(0);
 	aff_text_name(w->w.lst_sprite, w->w.sprnb,
 						"img/sprites/table-chairs.xpm",
 						"img/sprites/armor.xpm",
@@ -63,7 +65,8 @@ void					init_sprites(t_wind *w)
 						"img/sprites/pillar.xpm",
 						"img/sprites/guard.xpm");
 	ft_check_type(w->w.lst_sprite, w->w.sprnb, "xpm");
-	w->w.sprite = malloc(sizeof(t_sprimg) * w->w.sprnb);
+	if (!(w->w.sprite = malloc(sizeof(t_sprimg) * w->w.sprnb)))
+		exit(0);
 	w->w.isprite = 1;
 	w->w.sprite[0].img.x = 3;
 	w_set_pxlfiletoimg(w, w->w.sprnb, w->w.lst_sprite, w->w.sprite);
@@ -76,7 +79,8 @@ void					init_texture(t_wind *w)
 	int			nbtext;
 
 	nbtext = 11;
-	w->w.lst_text = malloc(sizeof(char *) * nbtext);
+	if (!(w->w.lst_text = malloc(sizeof(char *) * nbtext)))
+		exit(0);
 	aff_text_name(w->w.lst_text, nbtext, "img/walls/greystone.xpm",
 						"img/walls/mossy.xpm",
 						"img/walls/redbrick.xpm",
@@ -89,7 +93,8 @@ void					init_texture(t_wind *w)
 						"img/walls/doorm.xpm",
 						"img/walls/wall_red_door.xpm");
 	ft_check_type(w->w.lst_text, nbtext, "xpm");
-	w->w.text = malloc(sizeof(t_img) * nbtext);
+	if (!(w->w.text = malloc(sizeof(t_img) * nbtext)))
+		exit(0);
 	w_set_pxlfiletoimg(w, nbtext, w->w.lst_text, w->w.text);
 }
 
@@ -98,9 +103,11 @@ void					init_guns(t_wind *w)
 	int			nbtext;
 
 	nbtext = 1;
-	w->w.lst_weapon = malloc(sizeof(char *) * nbtext);
+	if (!(w->w.lst_weapon = malloc(sizeof(char *) * nbtext)))
+		exit(0);
 	aff_text_name(w->w.lst_weapon, nbtext, "img/guns/guns.xpm");
 	ft_check_type(w->w.lst_weapon, nbtext, "xpm");
-	w->w.weapon = malloc(sizeof(t_img) * nbtext);
+	if (!(w->w.weapon = malloc(sizeof(t_img) * nbtext)))
+		exit(0);
 	w_set_pxlfiletoimg(w, nbtext, w->w.lst_weapon, w->w.weapon);
 }

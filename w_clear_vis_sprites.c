@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:05:42 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 11:17:29 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 20:48:00 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void		w_clear_vis_sprites2dspr_list(t_wind *w)
 		free(w->w.oldvisiblespr);
 		w->w.oldvisiblespr = NULL;
 	}
-	w->w.oldvisiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite));
+	if (!(w->w.oldvisiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
+		exit(0);
 	i = 0;
 	while (i < w->w.sprnbvis)
 	{
@@ -33,7 +34,8 @@ void		w_clear_vis_sprites2dspr_list(t_wind *w)
 	w->w.sprnbvis = 0;
 	free(w->w.visiblespr);
 	w->w.visiblespr = NULL;
-	w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite));
+	if (!(w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
+		exit(0);
 }
 
 void		w_clear_vis_sprites(t_wind *w)

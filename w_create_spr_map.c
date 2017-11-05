@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:06:28 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 11:25:09 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 20:49:09 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ void		create_spr_map(t_wind *w)
 	int		y;
 	int		x;
 
-	w->w.tab_int_spr = malloc(w->b.nbrtot_of_line * sizeof(t_sprite *));
+	if (!(w->w.tab_int_spr = malloc(w->b.nbrtot_of_line * sizeof(t_sprite *))))
+		exit(0);
 	y = 0;
 	while (y < w->b.nbrtot_of_line)
 	{
-		w->w.tab_int_spr[y] = malloc(w->b.nbr_elem_line[3] * sizeof(t_sprite));
+		if (!(w->w.tab_int_spr[y] = malloc(w->b.nbr_elem_line[3] * sizeof(t_sprite))))
+			exit(0);
 		x = 0;
 		while (x < w->b.nbr_elem_line[3])
 		{
@@ -75,6 +77,7 @@ int			set_spr_to_prog(int fd, char *filename, t_wind *w)
 	create_spr_map(w);
 	w->w.nbtotsprprog = 0;
 	w_setsprcoordfile_tosprmap(fd, w);
-	w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite));
+	if (!(w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
+		exit(0);
 	return (0);
 }

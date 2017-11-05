@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 18:48:27 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 11:24:22 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 20:50:30 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ void			w_init_screen(t_wind *w)
 	int			y;
 	int			x;
 
-	w->screen = malloc(w->height * sizeof(t_screen *));
+	if (!(w->screen = malloc(w->height * sizeof(t_screen *))))
+		exit(0);
 	y = 0;
 	while (y < w->height)
 	{
 		x = 0;
-		w->screen[y] = malloc(w->width * sizeof(t_screen));
+		if (!(w->screen[y] = malloc(w->width * sizeof(t_screen))))
+			exit(0);
 		while (x < w->width)
 		{
 			w->screen[y][x].color = 0;

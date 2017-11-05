@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 12:35:06 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 20:46:40 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void		init_mem_param(t_wind *w)
 {
-	w->w.player.init_pos = malloc(3 * sizeof(double));
-	w->w.player.end_pos = malloc(3 * sizeof(double));
+	if(!(w->w.player.init_pos = malloc(3 * sizeof(double))))
+		exit(0);
+	if(!(w->w.player.end_pos = malloc(3 * sizeof(double))))
+		exit(0);
 }
 
 void		set_param_to_prog(int fd, t_wind *w, int j, int y)
@@ -47,6 +49,14 @@ void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 	}
 }
 
+void		init_mem_prog(t_wind *w, int y)
+{
+	if (!(w->b.tab_int = malloc((y + 1) * sizeof(int *))))
+		exit(0);
+	if (!(w->b.nbr_elem_line = malloc((y + 1) * sizeof(int *))))
+		exit(0);
+}
+
 void		insert_file_to_prog(char *filename, int y, t_wind *w)
 {
 	char	*line;
@@ -55,15 +65,15 @@ void		insert_file_to_prog(char *filename, int y, t_wind *w)
 	int		len;
 	int		fd;
 
-	w->b.tab_int = malloc((y + 1) * sizeof(int *));
-	w->b.nbr_elem_line = malloc((y + 1) * sizeof(int *));
+	init_mem_prog(w, y);
 	y = 0;
 	fd = open(filename, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
 		tab = ft_strsplit(line, ' ');
 		len = ft_nbrofpart(line, ' ');
-		w->b.tab_int[y] = malloc(len * sizeof(int));
+		if (!(w->b.tab_int[y] = malloc(len * sizeof(int))))
+			exit(0);
 		x = 0;
 		while (tab[x])
 		{

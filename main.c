@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 16:19:48 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 20:40:35 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		set_parameters2(t_wind *w)
 	w->w.info.ray_minimap = 1;
 	w->w.info.bg = 1;
 	w->w.info.texture = 1;
-	w->w.info.sound = 1;
+	w->w.info.sound = 0;
 	w_init_player_game(w);
 	w->w.tmpgun = 0;
 	w->w.player.ammunition = 7;

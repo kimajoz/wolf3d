@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 17:28:14 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/04 18:41:34 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/05 20:49:46 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ void			w_get_config_spr(int fd, t_wind *w)
 	int		y;
 
 	y = 0;
-	w->w.player.init_pos = malloc(3 * sizeof(double));
-	w->w.player.end_pos = malloc(3 * sizeof(double));
+	if (!(w->w.player.init_pos = malloc(3 * sizeof(double))))
+		exit(0);
+	if (!(w->w.player.end_pos = malloc(3 * sizeof(double))))
+		exit(0);
 	while (get_next_line(fd, &line))
 	{
 		x = 0;
