@@ -20,6 +20,32 @@ void		init_mem_param(t_wind *w)
 		exit(0);
 }
 
+void		ft_check_parsing_param_type(t_wind *w, char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (i < 2)
+	{
+		if (ft_isdigit(ft_atoi(tab[i]))
+		&& (ft_atoi(tab[i]) < w->b.nbrtot_of_line
+		|| ft_atoi(tab[i]) < w->b.nbr_elem_line[0])
+		&& ft_atoi(tab[i]) >= 0)
+			i++;
+		else
+			exit(ft_comment("3wrong number in .par file, or not digit numbers. Not inside the map."));
+	}
+	while (i < 3)
+	{
+		if (ft_isdigit(ft_atoi(tab[i]))
+		&& ft_atoi(tab[i]) < 360
+		&& ft_atoi(tab[i]) >= 0)
+			i++;
+		else
+			exit(ft_comment("wrong number in .par file for rotation, or not digit numbers."));
+	}
+}
+
 void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 {
 	char	*line;
@@ -32,7 +58,9 @@ void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 		x = 0;
 		if (line[0] != '#')
 		{
-			tab = ft_strsplit(line, ' ');
+			if ((tab = ft_strsplit(line, ' ')) == NULL)
+				exit(1);
+			ft_check_parsing_param_type(w, tab);
 			while (tab[x])
 			{
 				if (j == 0)
@@ -88,31 +116,35 @@ void		insert_file_to_prog(char *filename, int y, t_wind *w)
 
 void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 {
-	int		fd1;
 	int		y;
 	char	**tab;
+	int ret;
 
-	if (ft_check_fd(*fd, *filename, w->b.needed))
-		exit(EXIT_FAILURE);
-	fd1 = open(*filename, O_RDONLY);
 	y = 0;
-	if (ft_strstr(*filename, "scn"))
+	if (ft_strstr(*filename, ".scn"))
 	{
-		while (get_next_line(fd1, line))
+		while ((ret = get_next_line(*fd, line)) > 0)
 		{
-			tab = ft_strsplit(*line, ' ');
+			if ((tab = ft_strsplit(*line, ' ')) == NULL)
+				exit(ft_print_error_parsing(0, y));
 			w->b.tmpneline = 0;
 			while (tab[w->b.tmpneline])
+			{
+				if (!ft_isdigit(ft_atoi(tab[w->b.tmpneline])) && (ft_atoi(tab[w->b.tmpneline]) < 0 || ft_atoi(tab[w->b.tmpneline]) > 11))
+					exit(1);
 				ft_strdel(&tab[w->b.tmpneline++]);
+			}
 			free(tab);
 			ft_strdel(line);
 			y++;
 		}
+		if (ret < 0)
+			exit(ft_print_error_parsing(0, y));
 		w->b.nbrtot_of_line = y;
 		ft_check_parsing(w, *filename);
 		insert_file_to_prog(*filename, y, w);
 	}
-	close(fd1);
+	close(*fd);
 }
 
 int			rt_file(char *filename, t_wind *w, int needed)
@@ -121,18 +153,28 @@ int			rt_file(char *filename, t_wind *w, int needed)
 	int		fd1;
 	char	*line;
 
-	fd = open(filename, O_RDONLY);
-	if (ft_check_fd(fd, filename, 1))
-		exit(EXIT_FAILURE);
-	w->b.needed = needed;
-	if (ft_strstr(filename, "scn"))
-		w_insert_tab_int(w, &fd, &line, &filename);
-	else if (ft_strstr(filename, "spr"))
-		set_spr_to_prog(fd, filename, w);
-	else if (ft_strstr(filename, "par"))
+	ft_comment("open general check");
+	fd = ft_open_check(filename, O_RDONLY, needed);
+	if (fd == -1)
+		exit(ft_comment("Wrong type of file"));
+	ft_comment("open general check passed");
+	if (ft_strstr(filename, ".scn"))
 	{
+		ft_comment("open scn");
+		w_insert_tab_int(w, &fd, &line, &filename);
+		ft_comment("open passed");
+	}
+	else if (ft_strstr(filename, ".spr"))
+	{
+		if (set_spr_to_prog(fd, filename, w))
+			return (1);
+	}
+	else if (ft_strstr(filename, ".par"))
+	{
+		ft_comment("before open para");
 		if (!ft_check_fd(fd, filename, 0))
 		{
+			ft_comment("open para");
 			ft_check_parsing_param(filename);
 			fd1 = open(filename, O_RDONLY);
 			set_param_to_prog(fd1, w, 0, 0);
@@ -143,5 +185,5 @@ int			rt_file(char *filename, t_wind *w, int needed)
 		}
 	}
 	close(fd);
-	return (1);
+	return (0);
 }

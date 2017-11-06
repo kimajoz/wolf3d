@@ -55,7 +55,7 @@ void					init_sprites(t_wind *w)
 {
 	w->w.sprnb = 7;
 	if (!(w->w.lst_sprite = malloc(sizeof(char *) * w->w.sprnb)))
-		exit(0);
+		exit(1);
 	aff_text_name(w->w.lst_sprite, w->w.sprnb,
 						"img/sprites/table-chairs.xpm",
 						"img/sprites/armor.xpm",
@@ -66,7 +66,7 @@ void					init_sprites(t_wind *w)
 						"img/sprites/guard.xpm");
 	ft_check_type(w->w.lst_sprite, w->w.sprnb, "xpm");
 	if (!(w->w.sprite = malloc(sizeof(t_sprimg) * w->w.sprnb)))
-		exit(0);
+		exit(1);
 	w->w.isprite = 1;
 	w->w.sprite[0].img.x = 3;
 	w_set_pxlfiletoimg(w, w->w.sprnb, w->w.lst_sprite, w->w.sprite);

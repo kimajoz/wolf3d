@@ -75,7 +75,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 int					ft_nbrofpart(char *s, char c);
-void				ft_comment(char *str);
+int					ft_comment(char *str);
 void				ft_free_tablst(char **tab);
 
 typedef struct		s_list
@@ -141,5 +141,6 @@ int					ft_iget_sign(int first, int second);
 int					ft_iget_diff(int first, int second);
 int					ft_play_sound(char *filename, int system);
 double				ft_get_sound_duration(char *filename, int os);
+int					ft_open_check(char *filename, int flags, int needed);
 
 #endif

@@ -30,10 +30,12 @@ void *d)
 	int		fd;
 
 	i = 0;
+	ft_putnbr(max);
 	while (i < max)
 	{
 		fd = open(lst[i], O_RDONLY);
-		if (!ft_check_fd(fd, lst[i], 1))
+		ft_comment("t");
+		if (ft_check_fd(fd, lst[i], 1))
 		{
 			if (w->w.isprite)
 				set_pxl_if_sprite(w, i, lst, d);

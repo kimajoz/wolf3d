@@ -17,8 +17,8 @@ int			ft_print_error_parsing(int x, int y)
 	ft_putstr("wrong parsing file, ");
 	ft_putstr("please check number of elem(now ");
 	ft_putnbr(x);
-	ft_putstr(" -> needs ");
-	ft_putstr(" lenght of the line ");
+	ft_putstr(" -> needs the");
+	ft_putstr(" lenght of the line");
 	ft_putstr(") on line ");
 	ft_putnbr(y + 1);
 	ft_putstr(".");

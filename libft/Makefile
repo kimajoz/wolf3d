@@ -101,6 +101,7 @@ SRC= src/ft_lstiter.c \
 	src/ft_get_sound_duration.c \
 	src/ft_iget_sign.c \
 	src/ft_iget_diff.c \
+	src/ft_open_check.c \
 	src/ft_comment.c \
 	src/ft_free_tablst.c \
 	src/ft_rot_fabs.c

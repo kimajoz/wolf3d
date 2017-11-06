@@ -135,5 +135,6 @@ void		legend(t_wind *w);
 void		free_legend(t_wind *w);
 void		w_mlibx_putint(int i, int row, int column, t_wind *w);
 void		tab_info(t_wind *w);
+int			ft_print_error_parsing(int x, int y);
 
 #endif
