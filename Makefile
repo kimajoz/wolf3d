@@ -1,36 +1,36 @@
 UNAME := $(shell uname)
 
 NAME=wolf3d
-SRC=	main.c \
-		wolf3d.c \
-		w_check_progstart.c \
-		w_cast_rays.c \
-		w_verticales_lines_check.c \
-		w_print_radar_fov.c \
-		w_draw_background_color.c \
-		w_texture_walls.c \
-		w_set_pxlfiletoimg.c \
-		w_cast_single_ray_spr.c \
-		w_render_sprites.c \
-		w_clear_vis_sprites.c \
-		w_set_pxl_spr_gunr.c \
-		w_game_timer_cycle.c \
-		w_game_over.c \
-		w_play_music.c \
-		w_gun_fire.c \
-		w_get_configs.c \
-		w_mlibx_draw_pixel_line.c \
-		w_init_player_game.c \
-		mlibx_putstring.c \
-		rt_file.c \
-		rt_parsing.c \
-		w_create_spr_map.c \
-		create_new_window.c \
-		create_new_img.c \
-		key_function.c \
-		put_info.c \
-		free_legend.c \
-		expose_hook.c
+SRC=	src/main.c \
+		src/wolf3d.c \
+		src/w_check_progstart.c \
+		src/w_cast_rays.c \
+		src/w_verticales_lines_check.c \
+		src/w_print_radar_fov.c \
+		src/w_draw_background_color.c \
+		src/w_texture_walls.c \
+		src/w_set_pxlfiletoimg.c \
+		src/w_cast_single_ray_spr.c \
+		src/w_render_sprites.c \
+		src/w_clear_vis_sprites.c \
+		src/w_set_pxl_spr_gunr.c \
+		src/w_game_timer_cycle.c \
+		src/w_game_over.c \
+		src/w_play_music.c \
+		src/w_gun_fire.c \
+		src/w_get_configs.c \
+		src/w_mlibx_draw_pixel_line.c \
+		src/w_init_player_game.c \
+		src/mlibx_putstring.c \
+		src/rt_file.c \
+		src/rt_parsing.c \
+		src/w_create_spr_map.c \
+		src/create_new_window.c \
+		src/create_new_img.c \
+		src/key_function.c \
+		src/put_info.c \
+		src/free_legend.c \
+		src/expose_hook.c
 OBJ=${SRC:.c=.o}
 
 ifeq ($(UNAME), Darwin) # MAC

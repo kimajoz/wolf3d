@@ -15,7 +15,7 @@
 # include <string.h>
 # include <math.h>
 # include <time.h>
-# include "../../minilibx_struct.h"
+# include "../../includes/minilibx_struct.h"
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
