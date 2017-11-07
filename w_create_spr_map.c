@@ -96,18 +96,24 @@ void		w_setsprcoordfile_tosprmap(int fd, t_wind *w)
 
 int			set_spr_to_prog(int fd, char *filename, t_wind *w)
 {
+	int		fd1;
+
 	if (ft_check_fd(fd, filename, 0))
 	{
 		ft_comment("arrive pas a lire spr");
 		w->w.info.spr = 0;
 		return (1);
 	}
+	fd1 = open(filename, O_RDONLY);
 	w->w.info.spr = 1;
 	init_sprites(w);
 	w->w.sprnbvis = 0;
+	ft_comment("create_spr_map");
 	create_spr_map(w);
+	ft_comment("create_spr_map passed");
 	w->w.nbtotsprprog = 0;
-	w_setsprcoordfile_tosprmap(fd, w);
+	w_setsprcoordfile_tosprmap(fd1, w);
+	ft_comment("w_setsprcoordfile_tosprmap");
 	if (!(w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
 		exit(1);
 	return (0);

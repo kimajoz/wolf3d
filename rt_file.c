@@ -131,7 +131,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 			while (tab[w->b.tmpneline])
 			{
 				if (!ft_isdigit(ft_atoi(tab[w->b.tmpneline])) && (ft_atoi(tab[w->b.tmpneline]) < 0 || ft_atoi(tab[w->b.tmpneline]) > 11))
-					exit(1);
+					exit(ft_comment("Content parsed in file.scn needs to be a digit between 0 number and 11."));
 				ft_strdel(&tab[w->b.tmpneline++]);
 			}
 			free(tab);

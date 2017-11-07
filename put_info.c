@@ -91,7 +91,7 @@ void				put_info_game(t_wind *w, int row, int bl)
 	rightm = 71;
 	midm = 25;
 	put_info_timeout(w, rightm, bl);
-	row = w->b.nbrtot_of_line + 4;
+	row = (w->height - 150) / 20;
 	mlibx_putstring("Health:", row, midm, w);
 	mlibx_putstring(w->w.legend[0], row, midm + 7, w);
 	mlibx_putstring("Ammunition:", row, midm + 12, w);

@@ -35,7 +35,9 @@ void *d)
 	{
 		fd = open(lst[i], O_RDONLY);
 		ft_comment("t");
-		if (ft_check_fd(fd, lst[i], 1))
+		if (!ft_check_fd(fd, lst[i], 1))
+			exit(EXIT_FAILURE);
+		else
 		{
 			if (w->w.isprite)
 				set_pxl_if_sprite(w, i, lst, d);
@@ -48,8 +50,6 @@ void *d)
 				(d))[i].size_line, &((t_img *)(d))[i].endian);
 			}
 		}
-		else
-			exit(EXIT_FAILURE);
 		close(fd);
 		i++;
 	}
