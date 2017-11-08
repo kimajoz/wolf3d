@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/05 16:42:16 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 16:42:20 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/08 16:24:38 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			ft_check_fd(int fd, char *filename, int needed)
 	char	*line;
 	int		ret;
 
-	while ((ret = get_next_line(fd, &line) > 0))
+	while ((ret = get_next_line(fd, &line)) < 0)
 	{
 		ft_putstr("File not found or empty file: ");
 		ft_putstr(filename);

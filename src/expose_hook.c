@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 14:06:46 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 11:08:23 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/08 18:23:35 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ int			expose_hook(t_wind *w)
 		mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x,
 				w->img.y);
 	put_info(w);
+	return (0);
+}
+
+int			press_exitcross(t_wind *w)
+{
+	free(w);
+	exit(1);
 	return (0);
 }
 

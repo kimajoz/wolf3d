@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 21:14:11 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/08 18:23:57 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 #define KEYPRESSMASK		(1L<<0)
 #define KEYRELEASE			3
 #define KEYRELEASEMASK		(1L<<1)
+#define DESTROYNOTIFY		17
+#define LEAVENOTIFY			8
+#define LEAVEWINDOWMASK		(1L<<5)
+
 
 static void		set_parameters2(t_wind *w)
 {
@@ -89,6 +93,7 @@ int				prog(char *filename)
 		init_minimap(&w);
 	mlx_hook(w.win, KEYPRESS, KEYPRESSMASK, keypress_function, &w);
 	mlx_hook(w.win, KEYRELEASE, KEYRELEASEMASK, key_release_function, &w);
+	mlx_hook(w.win, DESTROYNOTIFY, LEAVEWINDOWMASK, press_exitcross, &w);
 	mlx_loop_hook(w.mlx, hook_render, &w);
 	mlx_expose_hook(w.win, expose_hook, &w);
 	mlx_loop(w.mlx);

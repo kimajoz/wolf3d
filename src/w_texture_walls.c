@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 15:26:08 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 20:52:22 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/08 16:31:00 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,29 @@ static int				aff_block(t_sprimg *block, int numargs, ...)
 	int			arg;
 
 	i = 0;
+	ft_comment("aff_block 01");
 	va_start(list, numargs);
+	ft_comment("aff_block 02");
 	while (i < numargs)
 	{
+		ft_comment("aff_block 03");
 		arg = va_arg(list, int);
 		block[i].block = arg;
 		i++;
 	}
+		ft_comment("aff_block 04");
 	va_end(list);
+		ft_comment("aff_block 05");
 	return (0);
 }
 
 void					init_sprites(t_wind *w)
 {
 	w->w.sprnb = 7;
+	ft_comment("init_sprites 01");
 	if (!(w->w.lst_sprite = malloc(sizeof(char *) * w->w.sprnb)))
 		exit(1);
+	ft_comment("init_sprites 02");
 	aff_text_name(w->w.lst_sprite, w->w.sprnb,
 						"img/sprites/table-chairs.xpm",
 						"img/sprites/armor.xpm",
@@ -64,14 +71,19 @@ void					init_sprites(t_wind *w)
 						"img/sprites/lustre.xpm",
 						"img/sprites/pillar.xpm",
 						"img/sprites/guard.xpm");
+	ft_comment("init_sprites 03");
 	ft_check_type(w->w.lst_sprite, w->w.sprnb, "xpm");
+	ft_comment("init_sprites 04");
 	if (!(w->w.sprite = malloc(sizeof(t_sprimg) * w->w.sprnb)))
 		exit(1);
+	ft_comment("init_sprites 05");
 	w->w.isprite = 1;
 	w->w.sprite[0].img.x = 3;
 	w_set_pxlfiletoimg(w, w->w.sprnb, w->w.lst_sprite, w->w.sprite);
+	ft_comment("init_sprites 05");
 	w->w.isprite = 0;
 	aff_block(w->w.sprite, w->w.sprnb, 1, 1, 1, 0, 0, 1, 1);
+	ft_comment("init_sprites 06");
 }
 
 void					init_texture(t_wind *w)

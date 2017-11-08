@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:33:39 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 11:16:50 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/08 16:37:15 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void *d)
 	{
 		fd = open(lst[i], O_RDONLY);
 		ft_comment("t");
-		if (!ft_check_fd(fd, lst[i], 1))
+		if (ft_check_fd(fd, lst[i], 1))
 			exit(EXIT_FAILURE);
 		else
 		{

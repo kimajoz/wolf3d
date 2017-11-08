@@ -6,12 +6,24 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:51:43 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/08 17:28:57 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/08 18:03:46 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+#include "../inc/libft.h"
+
+int			ft_isnumber(char *str)
 {
+	int		c;
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		ft_isdigit(ft_atoi(str));
+		i++;
+	}
+	c = str[i];
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);

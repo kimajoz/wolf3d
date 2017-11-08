@@ -1,0 +1,56 @@
+Norme: ./src/create_new_img.c
+Norme: ./src/create_new_window.c
+Norme: ./src/free_legend.c
+Norme: ./src/mlibx_putstring.c
+Norme: ./src/expose_hook.c
+Norme: ./src/main.c
+Norme: ./src/rt_parsing.c
+Norme: ./src/key_function.c
+Error (line 46): function keypress_function01 has 27 lines
+Norme: ./src/put_info.c
+Norme: ./src/w_cast_rays.c
+Norme: ./src/w_check_progstart.c
+Norme: ./src/w_cast_single_ray_spr.c
+Norme: ./src/w_draw_background_color.c
+Norme: ./src/w_clear_vis_sprites.c
+Norme: ./src/rt_file.c
+Error: 7 functions in the file
+Error (line 17, col 1): missing space after if
+Error (line 19, col 1): missing space after if
+Error (line 36): line has 103 characters
+Error (line 45): line has 95 characters
+Error (line 49): function set_param_to_prog has 27 lines
+Error (line 117): declarations in w_insert_tab_int are bad aligned
+Error (line 117): function w_insert_tab_int has 29 lines
+Error (line 133): line has 137 characters
+Error (line 134): line has 113 characters
+Error (line 150): function rt_file has 38 lines
+Norme: ./src/w_game_over.c
+Norme: ./src/w_game_timer_cycle.c
+Norme: ./src/w_get_configs.c
+Norme: ./src/w_gun_fire.c
+Norme: ./src/w_init_player_game.c
+Norme: ./src/w_create_spr_map.c
+Error (line 25): line has 87 characters
+Error (line 41): function w_check_spr_inmap_anddigit has 35 lines
+Error (line 57): line has 101 characters
+Error (line 60): C++ comment
+Error (line 67): line has 94 characters
+Error (line 74): line has 102 characters
+Error (line 80): function w_setsprcoordfile_tosprmap has 33 lines
+Norme: ./src/w_play_music.c
+Norme: ./src/w_print_radar_fov.c
+Norme: ./src/w_set_pxl_spr_gunr.c
+Norme: ./src/w_mlibx_draw_pixel_line.c
+Norme: ./src/w_render_sprites.c
+Norme: ./src/w_set_pxlfiletoimg.c
+Error (line 26): function w_set_pxlfiletoimg has 27 lines
+Norme: ./includes/keymacro.h
+Norme: ./src/w_texture_walls.c
+Error (line 53): bad indentation
+Error (line 55): bad indentation
+Error (line 59): function init_sprites has 26 lines
+Norme: ./includes/wolf3d.h
+Norme: ./src/wolf3d.c
+Norme: ./includes/minilibx_struct.h
+Norme: ./src/w_verticales_lines_check.c

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 20:57:48 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/08 17:19:08 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 			w->b.tmpneline = 0;
 			while (tab[w->b.tmpneline])
 			{
-				if (!ft_isdigit(ft_atoi(tab[w->b.tmpneline])) && (ft_atoi(tab[w->b.tmpneline]) < 0 || ft_atoi(tab[w->b.tmpneline]) > 11))
+				if (ft_isdigit(ft_atoi(tab[w->b.tmpneline])) && (ft_atoi(tab[w->b.tmpneline]) < 0 || ft_atoi(tab[w->b.tmpneline]) > 11))
 					exit(ft_comment("Content parsed in file.scn needs to be a digit between 0 number and 11."));
 				ft_strdel(&tab[w->b.tmpneline++]);
 			}
@@ -166,6 +166,7 @@ int			rt_file(char *filename, t_wind *w, int needed)
 	}
 	else if (ft_strstr(filename, ".spr"))
 	{
+		ft_comment("before spr");
 		if (set_spr_to_prog(fd, filename, w))
 			return (1);
 	}
