@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/08 18:23:49 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/09 19:06:49 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,6 @@ void		free_legend(t_wind *w);
 void		w_mlibx_putint(int i, int row, int column, t_wind *w);
 void		tab_info(t_wind *w);
 int			ft_print_error_parsing(int x, int y);
-int			press_exitcross(t_wind *w);
+int			press_exitcross();
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/08 18:23:57 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/09 19:08:05 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 #define KEYRELEASE			3
 #define KEYRELEASEMASK		(1L<<1)
 #define DESTROYNOTIFY		17
-#define LEAVENOTIFY			8
 #define LEAVEWINDOWMASK		(1L<<5)
 
 
@@ -81,11 +80,17 @@ int				prog(char *filename)
 	w_init_player_pos(&w);
 	if (!w_check_progstart(&w, filename))
 		return (0);
+	ft_comment("main 01");
 	set_parameters(&w);
+	ft_comment("main 02");
 	init_texture(&w);
+	ft_comment("main 03");
 	init_guns(&w);
+	ft_comment("main 04");
 	w_init_screen(&w);
+	ft_comment("main 05");
 	create_new_img(&w);
+	ft_comment("main 06");
 	if (w.w.info.sound)
 		w_play_music(&w, w.lpth.musicstart, S_STARTL1, 0);
 	w_play_chronotime(&w);

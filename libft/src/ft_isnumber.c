@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:51:43 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/08 18:03:46 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/09 15:47:48 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,12 @@
 
 int			ft_isnumber(char *str)
 {
-	int		c;
-	int		i;
-
-	i = 0;
-	while (str[i] != '\0')
+	while (str)
 	{
-		ft_isdigit(ft_atoi(str));
-		i++;
+		if (ft_isdigit(ft_atoi(str)))
+			str++;
+		else
+			return (1);
 	}
-	c = str[i];
-	if (c >= '0' && c <= '9')
-		return (1);
 	return (0);
 }

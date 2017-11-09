@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/05 16:42:16 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 16:42:20 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/09 18:57:04 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int			ft_open_check(char *filename, int flags, int needed)
 
 	fd = open(filename, flags);
 	if (fd < 0 && needed)
-		exit(EXIT_FAILURE);
+		exit(ft_comment(".scn file not valid. Please modify and retry"));
 	return (fd);
 }

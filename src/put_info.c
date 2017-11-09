@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:52:45 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 15:33:48 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/09 18:46:30 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void				put_info_game(t_wind *w, int row, int bl)
 	rightm = 71;
 	midm = 25;
 	put_info_timeout(w, rightm, bl);
-	row = (w->height - 150) / 20;
+	row = (w->height - 50) / 20;
 	mlibx_putstring("Health:", row, midm, w);
 	mlibx_putstring(w->w.legend[0], row, midm + 7, w);
 	mlibx_putstring("Ammunition:", row, midm + 12, w);

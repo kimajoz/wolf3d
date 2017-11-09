@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 19:30:14 by pbillett          #+#    #+#             */
-/*   Updated: 2017/10/28 19:07:17 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/09 18:21:33 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,14 @@ int				w_check_progstart(t_wind *w, char *filename)
 	fparam = new_file_name(filename, ".par");
 	rt_file(fsprites, w, 0);
 	rt_file(fparam, w, 0);
+	ft_comment("w_check_progstart 01");
 	ft_strdel(&fsprites);
+	ft_comment("w_check_progstart 02");
 	free(fsprites);
+	ft_comment("w_check_progstart 03");
 	ft_strdel(&fparam);
+	ft_comment("w_check_progstart 04");
 	free(fparam);
+	ft_comment("w_check_progstart 05");
 	return (1);
 }

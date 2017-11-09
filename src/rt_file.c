@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/08 17:19:08 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/09 19:28:41 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,24 @@ void		ft_check_parsing_param_type(t_wind *w, char **tab)
 	i = 0;
 	while (i < 2)
 	{
-		if (ft_isdigit(ft_atoi(tab[i]))
+		if (ft_isnumber(tab[i])
 		&& (ft_atoi(tab[i]) < w->b.nbrtot_of_line
 		|| ft_atoi(tab[i]) < w->b.nbr_elem_line[0])
 		&& ft_atoi(tab[i]) >= 0)
 			i++;
 		else
-			exit(ft_comment("3wrong number in .par file, or not digit numbers. Not inside the map."));
+			exit(ft_comment("wrong number in .par file, or not digit numbers. \
+			Not inside the map."));
 	}
 	while (i < 3)
 	{
-		if (ft_isdigit(ft_atoi(tab[i]))
+		if (ft_isnumber(tab[i])
 		&& ft_atoi(tab[i]) < 360
 		&& ft_atoi(tab[i]) >= 0)
 			i++;
 		else
-			exit(ft_comment("wrong number in .par file for rotation, or not digit numbers."));
+			exit(ft_comment("wrong number in .par file for rotation, \
+			or not digit numbers."));
 	}
 }
 
@@ -130,8 +132,10 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 			w->b.tmpneline = 0;
 			while (tab[w->b.tmpneline])
 			{
-				if (ft_isdigit(ft_atoi(tab[w->b.tmpneline])) && (ft_atoi(tab[w->b.tmpneline]) < 0 || ft_atoi(tab[w->b.tmpneline]) > 11))
-					exit(ft_comment("Content parsed in file.scn needs to be a digit between 0 number and 11."));
+				if (ft_isdigit(ft_atoi(tab[w->b.tmpneline])) &&
+	(ft_atoi(tab[w->b.tmpneline]) < 0 || ft_atoi(tab[w->b.tmpneline]) > 11))
+					exit(ft_comment("Content parsed in file.scn needs to be a\
+								digit between 0 number and 11."));
 				ft_strdel(&tab[w->b.tmpneline++]);
 			}
 			free(tab);
@@ -156,7 +160,8 @@ int			rt_file(char *filename, t_wind *w, int needed)
 	ft_comment("open general check");
 	fd = ft_open_check(filename, O_RDONLY, needed);
 	if (fd == -1)
-		exit(ft_comment("Wrong type of file"));
+		exit(ft_comment("Wrong type of file, please check your .scn, .spr, \
+		and .par file"));
 	ft_comment("open general check passed");
 	if (ft_strstr(filename, ".scn"))
 	{
@@ -177,8 +182,11 @@ int			rt_file(char *filename, t_wind *w, int needed)
 		{
 			ft_comment("open para");
 			ft_check_parsing_param(filename);
+			ft_comment("open para 01");
 			fd1 = open(filename, O_RDONLY);
+			ft_comment("open para 02");
 			set_param_to_prog(fd1, w, 0, 0);
+			ft_comment("open para 03");
 			w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
 			w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
 			w->cam.rot.y = w->w.player.init_pos[2];

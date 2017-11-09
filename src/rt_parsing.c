@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/02 16:35:00 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/09 19:01:42 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			ft_print_error_parsing(int x, int y)
 	ft_putstr(" -> needs the");
 	ft_putstr(" lenght of the line");
 	ft_putstr(") on line ");
-	ft_putnbr(y + 1);
+	ft_putnbr(y);
 	ft_putstr(".");
 	ft_putstr("\n");
 	return (1);
@@ -32,7 +32,7 @@ int			ft_print_error_type_parsing(int x, int y)
 	ft_putstr("please check type of character ");
 	ft_putnbr(x);
 	ft_putstr(" on line ");
-	ft_putnbr(y + 1);
+	ft_putnbr(y);
 	ft_putstr(".");
 	ft_putstr("\n");
 	return (1);
