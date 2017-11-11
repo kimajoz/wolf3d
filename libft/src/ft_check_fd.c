@@ -22,12 +22,18 @@ int			ft_check_fd(int fd, char *filename, int needed)
 	{
 		ft_putstr("File not found or empty file: ");
 		ft_putstr(filename);
+		ft_comment("ft_check_fd 01");
 		if (!needed)
 			ft_putstr(" (Optional file)");
 		ft_putchar('\n');
+		ft_comment("ft_check_fd 02");
 		if (fd == -1)
 			return (1);
-		ft_strdel(&line);
+		ft_putnbr(fd);
+		ft_comment("ft_check_fd 03");
+		if (line)
+			ft_strdel(&line);
+		ft_comment("ft_check_fd 04");
 	}
 	if (ret < 0)
 		exit(ft_comment("File not found or wrong parsing in file."));

@@ -23,8 +23,9 @@ int			expose_hook(t_wind *w)
 	return (0);
 }
 
-int			press_exitcross()
+int			press_exitcross(t_wind *w)
 {
+	free(w);
 	exit(1);
 	return (0);
 }

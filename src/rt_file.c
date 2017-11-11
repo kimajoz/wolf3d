@@ -34,7 +34,7 @@ void		ft_check_parsing_param_type(t_wind *w, char **tab)
 			i++;
 		else
 			exit(ft_comment("wrong number in .par file, or not digit numbers. \
-			Not inside the map."));
+Not inside the map."));
 	}
 	while (i < 3)
 	{
@@ -44,7 +44,7 @@ void		ft_check_parsing_param_type(t_wind *w, char **tab)
 			i++;
 		else
 			exit(ft_comment("wrong number in .par file for rotation, \
-			or not digit numbers."));
+or not digit numbers."));
 	}
 }
 
@@ -135,7 +135,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 				if (ft_isdigit(ft_atoi(tab[w->b.tmpneline])) &&
 	(ft_atoi(tab[w->b.tmpneline]) < 0 || ft_atoi(tab[w->b.tmpneline]) > 11))
 					exit(ft_comment("Content parsed in file.scn needs to be a\
-								digit between 0 number and 11."));
+digit between 0 number and 11."));
 				ft_strdel(&tab[w->b.tmpneline++]);
 			}
 			free(tab);
@@ -159,9 +159,16 @@ int			rt_file(char *filename, t_wind *w, int needed)
 
 	ft_comment("open general check");
 	fd = ft_open_check(filename, O_RDONLY, needed);
-	if (fd == -1)
-		exit(ft_comment("Wrong type of file, please check your .scn, .spr, \
-		and .par file"));
+	if (ft_check_fd(fd, filename, 1))
+	{
+		ft_putstr(filename);
+		exit(ft_comment(" file not here. or with wrong parsing. (see examples in maps folder.)"));
+	}
+	else
+	{
+		ft_putstr(filename);
+		ft_putendl(" file load ok");
+	}
 	ft_comment("open general check passed");
 	if (ft_strstr(filename, ".scn"))
 	{

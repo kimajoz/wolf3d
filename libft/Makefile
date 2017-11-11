@@ -105,6 +105,7 @@ SRC= src/ft_lstiter.c \
 	src/ft_comment.c \
 	src/ft_free_tablst.c \
 	src/ft_isnumber.c \
+	src/ft_does_file_exist.c \
 	src/ft_rot_fabs.c
 CFLAGS= -Wall -Werror -Wextra
 SRCDIR= src

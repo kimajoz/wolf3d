@@ -143,5 +143,6 @@ int					ft_play_sound(char *filename, int system);
 double				ft_get_sound_duration(char *filename, int os);
 int					ft_open_check(char *filename, int flags, int needed);
 int					ft_isnumber(char *str);
+int					ft_does_file_exist(const char *filename);
 
 #endif
