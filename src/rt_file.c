@@ -160,10 +160,7 @@ int			rt_file(char *filename, t_wind *w, int needed)
 	ft_comment("open general check");
 	fd = ft_open_check(filename, O_RDONLY, needed);
 	if (ft_check_fd(fd, filename, 1))
-	{
-		ft_putstr(filename);
-		exit(ft_comment(" file not here. or with wrong parsing. (see examples in maps folder.)"));
-	}
+		exit(1);
 	else
 	{
 		ft_putstr(filename);
