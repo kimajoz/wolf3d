@@ -14,9 +14,9 @@
 
 void		init_mem_param(t_wind *w)
 {
-	if(!(w->w.player.init_pos = malloc(3 * sizeof(double))))
+	if (!(w->w.player.init_pos = malloc(3 * sizeof(double))))
 		exit(0);
-	if(!(w->w.player.end_pos = malloc(3 * sizeof(double))))
+	if (!(w->w.player.end_pos = malloc(3 * sizeof(double))))
 		exit(0);
 }
 
@@ -120,7 +120,7 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 {
 	int		y;
 	char	**tab;
-	int ret;
+	int		ret;
 
 	y = 0;
 	if (ft_strstr(*filename, ".scn"))
@@ -151,52 +151,40 @@ digit between 0 number and 11."));
 	close(*fd);
 }
 
+void		w_set_par_file(t_wind *w, int fd, char *filename)
+{
+	int		fd1;
+
+	if (!ft_check_fd(fd, filename, 0))
+	{
+		ft_check_parsing_param(filename);
+		fd1 = open(filename, O_RDONLY);
+		set_param_to_prog(fd1, w, 0, 0);
+		w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
+		w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
+		w->cam.rot.y = w->w.player.init_pos[2];
+		w->w.bolpar = 1;
+		close(fd1);
+	}
+}
+
 int			rt_file(char *filename, t_wind *w, int needed)
 {
 	int		fd;
-	int		fd1;
 	char	*line;
 
-	ft_comment("open general check");
 	fd = ft_open_check(filename, O_RDONLY, needed);
 	if (ft_check_fd(fd, filename, 1))
 		exit(1);
-	else
-	{
-		ft_putstr(filename);
-		ft_putendl(" file load ok");
-	}
-	ft_comment("open general check passed");
 	if (ft_strstr(filename, ".scn"))
-	{
-		ft_comment("open scn");
 		w_insert_tab_int(w, &fd, &line, &filename);
-		ft_comment("open passed");
-	}
 	else if (ft_strstr(filename, ".spr"))
 	{
-		ft_comment("before spr");
 		if (set_spr_to_prog(fd, filename, w))
 			return (1);
 	}
 	else if (ft_strstr(filename, ".par"))
-	{
-		ft_comment("before open para");
-		if (!ft_check_fd(fd, filename, 0))
-		{
-			ft_comment("open para");
-			ft_check_parsing_param(filename);
-			ft_comment("open para 01");
-			fd1 = open(filename, O_RDONLY);
-			ft_comment("open para 02");
-			set_param_to_prog(fd1, w, 0, 0);
-			ft_comment("open para 03");
-			w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
-			w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
-			w->cam.rot.y = w->w.player.init_pos[2];
-			w->w.bolpar = 1;
-		}
-	}
+		w_set_par_file(w, fd, filename);
 	close(fd);
 	return (0);
 }

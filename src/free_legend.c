@@ -14,8 +14,8 @@
 
 int					w_insidemap(int x, int y, t_wind *w)
 {
-	if ((y >= 0 && y < (w->b.nbrtot_of_line)) &&
-	(x >= 0 && x < w->b.nbr_elem_line[0]))
+	if ((y >= 0 && y <= (w->b.nbrtot_of_line + 1)) &&
+	(x >= 0 && x <= w->b.nbr_elem_line[0]))
 		return (1);
 	return (0);
 }

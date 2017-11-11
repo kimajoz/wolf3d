@@ -43,6 +43,17 @@ void			move(t_wind *w)
 	}
 }
 
+void			w_reload_gun(t_wind *w)
+{
+	if (w->w.player.ammunition < 17)
+	{
+		w->w.player.ammunition += 7;
+		w->w.player.ammureload = 1;
+		if (w->w.info.sound)
+			w_play_music(w, w->lpth.fxguncocking, S_GUNCOKING, 0);
+	}
+}
+
 static void		keypress_function01(int keycode, t_wind *w)
 {
 	if (keycode == U_ARROW || keycode == D_ARROW || keycode == R_ARROW ||
@@ -63,15 +74,7 @@ static void		keypress_function01(int keycode, t_wind *w)
 	else if (keycode == CTRL_R)
 		w->w.player.fire = 1;
 	else if (keycode == KEY_R)
-	{
-		if (w->w.player.ammunition < 17)
-		{
-			w->w.player.ammunition += 7;
-			w->w.player.ammureload = 1;
-			if (w->w.info.sound)
-				w_play_music(w, w->lpth.fxguncocking, S_GUNCOKING, 0);
-		}
-	}
+		w_reload_gun(w);
 }
 
 static void		keypress_function02(int keycode, t_wind *w)
