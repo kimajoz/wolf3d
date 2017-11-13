@@ -21,7 +21,7 @@
 
 void				put_info_cam(t_wind *w, int leftm, int row, int bl)
 {
-	row = w->b.nbrtot_of_line / 1.8;
+	row = w->b.nbrtot_of_line / 1.75;
 	mlibx_putstring("player.speed :", row, 1, w);
 	w_mlibx_putint(w->w.player.speed, row, leftm + bl + 5, w);
 	row++;

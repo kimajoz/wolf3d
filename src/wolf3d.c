@@ -28,13 +28,16 @@ void				init_minimap(t_wind *w)
 	int			j;
 
 	i = 0;
-	while (i < (w->b.nbrtot_of_line * MMS))
+	printf("NBR OF LINE: %d, NBR ELEM:%d\n", w->b.nbrtot_of_line, w->b.nbr_elem_line[0]);
+	printf("sprite: %d\n", w->w.info.spr);
+	while (i <= ((w->b.nbrtot_of_line + 1) * MMS))
 	{
 		j = 0;
 		while (j < (w->b.nbr_elem_line[(i / MMS)] * MMS))
 		{
 			if (w->w.info.spr)
 			{
+				printf("current nbrtot_of_line: %d, nbr_elem_line:%d\n", i / MMS, i /MMS);
 				if (w->w.tab_int_spr[i / MMS][j / MMS].num == 1)
 					w_mlibx_draw_pixel(w, j, i, 0xFF0000);
 				else if (w->w.tab_int_spr[i / MMS][j / MMS].num == 4)

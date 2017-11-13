@@ -65,6 +65,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <pthread.h>
+#include <stdio.h>
 
 int			w_check_progstart(t_wind *w, char *filename);
 int			rt_file(char *filename, t_wind *w, int needed);

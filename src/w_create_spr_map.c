@@ -19,7 +19,7 @@ void		create_spr_map(t_wind *w)
 	int		x;
 
 	if (!(w->w.tab_int_spr =
-	malloc(w->b.nbrtot_of_line * sizeof(t_sprite *))))
+	malloc((w->b.nbrtot_of_line + 1) * sizeof(t_sprite *))))
 		exit(1);
 	y = 0;
 	while (y < w->b.nbrtot_of_line)
@@ -112,10 +112,14 @@ int			set_spr_to_prog(int fd, char *filename, t_wind *w)
 	w->w.info.spr = 1;
 	init_sprites(w);
 	w->w.sprnbvis = 0;
+	ft_comment("before create_spr_map");
 	create_spr_map(w);
+	ft_comment("after create_spr_map");
 	w->w.nbtotsprprog = 0;
 	w_setsprcoordfile_tosprmap(fd1, w);
+	ft_comment("after setsprcoord");
 	if (!(w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
 		exit(1);
+	ft_comment("end set_spr_to_prog");
 	return (0);
 }

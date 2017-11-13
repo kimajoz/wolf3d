@@ -102,7 +102,7 @@ void		insert_file_to_prog(char *filename, int y, t_wind *w)
 	{
 		tab = ft_strsplit(line, ' ');
 		len = ft_nbrofpart(line, ' ');
-		if (!(w->b.tab_int[y] = malloc(len * sizeof(int))))
+		if (!(w->b.tab_int[y] = malloc((len +1) * sizeof(int))))
 			exit(0);
 		x = 0;
 		while (tab[x])
@@ -123,31 +123,28 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 	int		ret;
 
 	y = 0;
-	if (ft_strstr(*filename, ".scn"))
+	while ((ret = get_next_line(*fd, line)) > 0)
 	{
-		while ((ret = get_next_line(*fd, line)) > 0)
-		{
-			if ((tab = ft_strsplit(*line, ' ')) == NULL)
-				exit(ft_print_error_parsing(0, y));
-			w->b.tmpneline = 0;
-			while (tab[w->b.tmpneline])
-			{
-				if (ft_isdigit(ft_atoi(tab[w->b.tmpneline])) &&
-	(ft_atoi(tab[w->b.tmpneline]) < 0 || ft_atoi(tab[w->b.tmpneline]) > 11))
-					exit(ft_comment("Content parsed in file.scn needs to be a\
-digit between 0 number and 11."));
-				ft_strdel(&tab[w->b.tmpneline++]);
-			}
-			free(tab);
-			ft_strdel(line);
-			y++;
-		}
-		if (ret < 0)
+		if ((tab = ft_strsplit(*line, ' ')) == NULL)
 			exit(ft_print_error_parsing(0, y));
-		w->b.nbrtot_of_line = y;
-		ft_check_parsing(w, *filename);
-		insert_file_to_prog(*filename, y, w);
+		w->b.tmpneline = 0;
+		while (tab[w->b.tmpneline])
+		{
+			if (ft_isdigit(ft_atoi(tab[w->b.tmpneline])) &&
+(ft_atoi(tab[w->b.tmpneline]) < 0 || ft_atoi(tab[w->b.tmpneline]) > 11))
+				exit(ft_comment("Content parsed in file.scn needs to be a\
+digit between 0 number and 11."));
+			ft_strdel(&tab[w->b.tmpneline++]);
+		}
+		free(tab);
+		ft_strdel(line);
+		y++;
 	}
+	if (ret < 0)
+		exit(ft_print_error_parsing(0, y));
+	w->b.nbrtot_of_line = y;
+	ft_check_parsing(w, *filename);
+	insert_file_to_prog(*filename, y, w);
 	close(*fd);
 }
 
@@ -176,14 +173,15 @@ int			rt_file(char *filename, t_wind *w, int needed)
 	fd = ft_open_check(filename, O_RDONLY, needed);
 	if (ft_check_fd(fd, filename, 1))
 		exit(1);
-	if (ft_strstr(filename, ".scn"))
+	if (ft_strrstr(filename, ".scn"))
 		w_insert_tab_int(w, &fd, &line, &filename);
-	else if (ft_strstr(filename, ".spr"))
+	else if (!ft_strrstr(filename, ".spr"))
 	{
+		ft_comment(".spr file open");
 		if (set_spr_to_prog(fd, filename, w))
 			return (1);
 	}
-	else if (ft_strstr(filename, ".par"))
+	else if (!ft_strrstr(filename, ".par"))
 		w_set_par_file(w, fd, filename);
 	close(fd);
 	return (0);

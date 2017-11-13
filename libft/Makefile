@@ -31,6 +31,7 @@ SRC= src/ft_lstiter.c \
 	src/ft_putnbr_fd.c \
 	src/ft_strjoin.c \
 	src/ft_strstr.c \
+	src/ft_strrstr.c \
 	src/ft_isalnum.c \
 	src/ft_memccpy.c \
 	src/ft_putstr.c \

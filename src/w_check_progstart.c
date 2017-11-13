@@ -34,7 +34,7 @@ int				w_check_progstart(t_wind *w, char *filename)
 
 	w->width = 800;
 	w->height = 600;
-	if (!ft_strstr(filename, "scn"))
+	if (!ft_strrstr(filename, ".scn"))
 	{
 		ft_putendl("File wrong type: Needed .scn input file extension.");
 		return (0);
