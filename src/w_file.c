@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_file.c                                          :+:      :+:    :+:   */
+/*   w_file.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/14 17:59:19 by pbillett         ###   ########.fr       */
+/*   Created: 2017/11/14 18:59:29 by pbillett          #+#    #+#             */
+/*   Updated: 2017/11/14 20:18:58 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void		init_mem_param(t_wind *w)
+void		w_set_init_endpos(t_wind *w, char **tab, int j)
 {
-	if (!(w->w.player.init_pos = malloc(3 * sizeof(double))))
-		exit(0);
-	if (!(w->w.player.end_pos = malloc(3 * sizeof(double))))
-		exit(0);
+	if (j == 0)
+	{
+		w->w.player.init_pos.x = ft_atoi(tab[0]);
+		w->w.player.init_pos.y = ft_atoi(tab[1]);
+		w->w.player.init_pos.z = ft_atoi(tab[2]);
+	}
+	if (j == 1)
+	{
+		w->w.player.end_pos.x = ft_atoi(tab[0]);
+		w->w.player.end_pos.y = ft_atoi(tab[1]);
+		w->w.player.end_pos.z = ft_atoi(tab[2]);
+	}
 }
 
 void		ft_check_parsing_param_type(t_wind *w, char **tab)
@@ -54,7 +62,6 @@ void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 	char	**tab;
 	int		x;
 
-	init_mem_param(w);
 	while (get_next_line(fd, &line))
 	{
 		x = 0;
@@ -63,14 +70,9 @@ void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 			if ((tab = ft_strsplit(line, ' ')) == NULL)
 				exit(1);
 			ft_check_parsing_param_type(w, tab);
+			w_set_init_endpos(w, tab, j);
 			while (tab[x])
-			{
-				if (j == 0)
-					w->w.player.init_pos[x] = ft_atoi(tab[x]);
-				if (j == 1)
-					w->w.player.end_pos[x] = ft_atoi(tab[x]);
 				ft_strdel(&tab[x++]);
-			}
 			free(tab);
 			j++;
 		}
@@ -148,28 +150,27 @@ digit between 0 number and 11."));
 	close(*fd);
 }
 
-void		w_set_par_file(t_wind *w, int fd, char *filename)
+void		w_set_par_file(t_wind *w, char *filename)
 {
 	int		fd1;
 
-	if (!ft_check_fd(fd, filename, 0))
-	{
-		ft_check_parsing_param(filename);
-		fd1 = open(filename, O_RDONLY);
-		set_param_to_prog(fd1, w, 0, 0);
-		w->cam.pos.x = w->w.player.init_pos[0] + 0.5;
-		w->cam.pos.z = w->w.player.init_pos[1] + 0.5;
-		w->cam.rot.y = w->w.player.init_pos[2];
-		w->w.bolpar = 1;
-		close(fd1);
-	}
+	ft_check_parsing_param(filename);
+	fd1 = open(filename, O_RDONLY);
+	set_param_to_prog(fd1, w, 0, 0);
+	w->cam.pos.x = w->w.player.init_pos.x + 0.5;
+	w->cam.pos.z = w->w.player.init_pos.y + 0.5;
+	w->cam.rot.y = w->w.player.init_pos.z;
+	w->w.bolpar = 1;
+	close(fd1);
 }
 
-int			rt_file(char *filename, t_wind *w, int needed)
+int			w_file(char *filename, t_wind *w, int needed)
 {
 	int		fd;
 	char	*line;
 
+	ft_comment("enter rt_file");
+	ft_comment(filename);
 	fd = ft_open_check(filename, O_RDONLY, needed);
 	if (ft_check_fd(fd, filename, 1))
 		exit(1);
@@ -178,11 +179,11 @@ int			rt_file(char *filename, t_wind *w, int needed)
 	else if (ft_strrstr(filename, ".spr"))
 	{
 		ft_comment(".spr file open");
-		if (set_spr_to_prog(fd, filename, w))
+		if (set_spr_to_prog(filename, w))
 			return (1);
 	}
 	else if (ft_strrstr(filename, ".par"))
-		w_set_par_file(w, fd, filename);
+		w_set_par_file(w, filename);
 	close(fd);
 	return (0);
 }

@@ -22,8 +22,8 @@ SRC=	src/main.c \
 		src/w_mlibx_draw_pixel_line.c \
 		src/w_init_player_game.c \
 		src/mlibx_putstring.c \
-		src/rt_file.c \
-		src/rt_parsing.c \
+		src/w_file.c \
+		src/w_parsing.c \
 		src/w_create_spr_map.c \
 		src/create_new_window.c \
 		src/create_new_img.c \

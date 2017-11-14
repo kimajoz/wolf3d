@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 19:30:14 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/09 18:21:33 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 20:16:09 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int				w_check_progstart(t_wind *w, char *filename)
 		return (0);
 	}
 	*w = create_new_window("Wolf3d", w->width, w->height);
-	rt_file(filename, w, 1);
+	w_file(filename, w, 1);
 	fsprites = new_file_name(filename, ".spr");
 	fparam = new_file_name(filename, ".par");
-	rt_file(fsprites, w, 0);
-	rt_file(fparam, w, 0);
+	w_file(fsprites, w, 0);
+	w_file(fparam, w, 0);
 	ft_strdel(&fsprites);
 	free(fsprites);
 	ft_strdel(&fparam);

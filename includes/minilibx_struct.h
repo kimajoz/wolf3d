@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:50 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 17:43:04 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 18:34:06 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,8 +291,8 @@ typedef struct				s_player
 	int						dir;
 	double					rotspeed;
 	double					movespeed;
-	int						*init_pos;
-	int						*end_pos;
+	t_point					init_pos;
+	t_dpoint				end_pos;
 	double					timeout;
 	double					prevtimeoutimg;
 	double					prevtimeoutm;

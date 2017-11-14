@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:05:42 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 20:48:00 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 20:00:56 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,31 @@ void		w_clear_vis_sprites2dspr_list(t_wind *w)
 	int		i;
 
 	i = 0;
-	if (w->w.oldvisiblespr)
+	ft_comment("w_clear_vis_sprites2dspr_list 01");
+	if (!w->w.oldvisiblespr)
 	{
 		free(w->w.oldvisiblespr);
 		w->w.oldvisiblespr = NULL;
 	}
+	ft_comment("w_clear_vis_sprites2dspr_list 02");
 	if (!(w->w.oldvisiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
 		exit(0);
 	i = 0;
+	ft_comment("w_clear_vis_sprites2dspr_list 03");
 	while (i < w->w.sprnbvis)
 	{
 		w->w.oldvisiblespr[i] = w->w.visiblespr[i];
 		w->w.oldvisiblespr[i].vis = 0;
 		i++;
 	}
+	ft_comment("w_clear_vis_sprites2dspr_list 04");
 	w->w.sprnbvis = 0;
 	free(w->w.visiblespr);
+	ft_comment("w_clear_vis_sprites2dspr_list 05");
 	w->w.visiblespr = NULL;
 	if (!(w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
 		exit(0);
+	ft_comment("w_clear_vis_sprites2dspr_list 06");
 }
 
 void		w_clear_vis_sprites(t_wind *w)

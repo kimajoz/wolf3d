@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_parsing.c                                       :+:      :+:    :+:   */
+/*   w_parsing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/06 21:06:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/09 19:01:42 by pbillett         ###   ########.fr       */
+/*   Created: 2017/11/14 18:59:14 by pbillett          #+#    #+#             */
+/*   Updated: 2017/11/14 18:59:16 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		ft_check_parsing_param(char *filename)
 
 	y = 0;
 	fd = open(filename, O_RDONLY);
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
 		i = 0;
 		if (line[0] != '#')

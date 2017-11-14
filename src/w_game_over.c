@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 17:58:01 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 16:31:04 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 18:36:41 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void		check_win_game(t_wind *w)
 {
 	if (w->w.bolpar == 1)
 	{
-		if (((int)w->cam.pos.x == w->w.player.end_pos[0]) &&
-		((int)w->cam.pos.z == w->w.player.end_pos[1]) && !w->w.player.win)
+		if (((int)w->cam.pos.x == w->w.player.end_pos.x) &&
+		((int)w->cam.pos.z == w->w.player.end_pos.y) && !w->w.player.win)
 			w->w.player.win = 1;
 	}
 }

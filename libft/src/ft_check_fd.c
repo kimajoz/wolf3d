@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/05 16:42:16 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/09 19:24:22 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 19:47:19 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int			ft_check_fd(int fd, char *filename, int optional)
 				ft_putendl("");
 			return (1);
 		}
-		ft_strdel(&line);
+		//if (!line)
+		//ft_strdel(&line);
 	}
-	if (ret < 0)
-		exit(ft_comment("File not found or wrong parsing in file."));
+	//if (ret < 0)
+		//exit(ft_comment("File not found or wrong parsing in file."));
 	return (0);
 }

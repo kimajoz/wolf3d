@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:06:28 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/14 18:10:40 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 20:12:54 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void		create_spr_map(t_wind *w)
 	int		x;
 
 	if (!(w->w.tab_int_spr =
-	malloc((w->b.nbrtot_of_line + 1) * sizeof(t_sprite *))))
+	malloc((w->b.nbrtot_of_line) * sizeof(t_sprite *))))
 		exit(1);
 	y = 0;
-	while (y < w->b.nbrtot_of_line)
+	while (y < w->b.nbrtot_of_line + 1)
 	{
 		if (!(w->w.tab_int_spr[y] =
 		malloc(w->b.nbr_elem_line[3] * sizeof(t_sprite))))
@@ -98,15 +98,10 @@ void		w_setsprcoordfile_tosprmap(int fd, t_wind *w)
 		exit(ft_comment("Cannot read .spr file. Please check path"));
 }
 
-int			set_spr_to_prog(int fd, char *filename, t_wind *w)
+int			set_spr_to_prog(char *filename, t_wind *w)
 {
 	int		fd1;
 
-	if (ft_check_fd(fd, filename, 0))
-	{
-		w->w.info.spr = 0;
-		return (1);
-	}
 	fd1 = open(filename, O_RDONLY);
 	w->w.info.spr = 1;
 	init_sprites(w);

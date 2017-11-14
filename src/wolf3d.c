@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:05:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/05 16:31:51 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 20:12:18 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ void				init_minimap(t_wind *w)
 	int			j;
 
 	i = 0;
-	printf("NBR OF LINE: %d, NBR ELEM:%d\n", w->b.nbrtot_of_line, w->b.nbr_elem_line[0]);
-	printf("sprite: %d\n", w->w.info.spr);
-	while (i <= ((w->b.nbrtot_of_line + 1) * MMS))
+	//printf("NBR OF LINE: %d, NBR ELEM:%d\n", w->b.nbrtot_of_line, w->b.nbr_elem_line[0]);
+	//printf("sprite: %d\n", w->w.info.spr);
+	while (i < ((w->b.nbrtot_of_line + 1) * MMS))
 	{
 		j = 0;
 		while (j < (w->b.nbr_elem_line[(i / MMS)] * MMS))
 		{
 			if (w->w.info.spr)
 			{
-				printf("current nbrtot_of_line: %d, nbr_elem_line:%d\n", i / MMS, i /MMS);
+				//printf("current nbrtot_of_line: %d, nbr_elem_line:%d\n", i / MMS, i /MMS);
 				if (w->w.tab_int_spr[i / MMS][j / MMS].num == 1)
 					w_mlibx_draw_pixel(w, j, i, 0xFF0000);
 				else if (w->w.tab_int_spr[i / MMS][j / MMS].num == 4)
@@ -77,29 +77,47 @@ int					game_cycle(t_wind *w)
 
 int					wolf3d(t_wind *w)
 {
+	ft_comment("wolf3d 01");
 	if (w->w.info.spr)
 		w_clear_vis_sprites(w);
+	ft_comment("wolf3d 02");
 	game_cycle(w);
+	ft_comment("wolf3d 03");
 	w->w.timeimg = 0.01;
 	if ((w->w.player.prevtimeoutimg + w->w.timeimg) < w->w.player.timeout ||
 			!w->w.player.prevtimeoutimg)
 	{
+		ft_comment("wolf3d 04");
 		w->w.player.prevtimeoutimg = w->w.player.timeout;
 		w_clear_screen(w);
+		ft_comment("wolf3d 05");
 		if (w->w.info.bg)
 			w_draw_background_color(w);
+		ft_comment("wolf3d 06");
 		if (w->w.info.tabinfo)
 			init_minimap(w);
+		ft_comment("wolf3d 07");
 		w_cast_rays(w);
+		ft_comment("wolf3d 08");
 		if (w->w.info.spr)
 			w_render_sprites(w);
+		ft_comment("wolf3d 09");
 		w_gun_fire(w);
+		ft_comment("wolf3d 10");
 		w_render_screen(w);
+		ft_comment("wolf3d 11");
 	}
 	else if ((w->w.player.prevtimeoutimg + w->w.timeimg) > w->w.player.timeout
 			&& w->w.player.prevtimeoutimg)
+	{
+		ft_comment("wolf3d 11");
 		w_render_screen(w);
+		ft_comment("wolf3d 12");
+	}
+	ft_comment("wolf3d 13");
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr_img, w->img.x, w->img.y);
+	ft_comment("wolf3d 14");
 	put_info(w);
+	ft_comment("wolf3d 15");
 	return (0);
 }

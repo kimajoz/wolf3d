@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 15:26:08 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/08 16:31:00 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 19:53:20 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void					init_sprites(t_wind *w)
 	ft_comment("init_sprites 05");
 	w->w.isprite = 1;
 	w->w.sprite[0].img.x = 3;
+	ft_comment("init_sprites 05a");
 	w_set_pxlfiletoimg(w, w->w.sprnb, w->w.lst_sprite, w->w.sprite);
 	ft_comment("init_sprites 05");
 	w->w.isprite = 0;
@@ -107,7 +108,9 @@ void					init_texture(t_wind *w)
 	ft_check_type(w->w.lst_text, nbtext, "xpm");
 	if (!(w->w.text = malloc(sizeof(t_img) * nbtext)))
 		exit(0);
+	ft_comment("init_texture 01");
 	w_set_pxlfiletoimg(w, nbtext, w->w.lst_text, w->w.text);
+	ft_comment("init_texture 02");
 }
 
 void					init_guns(t_wind *w)
@@ -121,5 +124,7 @@ void					init_guns(t_wind *w)
 	ft_check_type(w->w.lst_weapon, nbtext, "xpm");
 	if (!(w->w.weapon = malloc(sizeof(t_img) * nbtext)))
 		exit(0);
+	ft_comment("init_guns");
 	w_set_pxlfiletoimg(w, nbtext, w->w.lst_weapon, w->w.weapon);
+	ft_comment("init_guns b");
 }
