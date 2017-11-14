@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:06:28 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/09 19:22:33 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 18:10:40 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int			set_spr_to_prog(int fd, char *filename, t_wind *w)
 
 	if (ft_check_fd(fd, filename, 0))
 	{
-		ft_comment("check spr");
 		w->w.info.spr = 0;
 		return (1);
 	}
@@ -112,14 +111,10 @@ int			set_spr_to_prog(int fd, char *filename, t_wind *w)
 	w->w.info.spr = 1;
 	init_sprites(w);
 	w->w.sprnbvis = 0;
-	ft_comment("before create_spr_map");
 	create_spr_map(w);
-	ft_comment("after create_spr_map");
 	w->w.nbtotsprprog = 0;
 	w_setsprcoordfile_tosprmap(fd1, w);
-	ft_comment("after setsprcoord");
 	if (!(w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
 		exit(1);
-	ft_comment("end set_spr_to_prog");
 	return (0);
 }

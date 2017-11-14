@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:32 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/09 19:28:41 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 17:59:19 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,13 +175,13 @@ int			rt_file(char *filename, t_wind *w, int needed)
 		exit(1);
 	if (ft_strrstr(filename, ".scn"))
 		w_insert_tab_int(w, &fd, &line, &filename);
-	else if (!ft_strrstr(filename, ".spr"))
+	else if (ft_strrstr(filename, ".spr"))
 	{
 		ft_comment(".spr file open");
 		if (set_spr_to_prog(fd, filename, w))
 			return (1);
 	}
-	else if (!ft_strrstr(filename, ".par"))
+	else if (ft_strrstr(filename, ".par"))
 		w_set_par_file(w, fd, filename);
 	close(fd);
 	return (0);

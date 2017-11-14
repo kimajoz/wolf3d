@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 14:26:55 by pbillett          #+#    #+#             */
-/*   Updated: 2015/12/01 18:31:42 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/14 18:05:56 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ char		*ft_strrstr(const char *s1, const char *s2)
 			if (s2r[p + 1] == '\0')
 			{
 				s1 = ft_strrev((char*)s1);
+				ft_strdel(&s2r);
 				return ((char *)s1 + (ft_strlen(s1) - (i + 1)));
 			}
 			p++;
 			i++;
 		}
 	}
+	ft_strdel(&s2r);
 	return (NULL);
 }
