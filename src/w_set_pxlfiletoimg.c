@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:33:39 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/14 19:48:48 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/15 14:42:29 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,13 @@ void *d)
 	int		fd;
 
 	i = 0;
-	ft_putnbr(max);
 	while (i < max)
 	{
-		ft_comment("i :");
-		ft_putnbr(i);
 		fd = open(lst[i], O_RDONLY);
-		ft_comment("t");
 		if (ft_check_fd(fd, lst[i], 1))
 			exit(EXIT_FAILURE);
 		else
 		{
-			ft_comment("check_fd_ok");
 			if (w->w.isprite)
 				set_pxl_if_sprite(w, i, lst, d);
 			else

@@ -4,6 +4,7 @@ NAME=wolf3d
 SRC=	src/main.c \
 		src/wolf3d.c \
 		src/w_check_progstart.c \
+		src/insert_file_to_prog.c \
 		src/w_cast_rays.c \
 		src/w_verticales_lines_check.c \
 		src/w_print_radar_fov.c \
@@ -24,6 +25,7 @@ SRC=	src/main.c \
 		src/mlibx_putstring.c \
 		src/w_file.c \
 		src/w_parsing.c \
+		src/move.c \
 		src/w_create_spr_map.c \
 		src/create_new_window.c \
 		src/create_new_img.c \

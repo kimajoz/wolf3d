@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/14 20:16:21 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/15 16:06:42 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void		free_legend(t_wind *w);
 void		w_mlibx_putint(int i, int row, int column, t_wind *w);
 void		tab_info(t_wind *w);
 int			ft_print_error_parsing(int x, int y);
-int			press_exitcross(t_wind *w);
+int			press_exitcross(void);
+void		set_param_to_prog(int fd, t_wind *w, int j, int y);
+void		insert_file_to_prog(char *filename, int y, t_wind *w);
 
 #endif

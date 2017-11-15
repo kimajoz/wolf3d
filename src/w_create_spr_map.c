@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:06:28 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/14 20:12:54 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/15 14:32:48 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,14 @@ or not digit numbers."));
 	while (i < 3)
 	{
 		if (ft_isnumber(tab[i])
-		&& (ft_atoi(tab[i]) < w->b.nbrtot_of_line || ft_atoi(tab[i]) < w->b.nbr_elem_line[0])
-		&& ft_atoi(tab[i]) >= 0)
+		&& (ft_atoi(tab[i]) < w->b.nbrtot_of_line ||
+		ft_atoi(tab[i]) < w->b.nbr_elem_line[0]) && ft_atoi(tab[i]) >= 0)
 			i++;
 		else
 			exit(ft_comment("wrong number in .spr file, or not digit numbers.\
 Not inside the map."));
 	}
-	w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].num =
-	ft_atoi(tab[0]);
+	w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].num = ft_atoi(tab[0]);
 	w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].block =
 	w->w.sprite[ft_atoi(tab[0])].block;
 }

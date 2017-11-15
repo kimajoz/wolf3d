@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 14:06:46 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/09 19:05:53 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/15 15:57:57 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int			expose_hook(t_wind *w)
 	return (0);
 }
 
-int			press_exitcross(t_wind *w)
+int			press_exitcross(void)
 {
-	free(w);
 	exit(1);
 	return (0);
 }
