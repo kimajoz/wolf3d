@@ -39,7 +39,7 @@ int				w_check_progstart(t_wind *w, char *filename)
 		ft_putendl("File wrong type: Needed .scn input file extension.");
 		return (0);
 	}
-	*w = create_new_window("Wolf3d", w->width, w->height);
+	w = create_new_window(w, "Wolf3d", w->width, w->height);
 	w_file(filename, w, 1);
 	fsprites = new_file_name(filename, ".spr");
 	fparam = new_file_name(filename, ".par");

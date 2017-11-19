@@ -21,7 +21,7 @@ int				ft_nbrofpart(char *s, char c)
 	x = 0;
 	while (s[i])
 	{
-		if (((s[i] != c && s[i - 1] == c) || (i == 0 && s[i] != c)) && s[i])
+		if (s[i] != c && (i == 0 || s[i - 1] == c) && s[i])
 		{
 			x++;
 		}
@@ -30,7 +30,7 @@ int				ft_nbrofpart(char *s, char c)
 	return (x);
 }
 
-static int		ft_lengthofpart(char *s, char c, int x)
+static int		ft_lengthofpart(char *s, char c, int maxnb_elem)
 {
 	int i;
 	int y;
@@ -41,16 +41,17 @@ static int		ft_lengthofpart(char *s, char c, int x)
 	nbr = 0;
 	while (s[i])
 	{
-		if (s[i] != c && (s[i - 1] == c || i == 0))
+		if (s[i] != c && (i == 0 || s[i - 1] == c))
 		{
-			while (s[i] && s[i] != c && nbr == x)
+			while (s[i] && s[i] != c && nbr == maxnb_elem)
 			{
 				i++;
 				y++;
 			}
 			nbr++;
 		}
-		i++;
+		if (s[i])
+			i++;
 	}
 	return (y);
 }

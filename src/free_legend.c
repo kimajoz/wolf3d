@@ -32,7 +32,7 @@ void				w_mlibx_putint(int i, int row, int column, t_wind *w)
 
 void				legend(t_wind *w)
 {
-	w->w.legend = malloc(sizeof(char *) * NBLEGEND + 1);
+	w->w.legend = malloc(sizeof(char *) * (NBLEGEND + 1));
 	w->w.legend[0] = ft_itoa(w->w.player.health);
 	w->w.legend[1] = ft_itoa(w->w.player.ammunition);
 	w->w.legend[2] = ft_itoa(w->w.player.object);

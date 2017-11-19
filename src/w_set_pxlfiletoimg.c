@@ -23,19 +23,17 @@ void		set_pxl_if_sprite(t_wind *w, int i, char **lst, void *d)
 	[i].img.endian);
 }
 
-void		w_set_pxlfiletoimg(t_wind *w, int max, char **lst,
+void		w_set_pxlfiletoimg(t_wind *w, int nb_img, char **lst,
 void *d)
 {
 	int		i;
 	int		fd;
 
 	i = 0;
-	while (i < max)
+	while (i < nb_img)
 	{
 		fd = open(lst[i], O_RDONLY);
-		if (ft_check_fd(fd, lst[i], 1))
-			exit(EXIT_FAILURE);
-		else
+		if (!ft_check_fd(fd, lst[i], 1))
 		{
 			if (w->w.isprite)
 				set_pxl_if_sprite(w, i, lst, d);
@@ -48,6 +46,8 @@ void *d)
 				(d))[i].size_line, &((t_img *)(d))[i].endian);
 			}
 		}
+		else
+			exit(EXIT_FAILURE);
 		close(fd);
 		i++;
 	}

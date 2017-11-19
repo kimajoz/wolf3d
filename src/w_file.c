@@ -20,16 +20,19 @@ void		w_check_type_numb_scnfile(t_wind *w, char **tab)
 digit between 0 number and 11."));
 }
 
-void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
+void		w_insert_tab_int(t_wind *w, char *filename)
 {
 	int		y;
 	char	**tab;
 	int		ret;
+	char	*line;
+	int		fd;
 
 	y = 0;
-	while ((ret = get_next_line(*fd, line)) > 0)
+	fd = ft_open_check(filename, O_RDONLY, 1);
+	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if ((tab = ft_strsplit(*line, ' ')) == NULL)
+		if ((tab = ft_strsplit(line, ' ')) == NULL)
 			exit(ft_print_error_parsing(0, y));
 		w->b.tmpneline = 0;
 		while (tab[w->b.tmpneline])
@@ -38,15 +41,15 @@ void		w_insert_tab_int(t_wind *w, int *fd, char **line, char **filename)
 			ft_strdel(&tab[w->b.tmpneline++]);
 		}
 		free(tab);
-		ft_strdel(line);
+		ft_strdel(&line);
 		y++;
 	}
 	if (ret < 0)
 		exit(ft_print_error_parsing(0, y));
-	w->b.nbrtot_of_line = y + 1;
-	ft_check_parsing(w, *filename);
-	insert_file_to_prog(*filename, y, w);
-	close(*fd);
+	w->b.nbrtot_of_line = y;
+	ft_check_parsing(w, filename);
+	insert_file_to_prog(filename, y, w);
+	close(fd);
 }
 
 void		w_set_par_file(t_wind *w, char *filename)
@@ -66,13 +69,12 @@ void		w_set_par_file(t_wind *w, char *filename)
 int			w_file(char *filename, t_wind *w, int needed)
 {
 	int		fd;
-	char	*line;
 
 	fd = ft_open_check(filename, O_RDONLY, needed);
 	if (ft_check_fd(fd, filename, 1))
 		exit(1);
 	if (ft_strrstr(filename, ".scn"))
-		w_insert_tab_int(w, &fd, &line, &filename);
+		w_insert_tab_int(w, filename);
 	else if (ft_strrstr(filename, ".spr"))
 	{
 		if (set_spr_to_prog(filename, w))

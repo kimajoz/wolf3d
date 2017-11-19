@@ -41,6 +41,9 @@ static void		set_parameters2(t_wind *w)
 	w->w.player.timeout = 1 / 1000;
 	w->w.player.prevtimeoutimg = 1 / 1000;
 	w->w.player.prevtimeoutm = 1 / 1000;
+	w->w.oldvisiblespr = NULL;
+	w->w.visiblespr = NULL;
+	w->w.player.kp.upwalk = 0;
 	tab_info(w);
 }
 

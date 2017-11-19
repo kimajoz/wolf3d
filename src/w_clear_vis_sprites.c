@@ -17,25 +17,17 @@ void		w_clear_vis_sprites2dspr_list(t_wind *w)
 	int		i;
 
 	i = 0;
-	if (!w->w.oldvisiblespr)
-	{
+	if (w->w.oldvisiblespr != NULL)
 		free(w->w.oldvisiblespr);
-		w->w.oldvisiblespr = NULL;
-	}
-	if (!(w->w.oldvisiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
-		exit(0);
-	i = 0;
+	w->w.oldvisiblespr = w->w.visiblespr;
 	while (i < w->w.sprnbvis)
 	{
-		w->w.oldvisiblespr[i] = w->w.visiblespr[i];
 		w->w.oldvisiblespr[i].vis = 0;
 		i++;
 	}
-	w->w.sprnbvis = 0;
-	free(w->w.visiblespr);
-	w->w.visiblespr = NULL;
 	if (!(w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
 		exit(0);
+	w->w.sprnbvis = 0;
 }
 
 void		w_clear_vis_sprites(t_wind *w)

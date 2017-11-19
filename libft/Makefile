@@ -108,7 +108,7 @@ SRC= src/ft_lstiter.c \
 	src/ft_isnumber.c \
 	src/ft_does_file_exist.c \
 	src/ft_rot_fabs.c
-CFLAGS= -Wall -Werror -Wextra
+CFLAGS= -Wall -Werror -Wextra -g
 SRCDIR= src
 OBJDIR= obj
 OBJ := $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

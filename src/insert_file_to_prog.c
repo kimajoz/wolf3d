@@ -62,7 +62,7 @@ void		set_param_to_prog(int fd, t_wind *w, int j, int y)
 	char	**tab;
 	int		x;
 
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
 		x = 0;
 		if (line[0] != '#')

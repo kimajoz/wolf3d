@@ -29,7 +29,7 @@ int			ft_check_fd(int fd, char *filename, int optional)
 			return (1);
 		}
 		//if (!line)
-		//ft_strdel(&line);
+		ft_strdel(&line);
 	}
 	//if (ret < 0)
 		//exit(ft_comment("File not found or wrong parsing in file."));

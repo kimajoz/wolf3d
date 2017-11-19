@@ -22,7 +22,7 @@ void		create_spr_map(t_wind *w)
 	malloc((w->b.nbrtot_of_line) * sizeof(t_sprite *))))
 		exit(1);
 	y = 0;
-	while (y < w->b.nbrtot_of_line + 1)
+	while (y < w->b.nbrtot_of_line)
 	{
 		if (!(w->w.tab_int_spr[y] =
 		malloc(w->b.nbr_elem_line[3] * sizeof(t_sprite))))
@@ -87,8 +87,7 @@ void		w_setsprcoordfile_tosprmap(int fd, t_wind *w)
 			w_check_spr_inmap_anddigit(w, tab);
 			while (tab[x])
 				ft_strdel(&tab[x++]);
-			if (tab)
-				free(tab);
+			free(tab);
 			w->w.nbtotsprprog++;
 		}
 		ft_strdel(&line);
@@ -102,6 +101,7 @@ int			set_spr_to_prog(char *filename, t_wind *w)
 	int		fd1;
 
 	fd1 = open(filename, O_RDONLY);
+	//ft_comment(filename);
 	w->w.info.spr = 1;
 	init_sprites(w);
 	w->w.sprnbvis = 0;
