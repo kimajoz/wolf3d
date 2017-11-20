@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:05:42 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/15 14:31:29 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 14:57:54 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@ void		w_clear_vis_sprites2dspr_list(t_wind *w)
 	int		i;
 
 	i = 0;
-	if (w->w.oldvisiblespr != NULL)
-		free(w->w.oldvisiblespr);
-	w->w.oldvisiblespr = w->w.visiblespr;
-	while (i < w->w.sprnbvis)
-	{
-		w->w.oldvisiblespr[i].vis = 0;
-		i++;
-	}
+	if (w->w.visiblespr != NULL)
+		free(w->w.visiblespr);
 	if (!(w->w.visiblespr = malloc(w->w.nbtotsprprog * sizeof(t_sprite))))
 		exit(0);
+	while (i < w->w.sprnbvis)
+	{
+		w->w.visiblespr[i].vis = 0;
+		i++;
+	}
 	w->w.sprnbvis = 0;
 }
 

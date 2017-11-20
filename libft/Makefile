@@ -6,7 +6,7 @@
 #    By: pbillett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 14:11:23 by pbillett          #+#    #+#              #
-#    Updated: 2017/11/09 15:48:54 by pbillett         ###   ########.fr        #
+#    Updated: 2017/11/20 16:11:32 by pbillett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,7 @@ SRC= src/ft_lstiter.c \
 	src/ft_free_tablst.c \
 	src/ft_isnumber.c \
 	src/ft_does_file_exist.c \
+	src/ft_countline_fd.c \
 	src/ft_rot_fabs.c
 CFLAGS= -Wall -Werror -Wextra -g
 SRCDIR= src

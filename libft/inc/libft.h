@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/05 17:08:33 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/20 11:39:31 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 16:10:07 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,6 @@ double				ft_get_sound_duration(char *filename, int os);
 int					ft_open_check(char *filename, int flags, int needed);
 int					ft_isnumber(char *str);
 int					ft_does_file_exist(const char *filename);
+int					ft_countline_fd(char *filename);
 
 #endif

@@ -6,11 +6,37 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:31:51 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 12:16:35 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 15:00:32 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+void			w_push_spr2darray(t_wind *w, t_dpoint wall)
+{
+	int			i;
+	int			bol;
+
+	bol = 0;
+	i = 0;
+	while (i < w->w.sprnbvis)
+	{
+		if (w->w.visiblespr[i].num == w->w.tab_int_spr[(int)wall.y]
+				[(int)wall.x].num)
+		{
+			w->w.visiblespr[i] = w->w.tab_int_spr[(int)wall.y][(int)wall.x];
+			bol = 1;
+		}
+		i++;
+	}
+	if (!bol && w->w.tab_int_spr[(int)wall.y][(int)wall.x].num > 0 &&
+			w->w.tab_int_spr[(int)wall.y][(int)wall.x].num <= 7)
+	{
+		w->w.visiblespr[w->w.sprnbvis] =
+			w->w.tab_int_spr[(int)wall.y][(int)wall.x];
+		w->w.bolspr = 1;
+	}
+}
 
 void			w_test_spr(t_dpoint wall, t_wind *w)
 {
@@ -18,9 +44,7 @@ void			w_test_spr(t_dpoint wall, t_wind *w)
 			!w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis)
 	{
 		w->w.tab_int_spr[(int)wall.y][(int)wall.x].vis = 1;
-		w->w.visiblespr[w->w.sprnbvis] =
-			w->w.tab_int_spr[(int)wall.y][(int)wall.x];
-		w->w.bolspr = 1;
+		w_push_spr2darray(w, wall);
 	}
 }
 

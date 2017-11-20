@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 15:23:46 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/03 12:38:10 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 12:46:24 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int					w_insidemap(int x, int y, t_wind *w)
 {
-	if ((y >= 0 && y <= (w->b.nbrtot_of_line)) &&
-	(x >= 0 && x <= w->b.nbr_elem_line[0]))
+	if ((y >= 0 && y < (w->b.nbrtot_of_line)) &&
+	(x >= 0 && x < w->b.nbr_elem_line[0]))
 		return (1);
 	return (0);
 }

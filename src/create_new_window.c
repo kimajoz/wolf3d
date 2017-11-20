@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 13:40:18 by pbillett          #+#    #+#             */
-/*   Updated: 2016/12/27 13:40:46 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 12:53:28 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ t_wind		*create_new_window(t_wind *w, char *title, int width, int height)
 	w->height = height;
 	w->title = title;
 	w->win = mlx_new_window(w->mlx, w->width, w->height, w->title);
-	return(w);
+	return (w);
 }

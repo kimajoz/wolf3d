@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/15 16:06:42 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:17:39 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define GUNW 84
 # define GUNH 103
 # define NBLEGEND 13
+# define IC_BLACK 0x000000
+# define IC_WHITE 0xFFFFFF
 # define IC_DGREY 0x333333
 # define IC_MGREY 0x777777
 # define IC_FGREEN 0x00FF00
@@ -65,7 +67,6 @@
 # include <math.h>
 # include <stdlib.h>
 # include <pthread.h>
-#include <stdio.h>
 
 int			w_check_progstart(t_wind *w, char *filename);
 int			w_file(char *filename, t_wind *w, int needed);

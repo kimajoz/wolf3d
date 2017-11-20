@@ -6,12 +6,11 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:06:28 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/15 14:32:48 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:18:22 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-#include <stdio.h>
 
 void		create_spr_map(t_wind *w)
 {
@@ -101,7 +100,6 @@ int			set_spr_to_prog(char *filename, t_wind *w)
 	int		fd1;
 
 	fd1 = open(filename, O_RDONLY);
-	//ft_comment(filename);
 	w->w.info.spr = 1;
 	init_sprites(w);
 	w->w.sprnbvis = 0;

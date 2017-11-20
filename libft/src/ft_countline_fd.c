@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_fd.c                                      :+:      :+:    :+:   */
+/*   ft_countline_fd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/05 16:42:16 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/20 13:16:01 by pbillett         ###   ########.fr       */
+/*   Created: 2017/11/20 16:04:49 by pbillett          #+#    #+#             */
+/*   Updated: 2017/11/20 16:09:56 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 #include "../inc/get_next_line.h"
 
-int			ft_check_fd(int fd, char *filename, int optional)
+int			ft_countline_fd(char *filename)
 {
+	int		fd;
 	char	*line;
 	int		ret;
+	int		y;
 
+	fd = open(filename, O_RDONLY);
+	y = 0;
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if (ret < 0)
-		{
-			ft_putstr(filename);
-			ft_putstr(" file not here, or with wrong parsing.\
-(Please see examples in maps folder).");
-			if (optional)
-				ft_putendl("");
-			return (1);
-		}
+		y++;
 		ft_strdel(&line);
 	}
+	close(fd);
 	if (ret < 0)
 		exit(ft_comment("File not found or wrong parsing in file."));
-	return (0);
+	return (y);
 }
