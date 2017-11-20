@@ -6,18 +6,18 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 12:31:15 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/01 12:32:47 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 11:38:55 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-void		ft_free_tablst(char **tab)
+void		ft_free_tablst(char **tab, int nb)
 {
 	int		x;
 
 	x = 0;
-	while (tab[x])
+	while (x < nb)
 		ft_strdel(&tab[x++]);
 	ft_strdel(tab);
 }

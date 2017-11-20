@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 15:25:35 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/15 14:28:43 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 12:23:34 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static void		set_parameters2(t_wind *w)
 	w->w.player.prevtimeoutimg = 1 / 1000;
 	w->w.player.prevtimeoutm = 1 / 1000;
 	w->w.oldvisiblespr = NULL;
-	w->w.visiblespr = NULL;
 	w->w.player.kp.upwalk = 0;
 	tab_info(w);
 }

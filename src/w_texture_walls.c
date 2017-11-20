@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 15:26:08 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/15 14:36:11 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 12:18:07 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void					init_sprites(t_wind *w)
 	w_set_pxlfiletoimg(w, w->w.sprnb, w->w.lst_sprite, w->w.sprite);
 	w->w.isprite = 0;
 	aff_block(w->w.sprite, w->w.sprnb, 1, 1, 1, 0, 0, 1, 1);
+	ft_free_tablst(w->w.lst_sprite, w->w.sprnb);
 }
 
 void					init_texture(t_wind *w)
@@ -96,6 +97,7 @@ void					init_texture(t_wind *w)
 	if (!(w->w.text = malloc(sizeof(t_img) * nbtext)))
 		exit(0);
 	w_set_pxlfiletoimg(w, nbtext, w->w.lst_text, w->w.text);
+	ft_free_tablst(w->w.lst_text, nbtext);
 }
 
 void					init_guns(t_wind *w)
@@ -110,4 +112,5 @@ void					init_guns(t_wind *w)
 	if (!(w->w.weapon = malloc(sizeof(t_img) * nbtext)))
 		exit(0);
 	w_set_pxlfiletoimg(w, nbtext, w->w.lst_weapon, w->w.weapon);
+	ft_free_tablst(w->w.lst_weapon, nbtext);
 }

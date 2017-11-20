@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/05 16:42:16 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/14 19:47:19 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/20 12:15:13 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			ft_check_fd(int fd, char *filename, int optional)
 	char	*line;
 	int		ret;
 
-	while ((ret = get_next_line(fd, &line)) < 0)
+	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (ret < 0)
 		{
@@ -28,10 +28,9 @@ int			ft_check_fd(int fd, char *filename, int optional)
 				ft_putendl("");
 			return (1);
 		}
-		//if (!line)
 		ft_strdel(&line);
 	}
-	//if (ret < 0)
-		//exit(ft_comment("File not found or wrong parsing in file."));
+	if (ret < 0)
+		exit(ft_comment("File not found or wrong parsing in file."));
 	return (0);
 }
