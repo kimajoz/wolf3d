@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:06:28 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/20 13:18:22 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/22 12:35:21 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void		create_spr_map(t_wind *w)
 	while (y < w->b.nbrtot_of_line)
 	{
 		if (!(w->w.tab_int_spr[y] =
-		malloc(w->b.nbr_elem_line[3] * sizeof(t_sprite))))
+		malloc(w->b.nbr_elem_line[0] * sizeof(t_sprite))))
 			exit(1);
 		x = 0;
-		while (x < w->b.nbr_elem_line[3])
+		while (x < w->b.nbr_elem_line[0])
 		{
 			w->w.tab_int_spr[y][x].num = 0;
 			w->w.tab_int_spr[y][x].posx = x;
@@ -51,7 +51,7 @@ void		w_check_spr_inmap_anddigit(t_wind *w, char **tab)
 		&& (ft_atoi(tab[i]) < 7 && ft_atoi(tab[i]) > 0))
 			i++;
 		else
-			exit(ft_comment("wrong number of type of sprites in .spr file,\
+			exit(ft_comment("wrong number of type of sprites in .spr file, \
 or not digit numbers."));
 	}
 	while (i < 3)
@@ -61,8 +61,8 @@ or not digit numbers."));
 		ft_atoi(tab[i]) < w->b.nbr_elem_line[0]) && ft_atoi(tab[i]) >= 0)
 			i++;
 		else
-			exit(ft_comment("wrong number in .spr file, or not digit numbers.\
-Not inside the map."));
+			exit(ft_comment("wrong number of elem in .spr file. \
+Not a digit numbers, or not inside the map."));
 	}
 	w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].num = ft_atoi(tab[0]);
 	w->w.tab_int_spr[ft_atoi(tab[2])][ft_atoi(tab[1])].block =

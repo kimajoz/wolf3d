@@ -6,13 +6,13 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 18:59:14 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/14 18:59:16 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/22 12:22:42 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-int			ft_print_error_parsing(int x, int y)
+int			ft_print_error_parsing(int x, int y, char *filename)
 {
 	ft_putstr("wrong parsing file, ");
 	ft_putstr("please check number of elem(now ");
@@ -21,18 +21,22 @@ int			ft_print_error_parsing(int x, int y)
 	ft_putstr(" lenght of the line");
 	ft_putstr(") on line ");
 	ft_putnbr(y);
+	ft_putstr("in file ");
+	ft_putstr(filename);
 	ft_putstr(".");
 	ft_putstr("\n");
 	return (1);
 }
 
-int			ft_print_error_type_parsing(int x, int y)
+int			ft_print_error_type_parsing(int x, int y, char *filename)
 {
 	ft_putstr("wrong type in parsing file, ");
 	ft_putstr("please check type of character ");
 	ft_putnbr(x);
 	ft_putstr(" on line ");
 	ft_putnbr(y);
+	ft_putstr("in file ");
+	ft_putstr(filename);
 	ft_putstr(".");
 	ft_putstr("\n");
 	return (1);
@@ -72,7 +76,7 @@ void		ft_check_parsing_param(char *filename)
 				ft_strdel(&tab[i++]);
 			free(tab);
 			if (i != 3)
-				exit(ft_print_error_parsing(i, y));
+				exit(ft_print_error_parsing(i, y, filename));
 		}
 		ft_strdel(&line);
 		y++;
@@ -101,7 +105,7 @@ void		ft_check_parsing(t_wind *w, char *filename)
 				ft_strdel(&tab[i++]);
 			free(tab);
 			if (i != w->b.tmpneline)
-				exit(ft_print_error_parsing(i, y));
+				exit(ft_print_error_parsing(i, y, filename));
 		}
 		ft_strdel(&line);
 		y++;

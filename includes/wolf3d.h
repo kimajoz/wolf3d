@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 21:06:00 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/20 13:17:39 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/22 12:20:31 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int			w_check_progstart(t_wind *w, char *filename);
 int			w_file(char *filename, t_wind *w, int needed);
 void		ft_check_parsing(t_wind *w, char *filename);
 void		ft_check_parsing_param(char *filename);
-int			ft_print_error_type_parsing(int x, int y);
+int			ft_print_error_type_parsing(int x, int y, char *filename);
 int			ft_count_lines(t_wind *w, char *filename);
 void		put_info(t_wind *w);
 void		put_info_timeout(t_wind *w, int rightm, int bl);
@@ -137,7 +137,7 @@ void		legend(t_wind *w);
 void		free_legend(t_wind *w);
 void		w_mlibx_putint(int i, int row, int column, t_wind *w);
 void		tab_info(t_wind *w);
-int			ft_print_error_parsing(int x, int y);
+int			ft_print_error_parsing(int x, int y, char *filename);
 int			press_exitcross(void);
 void		set_param_to_prog(int fd, t_wind *w, int j, int y);
 void		insert_file_to_prog(char *filename, int y, t_wind *w);

@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 16:03:27 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/15 16:04:43 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/22 12:34:59 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void		ft_check_parsing_param_type(t_wind *w, char **tab)
 		&& ft_atoi(tab[i]) >= 0)
 			i++;
 		else
-			exit(ft_comment("wrong number in .par file, or not digit numbers. \
-Not inside the map."));
+			exit(ft_comment("wrong number of elem in .par file. Not a digit \
+numbers or not inside the map."));
 	}
 	while (i < 3)
 	{

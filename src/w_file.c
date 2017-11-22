@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 18:59:29 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/20 16:17:56 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/22 12:36:07 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void		w_check_type_numb_scnfile(t_wind *w, char **tab)
 digit between 0 number and 11."));
 }
 
-void		ft_check_count_tab_int(t_wind *w, char *line, int y)
+void		ft_check_count_tab_int(t_wind *w, char *line, int y, char *filename)
 {
 	char	**tab;
 
 	if ((tab = ft_strsplit(line, ' ')) == NULL)
-		exit(ft_print_error_parsing(0, y));
+		exit(ft_print_error_parsing(0, y, filename));
 	w->b.tmpneline = 0;
 	while (tab[w->b.tmpneline])
 	{
@@ -33,14 +33,9 @@ void		ft_check_count_tab_int(t_wind *w, char *line, int y)
 		ft_strdel(&tab[w->b.tmpneline++]);
 	}
 	free(tab);
-	if (w->b.tmpneline != w->b.nbrtot_of_line && w->b.nbrtot_of_line < 2)
-	{
-		ft_comment("tmpline:");
-		ft_putnbr(w->b.tmpneline);
-		ft_comment("w->b.nbrtot_of_line:");
-		ft_putnbr(w->b.nbrtot_of_line);
-		exit(ft_comment("file.scn should have the same number of lines than elems per line."));
-	}
+	if (w->b.tmpneline != w->b.nbrtot_of_line || w->b.nbrtot_of_line < 3)
+		exit(ft_comment("file.scn should have the same number of lines \
+than elems per line. And a minimum of 3x3 lines"));
 }
 
 void		w_insert_tab_int(t_wind *w, char *filename)
@@ -55,12 +50,12 @@ void		w_insert_tab_int(t_wind *w, char *filename)
 	w->b.nbrtot_of_line = ft_countline_fd(filename);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		ft_check_count_tab_int(w, line, y);
+		ft_check_count_tab_int(w, line, y, filename);
 		ft_strdel(&line);
 		y++;
 	}
 	if (ret < 0)
-		exit(ft_print_error_parsing(0, y));
+		exit(ft_print_error_parsing(0, y, filename));
 	ft_check_parsing(w, filename);
 	insert_file_to_prog(filename, y, w);
 	close(fd);

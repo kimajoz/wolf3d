@@ -6,7 +6,7 @@
 /*   By: pbillett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 13:05:42 by pbillett          #+#    #+#             */
-/*   Updated: 2017/11/20 14:57:54 by pbillett         ###   ########.fr       */
+/*   Updated: 2017/11/22 12:02:20 by pbillett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		w_clear_vis_sprites(t_wind *w)
 	while (y < w->b.nbrtot_of_line)
 	{
 		x = 0;
-		while (x < w->b.nbr_elem_line[3])
+		while (x < w->b.nbr_elem_line[0])
 			w->w.tab_int_spr[y][x++].vis = 0;
 		y++;
 	}
