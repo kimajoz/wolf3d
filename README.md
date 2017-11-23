@@ -1,3 +1,6 @@
+![Alt text](img/screen_shot/wolf3d_802x627_scrot_02.png?raw=true "Wolf3d")
+![Alt text](img/screen_shot/wolf3d_802x627_scrot_01.png?raw=true "Wolf3d")
+
 # wolf3d
 Inspired by the eponym games of the 90s who was the First Person Shooter, this game allow you to see the raycasting technique. Your aim will be to represent a dynamic view of inside a labyrinth within you can move.
 
@@ -13,6 +16,25 @@ Compile both on Mac and Linux. (with X11)
       
                 ./wolf3d maps/map2.scn
 </code>
+
+# Shortcut :
+
+<h3>Keyboard:</h3>
+
+- Arrow keys (R/L/Up/Dwn): rotate left/right. Go forward/backard.
+- Ctrl(right): fire
+- r: reload
+- Space: open doors
+- 1/4: rays min/max
+- 2/3: rays -/+
+- Tab: hide minimap
+- Escape: quit
+
+Toogles:
+- 5: Minimap rays
+- 6: Background
+- 7: Textures
+- 8: Sound
 
 # Conditions to start:
 
@@ -93,25 +115,6 @@ Note: 4 for type table spr. (as correspond to sprite list in src/w_texture_walls
   </TR> 
 </TABLE>
 Note: 1,1 for x,y as start respawn point. 7,8 for x,y as win point pos on map.
-
-# Shortcut :
-
-<h3>Keyboard:</h3>
-
-- Arrow keys (R/L/Up/Dwn): rotate left/right. Go forward/backard.
-- Ctrl(right): fire
-- r: reload
-- Space: open doors
-- 1/4: rays min/max
-- 2/3: rays -/+
-- Tab: hide minimap
-- Escape: quit
-
-Toogles:
-- 5: Minimap rays
-- 6: Background
-- 7: Textures
-- 8: Sound
 
 # Compilation possible issues
 
